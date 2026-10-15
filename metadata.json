@@ -1,0 +1,6 @@
+{
+  "name": "Mitsubishi Outlander I — Помощник владельца",
+  "description": "Интерактивный справочник владельца Mitsubishi Outlander 1 поколения (CU_W / Airtrek): каталог запчастей с OEM артикулами, руководство по ремонту, типичные неисправности, шинный калькулятор и параметры дисков.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
