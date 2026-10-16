@@ -1076,6 +1076,21 @@ const supplementalModels: JapaneseCarModel[] = [
 ];
 
 
+
+const historicalBrandSeeds = [
+  { id: 'prince', name: 'Prince Motor Company', russianName: 'Принс', founded: 1952, headquarters: 'Токио, Япония', tagline: 'Историческая японская автомобильная марка', description: 'Исторический производитель, объединённый с Nissan в 1966 году; Skyline и Gloria имеют важную преемственность Prince/Nissan.', brandColor: '#475569', awdPhilosophy: 'Зависит от конкретной модели и эпохи.' },
+  { id: 'datsun', name: 'Datsun', russianName: 'Датсун', founded: 1931, headquarters: 'Япония', tagline: 'Историческая экспортная марка Nissan', description: 'Марка, использовавшаяся Nissan для автомобилей на разных рынках и в разные периоды; нельзя смешивать поколения и региональные версии.', brandColor: '#1d4ed8', awdPhilosophy: 'Зависит от модели, поколения и рынка.' },
+  { id: 'automzam', name: 'Autozam', russianName: 'Аутозам', founded: 1989, headquarters: 'Япония', tagline: 'Исторический японский суббренд Mazda', description: 'Один из суббрендов Mazda для японского рынка; часть моделей имела родственные версии под другими марками.', brandColor: '#64748b', awdPhilosophy: 'Зависит от конкретной модели.' },
+  { id: 'eunos', name: 'Eunos', russianName: 'Эунос', founded: 1989, headquarters: 'Япония', tagline: 'Исторический суббренд Mazda', description: 'Суббренд Mazda, ориентированный на японский рынок; модели и спецификации должны учитываться отдельно от экспортных аналогов.', brandColor: '#0f766e', awdPhilosophy: 'Зависит от конкретной модели.' },
+  { id: 'scion', name: 'Scion', russianName: 'Сайон', founded: 2003, headquarters: 'США', tagline: 'Исторический бренд Toyota для Северной Америки', description: 'Бренд Toyota для рынка Северной Америки, закрытый в 2016 году; некоторые модели имеют Toyota-аналоги, но спецификации рынка США учитываются отдельно.', brandColor: '#111827', awdPhilosophy: 'Зависит от модели и североамериканской комплектации.' }
+] as const;
+
+for (const seed of historicalBrandSeeds) {
+  if (!JAPANESE_BRANDS.some((brand) => brand.id === seed.id)) {
+    JAPANESE_BRANDS.push({ ...seed, country: 'Япония', models: [] });
+  }
+}
+
 const commercialBrandSeeds = [
   { id: 'hino', name: 'Hino Motors', russianName: 'Хино', founded: 1942, headquarters: 'Хино, Токио, Япония', tagline: 'Японский коммерческий транспорт', description: 'Производитель грузовых автомобилей, автобусов и коммерческих шасси.', brandColor: '#b91c1c', awdPhilosophy: 'Конфигурации привода зависят от серии, шасси и назначения.' },
   { id: 'mitsubishi-fuso', name: 'Mitsubishi Fuso', russianName: 'Мицубиси Фусо', founded: 1932, headquarters: 'Кавасаки, Япония', tagline: 'Коммерческие автомобили и автобусы', description: 'Марка коммерческих грузовиков и автобусов; агрегаты зависят от серии и рынка.', brandColor: '#2563eb', awdPhilosophy: 'Зависит от серии и назначения шасси.' },
