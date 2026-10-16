@@ -11,7 +11,7 @@ on:
       - '.github/ISSUE_TEMPLATE/**'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-android:
@@ -82,3 +82,14 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
+
+      - name: Publish APK to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Car Brother build ${{ github.run_number }}
+          body: |
+            Автоматическая сборка Car Brother для Android.
+            APK собран из коммита ${{ github.sha }}.
+          prerelease: true
+          files: android/app/build/outputs/apk/debug/app-debug.apk
