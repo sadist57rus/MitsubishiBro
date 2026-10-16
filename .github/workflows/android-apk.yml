@@ -62,7 +62,7 @@ jobs:
               raise SystemExit("MainActivity declaration not found in AndroidManifest.xml")
           import re
           s = re.sub(r'\s+android:screenOrientation="[^"]+"', '', s)
-          s = s.replace(needle, needle + '\\n            android:screenOrientation="portrait"', 1)
+          s = s.replace(needle, needle + '\n            android:screenOrientation="portrait"', 1)
           p.write_text(s)
           PY
 
