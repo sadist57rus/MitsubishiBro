@@ -133,7 +133,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['Двигатель/цепной привод/VVT-i','Впуск/выпуск/катализатор','Охлаждение','АКПП или гибридная трансмиссия','Передняя/задняя подвеска','Тормоза/ABS/VSC','Электрика и климат','Кузов/стёкла/замки','Гибридная батарея и инвертор — Hybrid'],
  accessories:['Оригинальные коврики, багажные аксессуары и электрооборудование по рынку и комплектации','Проверять совместимость кузовных деталей XV40 с рестайлингом и региональной версией'],
- sources:[{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Выбрать точный год и модель; региональные комплектации различаются.'}],
+ sources:[{label:'Каталог Drom — Toyota Camry XV40',url:'https://www.drom.ru/catalog/toyota/camry/',scope:'Поколения, комплектации, двигатели и коробки по рынкам; использовать как справочник характеристик, а ремонтные допуски сверять с заводским руководством.'},{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Выбрать точный год и модель; региональные комплектации различаются.'}],
  fitmentRule:'Указать VIN, рынок, год/месяц, код двигателя, код АКПП и наличие гибридной системы.'
 },
 {
@@ -208,7 +208,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['MR20DE/QR25DE/M9R двигатель','Впуск, выпуск, катализатор/DPF/EGR','CVT/МКПП/АКПП','Передние приводы и задняя муфта 4WD','Подвеска/рулевое','Тормоза/ABS/ESP','Охлаждение и кондиционер','Кузов/двери/стекла/салон/электрика'],
  accessories:['Оригинальные поперечины, рейлинги, коврики, защита, фаркоп и электрика — по рынку и комплектации','Не считать аксессуары T32 совместимыми с T31','Проверить допустимую массу прицепа и совместимость электрики по руководству'],
- sources:[{label:'Nissan manuals and guides',url:nissanManuals,scope:'Официальный портал; старые/региональные T31 документы могут требовать дилерского доступа.'},{label:'Nissan recommended fluids example (newer X-Trail)',url:'https://www.nissan.co.uk/owners/car-repair/car-owner-manual/manuals/iom/xtrail/0t33/e1/2024/recommended-fluids-lubricants-and-capacities-1.shtml',scope:'Только пример важности спецификации; значения T33 нельзя переносить на T31.'}],
+ sources:[{label:'Каталог Drom — Nissan X-Trail T31',url:'https://www.drom.ru/catalog/nissan/x-trail/',scope:'Поколения, комплектации, двигатели и коробки по рынкам; использовать как справочник характеристик, а ремонтные допуски сверять с заводским руководством.'},{label:'Nissan manuals and guides',url:nissanManuals,scope:'Официальный портал; старые/региональные T31 документы могут требовать дилерского доступа.'},{label:'Nissan recommended fluids example (newer X-Trail)',url:'https://www.nissan.co.uk/owners/car-repair/car-owner-manual/manuals/iom/xtrail/0t33/e1/2024/recommended-fluids-lubricants-and-capacities-1.shtml',scope:'Только пример важности спецификации; значения T33 нельзя переносить на T31.'}],
  fitmentRule:'Нужны VIN, рынок, MR20DE/QR25DE/M9R, точный код коробки, 2WD/4WD и дата выпуска. CVT-жидкость подтверждать по коду трансмиссии.'
 },
 {
@@ -284,7 +284,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['Двигатель и ГРМ','Топливная система/впуск/выпуск','МКПП/АКПП/сцепление','Раздатка и кардан','Передний/задний дифференциалы','Подвеска/рулевое','Тормоза/ABS/ESP','Кузов/рама/двери/салон','Электрика/климат'],
  accessories:['Оригинальные коврики, рейлинги, защита, фаркоп и багажные аксессуары — по кузову и рынку','Проверить отдельно 3-дверный и 5-дверный кузов; аксессуары XL-7/Grand Vitara других поколений не переносить'],
- sources:[{label:'Suzuki Global',url:suzukiGlobal,scope:'Глобальный портал; старые workshop manuals/EPC могут требовать локального дистрибьютора.'}],
+ sources:[{label:'Каталог Drom — Suzuki Grand Vitara JT',url:'https://www.drom.ru/catalog/suzuki/grand_vitara/',scope:'Поколения, комплектации, двигатели и коробки по рынкам; использовать как справочник характеристик, а ремонтные допуски сверять с заводским руководством.'},{label:'Suzuki Global',url:suzukiGlobal,scope:'Глобальный портал; старые workshop manuals/EPC могут требовать локального дистрибьютора.'}],
  fitmentRule:'Нужны VIN/frame, код двигателя, длина кузова, год/рынок, КПП, режим 4WD, код раздатки и наличие LSD.'
 },
 {
@@ -320,7 +320,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['M13A или K15B двигатель','КПП/сцепление/АКПП','Раздатка и карданы','Передний/задний мосты','Рама/подвеска/рулевое','Тормоза/ABS/ESP','Кузов/двери/уплотнения/салон','Электрика и климат'],
  accessories:['Оригинальные рейлинги/поперечины, коврики, брызговики и защитные элементы — строго по JB43/JB74','Не использовать артикулы JB43 для JB74 без EPC-подтверждения','Нештатные лифты/колёса должны сопровождаться проверкой нагрузок, геометрии и допустимости'],
- sources:[{label:'Suzuki Global',url:suzukiGlobal,scope:'Глобальная точка входа; для старых Jimny нужна документация точного рынка.'}],
+ sources:[{label:'Каталог Drom — Suzuki Jimny JB43/JB74',url:'https://www.drom.ru/catalog/suzuki/jimny/',scope:'Поколения, комплектации, двигатели и коробки по рынкам; использовать как справочник характеристик, а ремонтные допуски сверять с заводским руководством.'},{label:'Suzuki Global',url:suzukiGlobal,scope:'Глобальная точка входа; для старых Jimny нужна документация точного рынка.'}],
  fitmentRule:'В карточке всегда явно хранить поколение JB43 или JB74, VIN/frame, рынок, год, двигатель, коробку и тип раздатки.'
 },
 {
@@ -357,7 +357,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['K20/K24/N22 двигатель','i-VTEC/впуск/выпуск/DPF','5AT/6MT и сцепление','Передние приводы/кардан/AWD редуктор','Подвеска и рулевое','Тормоза/ABS/VSA','Охлаждение/кондиционер','Кузов/замки/стекла/салон','Электрика и мультимедиа'],
  accessories:['Оригинальные рейлинги, поперечины, коврики, брызговики, фаркоп и электрика — по рынку/комплектации','Не считать аксессуары CR-V IV совместимыми с RE','Проверить допустимую массу прицепа и одобрение фаркопа'],
- sources:[{label:'Honda Owner Information',url:hondaManuals,scope:'Выбор года/модели; старые региональные руководства могут быть недоступны.'},{label:'Honda Maintenance Minder guide (example)',url:'https://owners.honda.com/utility/download?path=%2Fstatic%2Fpdfs%2F2019%2FCR-V%2F2019_CR-V_Maintenance_Minder_System.pdf',scope:'Объясняет логику обслуживания Honda; интервалы нельзя напрямую переносить на CR-V 2007–2011.'}],
+ sources:[{label:'Каталог Drom — Honda CR-V III RE',url:'https://www.drom.ru/catalog/honda/cr-v/',scope:'Поколения, комплектации, двигатели и коробки по рынкам; использовать как справочник характеристик, а ремонтные допуски сверять с заводским руководством.'},{label:'Honda Owner Information',url:hondaManuals,scope:'Выбор года/модели; старые региональные руководства могут быть недоступны.'},{label:'Honda Maintenance Minder guide (example)',url:'https://owners.honda.com/utility/download?path=%2Fstatic%2Fpdfs%2F2019%2FCR-V%2F2019_CR-V_Maintenance_Minder_System.pdf',scope:'Объясняет логику обслуживания Honda; интервалы нельзя напрямую переносить на CR-V 2007–2011.'}],
  fitmentRule:'Нужны VIN, рынок, код двигателя, код коробки, FWD/AWD и месяц выпуска. Для заднего редуктора отдельно проверять спецификацию DPSF.'
 },
 {
