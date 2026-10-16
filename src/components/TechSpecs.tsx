@@ -8,6 +8,7 @@ import GenerationBodyCatalogPanel from './GenerationBodyCatalogPanel';
 import JapaneseModelFamilyDirectory from './JapaneseModelFamilyDirectory';
 import TechnicalReferenceMatrixPanel from './TechnicalReferenceMatrixPanel';
 import GlobalModelRatingsPanel from './GlobalModelRatingsPanel';
+import PowertrainReferencePanel from './PowertrainReferencePanel';
 import {
   Maximize2,
   UserCheck,
@@ -101,6 +102,7 @@ export default function TechSpecs() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      <PowertrainReferencePanel />
       <section className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/70 dark:bg-blue-950/20 p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
