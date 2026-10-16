@@ -572,6 +572,104 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'RG зависит от рынка, двигателя и кабины. Точные объёмы, масла мостов и АКПП — только по руководству для конкретной версии.'
   })
 
+
+  makeSupplementalModel({
+    id: 'toyota-rav4-xa30-crossover', brandId: 'toyota', name: 'RAV4 (XA30)', generation: 'III поколение', years: '2005–2012', bodyType: 'Кроссовер',
+    overview: 'Компактный кроссовер с бензиновыми и дизельными двигателями; привод и трансмиссия зависят от рынка.',
+    lengthMm: 4600, widthMm: 1855, heightMm: 1685, wheelbaseMm: 2660, groundClearanceMm: 190, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 60, curbWeightKg: '1450–1700 кг',
+    engines: [
+      { code: '2AZ-FE', name: '2.4 л бензин', displacement: '2362 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Широко распространённый двигатель'], weaknesses: ['Проверять расход масла и состояние охлаждения'] },
+      { code: '2.0 3ZR-FE', name: '2.0 л бензин — отдельные рынки', displacement: '1987 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC Dual VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Умеренный расход'], weaknesses: ['Не устанавливался во всех странах'] }
+    ],
+    transmissions: ['МКПП', 'АКПП', 'CVT — по рынку'], drivetrain: 'Передний привод или AWD; схема зависит от рынка и комплектации.',
+    sourceNotes: 'XA30 включает разные силовые агрегаты. Жидкость АКПП/CVT и редукторов не подбирать по одному названию модели.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-hilux-an120-pickup', brandId: 'toyota', name: 'Hilux (AN120/AN130)', generation: 'VIII поколение', years: '2015–2025', bodyType: 'Пикап',
+    overview: 'Рамный пикап с дизельными и бензиновыми двигателями; параметры зависят от региона, кабины и привода.',
+    lengthMm: 5330, widthMm: 1855, heightMm: 1815, wheelbaseMm: 3085, groundClearanceMm: 279, trunkVolumeLiters: 'Грузовая платформа зависит от кабины', fuelTankLiters: 80, curbWeightKg: '1900–2300 кг',
+    engines: [
+      { code: '2GD-FTV', name: '2.4 л турбодизель', displacement: '2393 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь ГРМ', strengths: ['Высокая тяга на низких оборотах'], weaknesses: ['Проверять EGR/DPF и историю обслуживания'] },
+      { code: '1GD-FTV', name: '2.8 л турбодизель', displacement: '2755 см³', powerHp: 'Зависит от рынка и года', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь ГРМ', strengths: ['Высокий крутящий момент'], weaknesses: ['Экологическая система и турбонаддув требуют диагностики'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'RWD или подключаемый 4WD; проверить конкретную комплектацию.',
+    sourceNotes: 'Hilux сильно отличается по региону, двигателю и кабине. Масла мостов/раздатки выбирать по коду агрегата.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-patrol-y61-suv', brandId: 'nissan', name: 'Patrol (Y61)', generation: 'V поколение', years: '1997–2016', bodyType: 'Внедорожник',
+    overview: 'Рамный внедорожник; бензиновые и дизельные версии, трансмиссии и оснащение зависят от рынка.',
+    lengthMm: 5080, widthMm: 1940, heightMm: 1855, wheelbaseMm: 2970, groundClearanceMm: 220, trunkVolumeLiters: 'Зависит от кузова и рядов сидений', fuelTankLiters: 95, curbWeightKg: '2200–2700 кг',
+    engines: [
+      { code: 'TB48DE', name: '4.8 л бензин', displacement: '4759 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '24V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Высокий ресурс при грамотном обслуживании'], weaknesses: ['Высокий расход топлива; важна исправность охлаждения'] },
+      { code: 'ZD30DDTi', name: '3.0 л турбодизель', displacement: '2953 см³', powerHp: 'Зависит от года/версии', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail/электронное управление по версии', timingDrive: 'Проверить по модификации', strengths: ['Экономичнее бензинового V8-класса'], weaknesses: ['Требуется проверка турбины, впрыска и температуры'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Подключаемый полный привод с понижающей передачей; комплектация зависит от рынка.',
+    sourceNotes: 'Y61 выпускался долго и с большим числом моторов. Нельзя объединять спецификации раннего и позднего ZD30.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-accord-cl-sedan', brandId: 'honda', name: 'Accord (CL/CM)', generation: 'VII поколение', years: '2002–2008', bodyType: 'Седан',
+    overview: 'Среднеразмерный седан с разными моторами для Европы, Японии и Северной Америки.',
+    lengthMm: 4665, widthMm: 1760, heightMm: 1450, wheelbaseMm: 2670, groundClearanceMm: 150, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 65, curbWeightKg: '1300–1600 кг',
+    engines: [
+      { code: 'K20A6', name: '2.0 л i-VTEC', displacement: '1998 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая балансировка расхода и мощности'], weaknesses: ['Проверять зазоры клапанов и состояние цепного привода'] },
+      { code: 'K24A', name: '2.4 л i-VTEC', displacement: '2354 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять течи и историю обслуживания'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], sourceNotes: 'Accord CL/CM включает региональные версии. Не путать с североамериканским Accord другого кода кузова.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-odyssey-ra-rb-minivan', brandId: 'honda', name: 'Odyssey (RA/RB)', generation: 'II–III поколения, семейство', years: '1999–2008', bodyType: 'Минивэн',
+    overview: 'Семейство минивэнов с несколькими рынками и поколениями; японская Odyssey отличается от североамериканской по кузову и агрегатам.',
+    lengthMm: 4770, widthMm: 1800, heightMm: 1550, wheelbaseMm: 2830, groundClearanceMm: 150, trunkVolumeLiters: 'Зависит от компоновки сидений', fuelTankLiters: 65, curbWeightKg: '1550–1850 кг',
+    engines: [
+      { code: 'K24A', name: '2.4 л i-VTEC', displacement: '2354 см³', powerHp: 'Зависит от поколения/рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый мотор Honda'], weaknesses: ['Проверять коробку, охлаждение и зазоры клапанов'] }
+    ],
+    transmissions: ['АКПП/CVT — по поколению и рынку'], sourceNotes: 'Запись объединяет семейство RA/RB только для поиска; перед ремонтом обязательно выбрать точный код кузова и рынок.'
+  }),
+  makeSupplementalModel({
+    id: 'mazda-cx5-ke-crossover', brandId: 'mazda', name: 'CX-5 (KE)', generation: 'I поколение', years: '2012–2017', bodyType: 'Кроссовер',
+    overview: 'Кроссовер с бензиновыми Skyactiv-G и дизельными Skyactiv-D; привод и коробка зависят от версии.',
+    lengthMm: 4540, widthMm: 1840, heightMm: 1670, wheelbaseMm: 2700, groundClearanceMm: 210, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 58, curbWeightKg: '1400–1700 кг',
+    engines: [
+      { code: 'PE-VPS', name: '2.0 л Skyactiv-G', displacement: '1997 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Экономичность при исправной системе'], weaknesses: ['Требует качественного топлива и точного масла по спецификации'] },
+      { code: 'PY-VPS', name: '2.5 л Skyactiv-G', displacement: '2488 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять состояние охлаждения и впуска'] },
+      { code: 'SH-VPTS', name: '2.2 л Skyactiv-D — отдельные рынки', displacement: '2191 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь ГРМ', strengths: ['Высокая тяга'], weaknesses: ['DPF/EGR и разжижение масла требуют контроля'] }
+    ],
+    transmissions: ['МКПП', 'АКПП Skyactiv-Drive'], drivetrain: 'FWD или AWD.',
+    sourceNotes: 'KE имеет несколько поколений ПО и силовых агрегатов. Для дизеля особенно важны правильный уровень масла и регламент DPF.'
+  }),
+  makeSupplementalModel({
+    id: 'subaru-outback-bp-wagon', brandId: 'subaru', name: 'Outback (BP)', generation: 'III поколение', years: '2003–2009', bodyType: 'Универсал',
+    overview: 'Универсал повышенной проходимости на базе Legacy; атмосферные и турбированные оппозитные моторы различаются по рынку.',
+    lengthMm: 4730, widthMm: 1770, heightMm: 1545, wheelbaseMm: 2670, groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 64, curbWeightKg: '1450–1750 кг',
+    engines: [
+      { code: 'EJ25', name: '2.5 л boxer', displacement: '2457 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC/DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Комфорт и клиренс универсала'], weaknesses: ['Проверять ремень ГРМ, утечки и охлаждение'] },
+      { code: 'EZ30', name: '3.0 л H6 — отдельные рынки', displacement: '3000 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '24V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Плавность шестицилиндрового двигателя'], weaknesses: ['Дороже обслуживание и ограничен доступ к некоторым узлам'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Symmetrical AWD.',
+    sourceNotes: 'BP — Outback III; не смешивать с более поздними кузовами. Уточнять коробку и двигатель по VIN.'
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-jimny-jb23-suv', brandId: 'suzuki', name: 'Jimny (JB23)', generation: 'III поколение, kei-версия', years: '1998–2018', bodyType: 'Внедорожник',
+    overview: 'Компактный рамный внедорожник японского рынка с турбомотором малого объёма и подключаемым полным приводом.',
+    lengthMm: 3395, widthMm: 1475, heightMm: 1680, wheelbaseMm: 2250, groundClearanceMm: 190, trunkVolumeLiters: 'Небольшой, зависит от сидений', fuelTankLiters: 40, curbWeightKg: '950–1050 кг',
+    engines: [
+      { code: 'K6A', name: '0.66 л турбо', displacement: '658 см³', powerHp: 'Ограничено нормами kei', torqueNm: 'Зависит от версии', valves: '12V DOHC Turbo', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Малый вес и внедорожная геометрия'], weaknesses: ['Турбина и охлаждение требуют регулярного контроля'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Подключаемый Part-Time 4WD с понижающей передачей.',
+    sourceNotes: 'JB23 — японская kei-версия; не переносить её характеристики на экспортный Jimny JB33/JB43.'
+  }),
+  makeSupplementalModel({
+    id: 'lexus-rx-al10-suv', brandId: 'lexus', name: 'RX (AL10)', generation: 'III поколение', years: '2008–2015', bodyType: 'Кроссовер',
+    overview: 'Премиальный кроссовер с бензиновыми V6 и гибридной модификацией RX 450h; оснащение зависит от рынка.',
+    lengthMm: 4770, widthMm: 1885, heightMm: 1725, wheelbaseMm: 2740, groundClearanceMm: 180, trunkVolumeLiters: 'Зависит от версии', fuelTankLiters: 72, curbWeightKg: '1850–2200 кг',
+    engines: [
+      { code: '2GR-FE', name: '3.5 л V6', displacement: '3456 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '24V DOHC Dual VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Плавная работа и тяга'], weaknesses: ['Проверять охлаждение, утечки и работу АКПП'] },
+      { code: '2GR-FXE', name: '3.5 л V6 гибрид', displacement: '3456 см³', powerHp: 'Суммарная мощность зависит от рынка', torqueNm: 'Зависит от системы', valves: '24V DOHC Atkinson cycle', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Экономичность в городе для своего класса'], weaknesses: ['Высоковольтную систему диагностировать только безопасным оборудованием'] }
+    ],
+    transmissions: ['АКПП', 'Гибридная e-CVT'], drivetrain: 'FWD/AWD или гибридный AWD по версии.',
+    sourceNotes: 'RX AL10 включает обычную и гибридную силовые установки. Жидкости гибридной трансмиссии и охлаждения HV-системы не взаимозаменяемы.'
+  })
+
 ];
 
 for (const model of supplementalModels) {
