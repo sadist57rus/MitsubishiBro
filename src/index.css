@@ -38,3 +38,33 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+
+/* Car Brother: wide-layout profile for tablets and landscape head units. */
+html[data-ui-mode="wide"] .max-w-7xl {
+  max-width: 96rem;
+}
+html[data-ui-mode="wide"] main {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+html[data-ui-mode="wide"] header .max-w-7xl {
+  max-width: 100%;
+}
+html[data-ui-mode="wide"] button,
+html[data-ui-mode="wide"] select,
+html[data-ui-mode="wide"] input {
+  touch-action: manipulation;
+}
+html[data-ui-mode="wide"] main .grid {
+  column-gap: 1.25rem;
+  row-gap: 1.25rem;
+}
+html[data-ui-mode="wide"] main button,
+html[data-ui-mode="wide"] main select,
+html[data-ui-mode="wide"] main input {
+  min-height: 2.75rem;
+}
+html[data-ui-mode="phone"] main {
+  max-width: 80rem;
+}

@@ -3,11 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header, { TabId } from './components/Header';
 import OverviewDashboard from './components/OverviewDashboard';
 import TechSpecs from './components/TechSpecs';
 import PartsCatalog from './components/PartsCatalog';
+import PartsAccessoriesHub from './components/PartsAccessoriesHub';
 import RepairGuides from './components/RepairGuides';
 import Troubleshooter from './components/Troubleshooter';
 import TireWheelCalculator from './components/TireWheelCalculator';
@@ -45,6 +46,13 @@ import {
 export default function App() {
   const { resolvedTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<TabId>('overview');
+  const [uiMode, setUiMode] = useState<'phone' | 'wide'>(() => {
+    try { return localStorage.getItem('car-brother-ui-mode') === 'wide' ? 'wide' : 'phone'; } catch { return 'phone'; }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.uiMode = uiMode;
+    try { localStorage.setItem('car-brother-ui-mode', uiMode); } catch { /* storage may be unavailable */ }
+  }, [uiMode]);
   const [selectedEngine, setSelectedEngine] = useState<EngineType>('ALL');
   const [selectedDrivetrain, setSelectedDrivetrain] = useState<DrivetrainType>('4WD');
   const [selectedBrandId, setSelectedBrandId] = useState<string>('mitsubishi');
@@ -58,7 +66,7 @@ export default function App() {
     fuel: { title: 'Мониторинг топлива и заправок', icon: Fuel },
     specs: { title: 'Технические характеристики и размеры', icon: Car },
     bulbs: { title: 'Автосвет и лампы (цоколи H7, H1, H3, T10)', icon: Lightbulb },
-    parts: { title: 'Каталог запчастей', icon: Layers },
+    parts: { title: 'Каталог запчастей и аксессуаров', icon: Layers },
     fuses: { title: 'Схема предохранителей', icon: Zap },
     tuning: { title: 'Тюнинг и доработки', icon: Sparkles },
     guides: { title: 'Руководство по ремонту', icon: Wrench },
@@ -85,6 +93,8 @@ export default function App() {
         selectedBrandId={selectedBrandId}
         onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
+        uiMode={uiMode}
+        onChangeUiMode={setUiMode}
       />
 
       {/* Breadcrumb Navigation when inside a sub-module */}
@@ -154,10 +164,7 @@ export default function App() {
         )}
 
         {activeTab === 'parts' && (
-          <PartsCatalog
-            selectedEngine={selectedEngine}
-            onSelectEngine={setSelectedEngine}
-          />
+          <PartsAccessoriesHub selectedBrandId={selectedBrandId} selectedModelId={selectedModelId} />
         )}
 
         {activeTab === 'fuses' && (

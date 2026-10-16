@@ -29,6 +29,7 @@ import { BrandLogo } from './BrandLogos';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
 
 export type TabId = 'overview' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook';
+type UiMode = 'phone' | 'wide';
 
 interface Props {
   activeTab: TabId;
@@ -41,6 +42,8 @@ interface Props {
   onSelectBrand?: (brandId: string) => void;
   onOpenBrandSelector?: () => void;
   onOpenApkGuide?: () => void;
+  uiMode?: UiMode;
+  onChangeUiMode?: (mode: UiMode) => void;
 }
 
 export interface NavSection {
@@ -62,7 +65,9 @@ export default function Header({
   selectedBrandId = 'mitsubishi',
   onSelectBrand,
   onOpenBrandSelector,
-  onOpenApkGuide
+  onOpenApkGuide,
+  uiMode = 'phone',
+  onChangeUiMode
 }: Props) {
   const { resolvedTheme, toggleTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -105,9 +110,9 @@ export default function Header({
     {
       id: 'parts',
       title: 'Каталог запчастей (OEM и аналоги)',
-      shortTitle: 'Запчасти',
+      shortTitle: 'Запчасти и аксессуары',
       badge: 'OEM',
-      description: 'Артикулы деталей, заменители CTR/Koyo, быстрый поиск',
+      description: 'Расходники, часто ломающиеся детали, каталог запчастей и аксессуары',
       icon: Layers
     },
     {
@@ -541,6 +546,14 @@ export default function Header({
                 FWD
               </button>
             </div>
+
+            {/* Interface profile selector */}
+            {onChangeUiMode && (
+              <div className="flex items-center gap-0.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5" title="Профиль интерфейса">
+                <button type="button" onClick={() => onChangeUiMode('phone')} aria-pressed={uiMode === 'phone'} className={`rounded-lg px-2 py-1.5 text-[11px] font-bold transition ${uiMode === 'phone' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Телефон</button>
+                <button type="button" onClick={() => onChangeUiMode('wide')} aria-pressed={uiMode === 'wide'} className={`rounded-lg px-2 py-1.5 text-[11px] font-bold transition ${uiMode === 'wide' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Планшет / магнитола</button>
+              </div>
+            )}
 
             {/* APK Guide Button */}
             {onOpenApkGuide && (
