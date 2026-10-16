@@ -62,21 +62,6 @@ jobs:
           npm install --no-save --no-audit --no-fund @capacitor/assets
           npx capacitor-assets generate --android
 
-      - name: Set portrait as safe first-launch default
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path("android/app/src/main/AndroidManifest.xml")
-          s = p.read_text()
-          needle = 'android:name=".MainActivity"'
-          if needle not in s:
-              raise SystemExit("MainActivity declaration not found in AndroidManifest.xml")
-          import re
-          s = re.sub(r'\s+android:screenOrientation="[^"]+"', '', s)
-          s = s.replace(needle, needle + '\n            android:screenOrientation="portrait"', 1)
-          p.write_text(s)
-          PY
-
       - name: Sync web assets into Android
         run: npx cap sync android
 
