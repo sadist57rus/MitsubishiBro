@@ -15,6 +15,11 @@
   }
 }
 
+/* Respect Android/iOS status-bar safe area so the sticky header never sits under system icons. */
+header.sticky {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
 /* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
