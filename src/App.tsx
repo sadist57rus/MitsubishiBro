@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Star, Smartphone, Monitor, RotateCcw } from 'lucide-react';
+import { Star, Monitor, RotateCcw } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
