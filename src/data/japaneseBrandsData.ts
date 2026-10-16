@@ -66,6 +66,8 @@ export interface JapaneseCarModel {
     rootCause: string;
     solution: string;
   }[];
+  /** Notes about market coverage and the verification level of supplemental data. */
+  dataQualityNote?: string;
   isOriginalSourceModel?: boolean;
 }
 
