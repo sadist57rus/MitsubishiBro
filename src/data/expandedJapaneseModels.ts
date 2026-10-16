@@ -388,6 +388,190 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['МКПП', 'АКПП или вариатор — в зависимости от рынка'],
     sourceNotes: 'Моторы и коробки не универсальны для всех E11. Объёмы жидкостей и лампы не указаны без точной модификации.'
   })
+
+  makeSupplementalModel({
+    id: 'mitsubishi-lancer-cs-sedan', brandId: 'mitsubishi', name: 'Lancer IX (CS)', generation: 'IX поколение', years: '2000–2010', bodyType: 'Седан',
+    overview: 'Компактный седан; моторы 4G18/4G63/4G69 и трансмиссии зависят от рынка и комплектации.',
+    lengthMm: 4535, widthMm: 1715, heightMm: 1445, wheelbaseMm: 2600, groundClearanceMm: 165, trunkVolumeLiters: '430 л (зависит от рынка)', fuelTankLiters: 50, curbWeightKg: '1100–1350 кг',
+    engines: [
+      { code: '4G18', name: '1.6 л SOHC', displacement: '1584 см³', powerHp: '98–нение по рынку', torqueNm: 'Зависит от версии', valves: '16V SOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Простая атмосферная конструкция'], weaknesses: ['Проверять ремень ГРМ и течи масла'] },
+      { code: '4G63', name: '2.0 л DOHC', displacement: '1997 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Широкая распространённость'], weaknesses: ['Регламент ГРМ зависит от двигателя и года'] },
+      { code: '4G69', name: '2.4 л MIVEC — отдельные версии', displacement: '2378 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC MIVEC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Не устанавливался на все рынки'] }
+    ],
+    transmissions: ['МКПП', 'АКПП — по двигателю и рынку'], drivetrain: 'Преимущественно передний привод; отдельные спортивные/региональные версии отличаются.',
+    sourceNotes: 'Поколение CS включает много рынков и комплектаций. Код двигателя/коробки обязателен для точных жидкостей, ламп и регламента.'
+  }),
+  makeSupplementalModel({
+    id: 'mitsubishi-lancer-cs-wagon', brandId: 'mitsubishi', name: 'Lancer IX Wagon (CS)', generation: 'IX поколение, универсал', years: '2003–2008', bodyType: 'Универсал',
+    overview: 'Универсал семейства Lancer IX; кузов и некоторые агрегаты отличаются от седана.',
+    lengthMm: 4485, widthMm: 1695, heightMm: 1465, wheelbaseMm: 2600, groundClearanceMm: 155, trunkVolumeLiters: 'Зависит от комплектации', fuelTankLiters: 50, curbWeightKg: '1200–1400 кг',
+    engines: [
+      { code: '4G18', name: '1.6 л бензин', displacement: '1584 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от рынка', valves: '16V SOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Простая конструкция'], weaknesses: ['Состояние ремня и роликов критично'] },
+      { code: '4G63', name: '2.0 л бензин — отдельные рынки', displacement: '1997 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Запас тяги'], weaknesses: ['Проверять точный код мотора'] }
+    ],
+    transmissions: ['МКПП / АКПП по комплектации'], sourceNotes: 'Универсал выделен отдельной записью; не переносить параметры кузова, ламп и деталей седана без проверки.'
+  }),
+  makeSupplementalModel({
+    id: 'mitsubishi-pajero-io-h76-suv', brandId: 'mitsubishi', name: 'Pajero iO / Pinin (H6/H7)', generation: 'I поколение', years: '1998–2007', bodyType: 'Внедорожник',
+    overview: 'Компактный внедорожник с разными версиями трансмиссии 4WD; названия и моторы зависят от рынка.',
+    lengthMm: 3975, widthMm: 1680, heightMm: 1700, wheelbaseMm: 2450, groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от кузова', fuelTankLiters: 53, curbWeightKg: '1250–1500 кг',
+    engines: [
+      { code: '4G93', name: '1.8 л GDI/MPI', displacement: '1834 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'GDI или MPI — проверить конкретный мотор', timingDrive: 'Ремень ГРМ', strengths: ['Компактный размер и внедорожная трансмиссия'], weaknesses: ['GDI чувствителен к состоянию топливной системы'] },
+      { code: '4G94', name: '2.0 л GDI — отдельные версии', displacement: '1999 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от рынка', valves: '16V DOHC', fuelSystem: 'GDI', timingDrive: 'Ремень ГРМ', strengths: ['Тяга для небольшого кузова'], weaknesses: ['Требует диагностики высокого давления и впуска'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Easy Select / Full-time 4WD — зависит от версии; проверить рычаг/код трансмиссии.',
+    sourceNotes: 'Pajero iO/Pinin имеет отличия по рынкам и типу 4WD. Сервисные спецификации уточнять по номеру кузова.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-camry-xv40-sedan', brandId: 'toyota', name: 'Camry (XV40)', generation: 'VI поколение', years: '2006–2011', bodyType: 'Седан',
+    overview: 'Среднеразмерный седан; двигатели 2.4/3.5 и коробки зависят от рынка, есть гибридная версия на отдельных рынках.',
+    lengthMm: 4815, widthMm: 1820, heightMm: 1480, wheelbaseMm: 2775, groundClearanceMm: 155, trunkVolumeLiters: '535 л (зависит от рынка)', fuelTankLiters: 70, curbWeightKg: '1450–1650 кг',
+    engines: [
+      { code: '2AZ-FE', name: '2.4 л бензин', displacement: '2362 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый мотор'], weaknesses: ['Проверять расход масла и состояние резьбы/охлаждения по истории конкретного двигателя'] },
+      { code: '2GR-FE', name: '3.5 л V6', displacement: '3456 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '24V DOHC Dual VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Высокая мощность'], weaknesses: ['Обслуживание и доступ к узлам дороже'] }
+    ],
+    transmissions: ['5-ступенчатая АКПП', '6-ступенчатая АКПП — по версии'], sourceNotes: 'XV40 для разных рынков имеет разные двигатели и системы. Точные заправочные объёмы брать из руководства соответствующего рынка.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-prado-j120-suv', brandId: 'toyota', name: 'Land Cruiser Prado (J120)', generation: 'III поколение', years: '2002–2009', bodyType: 'Внедорожник',
+    overview: 'Рамный внедорожник с бензиновыми и дизельными моторами, постоянным/подключаемым 4WD в зависимости от исполнения.',
+    lengthMm: 4715, widthMm: 1875, heightMm: 1870, wheelbaseMm: 2790, groundClearanceMm: 220, trunkVolumeLiters: 'Зависит от 3-го ряда', fuelTankLiters: 87, curbWeightKg: '1800–2200 кг',
+    engines: [
+      { code: '1GR-FE', name: '4.0 л V6 бензин', displacement: '3956 см³', powerHp: 'Зависит от года/рынка', torqueNm: 'Зависит от версии', valves: '24V DOHC Dual VVT-i/ VVT-i по версии', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять систему охлаждения и течи'] },
+      { code: '1KD-FTV', name: '3.0 л турбодизель', displacement: '2982 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Ремень ГРМ', strengths: ['Высокий крутящий момент'], weaknesses: ['Форсунки и топливная система требуют диагностики'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: '4WD; схема блокировок и межосевого дифференциала зависит от комплектации.',
+    sourceNotes: 'J120 включает несколько двигателей и рынков. Не переносить параметры J150 или Hilux; сверять код кузова и агрегатов.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-yaris-xp90-hatchback', brandId: 'toyota', name: 'Yaris / Vitz (XP90)', generation: 'II поколение', years: '2005–2011', bodyType: 'Хэтчбек',
+    overview: 'Компактный хэтчбек; Vitz — имя для японского рынка, Yaris — экспортное название.',
+    lengthMm: 3750, widthMm: 1695, heightMm: 1530, wheelbaseMm: 2460, groundClearanceMm: 145, trunkVolumeLiters: 'Зависит от кузова и рынка', fuelTankLiters: 42, curbWeightKg: '950–1200 кг',
+    engines: [
+      { code: '1KR-FE', name: '1.0 л бензин', displacement: '996 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '12V DOHC VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Экономичность'], weaknesses: ['Требует контроля масла и охлаждения'] },
+      { code: '1NZ-FE', name: '1.5 л бензин', displacement: '1496 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC VVT-i', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Надёжное распространённое семейство'], weaknesses: ['Проверять расход масла на возрастных экземплярах'] }
+    ],
+    transmissions: ['МКПП', 'АКПП/вариатор — по рынку'], sourceNotes: 'XP90 включает несколько кузовов и рынков; точные размеры, лампы и жидкости требуют конкретного кода кузова.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-xtrail-t31-suv', brandId: 'nissan', name: 'X-Trail (T31)', generation: 'II поколение', years: '2007–2014', bodyType: 'Кроссовер',
+    overview: 'Кроссовер с бензиновыми и дизельными двигателями; вариатор, механическая коробка и системы полного привода зависят от версии.',
+    lengthMm: 4630, widthMm: 1785, heightMm: 1685, wheelbaseMm: 2630, groundClearanceMm: 200, trunkVolumeLiters: '603 л (методика зависит от рынка)', fuelTankLiters: 65, curbWeightKg: '1450–1700 кг',
+    engines: [
+      { code: 'MR20DE', name: '2.0 л бензин', displacement: '1997 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый двигатель'], weaknesses: ['Проверять расход масла, шум цепи и охлаждение'] },
+      { code: 'QR25DE', name: '2.5 л бензин', displacement: '2488 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Состояние CVT критично при отсутствии обслуживания'] },
+      { code: 'M9R', name: '2.0 л дизель — отдельные рынки', displacement: '1995 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь/привод по модификации', strengths: ['Экономичность на трассе'], weaknesses: ['Проверять EGR/DPF и топливную систему'] }
+    ],
+    transmissions: ['6-ступенчатая МКПП', 'CVT', 'АКПП — отдельные рынки'], drivetrain: '2WD или ALL MODE 4x4-i.',
+    sourceNotes: 'T31 имеет разные коробки, включая CVT. Использовать только жидкость, указанную для конкретного кода трансмиссии.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-qashqai-j10-crossover', brandId: 'nissan', name: 'Qashqai (J10)', generation: 'I поколение', years: '2006–2013', bodyType: 'Кроссовер',
+    overview: 'Компактный кроссовер, доступный с передним или полным приводом; силовые агрегаты зависят от рынка.',
+    lengthMm: 4315, widthMm: 1780, heightMm: 1615, wheelbaseMm: 2630, groundClearanceMm: 200, trunkVolumeLiters: '410 л (зависит от рынка)', fuelTankLiters: 65, curbWeightKg: '1300–1600 кг',
+    engines: [
+      { code: 'HR16DE', name: '1.6 л бензин', displacement: '1598 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Простая атмосферная версия'], weaknesses: ['Проверять шум цепи и расход масла'] },
+      { code: 'MR20DE', name: '2.0 л бензин', displacement: '1997 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый мотор'], weaknesses: ['CVT требует истории обслуживания'] }
+    ],
+    transmissions: ['МКПП', 'CVT', 'АКПП — по рынку'], drivetrain: 'Передний привод или ALL MODE 4x4.',
+    sourceNotes: 'J10 включает несколько силовых агрегатов и коробок. Уточнить тип CVT/AT по VIN до выбора жидкости.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-crv-rd7-suv', brandId: 'honda', name: 'CR-V (RD7/RD8)', generation: 'II поколение', years: '2001–2006', bodyType: 'Кроссовер',
+    overview: 'Компактный кроссовер; мотор K24A и система Real Time 4WD встречаются на отдельных версиях.',
+    lengthMm: 4630, widthMm: 1785, heightMm: 1710, wheelbaseMm: 2620, groundClearanceMm: 205, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 58, curbWeightKg: '1450–1600 кг',
+    engines: [
+      { code: 'K24A1', name: '2.4 л i-VTEC', displacement: '2354 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять зазоры клапанов, течи и состояние охлаждения'] },
+      { code: 'K20A', name: '2.0 л i-VTEC — отдельные рынки', displacement: '1998 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство'], weaknesses: ['Код K20A охватывает разные версии'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Передний привод или Real Time 4WD.',
+    sourceNotes: 'RD7/RD8 — не единственные кузовные коды CR-V II. Жидкость заднего редуктора и коробки уточнять по рынку.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-fit-gd-hatchback', brandId: 'honda', name: 'Fit / Jazz (GD)', generation: 'I поколение', years: '2001–2008', bodyType: 'Хэтчбек',
+    overview: 'Компактный хэтчбек с трансформируемым салоном; Fit — японское имя, Jazz — экспортное наименование.',
+    lengthMm: 3830, widthMm: 1675, heightMm: 1525, wheelbaseMm: 2450, groundClearanceMm: 150, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 42, curbWeightKg: '990–1200 кг',
+    engines: [
+      { code: 'L13A', name: '1.3 л i-DSI/VTEC по версии', displacement: '1339 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '8/16V по версии', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Низкий расход топлива'], weaknesses: ['Многосвечная версия i-DSI требует правильных свечей и обслуживания'] },
+      { code: 'L15A', name: '1.5 л VTEC', displacement: '1496 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V SOHC VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошее соотношение расхода и мощности'], weaknesses: ['Проверять коробку и историю замены жидкости'] }
+    ],
+    transmissions: ['МКПП', 'CVT', 'АКПП — по рынку'], sourceNotes: 'GD отличается по рынкам, включая тип трансмиссии. Для CVT требуется точная жидкость Honda для данного агрегата.'
+  }),
+  makeSupplementalModel({
+    id: 'mazda-6-gg-sedan', brandId: 'mazda', name: 'Mazda6 (GG) седан', generation: 'I поколение', years: '2002–2008', bodyType: 'Седан',
+    overview: 'Среднеразмерный седан; моторы MZR и дизели различаются по рынку и году.',
+    lengthMm: 4670, widthMm: 1780, heightMm: 1435, wheelbaseMm: 2675, groundClearanceMm: 150, trunkVolumeLiters: '500 л (зависит от рынка)', fuelTankLiters: 64, curbWeightKg: '1300–1600 кг',
+    engines: [
+      { code: 'LF-DE', name: '2.0 л бензин MZR', displacement: '1999 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая доступность запчастей'], weaknesses: ['Проверять коррозию кузова и состояние охлаждения'] },
+      { code: 'L3-VE', name: '2.3 л бензин', displacement: '2261 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Более высокая тяга'], weaknesses: ['Проверять расход масла и герметичность'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], sourceNotes: 'Кузов седан отделён от хэтчбека/универсала. Габариты и оптика различаются по рынкам.'
+  }),
+  makeSupplementalModel({
+    id: 'mazda-6-gg-wagon', brandId: 'mazda', name: 'Mazda6 (GG) универсал', generation: 'I поколение', years: '2002–2008', bodyType: 'Универсал',
+    overview: 'Универсал Mazda6 первого поколения; задняя часть кузова и светотехника отличаются от седана.',
+    lengthMm: 4700, widthMm: 1780, heightMm: 1480, wheelbaseMm: 2675, groundClearanceMm: 150, trunkVolumeLiters: 'Зависит от методики измерения', fuelTankLiters: 64, curbWeightKg: '1400–1650 кг',
+    engines: [
+      { code: 'LF-DE', name: '2.0 л бензин MZR', displacement: '1999 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Практичный кузов'], weaknesses: ['Проверять коррозию порогов/арок и днища'] },
+      { code: 'L3-VE', name: '2.3 л бензин', displacement: '2261 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая динамика'], weaknesses: ['Проверять состояние двигателя и коробки'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], sourceNotes: 'Универсал имеет отдельные детали кузова/фонарей; не использовать спецификации седана для ламп без сверки.'
+  }),
+  makeSupplementalModel({
+    id: 'subaru-forester-sg-suv', brandId: 'subaru', name: 'Forester (SG)', generation: 'II поколение', years: '2002–2008', bodyType: 'Кроссовер',
+    overview: 'Кроссовер с оппозитными бензиновыми двигателями; атмосферные и турбоверсии имеют существенные отличия.',
+    lengthMm: 4485, widthMm: 1735, heightMm: 1590, wheelbaseMm: 2525, groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 60, curbWeightKg: '1350–1600 кг',
+    engines: [
+      { code: 'EJ20', name: '2.0 л boxer', displacement: '1994 см³', powerHp: 'Зависит от атмосферной/турбо версии', torqueNm: 'Зависит от версии', valves: '16V SOHC/DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Низкий центр тяжести'], weaknesses: ['Проверять течи, охлаждение и историю ремня ГРМ'] },
+      { code: 'EJ25', name: '2.5 л boxer', displacement: '2457 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC/DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять герметичность двигателя и охлаждения'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Symmetrical AWD; тип межосевого распределения зависит от коробки.',
+    sourceNotes: 'SG включает разные атмосферные и турбоверсии. Тип коробки определяет жидкость и процедуру проверки.'
+  }),
+  makeSupplementalModel({
+    id: 'subaru-legacy-bp-wagon', brandId: 'subaru', name: 'Legacy (BP) универсал', generation: 'IV поколение', years: '2003–2009', bodyType: 'Универсал',
+    overview: 'Универсал с оппозитными двигателями и Symmetrical AWD; моторы и коробки зависят от рынка.',
+    lengthMm: 4680, widthMm: 1730, heightMm: 1470, wheelbaseMm: 2670, groundClearanceMm: 150, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 64, curbWeightKg: '1400–1650 кг',
+    engines: [
+      { code: 'EJ20', name: '2.0 л boxer', displacement: '1994 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC/DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Полный привод и устойчивость'], weaknesses: ['Проверять ремень ГРМ, охлаждение и утечки'] },
+      { code: 'EJ25', name: '2.5 л boxer', displacement: '2457 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC/DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Тяга в среднем диапазоне'], weaknesses: ['Контролировать температуру и герметичность'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Symmetrical AWD.',
+    sourceNotes: 'BP — универсал, не путать с седаном BL. Объёмы и спецификации различаются по мотору и трансмиссии.'
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-grand-vitara-jt-suv', brandId: 'suzuki', name: 'Grand Vitara (JT)', generation: 'III поколение', years: '2005–2015', bodyType: 'Внедорожник',
+    overview: 'Внедорожник с несущим кузовом и встроенной рамой на части рынка; 4WD и моторы различаются по версии.',
+    lengthMm: 4470, widthMm: 1810, heightMm: 1695, wheelbaseMm: 2640, groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от кузова', fuelTankLiters: 66, curbWeightKg: '1450–1750 кг',
+    engines: [
+      { code: 'J20A', name: '2.0 л бензин', displacement: '1995 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Простая атмосферная версия'], weaknesses: ['Проверять цепной привод и охлаждение'] },
+      { code: 'J24B', name: '2.4 л бензин', displacement: '2393 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC VVT', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Проверять историю обслуживания и течи'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: '2WD/4WD; наличие понижающей передачи зависит от версии.',
+    sourceNotes: 'JT имеет 3/5-дверные варианты и разные трансмиссии. Жидкости раздатки/редукторов уточнять по коду агрегата.'
+  }),
+  makeSupplementalModel({
+    id: 'daihatsu-terios-j200-suv', brandId: 'daihatsu', name: 'Terios (J200)', generation: 'II поколение', years: '2006–2017', bodyType: 'Кроссовер',
+    overview: 'Компактный кроссовер с задним или полным приводом в зависимости от рынка.',
+    lengthMm: 4055, widthMm: 1695, heightMm: 1690, wheelbaseMm: 2580, groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от рынка', fuelTankLiters: 50, curbWeightKg: '1150–1350 кг',
+    engines: [
+      { code: '3SZ-VE', name: '1.5 л бензин DVVT', displacement: '1495 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC DVVT', fuelSystem: 'MPI', timingDrive: 'Цепь ГРМ', strengths: ['Компактность и доступный сервис'], weaknesses: ['Проверять охлаждение, шум цепи и состояние полного привода'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'Задний привод или постоянный/полный привод — зависит от рынка.',
+    sourceNotes: 'J200 продаётся в разных регионах под отличающимися спецификациями; параметры проверить по VIN.'
+  }),
+  makeSupplementalModel({
+    id: 'isuzu-dmax-rg-pickup', brandId: 'isuzu', name: 'D-Max (RG)', generation: 'III поколение', years: '2019–н.в.', bodyType: 'Пикап',
+    overview: 'Рамный пикап с дизельными двигателями и задним/подключаемым полным приводом. Точные характеристики различаются по рынку.',
+    lengthMm: 5265, widthMm: 1870, heightMm: 1790, wheelbaseMm: 3125, groundClearanceMm: 235, trunkVolumeLiters: 'Грузовая платформа зависит от кабины', fuelTankLiters: 76, curbWeightKg: '1900–2300 кг',
+    engines: [
+      { code: 'RZ4E-TC', name: '1.9 л турбодизель', displacement: '1898 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь/привод по модификации', strengths: ['Экономичность для пикапа'], weaknesses: ['Проверять DPF/EGR и топливную систему'] },
+      { code: '4JJ3-TCX', name: '3.0 л турбодизель', displacement: '2999 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC Turbo Diesel', fuelSystem: 'Common Rail', timingDrive: 'Цепь/привод по модификации', strengths: ['Высокий крутящий момент'], weaknesses: ['Экология и система впрыска требуют правильной диагностики'] }
+    ],
+    transmissions: ['МКПП', 'АКПП'], drivetrain: 'RWD или Part-Time 4WD.',
+    sourceNotes: 'RG зависит от рынка, двигателя и кабины. Точные объёмы, масла мостов и АКПП — только по руководству для конкретной версии.'
+  })
+
 ];
 
 for (const model of supplementalModels) {
