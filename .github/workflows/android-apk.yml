@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Car Brother Android APK
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build-android:
-    name: Build debug APK
+    name: Build Car Brother debug APK
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -51,6 +51,19 @@ jobs:
       - name: Generate Android project
         run: npx cap add android
 
+      - name: Configure landscape launcher for head units
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/app/src/main/AndroidManifest.xml")
+          s = p.read_text()
+          needle = 'android:name=".MainActivity"'
+          if needle not in s:
+              raise SystemExit("MainActivity declaration not found in AndroidManifest.xml")
+          s = s.replace(needle, needle + '\n            android:screenOrientation="landscape"', 1)
+          p.write_text(s)
+          PY
+
       - name: Sync web assets into Android
         run: npx cap sync android
 
@@ -63,7 +76,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: MitsubishiBro-APK-debug
+          name: Car-Brother-APK-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
