@@ -102,5 +102,11 @@ jobs:
           body: |
             Автоматическая сборка Car Brother для Android.
             APK собран из коммита ${{ github.sha }}.
+          draft: true
           prerelease: true
           files: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish release after APK upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "build-${{ github.run_number }}" --draft=false --prerelease
