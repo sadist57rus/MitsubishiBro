@@ -4,6 +4,7 @@ import SpecsBlueprintGraphic from './SpecsBlueprintGraphic';
 import { ENGINE_TECHNICAL_RECORDS, TECHNICAL_DATA_SOURCES } from '../data/technicalSpecRecords';
 import ModelDataCoveragePanel from './ModelDataCoveragePanel';
 import ExpandedModelDossiers from './ExpandedModelDossiers';
+import GenerationBodyCatalogPanel from './GenerationBodyCatalogPanel';
 import {
   Maximize2,
   UserCheck,
@@ -123,6 +124,7 @@ export default function TechSpecs() {
       </section>
 
       <ModelDataCoveragePanel />
+      <GenerationBodyCatalogPanel />
       <ExpandedModelDossiers />
 
       {/* Top Banner with Quick Dimension Visuals */}
