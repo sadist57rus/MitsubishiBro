@@ -203,10 +203,10 @@ export default function App() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div className="space-y-0.5">
               <div className="font-bold text-slate-900 dark:text-slate-200">
-                Mitsubishi Outlander I (CU2W, CU4W, CU5W / Airtrek) Community Assistant
+                Car Brother — справочник японских автомобилей
               </div>
               <p className="text-slate-500 dark:text-slate-400 text-[11px]">
-                Инженерный справочник на основе заводского Workshop Manual, схем электрооборудования и опыта Out-Club.
+                Технические данные, диагностика OBD-II и обслуживание. Сверяйте характеристики с руководством для конкретной модификации.
               </p>
             </div>
 
@@ -218,9 +218,9 @@ export default function App() {
                 <Smartphone className="w-3.5 h-3.5" />
                 <span>Сборка APK на GitHub</span>
               </button>
-              <span>CU_W Series</span>
+              <span>Car Brother</span>
               <span>·</span>
-              <span>2001 – 2008</span>
+              <span>Japan · Auto</span>
             </div>
           </div>
         </div>

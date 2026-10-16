@@ -1,6 +1,6 @@
-# MitsubishiBro
+# Car Brother
 
-**MitsubishiBro — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
+**Car Brother — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
 
 [![Build and typecheck](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/verify.yml/badge.svg)](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/verify.yml) [![Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml/badge.svg)](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml)
 
@@ -12,6 +12,14 @@
 - Офлайн-оболочка веб-приложения и локальные статические ресурсы.
 - Аудит каталога: обязательные поля, дубли идентификаторов, качество источников и предупреждения о неполных данных.
 - Схема точной модификации для раздельного учёта рынка, периода выпуска, кузова, двигателя, коробки и сервисных характеристик.
+
+## Android-магнитолы
+
+Приложение упаковано в Android WebView через Capacitor. Сборка APK ориентирована на альбомную ориентацию экрана, в том числе на недорогие головные устройства с 2 ГБ ОЗУ.
+
+**Совместимость с конкретной магнитолой пока не гарантируется без испытания на самом устройстве.** Для первой проверки предпочтительны Android 8.0+ с обновляемым Android System WebView/Chromium и не менее 2 ГБ ОЗУ. На бюджетных устройствах скорость зависит также от процессора, версии WebView, свободной памяти и прошивки. Неофициальная прошивка с «поддельной» версией Android или урезанным WebView может мешать запуску.
+
+Текущий интерфейс — справочник, а не приложение Android Auto/Android Automotive OS и не предназначен для управления автомобилем во время движения. Проверяйте каталог и выполняйте поиск только на стоянке.
 
 ## Важное предупреждение о технических данных
 
@@ -52,7 +60,9 @@ npm run preview
 
 ## Сборка Android APK
 
-APK собирается в GitHub Actions из кода текущей ветки `main`. Откройте [Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml), выберите последний успешный запуск и скачайте артефакт `MitsubishiBro-APK-debug`. Артефакт — отладочный APK для установки и тестирования, не подписанный production-релиз.
+APK собирается в GitHub Actions из кода текущей ветки `main`. Откройте [Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml), выберите последний успешный запуск и скачайте артефакт `Car-Brother-APK-debug`. Артефакт — отладочный APK для установки и тестирования, не подписанный production-релиз.
+
+Сборка фиксирует альбомную ориентацию главного экрана. Для теста на магнитоле установите APK, откройте приложение, проверьте масштабирование, меню, клавиатуру/поиск, прокрутку и переходы между разделами. Также проверьте возврат из сна и работу без сети. Сообщайте модель магнитолы, версию Android, версию WebView и фактический объём ОЗУ, если обнаружится сбой.
 
 Для локальной сборки с установленными Android SDK, Java 21 и Gradle wrapper:
 
@@ -61,6 +71,7 @@ npm install
 npm install --no-save @capacitor/core@^8.5.3 @capacitor/cli@^8.5.3 @capacitor/android@^8.5.3
 npm run build
 npx cap add android
+# Затем задайте android:screenOrientation="landscape" у MainActivity в AndroidManifest.xml
 npx cap sync android
 cd android
 ./gradlew assembleDebug
