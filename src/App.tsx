@@ -53,12 +53,12 @@ export default function App() {
     try { return localStorage.getItem('car-brother-ui-mode') === 'wide' ? 'wide' : 'phone'; } catch { return 'phone'; }
   });
   const [orientationChosen, setOrientationChosen] = useState(() => {
-    try { return localStorage.getItem('car-brother-orientation-chosen') === 'yes'; } catch { return false; }
+    try { return localStorage.getItem('car-brother-orientation-chosen-v2') === 'yes'; } catch { return false; }
   });
   const chooseOrientation = async (mode: 'phone' | 'wide') => {
     setUiMode(mode);
     try { await ScreenOrientation.lock({ orientation: mode === 'phone' ? 'portrait' : 'landscape' }); } catch { /* Web preview may not support native orientation locking. */ }
-    try { localStorage.setItem('car-brother-orientation-chosen', 'yes'); } catch { /* storage may be unavailable */ }
+    try { localStorage.setItem('car-brother-orientation-chosen-v2', 'yes'); } catch { /* storage may be unavailable */ }
     setOrientationChosen(true);
   };
   useEffect(() => {
