@@ -58,7 +58,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['Двигатель и ГРМ','Впуск, выпуск и топливная система','Охлаждение и отопление','АКПП/МКПП, раздатка и карданные валы','Передний/задний дифференциалы и блокировки','Рама, кузов, двери и уплотнители','Рулевое управление и гидроусилитель','Пружинная подвеска или AHC','Тормоза, ABS и датчики скорости','Электрика, климат-контроль, приборная панель и салон'],
  accessories:['Заводские рейлинги/поперечины, фаркоп и защитные элементы — только если подтверждены для рынка/комплектации','Оригинальные коврики, багажные аксессуары и электрика по каталогу Toyota/Lexus для точного номера модели','Не считать аксессуары Cygnus совместимыми с любым Land Cruiser 100 без каталожной проверки'],
- sources:[{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Выбор по модельному году; региональные версии отличаются.'},{label:'Toyota owners portal',url:'https://www.toyota.com/owners/',scope:'Ресурс владельца и точка входа; для старых J100 нужен региональный EPC.'}],
+ sources:[{label:'Каталог Drom — Toyota Land Cruiser',url:'https://www.drom.ru/catalog/toyota/land_cruiser/',scope:'Поколения, региональные модификации, двигатели, коробки и базовые характеристики. Перед использованием в ремонте сверять по VIN и заводскому руководству.'},{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Выбор по модельному году; региональные версии отличаются.'},{label:'Toyota owners portal',url:'https://www.toyota.com/owners/',scope:'Ресурс владельца и точка входа; для старых J100 нужен региональный EPC.'}],
  fitmentRule:'До заказа обязательно записать полный model code, VIN/frame number, месяц выпуска, рынок, код двигателя, код трансмиссии, тормозную комплектацию и наличие AHC/блокировок.'
 },
 {
@@ -97,7 +97,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['Двигатель/ГРМ/VVT-i','Впуск и выпуск, катализатор/DPF/EGR','Охлаждение','АКПП/CVT/МКПП и приводы','Задняя муфта/редуктор AWD','Подвеска и рулевое управление','Тормоза/ABS/VSC','Электрика и климат','Кузов, стекло, замки и салон'],
  accessories:['Багажные поперечины, коврики, защита и фаркоп — только по каталогу конкретного рынка','Оригинальные аксессуары Toyota по VIN и комплектации; не использовать аксессуары XA40 как совместимые с XA30 без подтверждения'],
- sources:[{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Официальные руководства по выбранному году и рынку.'},{label:'Toyota Europe RAV4 owner manual example',url:'https://myportalcontent.toyota-europe.com/Manuals/Toyota/RAV4_OM_OM42873E_%28EE%29.pdf',scope:'Пример более позднего европейского руководства; не источник параметров для XA30.'}],
+ sources:[{label:'Каталог Drom — Toyota RAV4 XA30',url:'https://www.drom.ru/catalog/toyota/rav4/',scope:'Поколения, региональные модификации, двигатели, коробки и базовые характеристики. Перед использованием в ремонте сверять по VIN и заводскому руководству.'},{label:'Toyota manuals and warranties',url:toyotaManuals,scope:'Официальные руководства по выбранному году и рынку.'},{label:'Toyota Europe RAV4 owner manual example',url:'https://myportalcontent.toyota-europe.com/Manuals/Toyota/RAV4_OM_OM42873E_%28EE%29.pdf',scope:'Пример более позднего европейского руководства; не источник параметров для XA30.'}],
  fitmentRule:'Фиксировать модельный код, VIN, рынок, двигатель, трансмиссию, привод и дату выпуска. Варианты 1AZ/2AZ/2AR/2GR/2AD имеют разные детали и сервисные параметры.'
 },
 {
@@ -171,7 +171,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['EJ/EE двигатель, ГРМ и впуск','Турбина/интеркулер/выпуск (turbo)','Топливная система/DPF/EGR (diesel)','5MT/6MT/4EAT/5EAT','Центральный и задний привод AWD','Передняя/задняя подвеска','Тормоза/ABS/VDC','Рулевое управление','Кузов/электрика/климат/салон'],
  accessories:['Оригинальные поперечины, коврики, брызговики и защита поддона — только для SG или SH и конкретного рынка','Не считать аксессуары SG совместимыми с SH','Проверить заводской фаркоп, электропроводку и допустимую нагрузку по руководству'],
- sources:[{label:'Subaru Owner Information Portal',url:subaruManuals,scope:'Выбор по VIN/модели/году; workshop manuals и региональная документация могут отличаться.'}],
+ sources:[{label:'Каталог Drom — Subaru Forester SG/SH',url:'https://www.drom.ru/catalog/subaru/forester/',scope:'Поколения, региональные модификации, двигатели, коробки и базовые характеристики. Перед использованием в ремонте сверять по VIN и заводскому руководству.'},{label:'Subaru Owner Information Portal',url:subaruManuals,scope:'Выбор по VIN/модели/году; workshop manuals и региональная документация могут отличаться.'}],
  fitmentRule:'Сначала разделить SG и SH. Для каждой записи нужны VIN, рынок, код кузова, код двигателя, код КПП, турбо/атмо и передаточное число редукторов.'
 },
 {
@@ -246,7 +246,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['Бензиновые TB и дизельные TD/ZD двигатели','Топливная система/турбина/впуск','МКПП/АКПП и сцепление','Раздатка/карданные валы','Передний/задний мосты, блокировки и ступицы','Рама/кузов/двери','Подвеска и рулевое','Тормоза/ABS','Электрика, климат и салон'],
  accessories:['Оригинальные лебёдочные/защитные/багажные аксессуары только при подтверждённой нагрузке и применимости','Фаркоп и электрика по homologation и региональному каталогу','Лифт-комплекты и внедорожные детали не считать OEM и проверять влияние на геометрию/безопасность'],
- sources:[{label:'Nissan manuals and guides',url:nissanManuals,scope:'Официальная точка входа; для глобального Y61 может потребоваться региональная документация.'}],
+ sources:[{label:'Каталог Drom — Nissan Patrol Y61',url:'https://www.drom.ru/catalog/nissan/patrol/',scope:'Поколения, региональные модификации, двигатели, коробки и базовые характеристики. Перед использованием в ремонте сверять по VIN и заводскому руководству.'},{label:'Nissan manuals and guides',url:nissanManuals,scope:'Официальная точка входа; для глобального Y61 может потребоваться региональная документация.'}],
  fitmentRule:'Записывать VIN/frame, рынок, код двигателя и его ревизию, коробку, передаточные числа мостов, блокировки, ABS и размер тормозов.'
 },
 {
@@ -396,7 +396,7 @@ export const EXPANDED_MODEL_DOSSIERS: ModelDossier[] = [
  ],
  assemblies:['SKYACTIV-G/D двигатель и привод ГРМ','Впуск/выпуск/DPF/EGR','6AT/6MT','Передние приводы/transfer/AWD rear differential','Охлаждение','Подвеска/рулевое','Тормоза/ABS/DSC','Электрика/i-stop/ADAS по комплектации','Кузов/стекло/замки/салон'],
  accessories:['Оригинальные рейлинги/поперечины, коврики, брызговики, защита, фаркоп и багажные аксессуары — по KE или KF и рынку','Оригинальная электрика и аксессуары должны учитывать i-stop, ADAS, тип кузова и комплектацию','Не переносить аксессуары KF на KE без каталожного подтверждения'],
- sources:[{label:'Mazda Owner Manuals',url:mazdaManuals,scope:'Официальные руководства по году/рынку.'},{label:'Mazda CX-5 KE/KF service data example (official Japan)',url:'https://www2.mazda.co.jp/carlife/owner/manual/cx-5/kf/ekni/contents/07050800.html',scope:'Официальная японская страница KF: содержит ориентиры жидкостей и ёмкостей; применять только к совпадающей версии.'},{label:'Mazda CX-5 manual example (2016)',url:'https://www.mazdausa.com/static/manuals/2016/cx5/contents/10020100.html',scope:'Официальное руководство 2016 года; не универсально для KF/дизеля/других рынков.'}],
+ sources:[{label:'Каталог Drom — Mazda CX-5 KE/KF',url:'https://www.drom.ru/catalog/mazda/cx-5/',scope:'Поколения, региональные модификации, двигатели, коробки и базовые характеристики. Перед использованием в ремонте сверять по VIN и заводскому руководству.'},{label:'Mazda Owner Manuals',url:mazdaManuals,scope:'Официальные руководства по году/рынку.'},{label:'Mazda CX-5 KE/KF service data example (official Japan)',url:'https://www2.mazda.co.jp/carlife/owner/manual/cx-5/kf/ekni/contents/07050800.html',scope:'Официальная японская страница KF: содержит ориентиры жидкостей и ёмкостей; применять только к совпадающей версии.'},{label:'Mazda CX-5 manual example (2016)',url:'https://www.mazdausa.com/static/manuals/2016/cx5/contents/10020100.html',scope:'Официальное руководство 2016 года; не универсально для KF/дизеля/других рынков.'}],
  fitmentRule:'Сначала разделить KE и KF; затем VIN, месяц/рынок, PE/PY/SH engine code, 6AT/6MT, FWD/AWD и i-stop. Ёмкости из руководства — ориентиры, после заливки уровень проверять по заводской процедуре.'
 }
 ];
