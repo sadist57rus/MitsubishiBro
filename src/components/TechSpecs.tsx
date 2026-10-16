@@ -6,6 +6,7 @@ import ModelDataCoveragePanel from './ModelDataCoveragePanel';
 import ExpandedModelDossiers from './ExpandedModelDossiers';
 import GenerationBodyCatalogPanel from './GenerationBodyCatalogPanel';
 import JapaneseModelFamilyDirectory from './JapaneseModelFamilyDirectory';
+import TechnicalReferenceMatrixPanel from './TechnicalReferenceMatrixPanel';
 import {
   Maximize2,
   UserCheck,
@@ -126,6 +127,7 @@ export default function TechSpecs() {
 
       <ModelDataCoveragePanel />
       <JapaneseModelFamilyDirectory />
+      <TechnicalReferenceMatrixPanel />
       <GenerationBodyCatalogPanel />
       <ExpandedModelDossiers />
 
