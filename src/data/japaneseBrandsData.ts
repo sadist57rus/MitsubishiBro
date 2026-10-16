@@ -68,6 +68,12 @@ export interface JapaneseCarModel {
   }[];
   /** Notes about market coverage and the verification level of supplemental data. */
   dataQualityNote?: string;
+  /** Conservative status: only set to verified when the exact variant is backed by an OEM document. */
+  verificationStatus?: 'unverified' | 'partially-verified' | 'verified';
+  /** Source links supporting this exact record; generic brand portals do not count as model-level verification. */
+  sourceReferences?: { label: string; url: string; scope: string }[];
+  /** ISO date of the last review of source references, not a claim that every field was re-verified. */
+  lastReviewed?: string;
   isOriginalSourceModel?: boolean;
 }
 
