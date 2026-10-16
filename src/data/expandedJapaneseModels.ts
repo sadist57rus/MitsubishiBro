@@ -672,7 +672,187 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['АКПП', 'Гибридная e-CVT'], drivetrain: 'FWD/AWD или гибридный AWD по версии.',
     sourceNotes: 'RX AL10 включает обычную и гибридную силовые установки. Жидкости гибридной трансмиссии и охлаждения HV-системы не взаимозаменяемы.'
   })
-
+,
+  makeSupplementalModel({
+    id: 'toyota-yaris-xp10', brandId: 'toyota', name: 'Yaris / Vitz (XP10)', generation: 'I поколение', years: '1999–2005', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3610, widthMm: 1660, heightMm: 1500, wheelbaseMm: 2370, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 45, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-yaris-xp90', brandId: 'toyota', name: 'Yaris / Vitz (XP90)', generation: 'II поколение', years: '2005–2011', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3785, widthMm: 1695, heightMm: 1530, wheelbaseMm: 2460, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 42, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-yaris-xp130', brandId: 'toyota', name: 'Yaris / Vitz (XP130)', generation: 'III поколение', years: '2010–2020', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3885, widthMm: 1695, heightMm: 1510, wheelbaseMm: 2510, groundClearanceMm: 135,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 42, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-prius-xw10', brandId: 'toyota', name: 'Prius (XW10)', generation: 'I поколение', years: '1997–2003', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1490, wheelbaseMm: 2550, groundClearanceMm: 140,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 50, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-prius-xw20', brandId: 'toyota', name: 'Prius (XW20)', generation: 'II поколение', years: '2003–2009', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4450, widthMm: 1725, heightMm: 1490, wheelbaseMm: 2700, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 45, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-prius-xw50', brandId: 'toyota', name: 'Prius (XW50)', generation: 'IV поколение', years: '2015–2022', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4540, widthMm: 1760, heightMm: 1470, wheelbaseMm: 2700, groundClearanceMm: 135,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 43, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-estima-xr50', brandId: 'toyota', name: 'Estima (XR50)', generation: 'III поколение', years: '2006–2019', bodyType: 'Минивэн',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4795, widthMm: 1800, heightMm: 1730, wheelbaseMm: 2950, groundClearanceMm: 160,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 65, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-skyline-v35', brandId: 'nissan', name: 'Skyline (V35)', generation: 'XI поколение', years: '2001–2007', bodyType: 'Седан',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4675, widthMm: 1750, heightMm: 1470, wheelbaseMm: 2850, groundClearanceMm: 140,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 80, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-skyline-v36', brandId: 'nissan', name: 'Skyline (V36)', generation: 'XII поколение', years: '2006–2014', bodyType: 'Седан',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4755, widthMm: 1770, heightMm: 1450, wheelbaseMm: 2850, groundClearanceMm: 130,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 80, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'nissan-march-k12', brandId: 'nissan', name: 'March / Micra (K12)', generation: 'III поколение', years: '2002–2010', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3725, widthMm: 1660, heightMm: 1525, wheelbaseMm: 2430, groundClearanceMm: 135,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 41, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-fit-gd', brandId: 'honda', name: 'Fit / Jazz (GD)', generation: 'I поколение', years: '2001–2008', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3830, widthMm: 1675, heightMm: 1525, wheelbaseMm: 2450, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 42, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'honda-fit-ge', brandId: 'honda', name: 'Fit / Jazz (GE)', generation: 'II поколение', years: '2007–2014', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3900, widthMm: 1695, heightMm: 1525, wheelbaseMm: 2500, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 42, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'mazda-demio-dy', brandId: 'mazda', name: 'Demio / Mazda2 (DY)', generation: 'II поколение', years: '2002–2007', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3925, widthMm: 1680, heightMm: 1530, wheelbaseMm: 2490, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 45, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'mazda-demio-de', brandId: 'mazda', name: 'Demio / Mazda2 (DE)', generation: 'III поколение', years: '2007–2014', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3885, widthMm: 1695, heightMm: 1475, wheelbaseMm: 2490, groundClearanceMm: 155,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 41, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'subaru-legacy-bp', brandId: 'subaru', name: 'Legacy (BP/BL)', generation: 'IV поколение', years: '2003–2009', bodyType: 'Универсал',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4680, widthMm: 1730, heightMm: 1475, wheelbaseMm: 2670, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 64, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'subaru-legacy-bmbr', brandId: 'subaru', name: 'Legacy (BM/BR)', generation: 'V поколение', years: '2009–2014', bodyType: 'Универсал',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4790, widthMm: 1780, heightMm: 1535, wheelbaseMm: 2750, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 65, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-swift-zc72', brandId: 'suzuki', name: 'Swift (ZC72/ZD72)', generation: 'III поколение', years: '2010–2017', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3850, widthMm: 1695, heightMm: 1510, wheelbaseMm: 2430, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 42, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-alto-ha25', brandId: 'suzuki', name: 'Alto (HA25)', generation: 'VII поколение', years: '2009–2014', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3395, widthMm: 1475, heightMm: 1535, wheelbaseMm: 2400, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 30, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'daihatsu-mira-l275', brandId: 'daihatsu', name: 'Mira (L275)', generation: 'VII поколение', years: '2006–2018', bodyType: 'Хэтчбек',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 3395, widthMm: 1475, heightMm: 1530, wheelbaseMm: 2490, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 36, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  }),
+  makeSupplementalModel({
+    id: 'lexus-ls-xf30', brandId: 'lexus', name: 'LS (XF30)', generation: 'III поколение', years: '2000–2006', bodyType: 'Седан',
+    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
+    lengthMm: 4995, widthMm: 1830, heightMm: 1490, wheelbaseMm: 2925, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 84, curbWeightKg: 'Зависит от версии',
+    engines: [], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
+    drivetrain: 'Зависит от модификации и рынка.',
+    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+  })
 ];
 
 for (const model of supplementalModels) {
