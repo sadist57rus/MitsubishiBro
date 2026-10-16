@@ -51,7 +51,7 @@ jobs:
       - name: Generate Android project
         run: npx cap add android
 
-      - name: Configure landscape launcher for head units
+      - name: Set portrait as safe first-launch default
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -60,7 +60,9 @@ jobs:
           needle = 'android:name=".MainActivity"'
           if needle not in s:
               raise SystemExit("MainActivity declaration not found in AndroidManifest.xml")
-          s = s.replace(needle, needle + '\n            android:screenOrientation="landscape"', 1)
+          import re
+          s = re.sub(r'\s+android:screenOrientation="[^"]+"', '', s)
+          s = s.replace(needle, needle + '\\n            android:screenOrientation="portrait"', 1)
           p.write_text(s)
           PY
 
