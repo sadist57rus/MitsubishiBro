@@ -93,6 +93,7 @@ cd android
 
 - [Политика проверки данных](docs/DATA_VERIFICATION_POLICY.md)
 - [План расширения покрытия](docs/CATALOG_COVERAGE_ROADMAP.md)
+- [Пакет данных № 1: Outlander CU5W / 4G69](docs/DATA_BATCH_01_OUTLANDER_CU5W_4G69.md)
 - [Схема точной модификации](src/data/vehicleVariantSchema.ts)
 
 ## Участие в развитии
