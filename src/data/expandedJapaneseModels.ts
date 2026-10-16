@@ -90,7 +90,10 @@ const makeSupplementalModel = (data: {
       { title: 'Износ опор двигателя и трансмиссии', symptoms: 'Вибрации на холостом ходу, удар при выборе D/R или начале движения.', rootCause: 'Просевшие опоры либо неисправность привода/трансмиссии.', solution: 'Проверить опоры под нагрузкой и исключить пропуски зажигания до замены.' },
       { title: 'Состояние трансмиссии и приводов', symptoms: 'Гул, вибрация, задержки переключения, рывки.', rootCause: 'Уровень/состояние жидкости, утечки, опоры, ШРУСы или внутренняя неисправность агрегата.', solution: 'Проверить точный тип коробки и спецификацию жидкости по VIN/коду агрегата; не смешивать ATF/CVT/DCT.' }
     ],
-    dataQualityNote: data.sourceNotes
+    dataQualityNote: data.sourceNotes,
+    verificationStatus: 'unverified',
+    sourceReferences: [],
+    lastReviewed: '2026-10-16'
   };
 }
 
