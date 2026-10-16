@@ -1064,7 +1064,7 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'Индекс семейства добавлен для покрытия каталога. Не использовать как руководство для ремонта: характеристики агрегатов, жидкости, лампы и предохранители требуют точной идентификации и OEM-источника.'
   }),
   makeSupplementalModel({
-    id: 'fuso-canter', brandId: 'mitsubishi', name: 'Fuso Canter', generation: 'Семейство лёгких коммерческих грузовиков', years: '1963–н.в.', bodyType: 'Пикап',
+    id: 'fuso-canter', brandId: 'mitsubishi-fuso', name: 'Fuso Canter', generation: 'Семейство лёгких коммерческих грузовиков', years: '1963–н.в.', bodyType: 'Пикап',
     overview: 'Семейство коммерческого транспорта; точные параметры определяются рынком, кодом кузова, датой выпуска и комплектацией.',
     lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
     trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: 0, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
@@ -1074,6 +1074,19 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'Индекс семейства добавлен для покрытия каталога. Не использовать как руководство для ремонта: характеристики агрегатов, жидкости, лампы и предохранители требуют точной идентификации и OEM-источника.'
   })
 ];
+
+
+const commercialBrandSeeds = [
+  { id: 'hino', name: 'Hino Motors', russianName: 'Хино', founded: 1942, headquarters: 'Хино, Токио, Япония', tagline: 'Японский коммерческий транспорт', description: 'Производитель грузовых автомобилей, автобусов и коммерческих шасси.', brandColor: '#b91c1c', awdPhilosophy: 'Конфигурации привода зависят от серии, шасси и назначения.' },
+  { id: 'mitsubishi-fuso', name: 'Mitsubishi Fuso', russianName: 'Мицубиси Фусо', founded: 1932, headquarters: 'Кавасаки, Япония', tagline: 'Коммерческие автомобили и автобусы', description: 'Марка коммерческих грузовиков и автобусов; агрегаты зависят от серии и рынка.', brandColor: '#2563eb', awdPhilosophy: 'Зависит от серии и назначения шасси.' },
+  { id: 'ud-trucks', name: 'UD Trucks', russianName: 'ЮД Тракс', founded: 1935, headquarters: 'Ageo, Сайтама, Япония', tagline: 'Средние и тяжёлые грузовые автомобили', description: 'Японский производитель грузовых автомобилей для региональных и магистральных перевозок.', brandColor: '#0f766e', awdPhilosophy: 'Обычно задний привод; специальные конфигурации уточняются по шасси.' }
+] as const;
+
+for (const seed of commercialBrandSeeds) {
+  if (!JAPANESE_BRANDS.some((brand) => brand.id === seed.id)) {
+    JAPANESE_BRANDS.push({ ...seed, country: 'Япония', models: [] });
+  }
+}
 
 for (const model of supplementalModels) {
   const brand = JAPANESE_BRANDS.find(item => item.id === model.brandId);
