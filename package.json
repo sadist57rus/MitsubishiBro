@@ -24,7 +24,8 @@
     "recharts": "^3.10.1",
     "vite": "^8.3.0",
     "@capacitor/core": "^8.5.3",
-    "@capacitor/android": "^8.5.3"
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/screen-orientation": "^8.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
