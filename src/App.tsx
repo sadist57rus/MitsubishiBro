@@ -55,9 +55,13 @@ export default function App() {
   const [orientationChosen, setOrientationChosen] = useState(() => {
     try { return localStorage.getItem('car-brother-orientation-chosen-v2') === 'yes'; } catch { return false; }
   });
-  const chooseOrientation = async (mode: 'phone' | 'wide') => {
+  const applyUiMode = async (mode: 'phone' | 'wide') => {
     setUiMode(mode);
-    try { await ScreenOrientation.lock({ orientation: mode === 'phone' ? 'portrait' : 'landscape' }); } catch { /* Web preview may not support native orientation locking. */ }
+    try { await ScreenOrientation.lock({ orientation: mode === 'phone' ? 'portrait' : 'landscape' }); } catch (error) { console.warn('Screen orientation lock is unavailable in this runtime:', error); }
+    try { localStorage.setItem('car-brother-ui-mode', mode); } catch { /* storage may be unavailable */ }
+  };
+  const chooseOrientation = async (mode: 'phone' | 'wide') => {
+    await applyUiMode(mode);
     try { localStorage.setItem('car-brother-orientation-chosen-v2', 'yes'); } catch { /* storage may be unavailable */ }
     setOrientationChosen(true);
   };
@@ -129,7 +133,7 @@ export default function App() {
         onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
         uiMode={uiMode}
-        onChangeUiMode={setUiMode}
+        onChangeUiMode={(mode) => { void applyUiMode(mode); }}
       />
 
       {/* Breadcrumb Navigation when inside a sub-module */}
