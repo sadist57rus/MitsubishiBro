@@ -440,6 +440,17 @@ export default function JapaneseBrandsHub({
                   <span className="font-bold">Статус достоверности: </span>
                   {currentModel.verificationStatus === 'verified' ? 'проверено по источникам для конкретной модификации' : currentModel.verificationStatus === 'partially-verified' ? 'частично проверено; отдельные параметры требуют сверки' : 'не подтверждено заводским источником для точной модификации'}
                   {(!currentModel.sourceReferences || currentModel.sourceReferences.length === 0) && <span> Источники для этой конкретной карточки ещё не прикреплены.</span>}
+                  {currentModel.sourceReferences && currentModel.sourceReferences.length > 0 && (
+                    <span className="block mt-1">
+                      Источники: {currentModel.sourceReferences.map((source, index) => (
+                        <React.Fragment key={source.url}>
+                          {index > 0 && ' · '}
+                          <a href={source.url} target="_blank" rel="noreferrer" className="underline font-semibold">{source.label}</a>
+                          <span> ({source.scope})</span>
+                        </React.Fragment>
+                      ))}
+                    </span>
+                  )}
                   {currentModel.lastReviewed && <span> Проверка статуса: {currentModel.lastReviewed}.</span>}
                 </div>
               </div>
