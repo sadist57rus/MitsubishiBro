@@ -71,7 +71,6 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
   const [category, setCategory] = useState('all');
   const brands = JAPANESE_BRANDS;
   const models = useMemo(() => brands.find(b => b.id === brandId)?.models ?? [], [brands, brandId]);
-  const categories = useMemo(() => ['all', ...new Set(STARTER_ITEMS.filter(i => i.group === group).map(i => i.category))], [group]);
   const selectedModel = models.find(m => m.id === modelId) ?? models[0];
   const sourcedItems: CatalogItem[] = SOURCE_BACKED_PARTS
     .filter(item => item.modelId === selectedModel?.id && brandId === 'mitsubishi')
@@ -90,6 +89,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
       modelId: item.modelId
     }));
   const catalogItems = [...STARTER_ITEMS, ...sourcedItems];
+  const categories = ['all', ...new Set(catalogItems.filter(i => i.group === group).map(i => i.category))];
   const items = useMemo(() => catalogItems.filter(item => item.group === group && (category === 'all' || item.category === category) && (!query.trim() || [item.title, item.category, item.fitment, item.note, item.oemNumber ?? '', item.brand ?? ''].some(v => v.toLowerCase().includes(query.toLowerCase().trim())))), [group, category, query, selectedModel?.id, brandId]);
 
   return <div className="space-y-5">
