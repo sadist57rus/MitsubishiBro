@@ -2141,3 +2141,14 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
     ]
   }
 ];
+
+/**
+ * Fail closed: legacy records without attached evidence must never appear as verified.
+ * The audit status is promoted only after exact-variant OEM documentation is attached.
+ */
+for (const brand of JAPANESE_BRANDS) {
+  for (const model of brand.models) {
+    model.verificationStatus ??= 'unverified';
+    model.sourceReferences ??= [];
+  }
+}
