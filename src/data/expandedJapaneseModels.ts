@@ -25,7 +25,7 @@ const makeSupplementalModel = (data: {
   transmissions: string[];
   drivetrain?: string;
   sourceNotes: string;
-}): JapaneseCarModel {
+}): JapaneseCarModel => {
   return {
     id: data.id,
     brandId: data.brandId,
@@ -390,7 +390,7 @@ const supplementalModels: JapaneseCarModel[] = [
     ],
     transmissions: ['МКПП', 'АКПП или вариатор — в зависимости от рынка'],
     sourceNotes: 'Моторы и коробки не универсальны для всех E11. Объёмы жидкостей и лампы не указаны без точной модификации.'
-  })
+  }),
 
   makeSupplementalModel({
     id: 'mitsubishi-lancer-cs-sedan', brandId: 'mitsubishi', name: 'Lancer IX (CS)', generation: 'IX поколение', years: '2000–2010', bodyType: 'Седан',
@@ -573,7 +573,7 @@ const supplementalModels: JapaneseCarModel[] = [
     ],
     transmissions: ['МКПП', 'АКПП'], drivetrain: 'RWD или Part-Time 4WD.',
     sourceNotes: 'RG зависит от рынка, двигателя и кабины. Точные объёмы, масла мостов и АКПП — только по руководству для конкретной версии.'
-  })
+  }),
 
 
   makeSupplementalModel({
