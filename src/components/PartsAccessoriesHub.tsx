@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
+import { SOURCE_BACKED_PARTS, PARTS_CATALOG_SOURCES } from '../data/sourceBackedPartsCatalog';
 import { Search, Filter, Package, Wrench, ShoppingBag, ShieldCheck, AlertTriangle, BookOpen, CarFront } from 'lucide-react';
 
 type CatalogGroup = 'consumables' | 'full' | 'accessories';
@@ -16,6 +17,7 @@ interface CatalogItem {
   verification: Verification;
   note: string;
   source?: string;
+  modelId?: string;
 }
 
 /**
@@ -70,8 +72,25 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
   const brands = JAPANESE_BRANDS;
   const models = useMemo(() => brands.find(b => b.id === brandId)?.models ?? [], [brands, brandId]);
   const categories = useMemo(() => ['all', ...new Set(STARTER_ITEMS.filter(i => i.group === group).map(i => i.category))], [group]);
-  const items = useMemo(() => STARTER_ITEMS.filter(item => item.group === group && (category === 'all' || item.category === category) && (!query.trim() || [item.title, item.category, item.fitment, item.note, item.oemNumber ?? '', item.brand ?? ''].some(v => v.toLowerCase().includes(query.toLowerCase().trim())))), [group, category, query]);
   const selectedModel = models.find(m => m.id === modelId) ?? models[0];
+  const sourcedItems: CatalogItem[] = SOURCE_BACKED_PARTS
+    .filter(item => item.modelId === selectedModel?.id && brandId === 'mitsubishi')
+    .map(item => ({
+      id: item.id,
+      title: item.name,
+      group: item.section,
+      category: item.category,
+      fitment: `${item.market}; ${item.modelYears}; ${item.engine}; ${item.trimScope}`,
+      oemNumber: item.partNumber,
+      brand: item.maker,
+      kind: item.section === 'accessories' ? 'official' : undefined,
+      verification: item.status === 'verified-source-scope' ? 'verified' : item.status === 'partial-fitment' ? 'partial' : 'unverified',
+      note: item.notes,
+      source: item.sourceIds.map(id => PARTS_CATALOG_SOURCES.find(s => s.id === id)?.url).filter(Boolean).join(' '),
+      modelId: item.modelId
+    }));
+  const catalogItems = [...STARTER_ITEMS, ...sourcedItems];
+  const items = useMemo(() => catalogItems.filter(item => item.group === group && (category === 'all' || item.category === category) && (!query.trim() || [item.title, item.category, item.fitment, item.note, item.oemNumber ?? '', item.brand ?? ''].some(v => v.toLowerCase().includes(query.toLowerCase().trim())))), [group, category, query, selectedModel?.id, brandId]);
 
   return <div className="space-y-5">
     <section className="relative overflow-hidden rounded-2xl bg-linear-to-br from-slate-950 via-slate-900 to-[#173451] p-5 sm:p-7 text-white border border-slate-800">
@@ -83,7 +102,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
           <p className="text-sm text-slate-300 mt-2 leading-relaxed">Три независимых каталога с подбором по марке и модели. Артикулы, официальность и применимость показываются только при наличии источника — неподтверждённые позиции помечены явно.</p>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs min-w-44">
-          <div className="rounded-xl bg-white/5 border border-white/10 p-3"><span className="block text-slate-400">Стартовые позиции</span><strong className="text-xl font-mono">{STARTER_ITEMS.length}</strong></div>
+          <div className="rounded-xl bg-white/5 border border-white/10 p-3"><span className="block text-slate-400">Стартовые позиции</span><strong className="text-xl font-mono">{STARTER_ITEMS.length + sourcedItems.length}</strong></div>
           <div className="rounded-xl bg-white/5 border border-white/10 p-3"><span className="block text-slate-400">Проверено</span><strong className="text-xl font-mono">0</strong></div>
         </div>
       </div>
@@ -120,7 +139,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
         <Filter className="w-4 h-4 text-slate-400" />
         {categories.map(c => <button key={c} onClick={() => setCategory(c)} className={`rounded-full px-3 py-1.5 text-xs font-semibold border ${category === c ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-transparent' : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'}`}>{c === 'all' ? 'Все системы' : c}</button>)}
       </div>
-      {selectedModel && <div className="rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3 text-xs text-slate-600 dark:text-slate-300 flex gap-2"><BookOpen className="w-4 h-4 shrink-0 text-red-500" /><span>Выбрано: <strong>{brands.find(b => b.id === brandId)?.name} {selectedModel.name}</strong>. Перед заказом проверяйте VIN, рынок, код кузова, двигатель, коробку и дату выпуска. Позиции ниже — стартовая структура каталога, а не подтверждение совместимости с выбранным автомобилем.</span></div>}
+      {selectedModel && <div className="rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3 text-xs text-slate-600 dark:text-slate-300 flex gap-2"><BookOpen className="w-4 h-4 shrink-0 text-red-500" /><span>Выбрано: <strong>{brands.find(b => b.id === brandId)?.name} {selectedModel.name}</strong>. Для записей с номерами деталей учитывайте указанный рынок источника. Часть найденных OEM-номеров относится к североамериканскому Outlander 2006 2.4L, а не автоматически к европейскому CU5W/4G69. Перед заказом проверяйте VIN, код кузова, двигатель, коробку и дату выпуска.</span></div>}
       <div className="flex items-center justify-between text-xs text-slate-500"><span>Показано позиций: <strong>{items.length}</strong></span><span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Уровень проверки указан на каждой позиции</span></div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         {items.map(item => <article key={item.id} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4 space-y-3 hover:border-slate-400 dark:hover:border-slate-600 transition">
@@ -132,6 +151,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
           {item.kind && <div className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 text-[11px] font-bold"><ShieldCheck className="w-3.5 h-3.5" />{item.kind === 'official' ? 'Категория: оригинальный аксессуар — артикул требует проверки' : 'Сторонний аксессуар'}</div>}
           {item.oemNumber && <div className="font-mono text-xs">OEM: {item.oemNumber}</div>}
           <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300">{item.note}</p>
+          {item.source && <div className="text-[11px]"><a className="text-blue-600 dark:text-blue-400 underline underline-offset-2 break-all" href={item.source.split(' ')[0]} target="_blank" rel="noreferrer">Открыть источник OEM-каталога</a></div>}
         </article>)}
         {items.length === 0 && <div className="col-span-full text-center p-10 text-sm text-slate-500">Ничего не найдено. Измени поисковый запрос или категорию.</div>}
       </div>
