@@ -1,6 +1,17 @@
 import { useState, useMemo, useEffect } from 'react';
 import { EngineType } from '../types';
 import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ReferenceLine
+} from 'recharts';
+import {
   Fuel,
   Calculator,
   RotateCcw,
@@ -15,10 +26,12 @@ import {
   Gauge,
   Sparkles,
   Info,
-  Car
+  Car,
+  SlidersHorizontal,
+  Activity
 } from 'lucide-react';
 
-interface FuelLog {
+export interface FuelLog {
   id: string;
   date: string;
   odometer: number;
@@ -31,7 +44,7 @@ interface FuelLog {
   station: string;
 }
 
-const STORAGE_KEY = 'outlander1_fuel_logs_v1';
+const STORAGE_KEY = 'outlander1_fuel_logs_v2';
 
 export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine?: EngineType }) {
   // Calculator inputs
@@ -40,36 +53,90 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   const [fuelPrice, setFuelPrice] = useState<string>('62.50');
   const [fuelType, setFuelType] = useState<string>('АИ-95');
 
-  // Logs state
+  // Chart options
+  const [chartXMode, setChartXMode] = useState<'odometer' | 'date'>('odometer');
+
+  // Logs state with rich authentic initial history
   const [logs, setLogs] = useState<FuelLog[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
     } catch (e) {
       console.error(e);
     }
     return [
       {
         id: '1',
-        date: '2026-03-28',
-        odometer: 245300,
-        distance: 430,
-        liters: 49.5,
-        pricePerLiter: 62.5,
-        totalCost: 3093.75,
-        consumption: 11.51,
+        date: '2026-02-15',
+        odometer: 243400,
+        distance: 410,
+        liters: 51.2,
+        pricePerLiter: 61.8,
+        totalCost: 3164,
+        consumption: 12.49,
         fuelType: 'АИ-95',
         station: 'Лукойл'
       },
       {
         id: '2',
-        date: '2026-04-05',
-        odometer: 245780,
-        distance: 480,
-        liters: 52.0,
-        pricePerLiter: 63.1,
-        totalCost: 3281.20,
-        consumption: 10.83,
+        date: '2026-02-28',
+        odometer: 243920,
+        distance: 520,
+        liters: 50.0,
+        pricePerLiter: 62.1,
+        totalCost: 3105,
+        consumption: 9.62,
+        fuelType: 'АИ-95',
+        station: 'Газпромнефть'
+      },
+      {
+        id: '3',
+        date: '2026-03-12',
+        odometer: 244360,
+        distance: 440,
+        liters: 53.5,
+        pricePerLiter: 62.4,
+        totalCost: 3338,
+        consumption: 12.16,
+        fuelType: 'АИ-95',
+        station: 'Роснефть'
+      },
+      {
+        id: '4',
+        date: '2026-03-24',
+        odometer: 244790,
+        distance: 430,
+        liters: 48.0,
+        pricePerLiter: 62.5,
+        totalCost: 3000,
+        consumption: 11.16,
+        fuelType: 'АИ-95',
+        station: 'Лукойл'
+      },
+      {
+        id: '5',
+        date: '2026-04-04',
+        odometer: 245280,
+        distance: 490,
+        liters: 52.8,
+        pricePerLiter: 63.0,
+        totalCost: 3326,
+        consumption: 10.78,
+        fuelType: 'АИ-95',
+        station: 'Татнефть'
+      },
+      {
+        id: '6',
+        date: '2026-04-14',
+        odometer: 245660,
+        distance: 380,
+        liters: 51.5,
+        pricePerLiter: 63.2,
+        totalCost: 3254,
+        consumption: 13.55,
         fuelType: 'АИ-95',
         station: 'Газпромнефть'
       }
@@ -77,11 +144,11 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   });
 
   const [isAddingLog, setIsAddingLog] = useState(false);
-  const [newOdometer, setNewOdometer] = useState<string>('246250');
-  const [newDistance, setNewDistance] = useState<string>('470');
-  const [newLiters, setNewLiters] = useState<string>('51');
-  const [newPrice, setNewPrice] = useState<string>('62.80');
-  const [newStation, setNewStation] = useState<string>('Роснефть');
+  const [newOdometer, setNewOdometer] = useState<string>('246100');
+  const [newDistance, setNewDistance] = useState<string>('440');
+  const [newLiters, setNewLiters] = useState<string>('49.5');
+  const [newPrice, setNewPrice] = useState<string>('63.00');
+  const [newStation, setNewStation] = useState<string>('Лукойл');
   const [newFuelType, setNewFuelType] = useState<string>('АИ-95');
 
   useEffect(() => {
@@ -140,13 +207,32 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
     const totalSpent = logs.reduce((acc, l) => acc + l.totalCost, 0);
     const avgConsumption = totalDist > 0 ? (totalLiters / totalDist) * 100 : 0;
 
+    const minConsumption = Math.min(...logs.map(l => l.consumption));
+    const maxConsumption = Math.max(...logs.map(l => l.consumption));
+
     return {
       totalDist,
       totalLiters: totalLiters.toFixed(1),
       totalSpent: totalSpent.toFixed(0),
-      avgConsumption: avgConsumption.toFixed(2)
+      avgConsumption: avgConsumption.toFixed(2),
+      minConsumption: minConsumption.toFixed(2),
+      maxConsumption: maxConsumption.toFixed(2)
     };
   }, [logs]);
+
+  // Formatted data for Recharts sorted chronologically/by odometer
+  const chartData = useMemo(() => {
+    return [...logs]
+      .sort((a, b) => a.odometer - b.odometer)
+      .map((item) => ({
+        ...item,
+        odometerKm: item.odometer,
+        label: chartXMode === 'odometer' ? `${item.odometer} км` : item.date,
+        consumptionVal: item.consumption,
+        litersVal: item.liters,
+        costVal: item.totalCost
+      }));
+  }, [logs, chartXMode]);
 
   const handleSaveLog = (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,17 +264,55 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   };
 
   const deleteLog = (id: string) => {
-    setLogs(logs.filter(l => l.id !== id));
+    setLogs(logs.filter((l) => l.id !== id));
+  };
+
+  // Custom Tooltip for Recharts
+  const CustomChartTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload as FuelLog;
+      return (
+        <div className="bg-slate-900 border border-slate-700 p-3 rounded-xl shadow-xl text-xs space-y-1.5 text-white font-mono">
+          <div className="flex justify-between items-center gap-4 text-slate-400 border-b border-slate-800 pb-1">
+            <span>{data.date}</span>
+            <span className="text-white font-bold">{data.odometer.toLocaleString()} км</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-red-400 font-bold">Расход:</span>
+            <strong className="text-base text-red-500 font-black">
+              {data.consumption} л/100км
+            </strong>
+          </div>
+          <div className="flex justify-between text-[11px] text-slate-300">
+            <span>Заправлено:</span>
+            <span>{data.liters} л ({data.fuelType})</span>
+          </div>
+          <div className="flex justify-between text-[11px] text-slate-300">
+            <span>Дистанция:</span>
+            <span>{data.distance} км</span>
+          </div>
+          <div className="flex justify-between text-[11px] text-slate-300 pt-1 border-t border-slate-800">
+            <span>Сумма чека:</span>
+            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} ₽</span>
+          </div>
+          <div className="text-[10px] text-slate-400 italic">
+            {data.station}
+          </div>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-200">
+    <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Header Card */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase tracking-wider flex items-center gap-1">
+                <Fuel className="w-3.5 h-3.5" />
                 Учёт и аналитика расхода топлива
               </span>
               <span className="text-slate-300 dark:text-slate-700">·</span>
@@ -198,15 +322,15 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               <Fuel className="w-6 h-6 text-red-600" />
               Мониторинг топлива Outlander I
             </h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Точный калькулятор среднего расхода (л/100км), оценка стоимости поездок, журнал заправок и диагностика повышенного аппетита
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-3xl">
+              Точный калькулятор среднего расхода (л/100км), оценка стоимости поездок, интерактивный график расхода по пробегу Recharts и причины повышенного аппетита 4G6.
             </p>
           </div>
 
           <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
             <button
               onClick={() => setIsAddingLog(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-sm transition"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-xs transition"
             >
               <Plus className="w-4 h-4" />
               <span>Записать заправку</span>
@@ -216,18 +340,27 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
         {/* Aggregate Stats Strip if logs exist */}
         {overallStats && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Средний расход по чекам</span>
+              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Средний расход</span>
               <div className="text-red-600 dark:text-red-400 font-mono font-black text-lg">
                 {overallStats.avgConsumption} <span className="text-xs font-normal text-slate-500">л/100км</span>
               </div>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
+              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Мин. / Макс.</span>
+              <div className="text-slate-900 dark:text-white font-mono font-bold text-sm mt-1">
+                <span className="text-emerald-600 dark:text-emerald-400">{overallStats.minConsumption}</span>
+                <span className="text-slate-400 mx-1">/</span>
+                <span className="text-amber-600 dark:text-amber-400">{overallStats.maxConsumption}</span>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
               <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Учтённый пробег</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
-                {overallStats.totalDist} <span className="text-xs font-normal text-slate-500">км</span>
+                {overallStats.totalDist.toLocaleString()} <span className="text-xs font-normal text-slate-500">км</span>
               </div>
             </div>
 
@@ -238,14 +371,145 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               </div>
             </div>
 
-            <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Сумма расходов</span>
+            <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800 col-span-2 sm:col-span-2">
+              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Сумма расходов на бензин</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
-                {overallStats.totalSpent} <span className="text-xs font-normal text-slate-500">₽</span>
+                {Number(overallStats.totalSpent).toLocaleString()} <span className="text-xs font-normal text-slate-500">₽</span>
               </div>
             </div>
           </div>
         )}
+      </div>
+
+      {/* RECHARTS SECTION: Interactive Fuel Consumption vs Mileage Chart */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <div className="flex items-center gap-2">
+            <Activity className="w-5 h-5 text-red-600" />
+            <div>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                График расхода топлива в зависимости от пробега (Recharts)
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Динамика изменения среднего расхода (л/100км) по записям бортжурнала с контрольными заводскими линиями
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
+              <button
+                onClick={() => setChartXMode('odometer')}
+                className={`px-3 py-1 rounded-lg font-bold transition ${
+                  chartXMode === 'odometer'
+                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                По пробегу (км)
+              </button>
+              <button
+                onClick={() => setChartXMode('date')}
+                className={`px-3 py-1 rounded-lg font-bold transition ${
+                  chartXMode === 'date'
+                    ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs'
+                    : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                }`}
+              >
+                По датам
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Legend / Benchmarks Bar */}
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono pt-1 text-slate-600 dark:text-slate-400">
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-red-600 inline-block" />
+            <span>Расход авто (л/100км)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-0.5 bg-emerald-500 inline-block border-b-2 border-dashed border-emerald-500" />
+            <span className="text-emerald-600 dark:text-emerald-400">7.6 л (Паспорт Трасса)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-0.5 bg-amber-500 inline-block border-b-2 border-dashed border-amber-500" />
+            <span className="text-amber-600 dark:text-amber-400">12.5 л (Паспорт Город 4WD)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 h-0.5 bg-red-500 inline-block border-b-2 border-dashed border-red-500" />
+            <span className="text-red-500">15.0 л (Порог перерасхода)</span>
+          </div>
+        </div>
+
+        {/* Recharts Container */}
+        <div className="h-72 w-full pt-3">
+          {chartData.length > 0 ? (
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                data={chartData}
+                margin={{ top: 10, right: 20, left: -15, bottom: 0 }}
+              >
+                <defs>
+                  <linearGradient id="fuelGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#dc2626" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#dc2626" stopOpacity={0.0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                <XAxis
+                  dataKey="label"
+                  stroke="#94a3b8"
+                  fontSize={11}
+                  tickLine={false}
+                />
+                <YAxis
+                  stroke="#94a3b8"
+                  fontSize={11}
+                  domain={[6, 17]}
+                  tickLine={false}
+                  unit=" л"
+                />
+                <Tooltip content={<CustomChartTooltip />} />
+
+                {/* Benchmark Lines */}
+                <ReferenceLine
+                  y={7.6}
+                  stroke="#10b981"
+                  strokeDasharray="4 4"
+                  label={{ value: '7.6L Трасса', fill: '#10b981', fontSize: 10, position: 'insideBottomRight' }}
+                />
+                <ReferenceLine
+                  y={12.5}
+                  stroke="#f59e0b"
+                  strokeDasharray="4 4"
+                  label={{ value: '12.5L Город', fill: '#f59e0b', fontSize: 10, position: 'insideBottomRight' }}
+                />
+                <ReferenceLine
+                  y={15.0}
+                  stroke="#ef4444"
+                  strokeDasharray="3 3"
+                  label={{ value: '15L Лимит', fill: '#ef4444', fontSize: 10, position: 'insideBottomRight' }}
+                />
+
+                <Area
+                  type="monotone"
+                  dataKey="consumptionVal"
+                  stroke="#dc2626"
+                  strokeWidth={3}
+                  fillOpacity={1}
+                  fill="url(#fuelGradient)"
+                  dot={{ r: 4, fill: '#dc2626', stroke: '#ffffff', strokeWidth: 2 }}
+                  activeDot={{ r: 6, fill: '#ef4444' }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-full flex items-center justify-center text-xs text-slate-400">
+              Нет данных для построения графика. Добавьте записи в журнал заправок.
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Main Fuel Calculator */}
@@ -279,7 +543,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   Пройденное расстояние (км):
                 </label>
                 <div className="flex items-center gap-1">
-                  {[250, 350, 420, 500].map(val => (
+                  {[250, 350, 420, 500].map((val) => (
                     <button
                       key={val}
                       onClick={() => setDistance(val.toString())}
@@ -293,7 +557,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               <input
                 type="number"
                 value={distance}
-                onChange={e => setDistance(e.target.value)}
+                onChange={(e) => setDistance(e.target.value)}
                 placeholder="Например: 420"
                 className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono font-bold text-slate-900 dark:text-white outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
               />
@@ -302,10 +566,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
                 <label className="font-semibold text-slate-700 dark:text-slate-300">
-                  Заправлено топлива (литров):
+                  Заправлено литров (л):
                 </label>
                 <div className="flex items-center gap-1">
-                  {[30, 40, 50, 60].map(val => (
+                  {[30, 45, 50, 60].map((val) => (
                     <button
                       key={val}
                       onClick={() => setLiters(val.toString())}
@@ -318,14 +582,15 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               </div>
               <input
                 type="number"
+                step="0.1"
                 value={liters}
-                onChange={e => setLiters(e.target.value)}
-                placeholder="Например: 48"
+                onChange={(e) => setLiters(e.target.value)}
+                placeholder="Например: 48.5"
                 className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono font-bold text-slate-900 dark:text-white outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 pt-1">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   Цена за литр (₽):
@@ -334,7 +599,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   type="number"
                   step="0.1"
                   value={fuelPrice}
-                  onChange={e => setFuelPrice(e.target.value)}
+                  onChange={(e) => setFuelPrice(e.target.value)}
                   placeholder="62.50"
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-mono font-bold text-slate-900 dark:text-white outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
                 />
@@ -346,7 +611,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 </label>
                 <select
                   value={fuelType}
-                  onChange={e => setFuelType(e.target.value)}
+                  onChange={(e) => setFuelType(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-red-500 transition"
                 >
                   <option value="АИ-92">АИ-92 (допустим для 4G63/4G64)</option>
@@ -401,7 +666,6 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     <div className="relative h-4 w-full">
                       {(() => {
                         const val = parseFloat(stats.consumption);
-                        // Scale from 6.0L (0%) to 20.0L (100%)
                         const pct = Math.min(100, Math.max(0, ((val - 6.0) / 14.0) * 100));
                         return (
                           <div
@@ -468,7 +732,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             {/* Benchmark Comparison Bars */}
             <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] space-y-2">
               <span className="font-bold text-slate-900 dark:text-slate-200 block">
-                Заводские ориентиры Outlander I (город / трасса):
+                Заводские ориентиры Outlander I (трасса / город):
               </span>
               <div className="space-y-1.5 font-mono text-[10px]">
                 <div>
@@ -506,7 +770,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         </div>
       </div>
 
-      {/* Add Fuel Log Modal / Form */}
+      {/* Add Fuel Log Modal */}
       {isAddingLog && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
@@ -531,7 +795,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 <input
                   type="number"
                   value={newOdometer}
-                  onChange={e => setNewOdometer(e.target.value)}
+                  onChange={(e) => setNewOdometer(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                   placeholder="246250"
                   required
@@ -546,7 +810,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   <input
                     type="number"
                     value={newDistance}
-                    onChange={e => setNewDistance(e.target.value)}
+                    onChange={(e) => setNewDistance(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                     placeholder="450"
                     required
@@ -560,7 +824,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     type="number"
                     step="0.1"
                     value={newLiters}
-                    onChange={e => setNewLiters(e.target.value)}
+                    onChange={(e) => setNewLiters(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                     placeholder="50"
                     required
@@ -577,7 +841,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     type="number"
                     step="0.1"
                     value={newPrice}
-                    onChange={e => setNewPrice(e.target.value)}
+                    onChange={(e) => setNewPrice(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
                     placeholder="62.50"
                   />
@@ -589,7 +853,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   <input
                     type="text"
                     value={newStation}
-                    onChange={e => setNewStation(e.target.value)}
+                    onChange={(e) => setNewStation(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                     placeholder="Лукойл, Роснефть..."
                   />
@@ -602,7 +866,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 </label>
                 <select
                   value={newFuelType}
-                  onChange={e => setNewFuelType(e.target.value)}
+                  onChange={(e) => setNewFuelType(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white"
                 >
                   <option value="АИ-92">АИ-92</option>
@@ -638,7 +902,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Calendar className="w-4 h-4 text-red-600" />
-            История заправок и динамика расхода ({logs.length})
+            История заправок и чеков ({logs.length})
           </h2>
           <span className="text-xs text-slate-500 font-mono">Сохраняется локально</span>
         </div>

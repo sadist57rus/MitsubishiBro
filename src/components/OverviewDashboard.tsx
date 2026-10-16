@@ -16,21 +16,51 @@ import {
   Droplet,
   ShieldCheck,
   ChevronRight,
-  Gauge
+  Gauge,
+  Lightbulb,
+  Award
 } from 'lucide-react';
 import { EngineType } from '../types';
 import { TabId } from './Header';
+import { BrandLogo } from './BrandLogos';
+import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
 
 interface Props {
   onNavigate: (tab: TabId) => void;
   selectedEngine: EngineType;
   onSelectEngine: (engine: EngineType) => void;
+  selectedBrandId?: string;
+  onSelectBrand?: (brandId: string) => void;
+  onOpenBrandSelector?: () => void;
 }
 
-export default function OverviewDashboard({ onNavigate, selectedEngine, onSelectEngine }: Props) {
+export default function OverviewDashboard({
+  onNavigate,
+  selectedEngine,
+  onSelectEngine,
+  selectedBrandId = 'mitsubishi',
+  onSelectBrand,
+  onOpenBrandSelector
+}: Props) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const sections = [
+    {
+      id: 'brands' as const,
+      title: 'Японские бренды и модели',
+      tag: '11 Производителей',
+      desc: 'Полная база: Mitsubishi, Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu, Isuzu',
+      icon: Award,
+      highlight: 'Все авто, моторы, 4WD и ТТХ'
+    },
+    {
+      id: 'fuel' as const,
+      title: 'Мониторинг топлива',
+      tag: 'График Recharts',
+      desc: 'Калькулятор среднего расхода (л/100км), динамика расхода от пробега на интерактивном графике Recharts',
+      icon: Fuel,
+      highlight: 'График пробега, чеки, расход'
+    },
     {
       id: 'specs' as const,
       title: 'Технические характеристики',
@@ -54,6 +84,14 @@ export default function OverviewDashboard({ onNavigate, selectedEngine, onSelect
       desc: 'Блок в салоне (за монетницей) и под капотом: прикуриватель, стоп-сигналы, вентиляторы, печка',
       icon: Zap,
       highlight: 'F1 15A, F9 10A, реле'
+    },
+    {
+      id: 'bulbs' as const,
+      title: 'Автосвет и лампы',
+      tag: 'Цоколи и замена',
+      desc: 'Полный справочник ламп: ближний H7, дальний H1, ПТФ H3, стопы W21/5W, габариты W5W, схемы и LED',
+      icon: Lightbulb,
+      highlight: 'H7, H1, H3, T10, W21/5W'
     },
     {
       id: 'tuning' as const,
@@ -123,9 +161,11 @@ export default function OverviewDashboard({ onNavigate, selectedEngine, onSelect
 
   // Quick search keywords router
   const quickSearches = [
-    { label: 'Калькулятор расхода топлива', tab: 'fuel' as const },
+    { label: 'Марки Японии (Toyota, Nissan, Suzuki...)', tab: 'brands' as const },
+    { label: 'Калькулятор расхода топлива (Recharts)', tab: 'fuel' as const },
     { label: 'Размеры кузова и багажника', tab: 'specs' as const },
-    { label: 'Ремень ГРМ', tab: 'parts' as const },
+    { label: 'Лампы и цоколи оптики', tab: 'bulbs' as const },
+    { label: 'Ремень ГРМ и аналоги', tab: 'parts' as const },
     { label: 'Прикуриватель F1', tab: 'fuses' as const },
     { label: 'Тормоза от XL', tab: 'tuning' as const },
     { label: 'Блок вентиляторов', tab: 'issues' as const },
@@ -209,6 +249,64 @@ export default function OverviewDashboard({ onNavigate, selectedEngine, onSelect
             <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Объём бензобака</span>
             <span className="font-mono font-bold text-slate-900 dark:text-white text-sm">60 литров</span>
           </div>
+        </div>
+      </div>
+
+      {/* JAPANESE BRANDS LOGO BAR: "по кнопке с логотипом бренда будет осуществляться выбор производителя!" */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xs space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <Award className="w-4 h-4 text-red-600" />
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                Японские автопроизводители (выбор по логотипу)
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Нажмите на логотип марки для просмотра всех моделей, спецификаций и систем 4WD
+            </p>
+          </div>
+
+          <button
+            onClick={() => onNavigate('brands')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition self-start sm:self-auto"
+          >
+            <span>Все 11 брендов и сравнение</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* 11 Brand Buttons with Logos */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2 pt-1">
+          {JAPANESE_BRANDS.map((brand) => {
+            const isCurrent = brand.id === selectedBrandId;
+            return (
+              <button
+                key={brand.id}
+                type="button"
+                onClick={() => {
+                  if (onSelectBrand) onSelectBrand(brand.id);
+                  onNavigate('brands');
+                }}
+                className={`group flex flex-col items-center justify-center p-2.5 rounded-xl border transition-all cursor-pointer ${
+                  isCurrent
+                    ? 'bg-red-50 dark:bg-red-950/40 border-red-500 shadow-2xs ring-1 ring-red-500/30'
+                    : 'bg-slate-50 dark:bg-slate-850 hover:bg-white dark:hover:bg-slate-800 border-slate-200 dark:border-slate-800 hover:border-red-400'
+                }`}
+                title={`Перейти к каталогу ${brand.name}`}
+              >
+                <div className="w-9 h-9 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-800 dark:text-slate-100 group-hover:scale-110 group-hover:border-red-400 transition-transform mb-1 shadow-2xs p-1">
+                  <BrandLogo brandId={brand.id} className="w-6 h-6" useBrandColor={true} />
+                </div>
+                <span className="text-[11px] font-bold text-slate-900 dark:text-white truncate w-full text-center">
+                  {brand.name.split(' ')[0]}
+                </span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate w-full text-center">
+                  {brand.russianName}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

@@ -17,6 +17,10 @@ import GarageLogbook from './components/GarageLogbook';
 import FuseDiagram from './components/FuseDiagram';
 import TuningHub from './components/TuningHub';
 import FuelMonitor from './components/FuelMonitor';
+import BulbsCatalog from './components/BulbsCatalog';
+import ApkGuideModal from './components/ApkGuideModal';
+import JapaneseBrandsHub from './components/JapaneseBrandsHub';
+import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
 import { EngineType, DrivetrainType } from './types';
 import {
@@ -32,7 +36,10 @@ import {
   Disc,
   Calendar,
   Stethoscope,
-  BookOpen
+  BookOpen,
+  Lightbulb,
+  Smartphone,
+  Award
 } from 'lucide-react';
 
 export default function App() {
@@ -40,11 +47,17 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [selectedEngine, setSelectedEngine] = useState<EngineType>('ALL');
   const [selectedDrivetrain, setSelectedDrivetrain] = useState<DrivetrainType>('4WD');
+  const [selectedBrandId, setSelectedBrandId] = useState<string>('mitsubishi');
+  const [selectedModelId, setSelectedModelId] = useState<string>('outlander-1');
+  const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
+  const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
 
   const tabTitles: Record<TabId, { title: string; icon: any }> = {
     overview: { title: 'Главная (Обзор)', icon: Home },
+    brands: { title: 'Японские автопроизводители и модели', icon: Award },
     fuel: { title: 'Мониторинг топлива и заправок', icon: Fuel },
     specs: { title: 'Технические характеристики и размеры', icon: Car },
+    bulbs: { title: 'Автосвет и лампы (цоколи H7, H1, H3, T10)', icon: Lightbulb },
     parts: { title: 'Каталог запчастей', icon: Layers },
     fuses: { title: 'Схема предохранителей', icon: Zap },
     tuning: { title: 'Тюнинг и доработки', icon: Sparkles },
@@ -69,6 +82,9 @@ export default function App() {
         setSelectedEngine={setSelectedEngine}
         selectedDrivetrain={selectedDrivetrain}
         setSelectedDrivetrain={setSelectedDrivetrain}
+        selectedBrandId={selectedBrandId}
+        onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
+        onOpenApkGuide={() => setIsApkGuideOpen(true)}
       />
 
       {/* Breadcrumb Navigation when inside a sub-module */}
@@ -109,6 +125,19 @@ export default function App() {
             onNavigate={setActiveTab}
             selectedEngine={selectedEngine}
             onSelectEngine={setSelectedEngine}
+            selectedBrandId={selectedBrandId}
+            onSelectBrand={setSelectedBrandId}
+            onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
+          />
+        )}
+
+        {activeTab === 'brands' && (
+          <JapaneseBrandsHub
+            onNavigateTab={setActiveTab}
+            selectedBrandId={selectedBrandId}
+            onSelectBrand={setSelectedBrandId}
+            selectedModelId={selectedModelId}
+            onSelectModel={setSelectedModelId}
           />
         )}
 
@@ -118,6 +147,10 @@ export default function App() {
 
         {activeTab === 'specs' && (
           <TechSpecs />
+        )}
+
+        {activeTab === 'bulbs' && (
+          <BulbsCatalog />
         )}
 
         {activeTab === 'parts' && (
@@ -178,34 +211,35 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-              <span>PCD 5x114.3 · DIA 67.1 · ET 46</span>
-              <span>·</span>
-              <span>Бак 60 л</span>
-            </div>
-          </div>
-
-          <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-400">
-            <p>
-              Данные выверены по заводским сервисным бюллетеням. Соблюдайте моменты затяжки при работах с ГРМ и тормозной системой.
-            </p>
-            <div className="shrink-0 flex items-center gap-2">
               <button
-                onClick={() => setActiveTab('overview')}
-                className="hover:text-red-600 dark:hover:text-red-400 transition"
+                onClick={() => setIsApkGuideOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition font-sans font-bold"
               >
-                Главная
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>Сборка APK на GitHub</span>
               </button>
+              <span>CU_W Series</span>
               <span>·</span>
-              <button
-                onClick={() => setActiveTab('specs')}
-                className="hover:text-red-600 dark:hover:text-red-400 transition"
-              >
-                Характеристики
-              </button>
+              <span>2001 – 2008</span>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* APK Guide Modal */}
+      <ApkGuideModal
+        isOpen={isApkGuideOpen}
+        onClose={() => setIsApkGuideOpen(false)}
+      />
+
+      {/* Brand Selector Modal */}
+      <BrandSelectorModal
+        isOpen={isBrandSelectorOpen}
+        onClose={() => setIsBrandSelectorOpen(false)}
+        selectedBrandId={selectedBrandId}
+        onSelectBrand={setSelectedBrandId}
+        onSelectModel={setSelectedModelId}
+      />
     </div>
   );
 }
