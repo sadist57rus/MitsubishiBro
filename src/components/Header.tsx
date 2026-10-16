@@ -82,7 +82,7 @@ export default function Header({
       id: 'brands',
       title: 'Японские автопроизводители и модели',
       shortTitle: 'Авто Японии',
-      badge: '11 Марок',
+      badge: '11 марок',
       description: 'Все авто Mitsubishi, Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu, Isuzu',
       icon: Award
     },
