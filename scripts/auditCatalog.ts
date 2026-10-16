@@ -9,6 +9,9 @@ const seenIds = new Set<string>();
 let modelCount = 0;
 let unverifiedCount = 0;
 let sourceBackedCount = 0;
+let placeholderCount = 0;
+const duplicateNames = new Map<string, string[]>();
+const vague = /(уточнить|зависит от|не задано|не применимо|проверить по|по vin|по рынку|не подтвержд|unknown|tbd)/i;
 
 function check(condition: unknown, message: string) {
   if (!condition) errors.push(message);
@@ -22,8 +25,18 @@ for (const brand of JAPANESE_BRANDS) {
     check(model.brandId === brand.id, `Brand mismatch: ${brand.id}/${model.id} has brandId=${model.brandId}`);
     if (seenIds.has(model.id)) errors.push(`Duplicate model id: ${model.id}`);
     seenIds.add(model.id);
+    const normalizedName = `${brand.id}:${model.name.trim().toLocaleLowerCase('ru-RU').replace(/\\s+/g, ' ')}`;
+    duplicateNames.set(normalizedName, [...(duplicateNames.get(normalizedName) ?? []), model.id]);
     check(Array.isArray(model.engines) && model.engines.length > 0, `No engine entries: ${model.id}`);
     check(Array.isArray(model.transmissions) && model.transmissions.length > 0, `No transmission entries: ${model.id}`);
+    if (model.engines.some((engine) => vague.test(`${engine.code} ${engine.name} ${engine.displacement} ${engine.powerHp} ${engine.torqueNm}`))) {
+      placeholderCount++;
+      warnings.push(`Engine data is placeholder/vague: ${model.id}`);
+    }
+    if (model.transmissions.some((transmission) => vague.test(transmission))) warnings.push(`Transmission data is placeholder/vague: ${model.id}`);
+    if (model.dimensions && [model.dimensions.lengthMm, model.dimensions.widthMm, model.dimensions.heightMm, model.dimensions.wheelbaseMm].some((n) => !Number.isFinite(n) || n <= 0)) warnings.push(`Missing/non-positive dimensions: ${model.id}`);
+    if (!model.dataQualityNote) warnings.push(`Missing data-quality note: ${model.id}`);
+    if (!model.verificationStatus || model.verificationStatus === 'unverified') warnings.push(`Not verified against exact variant sources: ${model.id}`);
     check(Boolean(model.fluidsAndCapacities?.engineOil && model.fluidsAndCapacities?.transmissionFluid), `Missing fluid guidance: ${model.id}`);
     check(Boolean(model.bulbsSummary?.lowBeam && model.bulbsSummary?.highBeam), `Missing lamp guidance: ${model.id}`);
     check(Array.isArray(model.obdDiagnostics?.commonCodes), `Missing OBD list: ${model.id}`);
@@ -51,7 +64,8 @@ for (const brand of JAPANESE_BRANDS) {
 }
 
 console.log(`Catalog audit: ${JAPANESE_BRANDS.length} brands, ${modelCount} models`);
-console.log(`Evidence: ${sourceBackedCount} models have source references; ${unverifiedCount} are not marked verified.`);
+for (const [name, ids] of duplicateNames) if (ids.length > 1) warnings.push(`Possible duplicate model names within brand: ${name}: ${ids.join(', ')}`);
+console.log(`Evidence: ${sourceBackedCount} models have source references; ${unverifiedCount} are not marked verified; ${placeholderCount} have placeholder engine data.`);
 console.log(`Warnings: ${warnings.length}; errors: ${errors.length}`);
 for (const warning of warnings.slice(0, 100)) console.warn(`WARN: ${warning}`);
 if (warnings.length > 100) console.warn(`... plus ${warnings.length - 100} additional warnings`);
