@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Star } from 'lucide-react';
+import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
 import OverviewDashboard from './components/OverviewDashboard';
 import TechSpecs from './components/TechSpecs';
@@ -59,6 +61,12 @@ export default function App() {
   const [selectedModelId, setSelectedModelId] = useState<string>('outlander-1');
   const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
+  const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
+    try { return JSON.parse(localStorage.getItem('car-brother-favorite-sections') || '[]') as FavoriteSection[]; } catch { return []; }
+  });
+  useEffect(() => { try { localStorage.setItem('car-brother-favorite-sections', JSON.stringify(favoriteSections)); } catch { /* local storage may be unavailable */ } }, [favoriteSections]);
+  const toggleFavorite = (tab: TabId) => setFavoriteSections(previous => previous.some(item => item.id === tab) ? previous.filter(item => item.id !== tab) : [...previous, { id: tab, title: tabTitles[tab]?.title || tab, savedAt: Date.now() }]);
+  const removeFavorite = (tab: TabId) => setFavoriteSections(previous => previous.filter(item => item.id !== tab));
 
   const tabTitles: Record<TabId, { title: string; icon: any }> = {
     overview: { title: 'Главная (Обзор)', icon: Home },
@@ -119,6 +127,7 @@ export default function App() {
               </div>
             </div>
 
+            <button onClick={() => toggleFavorite(activeTab)} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 font-bold transition ${favoriteSections.some(item => item.id === activeTab) ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200' : 'bg-slate-100 text-slate-700 hover:bg-amber-50 dark:bg-slate-800 dark:text-slate-300'}`}><Star className={`w-4 h-4 ${favoriteSections.some(item => item.id === activeTab) ? 'fill-current' : ''}`} />{favoriteSections.some(item => item.id === activeTab) ? 'В избранном' : 'Добавить в избранное'}</button>
             <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
               <span>ДВС: <strong className="text-red-600 dark:text-red-400">{selectedEngine}</strong></span>
               <span>·</span>
@@ -131,14 +140,14 @@ export default function App() {
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6">
         {activeTab === 'overview' && (
-          <OverviewDashboard
+          <div className="space-y-5"><FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} /><OverviewDashboard
             onNavigate={setActiveTab}
             selectedEngine={selectedEngine}
             onSelectEngine={setSelectedEngine}
             selectedBrandId={selectedBrandId}
             onSelectBrand={setSelectedBrandId}
             onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
-          />
+          /></div>
         )}
 
         {activeTab === 'brands' && (
