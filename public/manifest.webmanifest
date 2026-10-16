@@ -1,0 +1,14 @@
+{
+  "id": "/",
+  "name": "MitsubishiBro — справочник японских автомобилей",
+  "short_name": "MitsubishiBro",
+  "description": "Оффлайн-справочник по японским автомобилям, обслуживанию и диагностике",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#10243b",
+  "icons": [
+    { "src": "/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
