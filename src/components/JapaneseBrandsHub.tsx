@@ -429,6 +429,12 @@ export default function JapaneseBrandsHub({
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
                   {currentModel.overview}
                 </p>
+                {currentModel.dataQualityNote && (
+                  <div className="mt-2 max-w-3xl rounded-lg border border-amber-300/70 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-3 py-2 text-xs text-amber-900 dark:text-amber-200">
+                    <span className="font-bold">Примечание по данным: </span>
+                    {currentModel.dataQualityNote}
+                  </div>
+                )}
               </div>
 
               {/* Action Jump to Original Outlander I Tools */}
