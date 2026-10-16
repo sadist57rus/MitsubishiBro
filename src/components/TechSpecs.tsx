@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { OUTLANDER_TECH_SPECS, SpecCategory } from '../data/specsData';
 import SpecsBlueprintGraphic from './SpecsBlueprintGraphic';
 import { ENGINE_TECHNICAL_RECORDS, TECHNICAL_DATA_SOURCES } from '../data/technicalSpecRecords';
+import ModelDataCoveragePanel from './ModelDataCoveragePanel';
 import {
   Maximize2,
   UserCheck,
@@ -119,6 +120,8 @@ export default function TechSpecs() {
           <a href={TECHNICAL_DATA_SOURCES[0].url} target="_blank" rel="noreferrer" className="inline-block text-blue-700 dark:text-blue-300 underline underline-offset-2 mt-2">Открыть сервисный мануал 2006 года (раздел 4G69)</a>
         </div>
       </section>
+
+      <ModelDataCoveragePanel />
 
       {/* Top Banner with Quick Dimension Visuals */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-6">
