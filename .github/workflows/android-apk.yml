@@ -48,8 +48,19 @@ jobs:
       - name: Build web assets
         run: npm run build
 
+      - name: Prepare native app icon assets
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          mkdir -p assets
+          rsvg-convert -w 1024 -h 1024 public/app-icon.svg > assets/icon.png
+          cp assets/icon.png assets/splash.png
+
       - name: Generate Android project
-        run: npx cap add android
+        run: |
+          npx cap add android
+          npm install --no-save --no-audit --no-fund @capacitor/assets
+          npx capacitor-assets generate --android
 
       - name: Set portrait as safe first-launch default
         run: |
