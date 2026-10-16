@@ -5,6 +5,7 @@ import {
   JapaneseCarModel,
   JapaneseCarEngine
 } from '../data/japaneseBrandsData';
+import '../data/expandedJapaneseModels';
 import { BrandLogo } from './BrandLogos';
 import { TabId } from './Header';
 import {
@@ -84,25 +85,35 @@ export default function JapaneseBrandsHub({
   };
 
   const handleModelChange = (modelId: string) => {
+    const owner = JAPANESE_BRANDS.find(brand => brand.models.some(model => model.id === modelId));
+    if (owner && owner.id !== activeBrandId) {
+      setActiveBrandId(owner.id);
+      if (onSelectBrand) onSelectBrand(owner.id);
+    }
     setCurrentModelId(modelId);
     if (onSelectModel) onSelectModel(modelId);
   };
 
-  // Filtered models for search across all brands or current brand
+  // Search globally when a query is entered; otherwise show the selected brand.
   const filteredModels = useMemo(() => {
-    if (!searchQuery.trim() && filterBodyType === 'ALL') {
-      return currentBrand.models;
-    }
     const query = searchQuery.toLowerCase().trim();
-    return currentBrand.models.filter(m => {
+    const source = query
+      ? JAPANESE_BRANDS.flatMap(brand => brand.models)
+      : currentBrand.models;
+    return source.filter(model => {
       const matchQuery =
         !query ||
-        m.name.toLowerCase().includes(query) ||
-        m.generation.toLowerCase().includes(query) ||
-        m.engines.some(e => e.code.toLowerCase().includes(query) || e.name.toLowerCase().includes(query)) ||
-        m.awdSystemName.toLowerCase().includes(query);
+        model.name.toLowerCase().includes(query) ||
+        model.generation.toLowerCase().includes(query) ||
+        model.years.toLowerCase().includes(query) ||
+        model.bodyType.toLowerCase().includes(query) ||
+        model.engines.some(engine =>
+          engine.code.toLowerCase().includes(query) ||
+          engine.name.toLowerCase().includes(query)
+        ) ||
+        model.awdSystemName.toLowerCase().includes(query);
 
-      const matchBody = filterBodyType === 'ALL' || m.bodyType === filterBodyType;
+      const matchBody = filterBodyType === 'ALL' || model.bodyType === filterBodyType;
       return matchQuery && matchBody;
     });
   }, [currentBrand, searchQuery, filterBodyType]);
@@ -144,7 +155,7 @@ export default function JapaneseBrandsHub({
             </h1>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Точная заводская информация по всем поколениям Mitsubishi, а также флагманам Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu и Isuzu. Полные ТТХ, линейки моторов, типы полного привода, регламенты жидкостей и заводские болячки.
+              Справочник поколений и модификаций Mitsubishi, Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu и Isuzu. Состав и полнота данных зависят от конкретной модели и постепенно расширяются.
             </p>
           </div>
 
@@ -303,6 +314,27 @@ export default function JapaneseBrandsHub({
 
       {/* Model Selection Tabs Bar for Active Brand */}
       <div className="space-y-3">
+        <label className="flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2.5">
+          <Search className="w-4 h-4 shrink-0 text-slate-500" />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={event => setSearchQuery(event.target.value)}
+            placeholder="Поиск по всем маркам, моделям, поколениям и кодам двигателей…"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
+            aria-label="Поиск автомобиля по марке, модели или двигателю"
+          />
+          {searchQuery && (
+            <button type="button" onClick={() => setSearchQuery('')} className="text-xs text-red-600 hover:text-red-700">
+              Очистить
+            </button>
+          )}
+        </label>
+        {searchQuery.trim() && (
+          <p className="text-xs text-slate-500">
+            Найдено моделей: {filteredModels.length}. Результаты поиска охватывают все марки.
+          </p>
+        )}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
@@ -316,7 +348,7 @@ export default function JapaneseBrandsHub({
 
           {/* Body Type Filter Buttons */}
           <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 text-xs">
-            {['ALL', 'Кроссовер', 'Внедорожник', 'Седан', 'Пикап'].map(bType => (
+            {['ALL', 'Кроссовер', 'Внедорожник', 'Седан', 'Универсал', 'Хэтчбек', 'Минивэн', 'Купе/Спорт', 'Пикап'].map(bType => (
               <button
                 key={bType}
                 onClick={() => setFilterBodyType(bType)}
@@ -348,6 +380,10 @@ export default function JapaneseBrandsHub({
                 }`}
               >
                 <span>{model.name}</span>
+                <span className="rounded bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium opacity-80">{model.bodyType}</span>
+                {searchQuery.trim() && (
+                  <span className="text-[10px] opacity-70">{JAPANESE_BRANDS.find(brand => brand.id === model.brandId)?.russianName}</span>
+                )}
                 {model.isOriginalSourceModel && (
                   <span className="px-1.5 py-0.2 rounded text-[10px] bg-red-500 text-white font-mono font-bold">
                     База
@@ -394,6 +430,25 @@ export default function JapaneseBrandsHub({
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
                   {currentModel.overview}
                 </p>
+                {currentModel.dataQualityNote && (
+                  <div className="mt-2 max-w-3xl rounded-lg border border-amber-300/70 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-3 py-2 text-xs text-amber-900 dark:text-amber-200">
+                    <span className="font-bold">Примечание по данным: </span>
+                    {currentModel.dataQualityNote}
+                  </div>
+                )}
+                <div className={`mt-2 max-w-3xl rounded-lg border px-3 py-2 text-xs ${currentModel.verificationStatus === 'verified' ? 'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-200' : currentModel.verificationStatus === 'partially-verified' ? 'border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-200' : 'border-rose-300 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950/30 dark:text-rose-200'}`}>
+                  <span className="font-bold">Статус достоверности: </span>
+                  {currentModel.verificationStatus === 'verified' ? 'проверено по источникам для конкретной модификации' : currentModel.verificationStatus === 'partially-verified' ? 'частично проверено; отдельные параметры требуют сверки' : 'не подтверждено заводским источником для точной модификации'}
+                  {(!currentModel.sourceReferences || currentModel.sourceReferences.length === 0) && <span> Источники для этой конкретной карточки ещё не прикреплены.</span>}
+                  {currentModel.sourceReferences && currentModel.sourceReferences.length > 0 && (
+                    <span className="block mt-1">
+                      Источники: {currentModel.sourceReferences.map((source, index) => (
+                        <span key={source.url}>{index > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer" className="underline font-semibold">{source.label}</a><span> ({source.scope})</span></span>
+                      ))}
+                    </span>
+                  )}
+                  {currentModel.lastReviewed && <span> Проверка статуса: {currentModel.lastReviewed}.</span>}
+                </div>
               </div>
 
               {/* Action Jump to Original Outlander I Tools */}

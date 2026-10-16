@@ -66,6 +66,14 @@ export interface JapaneseCarModel {
     rootCause: string;
     solution: string;
   }[];
+  /** Notes about market coverage and the verification level of supplemental data. */
+  dataQualityNote?: string;
+  /** Conservative status: only set to verified when the exact variant is backed by an OEM document. */
+  verificationStatus?: 'unverified' | 'partially-verified' | 'verified';
+  /** Source links supporting this exact record; generic brand portals do not count as model-level verification. */
+  sourceReferences?: { label: string; url: string; scope: string }[];
+  /** ISO date of the last review of source references, not a claim that every field was re-verified. */
+  lastReviewed?: string;
   isOriginalSourceModel?: boolean;
 }
 
@@ -773,7 +781,7 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
             valves: '32V DOHC V8, чугунный блок цилиндров',
             fuelSystem: 'Электронный распределенный впрыск EFI',
             timingDrive: 'Зубчатый ремень (ресурс 100–150 тыс. км)',
-            strengths: ['Ресурс свыше 1 000 000 км без капремонта', 'Монументальный чугунный блок, тишина работы'],
+            strengths: ['Ресурс зависит от обслуживания и условий эксплуатации; фиксированный пробег без капремонта не гарантируется', 'Монументальный чугунный блок, тишина работы'],
             weaknesses: ['Расход бензина в городе (18–24 л/100 км)', 'Трещины выпускных коллекторов к 200 тыс. км']
           },
           {
@@ -1223,8 +1231,8 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
         obdDiagnostics: {
           portLocation: 'Слева под рулем + 14-пиновый разъем Nissan Consult под капотом.',
           commonCodes: [
-            { code: '0707', title: 'Spill Valve / Injection Timing', hint: 'Электронный дозирующий клапан ТНВД Bosch VP44' },
-            { code: '0102', title: 'Mass Air Flow Sensor', hint: 'ДМРВ на моторе ZD30' }
+            { code: 'P0707', title: 'Transmission Range Sensor Circuit Low Input (generic OBD-II definition)', hint: 'Общий P0707 относится к низкому уровню сигнала цепи датчика диапазонов трансмиссии; это не код клапана ТНВД. Для Nissan Patrol Y61 использовать только подтверждённые заводские коды конкретного ЭБУ.' },
+            { code: 'P0102', title: 'Mass or Volume Air Flow Circuit Low Input (generic OBD-II definition)', hint: 'Общий P0102 указывает на низкий входной сигнал цепи расходомера воздуха. Сам по себе не доказывает неисправность ДМРВ; проверить питание, массу, проводку, разъём и заводскую процедуру для конкретного ЭБУ.' }
           ],
           protocol: 'Nissan DDL / Consult-II + OBD-II'
         },
@@ -2083,7 +2091,7 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
             valves: '16V DOHC с чугунным блоком цилиндров',
             fuelSystem: 'Common Rail Denso 2000 бар с турбиной VGS',
             timingDrive: 'Комбинированный привод: нижний шестеренчатый каскад + короткая цепь ГРМ (ресурс свыше 500 000 км!)',
-            strengths: ['Коммерческий чугунный дизель-миллионник', 'Колоссальный ресурс и неприхотливость к тяжелым нагрузкам'],
+            strengths: ['Коммерческий дизель; ресурс зависит от обслуживания, нагрузки и режима эксплуатации', 'Колоссальный ресурс и неприхотливость к тяжелым нагрузкам'],
             weaknesses: ['Шумность и грубоватый звук работы на холостом ходу']
           }
         ],
@@ -2126,10 +2134,21 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
             title: 'Закоксовывание клапана и охладителя EGR сажей',
             symptoms: 'Потеря тяги при разгоне, загорание Check Engine с ошибкой P0401 / P0404.',
             rootCause: 'Низкие обороты мотора при езде внатяг приводят к оседанию сажи на штоке клапана EGR.',
-            solution: 'Промывка клапана и теплообменника EGR очистителем карбюратора каждые 60 000 км или программное отключение.'
+            solution: 'Диагностировать EGR и впуск по сервисной процедуре для конкретной версии; при подтверждённом загрязнении очистить разрешённым средством и способом. Не отключать систему контроля выбросов как универсальный ремонт.'
           }
         ]
       }
     ]
   }
 ];
+
+/**
+ * Fail closed: legacy records without attached evidence must never appear as verified.
+ * The audit status is promoted only after exact-variant OEM documentation is attached.
+ */
+for (const brand of JAPANESE_BRANDS) {
+  for (const model of brand.models) {
+    model.verificationStatus ??= 'unverified';
+    model.sourceReferences ??= [];
+  }
+}
