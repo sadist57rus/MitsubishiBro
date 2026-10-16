@@ -4,7 +4,8 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Smartphone, Monitor, RotateCcw } from 'lucide-react';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
 import OverviewDashboard from './components/OverviewDashboard';
@@ -51,6 +52,15 @@ export default function App() {
   const [uiMode, setUiMode] = useState<'phone' | 'wide'>(() => {
     try { return localStorage.getItem('car-brother-ui-mode') === 'wide' ? 'wide' : 'phone'; } catch { return 'phone'; }
   });
+  const [orientationChosen, setOrientationChosen] = useState(() => {
+    try { return localStorage.getItem('car-brother-orientation-chosen') === 'yes'; } catch { return false; }
+  });
+  const chooseOrientation = async (mode: 'phone' | 'wide') => {
+    setUiMode(mode);
+    try { await ScreenOrientation.lock({ orientation: mode === 'phone' ? 'portrait' : 'landscape' }); } catch { /* Web preview may not support native orientation locking. */ }
+    try { localStorage.setItem('car-brother-orientation-chosen', 'yes'); } catch { /* storage may be unavailable */ }
+    setOrientationChosen(true);
+  };
   useEffect(() => {
     document.documentElement.dataset.uiMode = uiMode;
     try { localStorage.setItem('car-brother-ui-mode', uiMode); } catch { /* storage may be unavailable */ }
@@ -87,6 +97,23 @@ export default function App() {
 
   const currentTabInfo = tabTitles[activeTab] || tabTitles.overview;
   const TabIcon = currentTabInfo.icon;
+
+  if (!orientationChosen) {
+    return (
+      <main className="min-h-screen bg-[#070b12] text-white flex items-center justify-center p-5">
+        <section className="w-full max-w-xl rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-950 to-slate-900 p-6 sm:p-8 shadow-2xl">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-400/50 bg-black text-amber-300"><RotateCcw className="h-8 w-8" /></div>
+          <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-amber-300">CAR BROTHER</p>
+          <h1 className="mt-2 text-center text-2xl sm:text-3xl font-black">Выберите ориентацию экрана</h1>
+          <p className="mx-auto mt-3 max-w-md text-center text-sm leading-relaxed text-slate-300">Этот выбор появится только при первом запуске. Позже ориентацию можно изменить в настройках приложения.</p>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button type="button" onClick={() => void chooseOrientation('phone')} className="rounded-2xl border border-amber-400/50 bg-amber-400/10 p-5 text-left transition hover:bg-amber-400/20"><Smartphone className="h-8 w-8 text-amber-300"/><span className="mt-3 block text-lg font-bold">Телефон</span><span className="mt-1 block text-sm text-slate-300">Портретная ориентация</span><span className="mt-3 block text-xs text-amber-300">Вертикально · по умолчанию</span></button>
+            <button type="button" onClick={() => void chooseOrientation('wide')} className="rounded-2xl border border-slate-600 bg-white/5 p-5 text-left transition hover:border-amber-400/50 hover:bg-amber-400/10"><Monitor className="h-8 w-8 text-amber-300"/><span className="mt-3 block text-lg font-bold">Автомагнитола / планшет</span><span className="mt-1 block text-sm text-slate-300">Альбомная ориентация</span><span className="mt-3 block text-xs text-amber-300">Горизонтально</span></button>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white">
