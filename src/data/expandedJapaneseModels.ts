@@ -77,7 +77,7 @@ const makeSupplementalModel = (data: {
     },
     knownIssues: [],
     dataQualityNote: data.sourceNotes
-  } as JapaneseCarModel & { dataQualityNote: string };
+  };
 }
 
 const supplementalModels: JapaneseCarModel[] = [
