@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { OUTLANDER_TECH_SPECS, SpecCategory } from '../data/specsData';
 import SpecsBlueprintGraphic from './SpecsBlueprintGraphic';
+import { ENGINE_TECHNICAL_RECORDS, TECHNICAL_DATA_SOURCES } from '../data/technicalSpecRecords';
 import {
   Maximize2,
   UserCheck,
@@ -94,6 +95,31 @@ export default function TechSpecs() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      <section className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/70 dark:bg-blue-950/20 p-5 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+          <div>
+            <div className="text-[11px] uppercase tracking-wider font-bold text-blue-700 dark:text-blue-300">Источник: сервисная документация · отдельная модификация</div>
+            <h2 className="text-lg font-black text-slate-900 dark:text-white mt-1">Outlander CU5W · двигатель 4G69</h2>
+            <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 mt-1">{ENGINE_TECHNICAL_RECORDS[0].summary}</p>
+          </div>
+          <span className="shrink-0 rounded-lg px-2.5 py-1.5 text-[10px] font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">Частично подтверждено</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
+          {ENGINE_TECHNICAL_RECORDS[0].values.map(value => (
+            <div key={value.label} className="rounded-lg border border-blue-100 dark:border-blue-900/50 bg-white dark:bg-slate-900 p-3">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400">{value.label}</div>
+              <div className="font-bold text-sm text-slate-900 dark:text-white mt-1">{value.value}</div>
+              {value.conditions && <div className="text-[10px] leading-relaxed text-slate-500 dark:text-slate-400 mt-1">{value.conditions}</div>}
+            </div>
+          ))}
+        </div>
+        <div className="text-xs text-slate-600 dark:text-slate-300 space-y-1">
+          <div className="font-bold">Ограничения применения</div>
+          {ENGINE_TECHNICAL_RECORDS[0].limitations.map(note => <p key={note}>• {note}</p>)}
+          <a href={TECHNICAL_DATA_SOURCES[0].url} target="_blank" rel="noreferrer" className="inline-block text-blue-700 dark:text-blue-300 underline underline-offset-2 mt-2">Открыть сервисный мануал 2006 года (раздел 4G69)</a>
+        </div>
+      </section>
+
       {/* Top Banner with Quick Dimension Visuals */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
