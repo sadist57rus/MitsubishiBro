@@ -5,6 +5,7 @@ import { ENGINE_TECHNICAL_RECORDS, TECHNICAL_DATA_SOURCES } from '../data/techni
 import ModelDataCoveragePanel from './ModelDataCoveragePanel';
 import ExpandedModelDossiers from './ExpandedModelDossiers';
 import GenerationBodyCatalogPanel from './GenerationBodyCatalogPanel';
+import JapaneseModelFamilyDirectory from './JapaneseModelFamilyDirectory';
 import {
   Maximize2,
   UserCheck,
@@ -124,6 +125,7 @@ export default function TechSpecs() {
       </section>
 
       <ModelDataCoveragePanel />
+      <JapaneseModelFamilyDirectory />
       <GenerationBodyCatalogPanel />
       <ExpandedModelDossiers />
 
