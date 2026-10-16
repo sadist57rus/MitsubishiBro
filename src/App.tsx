@@ -17,6 +17,7 @@ import GarageLogbook from './components/GarageLogbook';
 import FuseDiagram from './components/FuseDiagram';
 import TuningHub from './components/TuningHub';
 import FuelMonitor from './components/FuelMonitor';
+import VehicleCatalog from './components/VehicleCatalog';
 import { useTheme } from './context/ThemeContext';
 import { EngineType, DrivetrainType } from './types';
 import {
@@ -32,7 +33,8 @@ import {
   Disc,
   Calendar,
   Stethoscope,
-  BookOpen
+  BookOpen,
+  Database
 } from 'lucide-react';
 
 export default function App() {
@@ -54,6 +56,7 @@ export default function App() {
     maintenance: { title: 'Регламент ТО и жидкости', icon: Calendar },
     obd: { title: 'Коды ошибок OBD-II', icon: Stethoscope },
     logbook: { title: 'Бортжурнал владельца', icon: BookOpen },
+    catalog: { title: 'Каталог японских автомобилей', icon: Database },
   };
 
   const currentTabInfo = tabTitles[activeTab] || tabTitles.overview;
