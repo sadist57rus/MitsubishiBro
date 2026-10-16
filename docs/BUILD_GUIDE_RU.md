@@ -2,12 +2,11 @@
 
 ## Требования
 
-- Node.js 22 LTS (рекомендуется именно 22, как в CI).
-- npm, который поставляется вместе с Node.js.
-- Git — если проект клонируется из GitHub.
-- Для установки на Android нужен Android Studio; веб-проект сам по себе ещё не является APK.
+- Node.js 22 LTS и npm.
+- Git.
+- Для локальной Android-сборки: Android SDK/Android Studio и Java 21.
 
-## 1. Скачать исходники
+## 1. Получить проект
 
 ```bash
 git clone https://github.com/sadist57rus/MitsubishiBro.git
@@ -15,64 +14,57 @@ cd MitsubishiBro
 git checkout main
 ```
 
-Чтобы проверить изменения из PR №2, пока он не влит в main:
-
-```bash
-git fetch origin pull/2/head:pr-2
-git checkout pr-2
-```
-
-## 2. Установить зависимости
+## 2. Запустить веб-приложение локально
 
 ```bash
 npm install
+npm run dev
 ```
 
-## 3. Проверить код и каталог
+## 3. Проверить и собрать веб-версию
 
 ```bash
 npm run lint
 npm run audit:catalog
-```
-
-- `lint` проверяет TypeScript.
-- `audit:catalog` проверяет обязательные поля, дубли ID, формат OBD-кодов, источники и предупреждает о пустых/неподтверждённых характеристиках.
-- Предупреждение аудита не является подтверждением, что значение технически верно. До появления OEM-источника используйте такие данные только как незавершённую справочную запись.
-
-## 4. Собрать веб-версию
-
-```bash
 npm run build
-```
-
-Готовые файлы появятся в каталоге `dist/`. Для локального просмотра:
-
-```bash
 npm run preview
 ```
 
-Команда покажет локальный адрес; откройте его в браузере. Для разработки с горячей перезагрузкой:
+Сборка создаётся в `dist/`. Предупреждения аудита означают, что часть каталога неполная или не подтверждена. Не используйте непроверенные характеристики для обслуживания автомобиля.
+
+## 4. Собрать APK автоматически на GitHub
+
+Основной репозиторий теперь содержит workflow Android-сборки. Он запускается при изменениях в `main` (кроме одних только документационных файлов) или вручную.
+
+1. Откройте [Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml).
+2. Выберите последний запуск на нужном коммите и дождитесь статуса **Success**.
+3. Откройте страницу запуска, в разделе **Artifacts** скачайте `MitsubishiBro-APK-debug`.
+4. Распакуйте ZIP и установите `app-debug.apk` на Android. Если Android блокирует установку, разрешите установку приложений из выбранного источника в настройках устройства.
+
+Артефакт хранится 14 дней. Это **debug APK для тестирования**, не подписанный production-релиз для публикации в магазине приложений. Для production-релиза нужна защищённая подпись и отдельная конфигурация release.
+
+## 5. Собрать APK локально
+
+Установите Android Studio/Android SDK и Java 21, затем выполните:
 
 ```bash
-npm run dev
+npm install
+npm install --no-save @capacitor/core@^8.5.3 @capacitor/cli@^8.5.3 @capacitor/android@^8.5.3
+npm run lint
+npm run audit:catalog
+npm run build
+npx cap add android
+npx cap sync android
+cd android
+./gradlew assembleDebug
 ```
 
-## 5. Скачать собранный артефакт из GitHub Actions
+APK будет здесь: `android/app/build/outputs/apk/debug/app-debug.apk`. Если `android/` уже существует, не запускайте `npx cap add android` повторно — выполните только `npx cap sync android` перед сборкой.
 
-1. Откройте вкладку Actions репозитория: https://github.com/sadist57rus/MitsubishiBro/actions
-2. Выберите успешный запуск **Build and typecheck** на нужном коммите.
-3. Внизу страницы откройте Artifacts и скачайте `MitsubishiBro-web-build`.
-4. Артефакт содержит веб-сборку, а не APK. В workflow он хранится 14 дней.
-
-## 6. Android / APK
-
-Текущий репозиторий содержит Vite/React веб-приложение. Нельзя получить корректный APK простым переименованием файлов из `dist/`. Для APK потребуется отдельная Android-обвязка (например, Capacitor) или полноценный Android-проект, настройка Android SDK/JDK и отдельный CI workflow, который собирает и подписывает APK. Подпись релизного APK требует приватного keystore; не коммитьте его и пароли в репозиторий.
-
-Пока Android-проект не синхронизирован и отдельная сборка APK не прошла успешно, считайте артефакт Actions веб-сборкой.
-
-## Полезные ссылки
+## Ссылки
 
 - Репозиторий: https://github.com/sadist57rus/MitsubishiBro
-- PR расширения каталога: https://github.com/sadist57rus/MitsubishiBro/pull/2
-- Запуски сборки: https://github.com/sadist57rus/MitsubishiBro/actions
+- Веб-проверки: https://github.com/sadist57rus/MitsubishiBro/actions/workflows/verify.yml
+- Сборка APK: https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml
 - Политика проверки технических данных: [DATA_VERIFICATION_POLICY.md](DATA_VERIFICATION_POLICY.md)
+- План покрытия каталога: [CATALOG_COVERAGE_ROADMAP.md](CATALOG_COVERAGE_ROADMAP.md)
