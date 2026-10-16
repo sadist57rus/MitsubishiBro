@@ -436,6 +436,12 @@ export default function JapaneseBrandsHub({
                     {currentModel.dataQualityNote}
                   </div>
                 )}
+                <div className={`mt-2 max-w-3xl rounded-lg border px-3 py-2 text-xs ${currentModel.verificationStatus === 'verified' ? 'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-200' : currentModel.verificationStatus === 'partially-verified' ? 'border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-200' : 'border-rose-300 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950/30 dark:text-rose-200'}`}>
+                  <span className="font-bold">Статус достоверности: </span>
+                  {currentModel.verificationStatus === 'verified' ? 'проверено по источникам для конкретной модификации' : currentModel.verificationStatus === 'partially-verified' ? 'частично проверено; отдельные параметры требуют сверки' : 'не подтверждено заводским источником для точной модификации'}
+                  {(!currentModel.sourceReferences || currentModel.sourceReferences.length === 0) && <span> Источники для этой конкретной карточки ещё не прикреплены.</span>}
+                  {currentModel.lastReviewed && <span> Проверка статуса: {currentModel.lastReviewed}.</span>}
+                </div>
               </div>
 
               {/* Action Jump to Original Outlander I Tools */}
