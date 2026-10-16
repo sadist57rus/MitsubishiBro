@@ -313,6 +313,27 @@ export default function JapaneseBrandsHub({
 
       {/* Model Selection Tabs Bar for Active Brand */}
       <div className="space-y-3">
+        <label className="flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 py-2.5">
+          <Search className="w-4 h-4 shrink-0 text-slate-500" />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={event => setSearchQuery(event.target.value)}
+            placeholder="Поиск по всем маркам, моделям, поколениям и кодам двигателей…"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
+            aria-label="Поиск автомобиля по марке, модели или двигателю"
+          />
+          {searchQuery && (
+            <button type="button" onClick={() => setSearchQuery('')} className="text-xs text-red-600 hover:text-red-700">
+              Очистить
+            </button>
+          )}
+        </label>
+        {searchQuery.trim() && (
+          <p className="text-xs text-slate-500">
+            Найдено моделей: {filteredModels.length}. Результаты поиска охватывают все марки.
+          </p>
+        )}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
