@@ -1231,8 +1231,8 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
         obdDiagnostics: {
           portLocation: 'Слева под рулем + 14-пиновый разъем Nissan Consult под капотом.',
           commonCodes: [
-            { code: '0707', title: 'Spill Valve / Injection Timing', hint: 'Электронный дозирующий клапан ТНВД Bosch VP44' },
-            { code: '0102', title: 'Mass Air Flow Sensor', hint: 'ДМРВ на моторе ZD30' }
+            { code: 'P0707', title: 'Transmission Range Sensor Circuit Low Input (generic OBD-II definition)', hint: 'Общий P0707 относится к низкому уровню сигнала цепи датчика диапазонов трансмиссии; это не код клапана ТНВД. Для Nissan Patrol Y61 использовать только подтверждённые заводские коды конкретного ЭБУ.' },
+            { code: 'P0102', title: 'Mass or Volume Air Flow Circuit Low Input (generic OBD-II definition)', hint: 'Общий P0102 указывает на низкий входной сигнал цепи расходомера воздуха. Сам по себе не доказывает неисправность ДМРВ; проверить питание, массу, проводку, разъём и заводскую процедуру для конкретного ЭБУ.' }
           ],
           protocol: 'Nissan DDL / Consult-II + OBD-II'
         },
