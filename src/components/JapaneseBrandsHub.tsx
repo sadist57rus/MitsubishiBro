@@ -380,6 +380,7 @@ export default function JapaneseBrandsHub({
                 }`}
               >
                 <span>{model.name}</span>
+                <span className="rounded bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium opacity-80">{model.bodyType}</span>
                 {searchQuery.trim() && (
                   <span className="text-[10px] opacity-70">{JAPANESE_BRANDS.find(brand => brand.id === model.brandId)?.russianName}</span>
                 )}
