@@ -443,11 +443,7 @@ export default function JapaneseBrandsHub({
                   {currentModel.sourceReferences && currentModel.sourceReferences.length > 0 && (
                     <span className="block mt-1">
                       Источники: {currentModel.sourceReferences.map((source, index) => (
-                        <React.Fragment key={source.url}>
-                          {index > 0 && ' · '}
-                          <a href={source.url} target="_blank" rel="noreferrer" className="underline font-semibold">{source.label}</a>
-                          <span> ({source.scope})</span>
-                        </React.Fragment>
+                        <span key={source.url}>{index > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer" className="underline font-semibold">{source.label}</a><span> ({source.scope})</span></span>
                       ))}
                     </span>
                   )}
