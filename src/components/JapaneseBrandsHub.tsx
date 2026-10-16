@@ -5,6 +5,7 @@ import {
   JapaneseCarModel,
   JapaneseCarEngine
 } from '../data/japaneseBrandsData';
+import '../data/expandedJapaneseModels';
 import { BrandLogo } from './BrandLogos';
 import { TabId } from './Header';
 import {
