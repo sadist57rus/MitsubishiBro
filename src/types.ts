@@ -109,6 +109,7 @@ export interface LogEntry {
   id: string;
   /** Vehicle in the garage that owns this maintenance record. */
   vehicleId?: string;
+  currency?: string;
   date: string;
   mileage: number;
   category: string;
