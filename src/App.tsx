@@ -278,7 +278,7 @@ function AppContent() {
                 className={`car-brother-rail-item ${activeTab === id ? 'is-active' : ''}`}
               >
                 <Icon aria-hidden="true" size={24} />
-                <span>{item.title.split(' ')[0]}</span>
+                <span>{(({overview:'Домой',garage:'Гараж',settings:'Настройки',brands:'Марки',fuel:'Топливо',specs:'Характеристики',bulbs:'Лампы',parts:'Запчасти',fuses:'Предохранители',tuning:'Тюнинг',guides:'Ремонт',issues:'Неисправности',wheels:'Колёса',maintenance:'ТО',obd:'OBD',logbook:'Журнал'} as Record<string,string>)[id] || item.title)}</span>
               </button>
             );
           })}
