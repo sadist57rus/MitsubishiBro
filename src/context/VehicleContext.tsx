@@ -47,7 +47,7 @@ export function VehicleProvider({children}:{children:ReactNode}) {
   setModelId:(modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.models.some(m=>m.id===modelId));if(brand)setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId:brand.id,modelId,engine:brand.models.find(m=>m.id===modelId)?.engines[0]?.code || v.engine}:v)}));},
   setEngine:(engine)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,engine}:v)})),
   setDrivetrain:(drivetrain)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,drivetrain}:v)})),
-  selectVehicle:(brandId,modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.id===brandId);if(brand?.models.some(m=>m.id===modelId))setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId,modelId}:v)}));},
+  selectVehicle:(brandId,modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.id===brandId);if(brand?.models.some(m=>m.id===modelId))setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId,modelId,engine:brand.models.find(m=>m.id===modelId)?.engines[0]?.code || v.engine}:v)}));},
   addVehicle:(v)=>{const vehicle:GarageVehicle={...v,id:'vehicle-'+Date.now()+'-'+Math.random().toString(36).slice(2,7)};setGarage(g=>({vehicles:[...g.vehicles,vehicle],activeVehicleId:vehicle.id}));},
   updateVehicle:(vehicle)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===vehicle.id&&validVehicle(vehicle)?vehicle:v)})),
   removeVehicle:(id)=>setGarage(g=>{if(g.vehicles.length<=1)return g;const vehicles=g.vehicles.filter(v=>v.id!==id);return {vehicles,activeVehicleId:g.activeVehicleId===id?vehicles[0].id:g.activeVehicleId};}),
