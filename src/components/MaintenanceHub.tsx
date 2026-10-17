@@ -110,7 +110,7 @@ export default function MaintenanceHub() {
         {/* Schedule Checklist Based on Current Mileage */}
         <div className="pt-2 border-t border-slate-800">
           <div className="flex items-center justify-between mb-3 text-xs">
-            <span className="text-slate-400 font-medium uppercase tracking-wider text-[11px]">
+            <span className="text-slate-400 font-medium uppercase tracking-wider text-xs">
               План регламентного обслуживания:
             </span>
             <span className="text-slate-500">
@@ -146,14 +146,14 @@ export default function MaintenanceHub() {
                       <span className={`text-xs font-semibold block ${isChecked ? 'line-through text-slate-400' : 'text-slate-200'}`}>
                         {item.name}
                       </span>
-                      <span className="text-[11px] text-slate-500">
+                      <span className="text-xs text-slate-500">
                         {item.system} · Каждые <strong className="font-mono text-slate-400">{item.frequencyKm.toLocaleString()} км</strong>
                       </span>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="text-[10px] text-slate-500 block">Следующее ТО</span>
+                    <span className="text-xs text-slate-500 block">Следующее ТО</span>
                     <span className={`text-xs font-mono font-bold ${isDueSoon ? 'text-amber-400' : 'text-slate-300'}`}>
                       {nextDueKm.toLocaleString()} км
                     </span>
@@ -184,7 +184,7 @@ export default function MaintenanceHub() {
               setFuelLiters('45');
               setFuelPricePerLiter('58.5');
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-400 hover:text-slate-200 bg-slate-950 rounded-lg border border-slate-800 transition self-start sm:self-auto"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-400 hover:text-slate-200 bg-slate-950 rounded-lg border border-slate-800 transition self-start sm:self-auto"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Сбросить значения</span>
@@ -200,7 +200,7 @@ export default function MaintenanceHub() {
                 <label className="text-xs font-medium text-slate-300">
                   Пройденное расстояние (по одометру Trip):
                 </label>
-                <div className="flex gap-1 text-[10px]">
+                <div className="flex gap-1 text-xs">
                   {['300', '420', '500'].map(d => (
                     <button
                       key={d}
@@ -234,7 +234,7 @@ export default function MaintenanceHub() {
                 <label className="text-xs font-medium text-slate-300">
                   Количество заправленного бензина:
                 </label>
-                <div className="flex gap-1 text-[10px]">
+                <div className="flex gap-1 text-xs">
                   {['35', '45', '55'].map(l => (
                     <button
                       key={l}
@@ -261,7 +261,7 @@ export default function MaintenanceHub() {
                   литров
                 </span>
               </div>
-              <span className="text-[10px] text-slate-500 block mt-1">
+              <span className="text-xs text-slate-500 block mt-1">
                 Совет: для максимальной точности заправляйте «до отсечки» пистолета на одной АЗС
               </span>
             </div>
@@ -294,7 +294,7 @@ export default function MaintenanceHub() {
                 {/* Metric Cards Row */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   <div className="bg-slate-950 p-4 rounded-xl border border-red-950/80 ring-1 ring-red-500/20 flex flex-col justify-between">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
                       Средний расход
                     </span>
                     <div className="my-1.5">
@@ -302,13 +302,13 @@ export default function MaintenanceHub() {
                         {fuelCalc.consumption}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-red-400">
+                    <span className="text-xs font-mono text-red-400">
                       литров на 100 км
                     </span>
                   </div>
 
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
                       Стоимость 1 км
                     </span>
                     <div className="my-1.5">
@@ -316,13 +316,13 @@ export default function MaintenanceHub() {
                         {fuelCalc.costPerKm !== null ? `${fuelCalc.costPerKm} ₽` : '—'}
                       </span>
                     </div>
-                    <span className="text-[10px] text-slate-500">
+                    <span className="text-xs text-slate-500">
                       {fuelCalc.costTotal !== null ? `Всего: ${fuelCalc.costTotal.toLocaleString('ru-RU')} ₽` : 'Укажите цену топлива'}
                     </span>
                   </div>
 
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 col-span-2 sm:col-span-1 flex flex-col justify-between">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">
                       Запас на баке 60 л
                     </span>
                     <div className="my-1.5">
@@ -330,7 +330,7 @@ export default function MaintenanceHub() {
                         ~{fuelCalc.rangeOn60L}
                       </span>
                     </div>
-                    <span className="text-[10px] text-slate-500">
+                    <span className="text-xs text-slate-500">
                       километров пути
                     </span>
                   </div>
@@ -370,24 +370,24 @@ export default function MaintenanceHub() {
 
             {/* Passport Consumption Reference Table */}
             <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800 text-xs">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
                 Заводские нормы расхода Outlander 1 (паспортные данные):
               </span>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[11px]">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-xs">
                 <div className="bg-slate-900/80 p-2 rounded border border-slate-800/80">
-                  <span className="text-[10px] font-sans text-slate-500 block">2.0 4G63 (МКПП)</span>
+                  <span className="text-xs font-sans text-slate-500 block">2.0 4G63 (МКПП)</span>
                   <span className="text-slate-200 font-semibold">7.4 – 11.2 л</span>
                 </div>
                 <div className="bg-slate-900/80 p-2 rounded border border-slate-800/80">
-                  <span className="text-[10px] font-sans text-slate-500 block">2.4 4G64/69 (АКПП)</span>
+                  <span className="text-xs font-sans text-slate-500 block">2.4 4G64/69 (АКПП)</span>
                   <span className="text-slate-200 font-semibold">8.4 – 13.8 л</span>
                 </div>
                 <div className="bg-slate-900/80 p-2 rounded border border-slate-800/80">
-                  <span className="text-[10px] font-sans text-slate-500 block">Зима / Пробки</span>
+                  <span className="text-xs font-sans text-slate-500 block">Зима / Пробки</span>
                   <span className="text-amber-400 font-semibold">13.5 – 16.0 л</span>
                 </div>
                 <div className="bg-slate-900/80 p-2 rounded border border-slate-800/80">
-                  <span className="text-[10px] font-sans text-slate-500 block">2.0 Turbo (4G63T)</span>
+                  <span className="text-xs font-sans text-slate-500 block">2.0 Turbo (4G63T)</span>
                   <span className="text-red-400 font-semibold">10.5 – 17.5 л</span>
                 </div>
               </div>
@@ -419,25 +419,25 @@ export default function MaintenanceHub() {
                       {fluid.volume}
                     </span>
                   </div>
-                  <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded font-mono">
+                  <span className="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded font-mono">
                     {fluid.changeInterval}
                   </span>
                 </div>
 
                 <div className="space-y-2 mt-3 text-xs">
                   <div>
-                    <span className="text-slate-500 uppercase text-[10px] tracking-wider block">Спецификация и допуск:</span>
+                    <span className="text-slate-500 uppercase text-xs tracking-wider block">Спецификация и допуск:</span>
                     <span className="text-slate-200 font-medium leading-relaxed block mt-0.5">{fluid.specification}</span>
                   </div>
 
                   <div>
-                    <span className="text-slate-500 uppercase text-[10px] tracking-wider block">Проверенные бренды:</span>
+                    <span className="text-slate-500 uppercase text-xs tracking-wider block">Проверенные бренды:</span>
                     <span className="text-slate-300 block mt-0.5">{fluid.recommendedBrands}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800/80 text-[11px] text-amber-300 flex items-start gap-2">
+              <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800/80 text-xs text-amber-300 flex items-start gap-2">
                 <Info className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                 <span className="leading-relaxed">{fluid.proTip}</span>
               </div>
