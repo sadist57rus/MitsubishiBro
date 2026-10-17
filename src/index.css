@@ -332,3 +332,28 @@ html[data-ui-mode="wide"] .fuel-spend-panel svg { touch-action: manipulation; }
   html[data-ui-mode="wide"] main { padding-bottom: 1rem; }
   html[data-ui-mode="wide"] .fuel-spend-panel { padding: 1.75rem; }
 }
+
+/* Never split words on navigation buttons or icon labels. Use concise labels instead. */
+button, [role="button"], nav a, nav button,
+.car-brother-rail-item, header button {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+.car-brother-rail-item > span,
+header button .tracking-tight,
+header button .text-xs,
+[role="tab"] {
+  white-space: nowrap;
+}
+html[data-ui-mode="wide"] .car-brother-rail-item {
+  overflow: hidden;
+  padding-inline: .125rem;
+}
+html[data-ui-mode="wide"] .car-brother-rail-item > span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
