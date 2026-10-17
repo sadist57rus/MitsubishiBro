@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { parseValidatedJson, readStored, writeStored } from '../lib/storage';
 import { Capacitor } from '@capacitor/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
@@ -41,15 +42,7 @@ const INITIAL_RECORDS: LogEntry[] = [
 ];
 
 export default function GarageLogbook() {
-  const [entries, setEntries] = useState<LogEntry[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {
-      console.error(e);
-    }
-    return INITIAL_RECORDS;
-  });
+  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(STORAGE_KEY, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), INITIAL_RECORDS));
 
   const [isAdding, setIsAdding] = useState(false);
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
@@ -60,13 +53,7 @@ export default function GarageLogbook() {
   const [newCost, setNewCost] = useState<number>(0);
   const [newNotes, setNewNotes] = useState('');
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [entries]);
+  useEffect(() => { writeStored(STORAGE_KEY, entries, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string'))); }, [entries]);
 
   const handleAddEntry = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,10 +116,8 @@ export default function GarageLogbook() {
       fileReader.readAsText(e.target.files[0], 'UTF-8');
       fileReader.onload = (event) => {
         try {
-          const parsed = JSON.parse(event.target?.result as string);
-          if (Array.isArray(parsed)) {
-            setEntries(parsed);
-          }
+          const parsed = parseValidatedJson<LogEntry[]>(event.target?.result as string, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')));
+          setEntries(parsed);
         } catch (err) {
           alert('Ошибка чтения JSON файла');
         }
@@ -231,7 +216,7 @@ export default function GarageLogbook() {
             <div>
               <label className="text-xs text-slate-400 block mb-1">Пробег (км)</label>
               <input
-                type="number"
+                type="number" inputMode="decimal"
                 value={newMileage}
                 onChange={(e) => setNewMileage(Number(e.target.value))}
                 required
@@ -286,7 +271,7 @@ export default function GarageLogbook() {
             <div>
               <label className="text-xs text-slate-400 block mb-1">Сумма расходов (руб)</label>
               <input
-                type="number"
+                type="number" inputMode="decimal"
                 value={newCost}
                 onChange={(e) => setNewCost(Number(e.target.value))}
                 placeholder="4500"
