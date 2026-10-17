@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { App as CapacitorApp } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { Star, Monitor, RotateCcw } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
@@ -51,7 +54,20 @@ import {
 
 function AppContent() {
   const { resolvedTheme } = useTheme();
-  const [activeTab, setActiveTab] = useState<TabId>('overview');
+  const [activeTab, setActiveTabState] = useState<TabId>('overview');
+  const activeTabRef = useRef<TabId>('overview');
+  const handlingPopStateRef = useRef(false);
+  const headerBackHandlerRef = useRef<() => boolean>(() => false);
+  const lastBackPressRef = useRef(0);
+  const [backHint, setBackHint] = useState('');
+  const setActiveTab = (tab: TabId) => {
+    if (tab === activeTabRef.current) return;
+    activeTabRef.current = tab;
+    setActiveTabState(tab);
+    if (!handlingPopStateRef.current && typeof window !== 'undefined') {
+      window.history.pushState({ carBrotherTab: tab }, '', window.location.href);
+    }
+  };
   const [uiMode, setUiMode] = useState<'phone' | 'wide'>(() => {
     try { return localStorage.getItem('car-brother-ui-mode') === 'wide' ? 'wide' : 'phone'; } catch { return 'phone'; }
   });
@@ -72,6 +88,62 @@ function AppContent() {
     document.documentElement.dataset.uiMode = uiMode;
     try { localStorage.setItem('car-brother-ui-mode', uiMode); } catch { /* storage may be unavailable */ }
   }, [uiMode]);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.history.replaceState({ ...(window.history.state || {}), carBrotherTab: activeTabRef.current }, '', window.location.href);
+    const onPopState = (event: PopStateEvent) => {
+      const next = (event.state?.carBrotherTab as TabId | undefined) || 'overview';
+      handlingPopStateRef.current = true;
+      activeTabRef.current = next;
+      setActiveTabState(next);
+      handlingPopStateRef.current = false;
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+    const syncStatusBar = async () => {
+      try {
+        await StatusBar.setBackgroundColor({ color: resolvedTheme === 'dark' ? '#070b12' : '#ffffff' });
+        await StatusBar.setStyle({ style: resolvedTheme === 'dark' ? Style.Light : Style.Dark });
+        await StatusBar.show();
+      } catch (error) {
+        console.warn('Status bar synchronization is unavailable:', error);
+      }
+    };
+    void syncStatusBar();
+  }, [resolvedTheme]);
+
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return;
+    let active = true;
+    const listener = CapacitorApp.addListener('backButton', () => {
+      if (!active) return;
+      if (isBrandSelectorOpen) { setIsBrandSelectorOpen(false); return; }
+      if (isApkGuideOpen) { setIsApkGuideOpen(false); return; }
+      if (headerBackHandlerRef.current()) return;
+      if (activeTabRef.current !== 'overview') {
+        if (window.history.state?.carBrotherTab) window.history.back();
+        else setActiveTab('overview');
+        return;
+      }
+      const now = Date.now();
+      if (now - lastBackPressRef.current < 2000) {
+        void CapacitorApp.exitApp();
+        return;
+      }
+      lastBackPressRef.current = now;
+      setBackHint('Нажмите «Назад» ещё раз для выхода');
+      window.setTimeout(() => setBackHint(''), 2000);
+    });
+    return () => {
+      active = false;
+      void listener.then(handle => handle.remove());
+    };
+  }, [isBrandSelectorOpen, isApkGuideOpen]);
+
   const { engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
   const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
@@ -132,6 +204,7 @@ function AppContent() {
         selectedBrandId={selectedBrandId}
         onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
+        onRegisterBackHandler={(handler) => { headerBackHandlerRef.current = handler; }}
         uiMode={uiMode}
         onChangeUiMode={(mode) => { void applyUiMode(mode); }}
       />
@@ -239,6 +312,8 @@ function AppContent() {
           <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook /></VehicleDataGate>
         )}
       </main>
+
+      {backHint && <div role="status" className="fixed bottom-5 left-1/2 z-[100] -translate-x-1/2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl">{backHint}</div>}
 
       {/* Footer */}
       <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-xs text-slate-500 dark:text-slate-400 mt-12 transition-colors">
