@@ -14,13 +14,17 @@ interface ThemeContextType {
   theme: ThemeMode;
   resolvedTheme: 'light' | 'dark';
   setTheme: (theme: ThemeMode) => void;
-  toggleTheme: () => void;\n  palette: ColorPalette;\n  setPalette: (palette: ColorPalette) => void;
+  toggleTheme: () => void;
+  palette: ColorPalette;
+  setPalette: (palette: ColorPalette) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const THEME_STORAGE_KEY = 'car-brother-theme';
-const LEGACY_THEME_STORAGE_KEY = 'outlander1_theme_v2';\nconst PALETTE_STORAGE_KEY = 'car-brother-color-palette';\nconst validPalettes: ColorPalette[] = ['black-yellow', 'white-red', 'black-orange', 'midnight-blue', 'forest-green'];
+const LEGACY_THEME_STORAGE_KEY = 'outlander1_theme_v2';
+const PALETTE_STORAGE_KEY = 'car-brother-color-palette';
+const validPalettes: ColorPalette[] = ['black-yellow', 'white-red', 'black-orange', 'midnight-blue', 'forest-green'];
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
