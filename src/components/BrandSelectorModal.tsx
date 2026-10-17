@@ -86,14 +86,14 @@ export default function BrandSelectorModal({
 
         {/* Brands Grid */}
         <div className="p-4 overflow-y-auto space-y-2 flex-1 scrollbar-thin">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {filteredBrands.map(brand => {
               const isSelected = brand.id === selectedBrandId;
               return (
                 <div
                   key={brand.id}
                   onClick={() => handleChooseBrand(brand)}
-                  className={`group flex items-start gap-3 p-3.5 rounded-xl border transition cursor-pointer text-left ${
+                  className={`group flex min-w-0 flex-col items-center gap-2 p-2 sm:p-3 rounded-xl border transition cursor-pointer text-center ${
                     isSelected
                       ? 'bg-red-50 dark:bg-red-950/40 border-red-500 ring-2 ring-red-500/20'
                       : 'bg-white dark:bg-slate-850 hover:bg-slate-50 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-800 hover:border-red-300'
@@ -110,10 +110,10 @@ export default function BrandSelectorModal({
                     <BrandLogo brandId={brand.id} className="w-7 h-7" useBrandColor={true} />
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-1">
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <span className="font-extrabold text-sm text-slate-900 dark:text-white truncate">
+                  <div className="min-w-0 w-full">
+                    <div className="flex min-w-0 items-center justify-center gap-1">
+                      <div className="flex min-w-0 flex-wrap items-center justify-center gap-1.5">
+                        <span className="max-w-full break-words font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white">
                           {brand.name}
                         </span>
                         {brand.id === 'mitsubishi' && (
@@ -127,13 +127,13 @@ export default function BrandSelectorModal({
                       )}
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    <div className="flex flex-wrap items-center justify-center gap-1 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                       <span>{brand.russianName}</span>
                       <span>·</span>
                       <span>с {brand.founded} г.</span>
                     </div>
 
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 line-clamp-1">
+                    <p className="hidden sm:block text-[11px] text-slate-600 dark:text-slate-400 mt-1 break-words">
                       Модели: {brand.models.map(m => m.name.split(' ')[0]).join(', ')}
                     </p>
                   </div>
