@@ -215,7 +215,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white">
+    <div className={`min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white ${uiMode === "wide" ? "car-brother-wide" : ""}`}>
       {/* Top Header with prominent "Разделы" dropdown */}
       <Header
         activeTab={activeTab}
@@ -232,6 +232,28 @@ function AppContent() {
         uiMode={uiMode}
         onChangeUiMode={(mode) => { void applyUiMode(mode); }}
       />
+
+      {uiMode === 'wide' && (
+        <nav aria-label="Основная навигация" className="car-brother-rail" data-testid="wide-navigation-rail">
+          {Object.entries(tabTitles).map(([id, item]) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={id}
+                type="button"
+                aria-label={item.title}
+                aria-current={activeTab === id ? 'page' : undefined}
+                title={item.title}
+                onClick={() => setActiveTab(id as TabId)}
+                className={`car-brother-rail-item ${activeTab === id ? 'is-active' : ''}`}
+              >
+                <Icon aria-hidden="true" size={24} />
+                <span>{item.title.split(' ')[0]}</span>
+              </button>
+            );
+          })}
+        </nav>
+      )}
 
       {/* Breadcrumb Navigation when inside a sub-module */}
       {activeTab !== 'overview' && (
