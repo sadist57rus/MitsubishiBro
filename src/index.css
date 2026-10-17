@@ -73,6 +73,50 @@ html[data-ui-mode="wide"] .ui-button, html[data-ui-mode="wide"] .ui-tab { min-he
 html[data-ui-mode="wide"] main { font-size:1rem; }
 
 
+
+/* Car Brother accessibility baseline: readable type, large touch targets and keyboard focus. */
+:root {
+  --font-secondary-min: 0.75rem;
+  --font-primary-min: 0.875rem;
+  --tap-size: 2.75rem;
+}
+html[data-ui-mode="wide"] {
+  --font-secondary-min: 1rem;
+  --font-primary-min: 1rem;
+  --tap-size: 3.5rem;
+}
+body { font-size: var(--font-primary-min); }
+main p, main label, main input, main select, main textarea,
+main table, main th, main td, main button, header button, header select {
+  font-size: max(1em, var(--font-secondary-min));
+}
+button, [role="button"], a, select, input[type="checkbox"], input[type="radio"] {
+  min-height: var(--tap-size);
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, [tabindex]:focus-visible, [role="button"]:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--ui-surface, #fff);
+}
+.dark button:focus-visible, .dark a:focus-visible, .dark input:focus-visible,
+.dark select:focus-visible, .dark textarea:focus-visible, .dark [tabindex]:focus-visible {
+  outline-color: #93c5fd;
+}
+html[data-ui-mode="wide"] button, html[data-ui-mode="wide"] [role="button"],
+html[data-ui-mode="wide"] a, html[data-ui-mode="wide"] select {
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
