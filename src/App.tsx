@@ -7,7 +7,7 @@ import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { Star, Monitor, RotateCcw } from 'lucide-react';
+import { Star, Monitor } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
