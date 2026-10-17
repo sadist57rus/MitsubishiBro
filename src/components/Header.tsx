@@ -44,6 +44,7 @@ interface Props {
   onOpenApkGuide?: () => void;
   uiMode?: UiMode;
   onChangeUiMode?: (mode: UiMode) => void;
+  onRegisterBackHandler?: (handler: () => boolean) => void;
 }
 
 export interface NavSection {
@@ -67,7 +68,8 @@ export default function Header({
   onOpenBrandSelector,
   onOpenApkGuide,
   uiMode = 'phone',
-  onChangeUiMode
+  onChangeUiMode,
+  onRegisterBackHandler
 }: Props) {
   const { resolvedTheme, toggleTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -233,6 +235,14 @@ export default function Header({
     setIsDropdownOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    onRegisterBackHandler?.(() => {
+      if (isDropdownOpen) { setIsDropdownOpen(false); return true; }
+      if (isBrandDropdownOpen) { setIsBrandDropdownOpen(false); return true; }
+      return false;
+    });
+  }, [isDropdownOpen, isBrandDropdownOpen, onRegisterBackHandler]);
 
   const isLight = resolvedTheme === 'light';
 
