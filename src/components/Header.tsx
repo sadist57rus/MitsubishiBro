@@ -269,7 +269,9 @@ export default function Header({
                     : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
                 }`}
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
+                aria-label={`Выбрать марку автомобиля, сейчас ${currentBrand.russianName || currentBrand.name}`}
                 aria-expanded={isBrandDropdownOpen}
+                aria-haspopup="dialog"
               >
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center p-2 shadow-2xs group-hover:scale-105 transition shrink-0 ${
                   isBrandDropdownOpen ? 'bg-white text-slate-900' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'
@@ -399,7 +401,9 @@ export default function Header({
                     : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700'
                 }`}
                 title="Нажмите, чтобы открыть меню всех разделов"
+                aria-label="Открыть разделы приложения"
                 aria-expanded={isDropdownOpen}
+                aria-haspopup="dialog"
               >
                 <LayoutGrid className={`w-4 h-4 shrink-0 ${isDropdownOpen ? 'text-white' : 'text-red-600 dark:text-red-400'}`} />
                 <span className="tracking-tight whitespace-nowrap">
@@ -484,7 +488,7 @@ export default function Header({
                                           setActiveTab('brands');
                                           setIsDropdownOpen(false);
                                         }}
-                                        className={`p-2 rounded-lg border flex flex-col items-center justify-center transition cursor-pointer ${
+                                        className={`min-h-11 min-w-11 p-2 rounded-lg border flex flex-col items-center justify-center transition cursor-pointer ${
                                           b.id === selectedBrandId
                                             ? 'bg-red-600 text-white border-red-600 shadow-2xs'
                                             : 'bg-white dark:bg-slate-800 hover:bg-slate-100 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'
@@ -492,7 +496,7 @@ export default function Header({
                                         title={`${b.name} (${b.russianName})`}
                                       >
                                         <BrandLogo brandId={b.id} className="w-5 h-5" useBrandColor={b.id !== selectedBrandId} />
-                                        <span className="text-[8px] font-bold mt-0.5 truncate w-full text-center">
+                                        <span className="text-xs font-bold mt-0.5 truncate w-full text-center">
                                           {b.russianName || b.name.split(' ')[0]}
                                         </span>
                                       </button>
@@ -525,7 +529,8 @@ export default function Header({
               <select
                 value={selectedEngine}
                 onChange={(e) => setSelectedEngine(e.target.value as EngineType)}
-                className="bg-transparent text-slate-900 dark:text-slate-100 font-mono font-medium outline-none cursor-pointer text-xs"
+                aria-label="Выбрать двигатель"
+                className="min-h-11 bg-transparent text-slate-900 dark:text-slate-100 font-mono font-medium outline-none cursor-pointer text-sm"
               >
                 {engines.map(eng => (
                   <option key={eng.id} value={eng.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
@@ -571,7 +576,8 @@ export default function Header({
             {onOpenApkGuide && (
               <button
                 onClick={onOpenApkGuide}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition shadow-2xs"
+                aria-label="Инструкция по сборке APK"
+                className="flex min-h-11 items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold text-slate-800 dark:text-slate-200 transition shadow-2xs"
                 title="Инструкция: как скачать или собрать APK для Android на GitHub"
               >
                 <Smartphone className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
@@ -582,12 +588,13 @@ export default function Header({
             {/* Day / Night Theme Switch */}
             <button
               onClick={toggleTheme}
-              className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl border text-xs font-semibold transition shadow-2xs ${
+              className={`flex min-h-11 items-center gap-2 px-2.5 py-1.5 rounded-xl border text-sm font-semibold transition shadow-2xs ${
                 isLight
                   ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
                   : 'bg-slate-800 text-amber-300 border-slate-700 hover:bg-slate-700'
               }`}
               title="Переключить тему (Светлая дневная / Тёмная ночная)"
+              aria-label="Переключить светлую или тёмную тему"
             >
               {isLight ? (
                 <>
