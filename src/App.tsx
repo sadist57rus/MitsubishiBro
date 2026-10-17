@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
@@ -12,22 +12,22 @@ import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
-import OverviewDashboard from './components/OverviewDashboard';
-import TechSpecs from './components/TechSpecs';
-import PartsCatalog from './components/PartsCatalog';
-import PartsAccessoriesHub from './components/PartsAccessoriesHub';
-import RepairGuides from './components/RepairGuides';
-import Troubleshooter from './components/Troubleshooter';
-import TireWheelCalculator from './components/TireWheelCalculator';
-import MaintenanceHub from './components/MaintenanceHub';
-import ObdDiagnostics from './components/ObdDiagnostics';
-import GarageLogbook from './components/GarageLogbook';
-import FuseDiagram from './components/FuseDiagram';
-import TuningHub from './components/TuningHub';
-import FuelMonitor from './components/FuelMonitor';
-import BulbsCatalog from './components/BulbsCatalog';
+const OverviewDashboard = lazy(async () => { await import('./data/specsData'); return import('./components/OverviewDashboard'); });
+const TechSpecs = lazy(async () => { await import('./data/specsData'); return import('./components/TechSpecs'); });
+const PartsCatalog = lazy(async () => { await import('./data/partsData'); return import('./components/PartsCatalog'); });
+const PartsAccessoriesHub = lazy(async () => { await import('./data/partsData'); return import('./components/PartsAccessoriesHub'); });
+const RepairGuides = lazy(async () => { await import('./data/guidesData'); return import('./components/RepairGuides'); });
+const Troubleshooter = lazy(async () => { await import('./data/issuesData'); return import('./components/Troubleshooter'); });
+const TireWheelCalculator = lazy(async () => { await import('./data/wheelsData'); return import('./components/TireWheelCalculator'); });
+const MaintenanceHub = lazy(async () => { await import('./data/maintenanceData'); return import('./components/MaintenanceHub'); });
+const ObdDiagnostics = lazy(async () => { await import('./data/obdData'); return import('./components/ObdDiagnostics'); });
+const GarageLogbook = lazy(async () => { return import('./components/GarageLogbook'); });
+const FuseDiagram = lazy(async () => { await import('./data/fusesData'); return import('./components/FuseDiagram'); });
+const TuningHub = lazy(async () => { await import('./data/tuningData'); return import('./components/TuningHub'); });
+const FuelMonitor = lazy(async () => { return import('./components/FuelMonitor'); });
+const BulbsCatalog = lazy(async () => { await import('./data/bulbsData'); return import('./components/BulbsCatalog'); });
 import ApkGuideModal from './components/ApkGuideModal';
-import JapaneseBrandsHub from './components/JapaneseBrandsHub';
+const JapaneseBrandsHub = lazy(async () => { await import('./data/japaneseBrandsData'); return import('./components/JapaneseBrandsHub'); });
 import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
@@ -51,6 +51,20 @@ import {
   Smartphone,
   Award
 } from 'lucide-react';
+
+
+class SectionErrorBoundary extends React.Component<{ children: React.ReactNode; sectionKey: string }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: Error) { console.error('Section render failed:', this.props.sectionKey, error); }
+  render() { if (!this.state.hasError) return this.props.children; return <section role="alert" className="mx-auto max-w-2xl rounded-2xl border border-red-300 bg-white p-6 text-slate-900 shadow dark:border-red-900 dark:bg-slate-900 dark:text-white"><h2 className="text-xl font-bold">Что-то пошло не так</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Не удалось открыть этот раздел. Можно сбросить его локальные данные и попробовать снова.</p><button className="mt-4 rounded-xl bg-red-600 px-4 py-2 font-semibold text-white" onClick={() => { try { const keys: string[] = []; for (let i=0;i<localStorage.length;i++) { const key=localStorage.key(i); if (key && (key.includes(this.props.sectionKey) || key.includes('outlander1_'))) keys.push(key); } keys.forEach(key => localStorage.removeItem(key)); } catch (error) { console.warn('Storage reset failed', error); } this.setState({ hasError: false }); window.location.reload(); }}>Сбросить данные раздела</button></section>; }
+}
+class AppErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: Error) { console.error('App render failed:', error); }
+  render() { if (!this.state.hasError) return this.props.children; return <main role="alert" className="min-h-screen bg-slate-100 p-6 text-slate-900 dark:bg-[#070b12] dark:text-white"><section className="mx-auto max-w-xl rounded-2xl border p-6"><h1 className="text-2xl font-bold">Что-то пошло не так</h1><p className="mt-2">Приложение столкнулось с ошибкой.</p><button className="mt-4 rounded-xl bg-red-600 px-4 py-2 font-semibold text-white" onClick={() => window.location.reload()}>Перезапустить приложение</button></section></main>; }
+}
 
 function AppContent() {
   const { resolvedTheme } = useTheme();
@@ -243,6 +257,7 @@ function AppContent() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6">
+        <SectionErrorBoundary key={activeTab} sectionKey={activeTab}><Suspense fallback={<div className="rounded-xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">Загрузка раздела…</div>}>
         {activeTab === 'overview' && (
           <div className="space-y-5"><FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} /><OverviewDashboard
             onNavigate={setActiveTab}
@@ -311,6 +326,7 @@ function AppContent() {
         {activeTab === 'logbook' && (
           <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook /></VehicleDataGate>
         )}
+        </Suspense></SectionErrorBoundary>
       </main>
 
       {backHint && <div role="status" className="fixed bottom-5 left-1/2 z-[100] -translate-x-1/2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl">{backHint}</div>}
@@ -364,5 +380,5 @@ function AppContent() {
 
 
 export default function App() {
-  return <VehicleProvider><AppContent /></VehicleProvider>;
+  return <AppErrorBoundary><VehicleProvider><AppContent /></VehicleProvider></AppErrorBoundary>;
 }
