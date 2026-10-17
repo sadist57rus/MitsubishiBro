@@ -1,66 +1,58 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
+import { readStored, writeStored } from '../lib/storage';
 import type { EngineType, DrivetrainType } from '../types';
 
-export interface VehicleSelection {
-  brandId: string;
-  modelId: string;
-  engine: EngineType;
-  drivetrain: DrivetrainType;
+export interface GarageVehicle {
+  id: string; brandId: string; modelId: string; year: number; vin?: string;
+  mileage: number; engine: string; drivetrain: DrivetrainType; currency: string;
 }
-interface VehicleContextValue extends VehicleSelection {
-  setBrandId: (brandId: string) => void;
-  setModelId: (modelId: string) => void;
-  setEngine: (engine: EngineType) => void;
-  setDrivetrain: (drivetrain: DrivetrainType) => void;
+interface GarageState { vehicles: GarageVehicle[]; activeVehicleId: string; }
+interface VehicleContextValue {
+  vehicleId: string; activeVehicle: GarageVehicle; vehicles: GarageVehicle[];
+  brandId: string; modelId: string; engine: EngineType; drivetrain: DrivetrainType;
+  setBrandId: (brandId: string) => void; setModelId: (modelId: string) => void;
+  setEngine: (engine: EngineType) => void; setDrivetrain: (drivetrain: DrivetrainType) => void;
   selectVehicle: (brandId: string, modelId: string) => void;
+  addVehicle: (vehicle: Omit<GarageVehicle,'id'>) => void;
+  updateVehicle: (vehicle: GarageVehicle) => void; removeVehicle: (id: string) => void; setActiveVehicle: (id: string) => void;
 }
-const STORAGE_KEY = 'car-brother-vehicle';
-const DEFAULT_SELECTION: VehicleSelection = { brandId: 'mitsubishi', modelId: 'outlander-1', engine: 'ALL', drivetrain: '4WD' };
-const VehicleContext = createContext<VehicleContextValue | null>(null);
-
-function readSelection(): VehicleSelection {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_SELECTION;
-    const parsed = JSON.parse(raw) as Partial<VehicleSelection>;
-    const brandId = typeof parsed.brandId === 'string' ? parsed.brandId : DEFAULT_SELECTION.brandId;
-    const brand = JAPANESE_BRANDS.find(item => item.id === brandId);
-    const modelId = typeof parsed.modelId === 'string' && brand?.models.some(model => model.id === parsed.modelId)
-      ? parsed.modelId : (brand?.models[0]?.id ?? DEFAULT_SELECTION.modelId);
-    return {
-      brandId: brand?.id ?? DEFAULT_SELECTION.brandId,
-      modelId,
-      engine: parsed.engine ?? DEFAULT_SELECTION.engine,
-      drivetrain: parsed.drivetrain ?? DEFAULT_SELECTION.drivetrain
-    };
-  } catch { return DEFAULT_SELECTION; }
+const GARAGE_KEY='car-brother-garage';
+const OLD_KEY='car-brother-vehicle';
+const DEFAULT_VEHICLE: GarageVehicle={id:'vehicle-default',brandId:'mitsubishi',modelId:'outlander-1',year:2006,mileage:0,engine:'4G69',drivetrain:'4WD',currency:'RUB'};
+const GarageContext=createContext<VehicleContextValue|null>(null);
+function validVehicle(v: unknown): v is GarageVehicle {
+  if(!v||typeof v!=='object')return false; const x=v as Record<string,unknown>;
+  const brand=JAPANESE_BRANDS.find(b=>b.id===x.brandId);
+  return typeof x.id==='string'&&typeof x.brandId==='string'&&!!brand&&typeof x.modelId==='string'&&brand.models.some(m=>m.id===x.modelId)&&Number.isInteger(x.year)&&typeof x.mileage==='number'&&Number.isFinite(x.mileage)&&x.mileage>=0&&typeof x.engine==='string'&&['4WD','FWD','ALL'].includes(String(x.drivetrain))&&typeof x.currency==='string';
 }
-export function VehicleProvider({ children }: { children: ReactNode }) {
-  const [selection, setSelection] = useState<VehicleSelection>(readSelection);
-  useEffect(() => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(selection)); } catch { /* storage unavailable */ } }, [selection]);
-  const value = useMemo<VehicleContextValue>(() => ({
-    ...selection,
-    setBrandId: brandId => setSelection(previous => {
-      const brand = JAPANESE_BRANDS.find(item => item.id === brandId);
-      return { ...previous, brandId: brand?.id ?? previous.brandId, modelId: brand?.models[0]?.id ?? previous.modelId };
-    }),
-    setModelId: modelId => setSelection(previous => {
-      const owner = JAPANESE_BRANDS.find(brand => brand.models.some(model => model.id === modelId));
-      return owner ? { ...previous, brandId: owner.id, modelId } : previous;
-    }),
-    setEngine: engine => setSelection(previous => ({ ...previous, engine })),
-    setDrivetrain: drivetrain => setSelection(previous => ({ ...previous, drivetrain })),
-    selectVehicle: (brandId, modelId) => setSelection(previous => {
-      const brand = JAPANESE_BRANDS.find(item => item.id === brandId);
-      const model = brand?.models.find(item => item.id === modelId);
-      return model && brand ? { ...previous, brandId: brand.id, modelId: model.id } : previous;
-    })
-  }), [selection]);
-  return <VehicleContext.Provider value={value}>{children}</VehicleContext.Provider>;
+function initialGarage(): GarageState {
+  const saved=readStored<GarageState>(GARAGE_KEY,(v):v is GarageState=>!!v&&typeof v==='object'&&Array.isArray((v as GarageState).vehicles)&&(v as GarageState).vehicles.every(validVehicle)&&typeof (v as GarageState).activeVehicleId==='string',{vehicles:[],activeVehicleId:''});
+  if(saved.vehicles.length) return {...saved,activeVehicleId:saved.vehicles.some(v=>v.id===saved.activeVehicleId)?saved.activeVehicleId:saved.vehicles[0].id};
+  let legacy: Record<string,unknown>={};
+  try { const raw=localStorage.getItem(OLD_KEY); if(raw){const parsed:unknown=JSON.parse(raw);if(parsed&&typeof parsed==='object')legacy=parsed as Record<string,unknown>;} } catch {}
+  const brand=JAPANESE_BRANDS.find(b=>b.id===legacy.brandId)||JAPANESE_BRANDS.find(b=>b.id===DEFAULT_VEHICLE.brandId)!;
+  const model=brand.models.find(m=>m.id===legacy.modelId)||brand.models[0];
+  const first:GarageVehicle={...DEFAULT_VEHICLE,id:'vehicle-'+Date.now(),brandId:brand.id,modelId:model.id,engine:typeof legacy.engine==='string'?legacy.engine:DEFAULT_VEHICLE.engine,drivetrain:legacy.drivetrain==='FWD'||legacy.drivetrain==='ALL'?legacy.drivetrain:'4WD'};
+  return {vehicles:[first],activeVehicleId:first.id};
 }
-export function useVehicle() {
-  const context = useContext(VehicleContext);
-  if (!context) throw new Error('useVehicle must be used inside VehicleProvider');
-  return context;
+export function VehicleProvider({children}:{children:ReactNode}) {
+ const [garage,setGarage]=useState<GarageState>(initialGarage);
+ useEffect(()=>{writeStored(GARAGE_KEY,garage,(v):v is GarageState=>!!v&&typeof v==='object'&&Array.isArray((v as GarageState).vehicles)&&(v as GarageState).vehicles.every(validVehicle)&&typeof (v as GarageState).activeVehicleId==='string');},[garage]);
+ const activeVehicle=garage.vehicles.find(v=>v.id===garage.activeVehicleId)||garage.vehicles[0]||DEFAULT_VEHICLE;
+ const value=useMemo<VehicleContextValue>(()=>({
+  vehicleId:activeVehicle.id,activeVehicle,vehicles:garage.vehicles,brandId:activeVehicle.brandId,modelId:activeVehicle.modelId,
+  engine:(['4G63','4G64','4G69','4G63T'].includes(activeVehicle.engine)?activeVehicle.engine:'ALL') as EngineType,drivetrain:activeVehicle.drivetrain,
+  setBrandId:(brandId)=>{const brand=JAPANESE_BRANDS.find(b=>b.id===brandId);if(!brand)return;setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId,modelId:brand.models[0].id}:v)}));},
+  setModelId:(modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.models.some(m=>m.id===modelId));if(brand)setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId:brand.id,modelId}:v)}));},
+  setEngine:(engine)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,engine}:v)})),
+  setDrivetrain:(drivetrain)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,drivetrain}:v)})),
+  selectVehicle:(brandId,modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.id===brandId);if(brand?.models.some(m=>m.id===modelId))setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId,modelId}:v)}));},
+  addVehicle:(v)=>{const vehicle:GarageVehicle={...v,id:'vehicle-'+Date.now()+'-'+Math.random().toString(36).slice(2,7)};setGarage(g=>({vehicles:[...g.vehicles,vehicle],activeVehicleId:vehicle.id}));},
+  updateVehicle:(vehicle)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===vehicle.id&&validVehicle(vehicle)?vehicle:v)})),
+  removeVehicle:(id)=>setGarage(g=>{if(g.vehicles.length<=1)return g;const vehicles=g.vehicles.filter(v=>v.id!==id);return {vehicles,activeVehicleId:g.activeVehicleId===id?vehicles[0].id:g.activeVehicleId};}),
+  setActiveVehicle:(id)=>setGarage(g=>g.vehicles.some(v=>v.id===id)?{...g,activeVehicleId:id}:g)
+ }),[garage,activeVehicle]);
+ return <GarageContext.Provider value={value}>{children}</GarageContext.Provider>;
 }
+export function useVehicle(){const value=useContext(GarageContext);if(!value)throw new Error('useVehicle must be used inside VehicleProvider');return value;}
