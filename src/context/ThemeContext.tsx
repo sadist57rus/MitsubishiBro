@@ -18,7 +18,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     try {
       const saved = (localStorage.getItem(THEME_STORAGE_KEY) ?? localStorage.getItem(LEGACY_THEME_STORAGE_KEY)) as ThemeMode;
-      if (saved && (saved === 'dark' || saved === 'light' || saved === 'system')) {
+      if (saved && (saved === 'dark' || saved === 'light' || saved === 'system' || saved === 'time')) {
         localStorage.setItem(THEME_STORAGE_KEY, saved);
         localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
       }
