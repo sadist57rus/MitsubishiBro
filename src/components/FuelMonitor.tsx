@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { EngineType } from '../types';
+import { parseDecimalInput, readStored, writeStored } from '../lib/storage';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -57,91 +58,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   const [chartXMode, setChartXMode] = useState<'odometer' | 'date'>('odometer');
 
   // Logs state with rich authentic initial history
-  const [logs, setLogs] = useState<FuelLog[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    return [
-      {
-        id: '1',
-        date: '2026-02-15',
-        odometer: 243400,
-        distance: 410,
-        liters: 51.2,
-        pricePerLiter: 61.8,
-        totalCost: 3164,
-        consumption: 12.49,
-        fuelType: 'АИ-95',
-        station: 'Лукойл'
-      },
-      {
-        id: '2',
-        date: '2026-02-28',
-        odometer: 243920,
-        distance: 520,
-        liters: 50.0,
-        pricePerLiter: 62.1,
-        totalCost: 3105,
-        consumption: 9.62,
-        fuelType: 'АИ-95',
-        station: 'Газпромнефть'
-      },
-      {
-        id: '3',
-        date: '2026-03-12',
-        odometer: 244360,
-        distance: 440,
-        liters: 53.5,
-        pricePerLiter: 62.4,
-        totalCost: 3338,
-        consumption: 12.16,
-        fuelType: 'АИ-95',
-        station: 'Роснефть'
-      },
-      {
-        id: '4',
-        date: '2026-03-24',
-        odometer: 244790,
-        distance: 430,
-        liters: 48.0,
-        pricePerLiter: 62.5,
-        totalCost: 3000,
-        consumption: 11.16,
-        fuelType: 'АИ-95',
-        station: 'Лукойл'
-      },
-      {
-        id: '5',
-        date: '2026-04-04',
-        odometer: 245280,
-        distance: 490,
-        liters: 52.8,
-        pricePerLiter: 63.0,
-        totalCost: 3326,
-        consumption: 10.78,
-        fuelType: 'АИ-95',
-        station: 'Татнефть'
-      },
-      {
-        id: '6',
-        date: '2026-04-14',
-        odometer: 245660,
-        distance: 380,
-        liters: 51.5,
-        pricePerLiter: 63.2,
-        totalCost: 3254,
-        consumption: 13.55,
-        fuelType: 'АИ-95',
-        station: 'Газпромнефть'
-      }
-    ];
-  });
+  const [logs, setLogs] = useState<FuelLog[]>(() => readStored(STORAGE_KEY, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string'), [
+      { id: 'fuel-1', date: '2026-02-15', odometer: 243400, distance: 410, liters: 51.2, pricePerLiter: 61.8, totalCost: 3164, consumption: 12.49, fuelType: 'АИ-95', station: 'Лукойл' },
+      { id: 'fuel-2', date: '2026-02-28', odometer: 243920, distance: 520, liters: 50, pricePerLiter: 62.1, totalCost: 3105, consumption: 9.62, fuelType: 'АИ-95', station: 'Газпромнефть' },
+    ]));
 
   const [isAddingLog, setIsAddingLog] = useState(false);
   const [newOdometer, setNewOdometer] = useState<string>('246100');
@@ -151,15 +71,13 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   const [newStation, setNewStation] = useState<string>('Лукойл');
   const [newFuelType, setNewFuelType] = useState<string>('АИ-95');
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-  }, [logs]);
+  useEffect(() => { writeStored(STORAGE_KEY, logs, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string')); }, [logs]);
 
   // Main Calculator Computation
   const stats = useMemo(() => {
-    const distNum = parseFloat(distance);
-    const litNum = parseFloat(liters);
-    const priceNum = parseFloat(fuelPrice);
+    const distNum = (parseDecimalInput(distance) ?? NaN);
+    const litNum = (parseDecimalInput(liters) ?? NaN);
+    const priceNum = (parseDecimalInput(fuelPrice) ?? NaN);
 
     if (distNum > 0 && litNum > 0) {
       const consumption = (litNum / distNum) * 100;
@@ -555,7 +473,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 </div>
               </div>
               <input
-                type="number"
+                type="number" inputMode="decimal"
                 value={distance}
                 onChange={(e) => setDistance(e.target.value)}
                 placeholder="Например: 420"
@@ -581,7 +499,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 </div>
               </div>
               <input
-                type="number"
+                type="number" inputMode="decimal"
                 step="0.1"
                 value={liters}
                 onChange={(e) => setLiters(e.target.value)}
@@ -596,7 +514,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   Цена за литр (₽):
                 </label>
                 <input
-                  type="number"
+                  type="number" inputMode="decimal"
                   step="0.1"
                   value={fuelPrice}
                   onChange={(e) => setFuelPrice(e.target.value)}
@@ -793,7 +711,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   Текущий одометр (км):
                 </label>
                 <input
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={newOdometer}
                   onChange={(e) => setNewOdometer(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
@@ -808,7 +726,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     Пройдено (км):
                   </label>
                   <input
-                    type="number"
+                    type="number" inputMode="decimal"
                     value={newDistance}
                     onChange={(e) => setNewDistance(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-mono"
@@ -821,7 +739,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     Заправлено (л):
                   </label>
                   <input
-                    type="number"
+                    type="number" inputMode="decimal"
                     step="0.1"
                     value={newLiters}
                     onChange={(e) => setNewLiters(e.target.value)}
@@ -838,7 +756,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     Цена литра (₽):
                   </label>
                   <input
-                    type="number"
+                    type="number" inputMode="decimal"
                     step="0.1"
                     value={newPrice}
                     onChange={(e) => setNewPrice(e.target.value)}
