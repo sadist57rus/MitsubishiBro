@@ -82,8 +82,11 @@ jobs:
           elif 'System.getenv("ANDROID_VERSION_CODE")' not in text:
               raise SystemExit("Could not locate Android versionCode in android/app/build.gradle")
           if 'versionName "1.0"' in text:
-              text = text.replace('versionName "1.0"', '(System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
-              text = text.replace('(System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 'versionName (System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
+              text = text.replace('versionName "1.0"', 'versionName (System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
+          elif "versionName '1.0'" in text:
+              text = text.replace("versionName '1.0'", 'versionName (System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
+          elif 'System.getenv("ANDROID_VERSION_NAME")' not in text:
+              raise SystemExit("Could not locate Android versionName in android/app/build.gradle")
           path.write_text(text)
           PY
 
