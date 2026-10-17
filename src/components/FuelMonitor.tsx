@@ -37,6 +37,7 @@ import {
 export interface FuelLog {
   id: string;
   vehicleId?: string;
+  currency?: string;
   date: string;
   odometer: number;
   distance: number;
@@ -75,7 +76,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       { id: '4', date: '2026-03-24', odometer: 244790, distance: 430, liters: 48.0, pricePerLiter: 62.5, totalCost: 3000, consumption: 11.16, fuelType: 'АИ-95', station: 'Лукойл' },
       { id: '5', date: '2026-04-04', odometer: 245280, distance: 490, liters: 52.8, pricePerLiter: 63.0, totalCost: 3326, consumption: 10.78, fuelType: 'АИ-95', station: 'Татнефть' },
       { id: '6', date: '2026-04-14', odometer: 245660, distance: 380, liters: 51.5, pricePerLiter: 63.2, totalCost: 3254, consumption: 13.55, fuelType: 'АИ-95', station: 'Газпромнефть' }
-    ] : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId })));
+    ] : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
 
   const [isAddingLog, setIsAddingLog] = useState(false);
   const [newOdometer, setNewOdometer] = useState<string>('246100');
@@ -136,7 +137,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
     if (logs.length === 0) return null;
     const totalDist = logs.reduce((acc, l) => acc + l.distance, 0);
     const totalLiters = logs.reduce((acc, l) => acc + l.liters, 0);
-    const totalSpent = logs.reduce((acc, l) => acc + l.totalCost, 0);
+    const totalSpent = logs.filter(l => (l.currency || 'RUB') === preferences.currency).reduce((acc, l) => acc + l.totalCost, 0);
     const avgConsumption = totalDist > 0 ? (totalLiters / totalDist) * 100 : 0;
 
     const minConsumption = Math.min(...logs.map(l => l.consumption));
@@ -150,7 +151,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       minConsumption: minConsumption.toFixed(2),
       maxConsumption: maxConsumption.toFixed(2)
     };
-  }, [logs]);
+  }, [logs, preferences.currency]);
 
   // Formatted data for Recharts sorted chronologically/by odometer
   const chartData = useMemo(() => {
@@ -180,6 +181,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       const newEntry: FuelLog = {
         id: Date.now().toString(),
         vehicleId,
+        currency: preferences.currency,
         date: new Date().toISOString().split('T')[0],
         odometer: odoNum,
         distance: distNum,
@@ -226,7 +228,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
           </div>
           <div className="flex justify-between text-[11px] text-slate-300 pt-1 border-t border-slate-800">
             <span>Сумма чека:</span>
-            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} {currencySymbol}</span>
+            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} {currencySymbols[data.currency || 'RUB'] || '₽'}</span>
           </div>
           <div className="text-[10px] text-slate-400 italic">
             {data.station}
@@ -873,7 +875,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                         {formatConsumption(log.consumption)} {consumptionUnit}
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-900 dark:text-white font-semibold">{log.totalCost.toFixed(0)} {currencySymbol}</td>
+                    <td className="py-3 px-3 text-slate-900 dark:text-white font-semibold">{log.totalCost.toFixed(0)} {currencySymbols[log.currency || 'RUB'] || '₽'}</td>
                     <td className="py-3 px-3 font-sans text-slate-500">
                       {log.station} ({log.fuelType})
                     </td>
