@@ -67,16 +67,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
   // Chart options
   const [chartXMode, setChartXMode] = useState<'odometer' | 'date'>('odometer');
+  const [spendPeriod, setSpendPeriod] = useState<'month' | 'year' | 'all'>('month');
 
   // Logs state with rich authentic initial history
-  const [logs, setLogs] = useState<FuelLog[]>(() => readStored(activeStorageKey, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string'), vehicleId === vehicles[0]?.id ? [
-      { id: '1', date: '2026-02-15', odometer: 243400, distance: 410, liters: 51.2, pricePerLiter: 61.8, totalCost: 3164, consumption: 12.49, fuelType: 'АИ-95', station: 'Лукойл' },
-      { id: '2', date: '2026-02-28', odometer: 243920, distance: 520, liters: 50.0, pricePerLiter: 62.1, totalCost: 3105, consumption: 9.62, fuelType: 'АИ-95', station: 'Газпромнефть' },
-      { id: '3', date: '2026-03-12', odometer: 244360, distance: 440, liters: 53.5, pricePerLiter: 62.4, totalCost: 3338, consumption: 12.16, fuelType: 'АИ-95', station: 'Роснефть' },
-      { id: '4', date: '2026-03-24', odometer: 244790, distance: 430, liters: 48.0, pricePerLiter: 62.5, totalCost: 3000, consumption: 11.16, fuelType: 'АИ-95', station: 'Лукойл' },
-      { id: '5', date: '2026-04-04', odometer: 245280, distance: 490, liters: 52.8, pricePerLiter: 63.0, totalCost: 3326, consumption: 10.78, fuelType: 'АИ-95', station: 'Татнефть' },
-      { id: '6', date: '2026-04-14', odometer: 245660, distance: 380, liters: 51.5, pricePerLiter: 63.2, totalCost: 3254, consumption: 13.55, fuelType: 'АИ-95', station: 'Газпромнефть' }
-    ] : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
+  const [logs, setLogs] = useState<FuelLog[]>(() => readStored(activeStorageKey, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string'), []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
 
   const [isAddingLog, setIsAddingLog] = useState(false);
   const [newOdometer, setNewOdometer] = useState<string>('246100');
@@ -110,7 +104,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         verdict = 'Оптимальный смешанный цикл для 4WD';
         verdictColor = 'text-emerald-400';
       } else if (consumption <= 14.5) {
-        verdict = 'Стандартный городской режим Outlander I';
+        verdict = 'Стандартный городской режим';
         verdictColor = 'text-amber-500';
       } else if (consumption <= 17.0) {
         verdict = 'Повышенный городской расход (пробки / зима)';
@@ -251,14 +245,14 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 Учёт и аналитика расхода топлива
               </span>
               <span className="text-slate-300 dark:text-slate-700">·</span>
-              <span className="text-xs font-mono text-slate-500">Бак 60 л (CU_W)</span>
+              <span className="text-xs font-mono text-slate-500">Расход и стоимость поездок</span>
             </div>
             <h1 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2.5">
               <Fuel className="w-6 h-6 text-red-600" />
-              Мониторинг топлива Outlander I
+              Расходы на топливо
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-3xl">
-              Точный калькулятор среднего расхода ({consumptionUnit}), оценка стоимости поездок, интерактивный график расхода по пробегу Recharts и причины повышенного аппетита 4G6.
+              Точный калькулятор среднего расхода ({consumptionUnit}), оценка стоимости поездок, интерактивный график расхода по пробегу Recharts и анализ расходов по журналу заправок.
             </p>
           </div>
 
@@ -315,6 +309,49 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
           </div>
         )}
       </div>
+
+      {/* Fuel spending donut: large, glanceable summary for head-unit displays. */}
+      {(() => {
+        const now = new Date();
+        const filtered = logs.filter(log => {
+          const date = new Date(log.date + 'T12:00:00');
+          if (spendPeriod === 'month') return date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth();
+          if (spendPeriod === 'year') return date.getFullYear() === now.getFullYear();
+          return true;
+        });
+        const spend = filtered.filter(log => (log.currency || 'RUB') === preferences.currency).reduce((sum, log) => sum + log.totalCost, 0);
+        const litersTotal = filtered.reduce((sum, log) => sum + log.liters, 0);
+        const circumference = 2 * Math.PI * 72;
+        const hasSpend = spend > 0;
+        return (
+          <section className="fuel-spend-panel bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 md:p-7 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
+              <div><h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">Расходы на топливо</h2><p className="text-base md:text-lg text-slate-600 dark:text-slate-300 mt-1">Сумма по сохранённым заправкам</p></div>
+              <div className="grid grid-cols-3 gap-2" role="group" aria-label="Период расходов">
+                {([{id:'month',label:'Месяц'},{id:'year',label:'Год'},{id:'all',label:'Всё время'}] as const).map(option=><button key={option.id} type="button" aria-pressed={spendPeriod===option.id} onClick={()=>setSpendPeriod(option.id)} className={'min-h-14 rounded-xl border-2 px-4 text-base md:text-lg font-bold '+(spendPeriod===option.id?'border-red-600 bg-red-600 text-white':'border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200')}>{option.label}</button>)}
+              </div>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 items-center">
+              <div className="flex justify-center">
+                <div className="relative w-64 h-64 md:w-72 md:h-72">
+                  <svg viewBox="0 0 180 180" role="img" aria-label={'Круговая диаграмма расходов: '+Math.round(spend).toLocaleString('ru-RU')+' '+currencySymbol} className="w-full h-full -rotate-90">
+                    <circle cx="90" cy="90" r="72" fill="none" stroke="currentColor" strokeWidth="18" className="text-slate-200 dark:text-slate-700"/>
+                    {hasSpend && <circle cx="90" cy="90" r="72" fill="none" stroke="#dc2626" strokeWidth="18" strokeLinecap="round" strokeDasharray={circumference+' '+circumference} />}
+                    {hasSpend && filtered.length > 1 && <circle cx="90" cy="90" r="72" fill="none" stroke="#f59e0b" strokeWidth="18" strokeLinecap="round" strokeDasharray={(circumference*0.18)+' '+circumference} strokeDashoffset={-circumference*0.82}/>}
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5"><span className="text-base md:text-lg font-bold text-slate-500 dark:text-slate-300">{spendPeriod==='month'?'За месяц':spendPeriod==='year'?'За год':'За всё время'}</span><strong className="mt-1 text-3xl md:text-4xl font-black leading-tight text-slate-900 dark:text-white">{Math.round(spend).toLocaleString('ru-RU')} <span className="text-2xl">{currencySymbol}</span></strong><span className="mt-1 text-sm md:text-base text-slate-500 dark:text-slate-300">{filtered.length} заправок</span></div>
+                </div>
+              </div>
+              <div className="grid gap-3">
+                <div className="rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 p-5"><p className="text-base md:text-lg text-slate-600 dark:text-slate-300">Заправлено</p><p className="text-3xl md:text-4xl font-black mt-1">{litersTotal.toLocaleString('ru-RU',{maximumFractionDigits:1})} л</p></div>
+                <div className="rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 p-5"><p className="text-base md:text-lg text-slate-600 dark:text-slate-300">Средний чек</p><p className="text-3xl md:text-4xl font-black mt-1">{filtered.length ? Math.round(spend/filtered.length).toLocaleString('ru-RU') : '0'} {currencySymbol}</p></div>
+                {!hasSpend && <p className="text-base text-slate-600 dark:text-slate-300">За выбранный период нет записей. Добавьте заправку — диаграмма обновится автоматически.</p>}
+                <div className="flex items-center gap-3 text-base md:text-lg"><span className="w-4 h-4 rounded-full bg-red-600 shrink-0"/><span>Учтённые расходы по журналу</span></div>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* RECHARTS SECTION: Interactive Fuel Consumption vs Mileage Chart */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
