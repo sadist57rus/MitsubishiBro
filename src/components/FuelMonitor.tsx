@@ -160,11 +160,11 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         ...item,
         odometerKm: item.odometer,
         label: chartXMode === 'odometer' ? `${item.odometer} км` : item.date,
-        consumptionVal: item.consumption,
+        consumptionVal: preferences.fuelUnit === 'mpg' ? 235.214583 / item.consumption : item.consumption,
         litersVal: item.liters,
         costVal: item.totalCost
       }));
-  }, [logs, chartXMode]);
+  }, [logs, chartXMode, preferences.fuelUnit]);
 
   const handleSaveLog = (e: React.FormEvent) => {
     e.preventDefault();
@@ -399,30 +399,30 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                 <YAxis
                   stroke="#94a3b8"
                   fontSize={11}
-                  domain={[6, 17]}
+                  domain={preferences.fuelUnit === 'mpg' ? [14, 32] : [6, 17]}
                   tickLine={false}
-                  unit=" л"
+                  unit={preferences.fuelUnit === 'mpg' ? " mpg" : " л"}
                 />
                 <Tooltip content={<CustomChartTooltip />} />
 
                 {/* Benchmark Lines */}
                 <ReferenceLine
-                  y={7.6}
+                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 7.6 : 7.6}
                   stroke="#10b981"
                   strokeDasharray="4 4"
-                  label={{ value: '7.6L Трасса', fill: '#10b981', fontSize: 10, position: 'insideBottomRight' }}
+                  label={{ value: preferences.fuelUnit === 'mpg' ? '31 mpg трасса' : '7.6 л трасса', fill: '#10b981', fontSize: 10, position: 'insideBottomRight' }}
                 />
                 <ReferenceLine
-                  y={12.5}
+                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 12.5 : 12.5}
                   stroke="#f59e0b"
                   strokeDasharray="4 4"
-                  label={{ value: '12.5L Город', fill: '#f59e0b', fontSize: 10, position: 'insideBottomRight' }}
+                  label={{ value: preferences.fuelUnit === 'mpg' ? '18.8 mpg город' : '12.5 л город', fill: '#f59e0b', fontSize: 10, position: 'insideBottomRight' }}
                 />
                 <ReferenceLine
-                  y={15.0}
+                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 15.0 : 15.0}
                   stroke="#ef4444"
                   strokeDasharray="3 3"
-                  label={{ value: '15L Лимит', fill: '#ef4444', fontSize: 10, position: 'insideBottomRight' }}
+                  label={{ value: preferences.fuelUnit === 'mpg' ? '15.7 mpg лимит' : '15 л лимит', fill: '#ef4444', fontSize: 10, position: 'insideBottomRight' }}
                 />
 
                 <Area
