@@ -347,7 +347,7 @@ export default function JapaneseBrandsHub({
           </div>
 
           {/* Body Type Filter Buttons */}
-          <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 text-xs">
+          <div className="flex w-full min-w-0 max-w-full items-center gap-1 overflow-x-auto overscroll-x-contain touch-pan-x pb-1 sm:pb-0 text-xs">
             {['ALL', 'Кроссовер', 'Внедорожник', 'Седан', 'Универсал', 'Хэтчбек', 'Минивэн', 'Купе/Спорт', 'Пикап'].map(bType => (
               <button
                 key={bType}
@@ -365,7 +365,7 @@ export default function JapaneseBrandsHub({
         </div>
 
         {/* Model Buttons Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
+        <div className="flex w-full min-w-0 max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain touch-pan-x pb-3 scrollbar-thin">
           {filteredModels.map(model => {
             const isModelSelected = currentModel?.id === model.id;
             return (
@@ -373,7 +373,7 @@ export default function JapaneseBrandsHub({
                 key={model.id}
                 type="button"
                 onClick={() => handleModelChange(model.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer border shadow-2xs ${
+                className={`flex shrink-0 items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer border shadow-2xs ${
                   isModelSelected
                     ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-sm font-bold'
                     : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-800'
