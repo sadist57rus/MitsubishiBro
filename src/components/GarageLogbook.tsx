@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 import { LogEntry } from '../types';
 import { BookOpen, Plus, Trash2, Download, Upload, DollarSign, Wrench, Calendar, Sparkles } from 'lucide-react';
 
@@ -94,14 +97,30 @@ export default function GarageLogbook() {
     }
   };
 
-  const handleExportJson = () => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(entries, null, 2));
+  const handleExportJson = async () => {
+    const date = new Date().toISOString().slice(0, 10);
+    const fileName = `car-brother-logbook-${date}.json`;
+    const data = JSON.stringify(entries, null, 2);
+    if (Capacitor.isNativePlatform()) {
+      try {
+        const saved = await Filesystem.writeFile({ path: fileName, data, directory: Directory.Cache, encoding: Encoding.UTF8 });
+        await Share.share({ title: 'Бортжурнал Car Brother', text: 'Экспорт бортжурнала', url: saved.uri, dialogTitle: 'Поделиться бортжурналом' });
+      } catch (error) {
+        console.error('Native logbook export failed:', error);
+        alert('Не удалось подготовить файл для отправки. Попробуйте ещё раз.');
+      }
+      return;
+    }
+    // Browser/PWA fallback.
+    const blob = new Blob([data], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
     const downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `outlander1_logbook_${new Date().toISOString().split('T')[0]}.json`);
+    downloadAnchor.href = url;
+    downloadAnchor.download = fileName;
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
+    URL.revokeObjectURL(url);
   };
 
   const handleImportJson = (e: React.ChangeEvent<HTMLInputElement>) => {
