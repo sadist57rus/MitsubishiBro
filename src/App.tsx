@@ -76,6 +76,7 @@ function AppContent() {
   const headerBackHandlerRef = useRef<() => boolean>(() => false);
   const lastBackPressRef = useRef(0);
   const [backHint, setBackHint] = useState('');
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
   const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const setActiveTab = (tab: TabId) => {
@@ -224,6 +225,7 @@ function AppContent() {
         selectedDrivetrain={selectedDrivetrain}
         setSelectedDrivetrain={setSelectedDrivetrain}
         selectedBrandId={selectedBrandId}
+        onSelectBrand={setSelectedBrandId}
         onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
         onRegisterBackHandler={(handler) => { headerBackHandlerRef.current = handler; }}
@@ -264,7 +266,29 @@ function AppContent() {
       )}
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6">
+      <main
+        className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6"
+        onTouchStart={(event) => {
+          const touch = event.touches[0];
+          swipeStartRef.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
+        }}
+        onTouchEnd={(event) => {
+          const start = swipeStartRef.current;
+          swipeStartRef.current = null;
+          const touch = event.changedTouches[0];
+          if (!start || !touch) return;
+          const dx = touch.clientX - start.x;
+          const dy = touch.clientY - start.y;
+          if (dx < 90 || Math.abs(dy) > 70 || dx < Math.abs(dy) * 1.25) return;
+          if (isBrandSelectorOpen) { setIsBrandSelectorOpen(false); return; }
+          if (isApkGuideOpen) { setIsApkGuideOpen(false); return; }
+          if (headerBackHandlerRef.current()) return;
+          if (activeTabRef.current !== 'overview') {
+            if (window.history.state?.carBrotherTab) window.history.back();
+            else setActiveTab('overview');
+          }
+        }}
+      >
         <SectionErrorBoundary key={activeTab} sectionKey={activeTab}><Suspense fallback={<div className="rounded-xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">Загрузка раздела…</div>}>
         {activeTab === 'overview' && (
           <div className="space-y-5"><FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} /><OverviewDashboard
