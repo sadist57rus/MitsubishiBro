@@ -296,6 +296,9 @@ export default function TechSpecs() {
         {filteredSpecs.map((section) => {
           const isOpen = openSections[section.id] ?? false;
           const Icon = getIcon(section.iconName);
+          const verificationStatus = section.id === 'engines' ? ENGINE_TECHNICAL_RECORDS[0]?.verificationStatus ?? 'unverified' : 'unverified';
+          const sourceIds = section.id === 'engines' ? (ENGINE_TECHNICAL_RECORDS[0]?.sourceIds ?? []) : [];
+          const verificationLabel = verificationStatus === 'verified' ? 'Подтверждено' : verificationStatus === 'partially-verified' ? 'Частично подтверждено' : 'Не проверено';
 
           return (
             <div
@@ -327,6 +330,9 @@ export default function TechSpecs() {
                     <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
                       {section.subtitle}
                     </p>
+                    <span title={verificationStatus === 'verified' ? 'Подтверждено источником для указанной модификации' : verificationStatus === 'partially-verified' ? 'Подтверждены только параметры, перечисленные в связанном источнике' : 'Для этого блока нет привязанного подтверждающего источника'} className={'mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold '+(verificationStatus === 'verified' ? 'bg-green-100 text-green-800' : verificationStatus === 'partially-verified' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-900')}>
+                      {verificationLabel}
+                    </span>
                   </div>
                 </div>
 
