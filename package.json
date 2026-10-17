@@ -22,7 +22,11 @@
     "vite": "^8.3.0",
     "@capacitor/core": "^8.5.3",
     "@capacitor/android": "^8.5.3",
-    "@capacitor/screen-orientation": "^8.0.0"
+    "@capacitor/screen-orientation": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/status-bar": "^8.0.0",
+    "@capacitor/filesystem": "^8.0.0",
+    "@capacitor/share": "^8.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
