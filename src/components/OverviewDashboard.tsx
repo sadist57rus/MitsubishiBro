@@ -68,10 +68,11 @@ export default function OverviewDashboard({
     return model.engines.map(engine => ({ id: engine.code, label: engine.code && engine.code !== 'УТОЧНИТЬ ПО ТАБЛИЧКЕ' ? engine.code : engine.name }))
       .filter((item, index, all) => item.id && all.findIndex(other => other.id === item.id) === index);
   }, [model]);
-  const currentEngine = selectedEngine !== 'ALL' ? selectedEngine : vehicle.engine;
+  const activeCatalogEngine = engineOptions.find(item => item.id === vehicle.activeVehicle.engine);
+  const currentEngine = selectedEngine !== 'ALL' ? selectedEngine : (activeCatalogEngine?.id as EngineType | undefined) || vehicle.engine;
   const engineLabel = currentEngine === 'ALL'
-    ? (engineOptions.length ? 'Все доступные варианты' : 'нет данных')
-    : engineOptions.find(item => item.id === currentEngine)?.label || 'нет данных';
+    ? (vehicle.activeVehicle.engine && vehicle.activeVehicle.engine !== 'не указан' ? vehicle.activeVehicle.engine : engineOptions.length ? 'Все доступные варианты' : 'нет данных')
+    : engineOptions.find(item => item.id === currentEngine)?.label || vehicle.activeVehicle.engine || 'нет данных';
 
   const sections = SECTION_CATALOG.filter(section =>
     !searchQuery.trim() || `${section.title} ${section.desc} ${section.group}`.toLowerCase().includes(searchQuery.toLowerCase().trim())
