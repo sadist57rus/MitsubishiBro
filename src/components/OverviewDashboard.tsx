@@ -85,6 +85,8 @@ export default function OverviewDashboard({
   const dimensions = model?.dimensions;
 
   const quickSpecs = [
+    { label: 'Год выпуска', value: displayValue(vehicle.activeVehicle.year) },
+    { label: 'Пробег', value: displayValue(vehicle.activeVehicle.mileage, ' км') },
     { label: 'Кузов', value: bodyType },
     { label: 'Двигатель', value: engineLabel },
     { label: 'Колёсная база', value: displayValue(dimensions?.wheelbaseMm, ' мм') },
@@ -97,6 +99,7 @@ export default function OverviewDashboard({
         <div className="relative p-5 sm:p-7">
           <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
           <div className="relative flex flex-col gap-5">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Моя машина · активна в гараже</div>
             <div className="flex items-start gap-3 min-w-0">
               <div className="h-14 w-14 shrink-0 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-2">
                 {brand ? <BrandLogo brandId={brand.id} className="w-10 h-10" /> : <Car className="w-8 h-8 text-slate-500" />}
