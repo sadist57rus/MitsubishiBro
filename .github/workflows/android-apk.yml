@@ -1,43 +1,47 @@
-name: Build Car Brother Android APK
+name: Car Brother Android APK
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-      - 'README.md'
-      - '.github/ISSUE_TEMPLATE/**'
+    tags: ['v*']
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-android:
-    name: Build Car Brother debug APK
+  prepare:
+    name: Prepare web and native project
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      # One-time bootstrap: create and commit the lockfile before npm ci is used.
+      - name: Create npm lockfile if missing
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          fi
+
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
-          distribution: temurin
-          java-version: '21'
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
 
-      - name: Install web dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Install Capacitor Android tooling
-        run: npm install --no-save --no-audit --no-fund @capacitor/core@^8.5.3 @capacitor/cli@^8.5.3 @capacitor/android@^8.5.3
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
 
       - name: Typecheck
         run: npm run lint
@@ -48,30 +52,105 @@ jobs:
       - name: Build web assets
         run: npm run build
 
-      - name: Prepare native app icon assets
+      - name: Generate Android project once
+        if: ${{ !hashFiles('android/gradlew') }}
         run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "::error::android/ is missing. Run the workflow on main first to bootstrap and commit the native project."
+            exit 1
+          fi
           sudo apt-get update
           sudo apt-get install -y librsvg2-bin
           mkdir -p assets
           rsvg-convert -w 1024 -h 1024 public/app-icon.svg > assets/icon.png
           cp assets/icon.png assets/splash.png
-
-      - name: Generate Android project
-        run: |
           npx cap add android
-          npm install --no-save --no-audit --no-fund @capacitor/assets
+          npm install --no-save --package-lock=false --no-audit --no-fund @capacitor/assets
           npx capacitor-assets generate --android
+
+      - name: Sync native project
+        run: npx cap sync android
+
+      # The first main-branch run commits package-lock.json and android/.
+      - name: Commit bootstrapped project
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          git add package-lock.json android
+          if git diff --cached --quiet; then
+            echo "Lockfile and Android project are already committed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore(android): commit native project and npm lockfile"
+            git push origin HEAD:main
+          fi
+
+      - name: Upload prepared native project
+        uses: actions/upload-artifact@v4
+        with:
+          name: car-brother-native-project
+          path: |
+            android/
+            package-lock.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 2
+
+  debug-apk:
+    name: Build debug APK (artifact only)
+    needs: prepare
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Download prepared native project
+        uses: actions/download-artifact@v4
+        with:
+          name: car-brother-native-project
+          path: .
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle*', 'android/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
 
       - name: Sync web assets into Android
         run: npx cap sync android
 
       - name: Build debug APK
+        working-directory: android
         run: |
-          cd android
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
-      - name: Upload APK
+      - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: Car-Brother-APK-debug
@@ -79,19 +158,93 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish APK to GitHub Releases
+  release-apk:
+    name: Build and publish signed release APK
+    needs: prepare
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@v4
+
+      - name: Download prepared native project
+        uses: actions/download-artifact@v4
+        with:
+          name: car-brother-native-project
+          path: .
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle*', 'android/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      - name: Prepare release keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          test -n "$ANDROID_KEYSTORE_BASE64" || { echo "::error::Missing ANDROID_KEYSTORE_BASE64 secret"; exit 1; }
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/car-brother-release.jks"
+          test -s "$RUNNER_TEMP/car-brother-release.jks"
+
+      - name: Sync web assets into Android
+        run: npx cap sync android
+
+      - name: Build signed release APK
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          test -n "$ANDROID_KEYSTORE_PASSWORD" || { echo "::error::Missing ANDROID_KEYSTORE_PASSWORD secret"; exit 1; }
+          test -n "$ANDROID_KEY_ALIAS" || { echo "::error::Missing ANDROID_KEY_ALIAS secret"; exit 1; }
+          test -n "$ANDROID_KEY_PASSWORD" || { echo "::error::Missing ANDROID_KEY_PASSWORD secret"; exit 1; }
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/car-brother-release.jks" \
+            -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
+
+      - name: Upload signed release APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Car-Brother-APK-release-${{ github.ref_name }}
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: build-${{ github.run_number }}
-          name: Car Brother build ${{ github.run_number }}
-          body: |
-            Автоматическая сборка Car Brother для Android.
-            APK собран из коммита ${{ github.sha }}.
-          draft: true
-          prerelease: true
-          files: android/app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Publish release after APK upload
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release edit "build-${{ github.run_number }}" --draft=false --prerelease
+          tag_name: ${{ github.ref_name }}
+          name: Car Brother ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          files: android/app/build/outputs/apk/release/app-release.apk
