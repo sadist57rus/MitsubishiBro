@@ -71,6 +71,22 @@ jobs:
       - name: Sync native project
         run: npx cap sync android
 
+      - name: Configure stable package versioning
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("android/app/build.gradle")
+          text = path.read_text()
+          if "versionCode 1" in text:
+              text = text.replace("versionCode 1", 'versionCode (System.getenv("ANDROID_VERSION_CODE")?.toInteger() ?: 1)', 1)
+          elif 'System.getenv("ANDROID_VERSION_CODE")' not in text:
+              raise SystemExit("Could not locate Android versionCode in android/app/build.gradle")
+          if 'versionName "1.0"' in text:
+              text = text.replace('versionName "1.0"', '(System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
+              text = text.replace('(System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 'versionName (System.getenv("ANDROID_VERSION_NAME") ?: "1.0")', 1)
+          path.write_text(text)
+          PY
+
       # The first main-branch run commits package-lock.json and android/.
       - name: Commit bootstrapped project
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -220,6 +236,8 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_VERSION_CODE: ${{ github.run_number }}
+          ANDROID_VERSION_NAME: ${{ github.ref_name }}
         run: |
           test -n "$ANDROID_KEYSTORE_PASSWORD" || { echo "::error::Missing ANDROID_KEYSTORE_PASSWORD secret"; exit 1; }
           test -n "$ANDROID_KEY_ALIAS" || { echo "::error::Missing ANDROID_KEY_ALIAS secret"; exit 1; }
