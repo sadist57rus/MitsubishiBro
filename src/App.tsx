@@ -76,6 +76,8 @@ function AppContent() {
   const headerBackHandlerRef = useRef<() => boolean>(() => false);
   const lastBackPressRef = useRef(0);
   const [backHint, setBackHint] = useState('');
+  const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
+  const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const setActiveTab = (tab: TabId) => {
     if (tab === activeTabRef.current) return;
     activeTabRef.current = tab;
@@ -165,8 +167,6 @@ function AppContent() {
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
   const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
-  const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
-  const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
     try { return JSON.parse(localStorage.getItem('car-brother-favorite-sections') || '[]') as FavoriteSection[]; } catch { return []; }
   });
