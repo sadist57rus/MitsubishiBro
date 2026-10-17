@@ -47,7 +47,9 @@ export default function GarageLogbook() {
   const { vehicleId, vehicles, activeVehicle } = useVehicle();
   const activeStorageKey = vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-logbook-' + vehicleId;
   const { preferences } = usePreferences();
-  const currencySymbols: Record<string,string> = { RUB: '₽', USD: ' = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []));
+  const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
+  const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
+  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []));
 
   const [isAdding, setIsAdding] = useState(false);
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
