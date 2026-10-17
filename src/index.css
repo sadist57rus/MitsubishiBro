@@ -73,3 +73,45 @@ html[data-ui-mode="wide"] main input {
 html[data-ui-mode="phone"] main {
   max-width: 80rem;
 }
+
+
+/* Mobile-first overflow guard: no sideways page scrolling in phone profile. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { width: 100%; max-width: 100%; min-width: 0; }
+html, body { overflow-x: clip; }
+img, svg, video, canvas { max-width: 100%; }
+button, input, select, textarea { min-width: 0; }
+html[data-ui-mode="phone"] main { width: 100%; min-width: 0; overflow-wrap: anywhere; }
+html[data-ui-mode="phone"] main .grid { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+html[data-ui-mode="phone"] main [class*="grid-cols-"] { grid-template-columns: minmax(0, 1fr); }
+html[data-ui-mode="phone"] main [class*="w-screen"] { max-width: 100%; }
+html[data-ui-mode="phone"] header .max-w-7xl { width: 100%; min-width: 0; }
+@media (max-width: 640px) {
+  header.sticky > .max-w-7xl > div {
+    height: auto;
+    min-height: 4rem;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  header.sticky > .max-w-7xl > div > div:first-child {
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+  header.sticky > .max-w-7xl > div > div:last-child {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  /* The mode switch duplicates the first-run choice and crowds phone controls. */
+  header [title="Профиль интерфейса"] { display: none !important; }
+  header [title*="как скачать или собрать APK"] { display: none !important; }
+  header select { max-width: 8.5rem; }
+  header .absolute.top-full { max-width: calc(100vw - 1rem); }
+  html[data-ui-mode="phone"] main .flex { min-width: 0; }
+  html[data-ui-mode="phone"] main .overflow-x-auto { max-width: 100%; }
+}
