@@ -11,12 +11,17 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const THEME_STORAGE_KEY = 'outlander1_theme_v2';
+const THEME_STORAGE_KEY = 'car-brother-theme';
+const LEGACY_THEME_STORAGE_KEY = 'outlander1_theme_v2';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     try {
-      const saved = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode;
+      const saved = (localStorage.getItem(THEME_STORAGE_KEY) ?? localStorage.getItem(LEGACY_THEME_STORAGE_KEY)) as ThemeMode;
+      if (saved && (saved === 'dark' || saved === 'light' || saved === 'system')) {
+        localStorage.setItem(THEME_STORAGE_KEY, saved);
+        localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
+      }
       if (saved && (saved === 'dark' || saved === 'light' || saved === 'system')) {
         return saved;
       }
