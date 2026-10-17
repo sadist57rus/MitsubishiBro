@@ -1,4 +1,5 @@
-export type EngineType = '4G63' | '4G64' | '4G69' | '4G63T' | 'ALL';
+/** Engine codes vary by manufacturer; do not constrain the shared selector to Mitsubishi codes. */
+export type EngineType = string;
 
 export type DrivetrainType = '4WD' | 'FWD' | 'ALL';
 
