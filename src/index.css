@@ -19,8 +19,10 @@
   --spacing-ui-3: .75rem;
   --spacing-ui-4: 1rem;
   --spacing-ui-6: 1.5rem;
+  --ui-scale: 1;
+  --tap-size: 3.5rem;
 }
-:root { color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; }
+:root { color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; --ui-scale:1; --tap-size:2.75rem; }
 .dark { color-scheme: dark; --ui-surface:#0f172a; --ui-surface-muted:#020617; --ui-content:#f8fafc; --ui-content-muted:#cbd5e1; --ui-border:#475569; }
 .ui-card { background:var(--ui-surface); color:var(--ui-content); border:1px solid var(--ui-border); border-radius:var(--radius-card); padding:1rem; }
 .ui-card-interactive { transition:border-color .15s,box-shadow .15s; }
@@ -66,14 +68,18 @@
 .ui-tab { min-height:44px; padding:.5rem 1rem; border-bottom:2px solid transparent; color:var(--ui-content-muted); font-size:.875rem; font-weight:650; }
 .ui-tab.is-active { border-color:#dc2626; color:#b91c1c; }
 .dark .ui-tab.is-active { color:#fca5a5; }
-html[data-ui-mode="wide"] .ui-button, html[data-ui-mode="wide"] .ui-tab { min-height:56px; font-size:1rem; }
+html[data-ui-mode="wide"] .ui-button, html[data-ui-mode="wide"] .ui-tab { min-height:var(--tap-size); font-size:1rem; }
 html[data-ui-mode="wide"] main { font-size:1rem; }
 
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  html[data-ui-mode="phone"] { --ui-scale: .9375; --tap-size: 2.75rem; }
+  html[data-ui-mode="wide"] { --ui-scale: 1; --tap-size: 3.5rem; }
+
   body {
+    font-size: calc(1rem * var(--ui-scale, 1));
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -138,7 +144,7 @@ html[data-ui-mode="wide"] main .grid {
 html[data-ui-mode="wide"] main button,
 html[data-ui-mode="wide"] main select,
 html[data-ui-mode="wide"] main input {
-  min-height: 2.75rem;
+  min-height: var(--tap-size);
 }
 html[data-ui-mode="phone"] main {
   max-width: 80rem;
@@ -152,8 +158,6 @@ html, body { overflow-x: clip; }
 img, svg, video, canvas { max-width: 100%; }
 button, input, select, textarea { min-width: 0; }
 html[data-ui-mode="phone"] main { width: 100%; min-width: 0; overflow-wrap: anywhere; }
-html[data-ui-mode="phone"] main .grid { min-width: 0; grid-template-columns: minmax(0, 1fr); }
-html[data-ui-mode="phone"] main [class*="grid-cols-"] { grid-template-columns: minmax(0, 1fr); }
 html[data-ui-mode="phone"] main [class*="w-screen"] { max-width: 100%; }
 html[data-ui-mode="phone"] header .max-w-7xl { width: 100%; min-width: 0; }
 @media (max-width: 640px) {
