@@ -288,27 +288,27 @@ function AppContent() {
       {/* Breadcrumb Navigation when inside a sub-module */}
       {activeTab !== 'overview' && (
         <div className="bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 backdrop-blur-xs transition-colors">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between text-xs">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2 text-sm">
             <div className="flex items-center gap-2 min-w-0">
               <button
                 onClick={() => setActiveTab('overview')}
                 className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition font-medium shrink-0"
-                title="Вернуться на главную"
+                title="Вернуться на предыдущий экран" aria-label="Назад"
               >
-                <ChevronLeft className="w-3.5 h-3.5 text-slate-500" />
-                <span>На главную</span>
+                <ChevronLeft className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+                <span>Назад</span>
               </button>
 
               <span className="text-slate-300 dark:text-slate-700">/</span>
 
               <div className="flex items-center gap-1.5 min-w-0 font-bold text-slate-900 dark:text-white truncate">
-                <TabIcon className="w-4 h-4 text-red-600 shrink-0" />
+                <TabIcon className="w-5 h-5 text-red-600 shrink-0" />
                 <span className="truncate">{currentTabInfo.title}</span>
               </div>
             </div>
 
-            <button onClick={() => toggleFavorite(activeTab)} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 font-bold transition ${favoriteSections.some(item => item.id === activeTab) ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200' : 'bg-slate-100 text-slate-700 hover:bg-amber-50 dark:bg-slate-800 dark:text-slate-300'}`}><Star className={`w-4 h-4 ${favoriteSections.some(item => item.id === activeTab) ? 'fill-current' : ''}`} />{favoriteSections.some(item => item.id === activeTab) ? 'В избранном' : 'Добавить в избранное'}</button>
-            <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+            <button onClick={() => toggleFavorite(activeTab)} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 font-bold transition ${favoriteSections.some(item => item.id === activeTab) ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200' : 'bg-slate-100 text-slate-700 hover:bg-amber-50 dark:bg-slate-800 dark:text-slate-300'}`}><Star className={`w-4 h-4 ${favoriteSections.some(item => item.id === activeTab) ? 'fill-current' : ''}`} />{favoriteSections.some(item => item.id === activeTab) ? 'В избранном' : 'В избранное'}</button>
+            <div className="hidden lg:flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-mono">
               <span>ДВС: <strong className="text-red-600 dark:text-red-400">{selectedEngine}</strong></span>
               <span>·</span>
               <span>Привод: <strong className="text-slate-800 dark:text-slate-200">{selectedDrivetrain}</strong></span>
