@@ -1,18 +1,26 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export type ThemeMode = 'light' | 'dark' | 'system' | 'time';
+export type ColorPalette = 'black-yellow' | 'white-red' | 'black-orange' | 'midnight-blue' | 'forest-green';
+export const COLOR_PALETTES: { id: ColorPalette; name: string; description: string; colors: [string, string, string] }[] = [
+  { id: 'black-yellow', name: 'Чёрный / жёлтый', description: 'Контрастный спорт', colors: ['#111111', '#facc15', '#ffffff'] },
+  { id: 'white-red', name: 'Белый / красный', description: 'Классика Car Brother', colors: ['#ffffff', '#dc2626', '#111827'] },
+  { id: 'black-orange', name: 'Чёрный / оранжевый', description: 'Техно', colors: ['#111111', '#f97316', '#f8fafc'] },
+  { id: 'midnight-blue', name: 'Ночной синий', description: 'Спокойный тёмный', colors: ['#0f172a', '#38bdf8', '#f8fafc'] },
+  { id: 'forest-green', name: 'Графит / зелёный', description: 'Автомобильный', colors: ['#171717', '#22c55e', '#f5f5f4'] },
+];
 
 interface ThemeContextType {
   theme: ThemeMode;
   resolvedTheme: 'light' | 'dark';
   setTheme: (theme: ThemeMode) => void;
-  toggleTheme: () => void;
+  toggleTheme: () => void;\n  palette: ColorPalette;\n  setPalette: (palette: ColorPalette) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const THEME_STORAGE_KEY = 'car-brother-theme';
-const LEGACY_THEME_STORAGE_KEY = 'outlander1_theme_v2';
+const LEGACY_THEME_STORAGE_KEY = 'outlander1_theme_v2';\nconst PALETTE_STORAGE_KEY = 'car-brother-color-palette';\nconst validPalettes: ColorPalette[] = ['black-yellow', 'white-red', 'black-orange', 'midnight-blue', 'forest-green'];
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
@@ -31,6 +39,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return 'light'; // Default to clean light daytime mode as requested
   });
 
+  const [palette, setPaletteState] = useState<ColorPalette>(() => {
+    try {
+      const saved = localStorage.getItem(PALETTE_STORAGE_KEY) as ColorPalette | null;
+      return saved && validPalettes.includes(saved) ? saved : 'white-red';
+    } catch { return 'white-red'; }
+  });
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -79,18 +93,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       const timer = window.setInterval(updateResolved, 60_000);
       return () => window.clearInterval(timer);
     }
-  }, [theme]);
+  }, [theme, palette]);
 
   const setTheme = (newTheme: ThemeMode) => {
     setThemeState(newTheme);
   };
+
+  const setPalette = (newPalette: ColorPalette) => setPaletteState(newPalette);
 
   const toggleTheme = () => {
     setThemeState(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme, palette, setPalette }}>
       {children}
     </ThemeContext.Provider>
   );
