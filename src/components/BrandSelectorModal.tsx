@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { JAPANESE_BRANDS, JapaneseBrand } from '../data/japaneseBrandsData';
 import { BrandLogo } from './BrandLogos';
 import { X, Search, Check, ChevronRight, Award, Sparkles } from 'lucide-react';
@@ -19,6 +19,26 @@ export default function BrandSelectorModal({
   onSelectModel
 }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const dialog = dialogRef.current;
+    const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), [href], [tabindex]:not([tabindex="-1"])') || []);
+    focusable()[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); onClose(); return; }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      if (!items.length) { event.preventDefault(); dialog?.focus(); return; }
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.removeEventListener('keydown', onKeyDown); previousFocusRef.current?.focus(); };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -41,8 +61,13 @@ export default function BrandSelectorModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="brand-selector-title"
+        tabIndex={-1}
         className="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
@@ -53,7 +78,7 @@ export default function BrandSelectorModal({
               <Award className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+              <h2 id="brand-selector-title" className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                 Выбор японского производителя
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -64,7 +89,8 @@ export default function BrandSelectorModal({
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition"
+            aria-label="Закрыть выбор марки"
+            className="min-h-11 min-w-11 p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -79,7 +105,8 @@ export default function BrandSelectorModal({
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Поиск по марке (Mitsubishi, Toyota, Nissan, Suzuki...) или модели..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-red-500"
+              aria-label="Поиск марки или модели"
+              className="w-full min-h-11 pl-9 pr-4 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-red-500"
             />
           </div>
         </div>
@@ -93,7 +120,11 @@ export default function BrandSelectorModal({
                 <div
                   key={brand.id}
                   onClick={() => handleChooseBrand(brand)}
-                  className={`group flex min-w-0 flex-col items-center gap-2 p-2 sm:p-3 rounded-xl border transition cursor-pointer text-center ${
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); handleChooseBrand(brand); } }}
+                  aria-label={`Выбрать ${brand.russianName || brand.name}`}
+                  className={`group flex min-w-0 min-h-11 flex-col items-center gap-2 p-2 sm:p-3 rounded-xl border transition cursor-pointer text-center ${
                     isSelected
                       ? 'bg-red-50 dark:bg-red-950/40 border-red-500 ring-2 ring-red-500/20'
                       : 'bg-white dark:bg-slate-850 hover:bg-slate-50 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-800 hover:border-red-300'
@@ -117,7 +148,7 @@ export default function BrandSelectorModal({
                           {brand.name}
                         </span>
                         {brand.id === 'mitsubishi' && (
-                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500 text-black font-bold">
+                          <span className="text-xs px-1.5 py-0.2 rounded bg-amber-500 text-black font-bold">
                             База
                           </span>
                         )}
@@ -127,7 +158,7 @@ export default function BrandSelectorModal({
                       )}
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-1 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    <div className="flex flex-wrap items-center justify-center gap-1 text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
                       <span>{brand.russianName}</span>
                       <span>·</span>
                       <span>с {brand.founded} г.</span>
