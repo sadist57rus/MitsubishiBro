@@ -42,7 +42,7 @@ export function VehicleProvider({children}:{children:ReactNode}) {
  const activeVehicle=garage.vehicles.find(v=>v.id===garage.activeVehicleId)||garage.vehicles[0]||DEFAULT_VEHICLE;
  const value=useMemo<VehicleContextValue>(()=>({
   vehicleId:activeVehicle.id,activeVehicle,vehicles:garage.vehicles,brandId:activeVehicle.brandId,modelId:activeVehicle.modelId,
-  engine:(['4G63','4G64','4G69','4G63T'].includes(activeVehicle.engine)?activeVehicle.engine:'ALL') as EngineType,drivetrain:activeVehicle.drivetrain,
+  engine:activeVehicle.engine as EngineType,drivetrain:activeVehicle.drivetrain,
   setBrandId:(brandId)=>{const brand=JAPANESE_BRANDS.find(b=>b.id===brandId);if(!brand)return;setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId,modelId:brand.models[0].id,engine:brand.models[0].engines[0]?.code || v.engine}:v)}));},
   setModelId:(modelId)=>{const brand=JAPANESE_BRANDS.find(b=>b.models.some(m=>m.id===modelId));if(brand)setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,brandId:brand.id,modelId,engine:brand.models.find(m=>m.id===modelId)?.engines[0]?.code || v.engine}:v)}));},
   setEngine:(engine)=>setGarage(g=>({...g,vehicles:g.vehicles.map(v=>v.id===g.activeVehicleId?{...v,engine}:v)})),
