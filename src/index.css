@@ -20,9 +20,10 @@
   --spacing-ui-4: 1rem;
   --spacing-ui-6: 1.5rem;
   --ui-scale: 1;
-  --tap-size: 3.5rem;
+  --tap-size: 2.75rem;
+  --ui-content-width: 100%;
 }
-:root { color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; --ui-scale:1; --tap-size:2.75rem; }
+:root { color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; }
 .dark { color-scheme: dark; --ui-surface:#0f172a; --ui-surface-muted:#020617; --ui-content:#f8fafc; --ui-content-muted:#cbd5e1; --ui-border:#475569; }
 .ui-card { background:var(--ui-surface); color:var(--ui-content); border:1px solid var(--ui-border); border-radius:var(--radius-card); padding:1rem; }
 .ui-card-interactive { transition:border-color .15s,box-shadow .15s; }
@@ -75,8 +76,18 @@ html[data-ui-mode="wide"] main { font-size:1rem; }
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  html[data-ui-mode="phone"] { --ui-scale: .9375; --tap-size: 2.75rem; }
-  html[data-ui-mode="wide"] { --ui-scale: 1; --tap-size: 3.5rem; }
+  :root,
+  html[data-ui-mode="phone"] {
+    --ui-scale: .9375;
+    --tap-size: 2.75rem;
+    --ui-content-width: 100%;
+  }
+
+  html[data-ui-mode="wide"] {
+    --ui-scale: 1;
+    --tap-size: 3.5rem;
+    --ui-content-width: 96rem;
+  }
 
   body {
     font-size: calc(1rem * var(--ui-scale, 1));
@@ -123,7 +134,7 @@ header.sticky {
 
 /* Car Brother: wide-layout profile for tablets and landscape head units. */
 html[data-ui-mode="wide"] .max-w-7xl {
-  max-width: 96rem;
+  max-width: var(--ui-content-width, 96rem);
 }
 html[data-ui-mode="wide"] main {
   padding-left: 1.5rem;
@@ -147,7 +158,7 @@ html[data-ui-mode="wide"] main input {
   min-height: var(--tap-size);
 }
 html[data-ui-mode="phone"] main {
-  max-width: 80rem;
+  max-width: var(--ui-content-width, 100%);
 }
 
 
