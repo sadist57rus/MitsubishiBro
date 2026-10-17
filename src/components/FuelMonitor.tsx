@@ -36,6 +36,7 @@ import {
 
 export interface FuelLog {
   id: string;
+  vehicleId?: string;
   date: string;
   odometer: number;
   distance: number;
@@ -74,7 +75,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       { id: '4', date: '2026-03-24', odometer: 244790, distance: 430, liters: 48.0, pricePerLiter: 62.5, totalCost: 3000, consumption: 11.16, fuelType: 'АИ-95', station: 'Лукойл' },
       { id: '5', date: '2026-04-04', odometer: 245280, distance: 490, liters: 52.8, pricePerLiter: 63.0, totalCost: 3326, consumption: 10.78, fuelType: 'АИ-95', station: 'Татнефть' },
       { id: '6', date: '2026-04-14', odometer: 245660, distance: 380, liters: 51.5, pricePerLiter: 63.2, totalCost: 3254, consumption: 13.55, fuelType: 'АИ-95', station: 'Газпромнефть' }
-    ] : []));
+    ] : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId })));
 
   const [isAddingLog, setIsAddingLog] = useState(false);
   const [newOdometer, setNewOdometer] = useState<string>('246100');
@@ -167,10 +168,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
   const handleSaveLog = (e: React.FormEvent) => {
     e.preventDefault();
-    const distNum = parseFloat(newDistance);
-    const litNum = parseFloat(newLiters);
-    const priceNum = parseFloat(newPrice);
-    const odoNum = parseFloat(newOdometer) || 0;
+    const distNum = parseDecimalInput(newDistance) ?? NaN;
+    const litNum = parseDecimalInput(newLiters) ?? NaN;
+    const priceNum = parseDecimalInput(newPrice) ?? NaN;
+    const odoNum = parseDecimalInput(newOdometer) ?? 0;
 
     if (distNum > 0 && litNum > 0) {
       const consumption = (litNum / distNum) * 100;
@@ -178,6 +179,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
       const newEntry: FuelLog = {
         id: Date.now().toString(),
+        vehicleId,
         date: new Date().toISOString().split('T')[0],
         odometer: odoNum,
         distance: distNum,
