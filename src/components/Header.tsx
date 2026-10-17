@@ -471,7 +471,7 @@ export default function Header({
                                     <span>Логотипы всех марок:</span>
                                     <span className="text-red-600 dark:text-red-400 font-bold">{currentBrand.russianName}</span>
                                   </div>
-                                  <div className="grid grid-cols-6 sm:grid-cols-11 gap-1">
+                                  <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-11 gap-1">
                                     {JAPANESE_BRANDS.map(b => (
                                       <button
                                         key={b.id}
