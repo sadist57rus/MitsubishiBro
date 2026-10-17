@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { parseDecimalInput } from '../lib/storage';
 import { FACTORY_SPECS, ALTERNATIVE_TIRES, OEM_WHEELS_GALLERY, calculateTire } from '../data/wheelsData';
 import { ArrowRight, CheckCircle2, AlertTriangle, ShieldAlert, Sparkles, Disc, Compass, Gauge, Copy, Check } from 'lucide-react';
 
@@ -230,7 +231,7 @@ export default function TireWheelCalculator() {
               <div>
                 <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={oldEt}
                   onChange={(e) => setOldEt(Number(e.target.value))}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
@@ -316,7 +317,7 @@ export default function TireWheelCalculator() {
               <div>
                 <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
-                  type="number"
+                  type="number" inputMode="decimal"
                   value={newEt}
                   onChange={(e) => setNewEt(Number(e.target.value))}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
