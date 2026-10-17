@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { Star, Monitor, RotateCcw } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
@@ -81,7 +82,7 @@ function AppContent() {
   const toggleFavorite = (tab: TabId) => setFavoriteSections(previous => previous.some(item => item.id === tab) ? previous.filter(item => item.id !== tab) : [...previous, { id: tab, title: tabTitles[tab]?.title || tab, savedAt: Date.now() }]);
   const removeFavorite = (tab: TabId) => setFavoriteSections(previous => previous.filter(item => item.id !== tab));
 
-  const tabTitles: Record<TabId, { title: string; icon: any }> = {
+  const tabTitles: Record<TabId, { title: string; icon: LucideIcon }> = {
     overview: { title: 'Главная (Обзор)', icon: Home },
     brands: { title: 'Японские автопроизводители и модели', icon: Award },
     fuel: { title: 'Мониторинг топлива и заправок', icon: Fuel },
