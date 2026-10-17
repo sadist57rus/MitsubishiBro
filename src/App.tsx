@@ -164,7 +164,7 @@ function AppContent() {
     };
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
-  const { engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
+  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
   const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
@@ -291,7 +291,7 @@ function AppContent() {
         )}
 
         {activeTab === 'fuel' && (
-          <FuelMonitor selectedEngine={selectedEngine} />
+          <FuelMonitor key={activeVehicleId} selectedEngine={selectedEngine} />
         )}
 
         {activeTab === 'specs' && (
@@ -335,7 +335,7 @@ function AppContent() {
         )}
 
         {activeTab === 'logbook' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook /></VehicleDataGate>
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook key={activeVehicleId} /></VehicleDataGate>
         )}
         </Suspense></SectionErrorBoundary>
       </main>
