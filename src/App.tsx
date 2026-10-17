@@ -32,6 +32,7 @@ import ApkGuideModal from './components/ApkGuideModal';
 const JapaneseBrandsHub = lazy(async () => { await import('./data/japaneseBrandsData'); return import('./components/JapaneseBrandsHub'); });
 import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
+import { JAPANESE_BRANDS } from './data/japaneseBrandsData';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
 import { EngineType, DrivetrainType } from './types';
@@ -167,7 +168,14 @@ function AppContent() {
     };
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
-  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
+  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, addVehicle } = useVehicle();
+  const [setupBrandId, setSetupBrandId] = useState('nissan');
+  const setupBrand = JAPANESE_BRANDS.find(brand => brand.id === setupBrandId) || JAPANESE_BRANDS[0];
+  const [setupModelId, setSetupModelId] = useState(setupBrand.models[0]?.id || '');
+  const [setupYear, setSetupYear] = useState(new Date().getFullYear() - 5);
+  const [setupEngine, setSetupEngine] = useState(setupBrand.models[0]?.engines[0]?.code || '');
+  const [setupMileage, setSetupMileage] = useState('0');
+  useEffect(() => { const model=setupBrand.models.find(item=>item.id===setupModelId)||setupBrand.models[0]; if(model){setSetupModelId(model.id);setSetupEngine(model.engines[0]?.code||'');} }, [setupBrandId]);
   const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
     try { return JSON.parse(localStorage.getItem('car-brother-favorite-sections') || '[]') as FavoriteSection[]; } catch { return []; }
   });
@@ -209,6 +217,26 @@ function AppContent() {
             <button type="button" onClick={() => void chooseOrientation('phone')} className="rounded-2xl border border-amber-400/50 bg-amber-400/10 p-5 text-left transition hover:bg-amber-400/20"><Smartphone className="h-8 w-8 text-amber-300"/><span className="mt-3 block text-lg font-bold">Телефон</span><span className="mt-1 block text-sm text-slate-300">Портретная ориентация</span><span className="mt-3 block text-xs text-amber-300">Вертикально · по умолчанию</span></button>
             <button type="button" onClick={() => void chooseOrientation('wide')} className="rounded-2xl border border-slate-600 bg-white/5 p-5 text-left transition hover:border-amber-400/50 hover:bg-amber-400/10"><Monitor className="h-8 w-8 text-amber-300"/><span className="mt-3 block text-lg font-bold">Автомагнитола / планшет</span><span className="mt-1 block text-sm text-slate-300">Альбомная ориентация</span><span className="mt-3 block text-xs text-amber-300">Горизонтально</span></button>
           </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (orientationChosen && vehicles.length === 0) {
+    const model = setupBrand.models.find(item => item.id === setupModelId) || setupBrand.models[0];
+    return (
+      <main className={"car-vehicle-setup min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-white flex items-center justify-center p-4 " + (uiMode === 'wide' ? 'car-vehicle-setup-wide' : '')}>
+        <section className="w-full max-w-4xl rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 md:p-10 shadow-2xl">
+          <div className="flex items-center gap-4 mb-6"><div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-600 text-white"><Car className="h-9 w-9" /></div><div><p className="text-sm font-bold uppercase tracking-widest text-red-600">CAR BROTHER</p><h1 className="text-3xl md:text-4xl font-black">Добавим вашу машину</h1></div></div>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8">Выберите автомобиль — стартовый экран, характеристики и журнал будут привязаны к нему. Никакой марки по умолчанию.</p>
+          <div className="grid gap-5 md:grid-cols-2">
+            <label className="block text-base md:text-lg font-bold">Марка<select className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-lg md:text-xl" value={setupBrandId} onChange={event => { const id=event.target.value; const brand=JAPANESE_BRANDS.find(item=>item.id===id)!; setSetupBrandId(id); setSetupModelId(brand.models[0]?.id||''); setSetupEngine(brand.models[0]?.engines[0]?.code||''); }}>{JAPANESE_BRANDS.map(brand=><option key={brand.id} value={brand.id}>{brand.russianName || brand.name}</option>)}</select></label>
+            <label className="block text-base md:text-lg font-bold">Модель<select className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-lg md:text-xl" value={setupModelId} onChange={event=>{const id=event.target.value;const item=setupBrand.models.find(value=>value.id===id);setSetupModelId(id);setSetupEngine(item?.engines[0]?.code||'');}}>{setupBrand.models.map(item=><option key={item.id} value={item.id}>{item.name} ({item.years})</option>)}</select></label>
+            <label className="block text-base md:text-lg font-bold">Год выпуска<input className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-xl" type="number" min="1950" max={new Date().getFullYear()+1} value={setupYear} onChange={event=>setSetupYear(Number(event.target.value))}/></label>
+            <label className="block text-base md:text-lg font-bold">Двигатель<select className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-lg md:text-xl" value={setupEngine} onChange={event=>setSetupEngine(event.target.value)}><option value="">Пока не знаю</option>{(model?.engines||[]).map(engine=><option key={engine.code} value={engine.code}>{engine.displacement||''} {engine.code} {engine.powerHp ? '(' + engine.powerHp + ' л.с.)' : ''}</option>)}</select></label>
+            <label className="block text-base md:text-lg font-bold">Текущий пробег, км<input className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-xl" type="number" min="0" inputMode="numeric" value={setupMileage} onChange={event=>setSetupMileage(event.target.value)}/></label>
+          </div>
+          <button className="mt-8 min-h-16 w-full rounded-2xl bg-red-600 px-6 text-xl md:text-2xl font-black text-white shadow-lg hover:bg-red-700" onClick={()=>addVehicle({brandId:setupBrand.id,modelId:model.id,year:setupYear,mileage:Math.max(0,Number(setupMileage)||0),engine:setupEngine||'не указан',drivetrain:'ALL',currency:'RUB'})}>Сохранить автомобиль и открыть приложение</button>
         </section>
       </main>
     );
