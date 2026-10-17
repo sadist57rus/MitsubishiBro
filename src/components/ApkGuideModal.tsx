@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Smartphone,
   Github,
@@ -21,6 +21,26 @@ interface Props {
 export default function ApkGuideModal({ isOpen, onClose }: Props) {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'actions' | 'capacitor' | 'pwa'>('actions');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const dialog = dialogRef.current;
+    const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])') || []);
+    focusable()[0]?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); onClose(); return; }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      if (!items.length) { event.preventDefault(); dialog?.focus(); return; }
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.removeEventListener('keydown', onKeyDown); previousFocusRef.current?.focus(); };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -103,8 +123,8 @@ npx cap open android
 # В Android Studio: Build -> Build Bundle(s) / APK(s) -> Build APK(s)`;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="apk-guide-title" tabIndex={-1} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2.5">
@@ -112,7 +132,7 @@ npx cap open android
               <Smartphone className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">
+              <h2 id="apk-guide-title" className="text-base font-bold text-slate-900 dark:text-white">
                 Как получить и собрать APK для Android на GitHub
               </h2>
               <p className="text-xs text-slate-500">
@@ -122,7 +142,8 @@ npx cap open android
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-600 text-sm font-bold transition"
+            aria-label="Закрыть инструкцию APK"
+            className="min-h-11 min-w-11 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-slate-900 text-sm font-bold transition"
           >
             ✕
           </button>
@@ -169,7 +190,7 @@ npx cap open android
               <span className="font-bold text-slate-900 dark:text-white block">
                 Самый простой способ: бесплатная сборка в облаке GitHub
               </span>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-xs">
                 Вам не нужно устанавливать тяжелый Android Studio и SDK на свой компьютер. Создайте файл workflow в вашем репозитории на GitHub, и робот GitHub сам скомпилирует готовый <strong>.apk</strong> при каждом пуше!
               </p>
             </div>
@@ -189,7 +210,7 @@ npx cap open android
 
             {/* Code Block with Copy */}
             <div className="relative">
-              <div className="flex justify-between items-center bg-slate-800 text-slate-300 px-3 py-1.5 rounded-t-lg text-[10px] font-mono">
+              <div className="flex justify-between items-center bg-slate-800 text-slate-300 px-3 py-1.5 rounded-t-lg text-xs font-mono">
                 <span>.github/workflows/build-apk.yml</span>
                 <button
                   onClick={() => handleCopy('workflow', githubWorkflowYaml)}
