@@ -251,7 +251,7 @@ export default function Header({
                   setIsBrandDropdownOpen(!isBrandDropdownOpen);
                   setIsDropdownOpen(false);
                 }}
-                className={`flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl border transition cursor-pointer group shadow-2xs ${
+                className={`flex items-center gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-xl border transition cursor-pointer group shadow-2xs ${
                   isBrandDropdownOpen
                     ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
                     : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
@@ -259,7 +259,7 @@ export default function Header({
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
                 aria-expanded={isBrandDropdownOpen}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center p-1.5 shadow-2xs group-hover:scale-105 transition shrink-0 ${
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center p-2 shadow-2xs group-hover:scale-105 transition shrink-0 ${
                   isBrandDropdownOpen ? 'bg-white text-slate-900' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'
                 }`}>
                   <BrandLogo brandId={currentBrand.id} className="w-full h-full" useBrandColor={true} />
@@ -274,7 +274,7 @@ export default function Header({
                     </span>
                     <ChevronDown className={`w-3 h-3 transition-transform ${isBrandDropdownOpen ? 'rotate-180 text-white' : 'text-slate-400 group-hover:text-red-600'}`} />
                   </div>
-                  <span className={`text-[10px] block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
+                  <span className={`text-xs block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
                     Все бренды
                   </span>
                 </div>
@@ -283,9 +283,9 @@ export default function Header({
               {/* BRAND DROPDOWN POPUP MENU - DISTINCT AUTHENTIC LOGO FOR EVERY BRAND */}
               {isBrandDropdownOpen && (
                 <div className="absolute left-0 top-full mt-2 w-[310px] sm:w-[350px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in duration-100 max-h-[85vh] overflow-y-auto">
-                  <div className="px-2.5 py-1.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <div className="px-2.5 py-1.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     <span>Меню брендов ({JAPANESE_BRANDS.length})</span>
-                    <span className="text-[10px] text-red-600 dark:text-red-400 font-bold">Оригинальные логотипы</span>
+                    <span className="text-xs text-red-600 dark:text-red-400 font-bold">Оригинальные логотипы</span>
                   </div>
 
                   <div className="py-1.5 space-y-1">
@@ -308,7 +308,7 @@ export default function Header({
                         >
                           <div className="flex items-center gap-2.5 min-w-0">
                             {/* Every brand has its distinct authentic logo in the menu */}
-                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center p-1.5 shrink-0 transition-transform group-hover:scale-105 border ${
+                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform group-hover:scale-105 border ${
                               isSelected
                                 ? 'bg-white dark:bg-slate-900 border-red-300 dark:border-red-800 shadow-2xs'
                                 : 'bg-white dark:bg-slate-850 border-slate-200 dark:border-slate-700 group-hover:border-red-300'
@@ -318,19 +318,19 @@ export default function Header({
 
                             <div className="min-w-0">
                               <div className="flex items-center gap-1.5">
-                                <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
+                                <span className="text-sm font-bold text-slate-900 dark:text-white truncate">
                                   {brand.russianName}
                                 </span>
-                                <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                                <span className="text-xs text-slate-500 dark:text-slate-400 truncate">
                                   ({brand.name.split(' ')[0]})
                                 </span>
                                 {brand.id === 'mitsubishi' && (
-                                  <span className="text-[9px] px-1 py-0.2 rounded bg-amber-500 text-black font-bold">
+                                  <span className="text-xs px-1 py-0.2 rounded bg-amber-500 text-black font-bold">
                                     База
                                   </span>
                                 )}
                               </div>
-                              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block">
+                              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono block">
                                 {brand.models.length} моделей · с {brand.founded} г.
                               </span>
                             </div>
@@ -353,7 +353,7 @@ export default function Header({
                         setIsBrandDropdownOpen(false);
                         if (onOpenBrandSelector) onOpenBrandSelector();
                       }}
-                      className="w-full py-1.5 text-center text-[11px] font-bold text-red-600 dark:text-red-400 hover:underline"
+                      className="w-full py-1.5 text-center text-xs font-bold text-red-600 dark:text-red-400 hover:underline"
                     >
                       Открыть окно расширенного поиска по всем моделям →
                     </button>
@@ -381,7 +381,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition border shadow-xs ${
+                className={`flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-sm font-bold transition border shadow-xs ${
                   isDropdownOpen
                     ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
                     : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700'
@@ -406,9 +406,9 @@ export default function Header({
               {/* DROPDOWN POPUP MENU - Generous width, full text visibility, NO TRUNCATION! */}
               {isDropdownOpen && (
                 <div className="absolute left-0 top-full mt-2 w-[310px] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
-                  <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>Все разделы приложения ({sections.length})</span>
-                    <span className="text-[10px] font-mono text-slate-500">Нажмите для перехода</span>
+                    <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
                   </div>
 
                   <div className="py-1 space-y-1">
@@ -441,23 +441,23 @@ export default function Header({
 
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1.5 flex-wrap">
-                                <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm leading-snug">
+                                <span className="font-bold text-slate-900 dark:text-white text-sm leading-snug">
                                   {sec.title}
                                 </span>
                                 {sec.badge && (
-                                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                                  <span className="text-xs font-mono px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
                                     {sec.badge}
                                   </span>
                                 )}
                               </div>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-normal mt-0.5 leading-snug">
+                              <p className="text-xs text-slate-500 dark:text-slate-400 font-normal mt-0.5 leading-snug">
                                 {sec.description}
                               </p>
 
                               {/* Direct in-menu brand logos row for quick switching */}
                               {sec.id === 'brands' && (
                                 <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-800">
-                                  <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1 flex items-center justify-between">
+                                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 flex items-center justify-between">
                                     <span>Логотипы всех марок:</span>
                                     <span className="text-red-600 dark:text-red-400 font-bold">{currentBrand.russianName}</span>
                                   </div>
@@ -472,7 +472,7 @@ export default function Header({
                                           setActiveTab('brands');
                                           setIsDropdownOpen(false);
                                         }}
-                                        className={`p-1.5 rounded-lg border flex flex-col items-center justify-center transition cursor-pointer ${
+                                        className={`p-2 rounded-lg border flex flex-col items-center justify-center transition cursor-pointer ${
                                           b.id === selectedBrandId
                                             ? 'bg-red-600 text-white border-red-600 shadow-2xs'
                                             : 'bg-white dark:bg-slate-800 hover:bg-slate-100 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'
@@ -507,7 +507,7 @@ export default function Header({
           <div className="flex items-center gap-2 shrink-0">
             {/* Engine Picker */}
             <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-1 text-xs">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-semibold mr-1 hidden sm:inline">
+              <span className="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold mr-1 hidden sm:inline">
                 ДВС:
               </span>
               <select
@@ -550,8 +550,8 @@ export default function Header({
             {/* Interface profile selector */}
             {onChangeUiMode && (
               <div className="flex items-center gap-0.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5" title="Профиль интерфейса">
-                <button type="button" onClick={() => onChangeUiMode('phone')} aria-pressed={uiMode === 'phone'} className={`rounded-lg px-2 py-1.5 text-[11px] font-bold transition ${uiMode === 'phone' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Телефон</button>
-                <button type="button" onClick={() => onChangeUiMode('wide')} aria-pressed={uiMode === 'wide'} className={`rounded-lg px-2 py-1.5 text-[11px] font-bold transition ${uiMode === 'wide' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Планшет / магнитола</button>
+                <button type="button" onClick={() => onChangeUiMode('phone')} aria-pressed={uiMode === 'phone'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'phone' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Телефон</button>
+                <button type="button" onClick={() => onChangeUiMode('wide')} aria-pressed={uiMode === 'wide'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'wide' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Планшет / магнитола</button>
               </div>
             )}
 
@@ -570,7 +570,7 @@ export default function Header({
             {/* Day / Night Theme Switch */}
             <button
               onClick={toggleTheme}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-semibold transition shadow-2xs ${
+              className={`flex items-center gap-2 px-2.5 py-1.5 rounded-xl border text-xs font-semibold transition shadow-2xs ${
                 isLight
                   ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
                   : 'bg-slate-800 text-amber-300 border-slate-700 hover:bg-slate-700'
