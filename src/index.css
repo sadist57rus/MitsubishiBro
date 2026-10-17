@@ -312,3 +312,23 @@ html[data-ui-mode="phone"] header .max-w-7xl { width: 100%; min-width: 0; }
   html[data-ui-mode="phone"] main .flex { min-width: 0; }
   html[data-ui-mode="phone"] main .overflow-x-auto { max-width: 100%; }
 }
+
+/* Head-unit ergonomics: larger navigation icons, controls and readable labels. */
+html[data-ui-mode="wide"] header.sticky { padding-bottom: .25rem; }
+html[data-ui-mode="wide"] header.sticky button { min-height: 56px; font-size: 18px; }
+html[data-ui-mode="wide"] header.sticky button svg { width: 30px; height: 30px; }
+html[data-ui-mode="wide"] .car-brother-rail-item { min-height: 72px; font-size: 14px; }
+html[data-ui-mode="wide"] .car-brother-rail-item svg { width: 32px; height: 32px; }
+html[data-ui-mode="wide"] main button, html[data-ui-mode="wide"] main select,
+html[data-ui-mode="wide"] main input { min-height: 56px; font-size: 18px; }
+html[data-ui-mode="wide"] main h1 { font-size: clamp(2rem, 3vw, 3rem); }
+html[data-ui-mode="wide"] main h2 { font-size: clamp(1.5rem, 2.2vw, 2.25rem); }
+html[data-ui-mode="wide"] .car-vehicle-setup { padding: 1.5rem; }
+html[data-ui-mode="wide"] .car-vehicle-setup section { max-width: 72rem; }
+html[data-ui-mode="wide"] .car-vehicle-setup label { font-size: 1.25rem; }
+html[data-ui-mode="wide"] .fuel-spend-panel button { min-width: 112px; min-height: 60px; }
+html[data-ui-mode="wide"] .fuel-spend-panel svg { touch-action: manipulation; }
+@media (orientation: landscape) and (min-width: 800px) and (min-height: 480px) {
+  html[data-ui-mode="wide"] main { padding-bottom: 1rem; }
+  html[data-ui-mode="wide"] .fuel-spend-panel { padding: 1.75rem; }
+}
