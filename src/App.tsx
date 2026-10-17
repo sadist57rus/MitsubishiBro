@@ -117,10 +117,14 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
+    const statusBarColor = resolvedTheme === 'dark' ? '#070b12' : '#ffffff';
+    // Keep browser chrome and the native Android status bar aligned with the active theme.
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', statusBarColor);
     if (!Capacitor.isNativePlatform()) return;
+
     const syncStatusBar = async () => {
       try {
-        await StatusBar.setBackgroundColor({ color: resolvedTheme === 'dark' ? '#070b12' : '#ffffff' });
+        await StatusBar.setBackgroundColor({ color: statusBarColor });
         await StatusBar.setStyle({ style: resolvedTheme === 'dark' ? Style.Light : Style.Dark });
         await StatusBar.show();
       } catch (error) {
