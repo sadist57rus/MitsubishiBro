@@ -349,11 +349,13 @@ export default function TechSpecs() {
               {/* Collapsible Body Content */}
               {isOpen && (
                 <div className="border-t border-slate-100 dark:border-slate-800 p-5 space-y-4 animate-in fade-in duration-150">
+                  {verificationStatus === 'unverified' && <div className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">⚠ Сверьте по руководству</div>}
+                  {sourceIds.length > 0 && <div className="flex flex-wrap gap-2 text-xs">{sourceIds.map(sourceId => { const source = TECHNICAL_DATA_SOURCES.find(item => item.id === sourceId); return source ? <a key={source.id} href={source.url} target="_blank" rel="noreferrer" title={'Подтверждено: ' + source.scope} className="text-blue-700 underline underline-offset-2 dark:text-blue-300">Источник: {source.title}</a> : null; })}</div>}
                   {/* Detailed Specs Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {section.items.map((item, index) => (
                       <div
-                        key={index}
+                        key={item.label}
                         className={`p-3 rounded-lg border text-xs transition flex flex-col justify-between ${
                           item.highlight
                             ? 'bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-900/60'
