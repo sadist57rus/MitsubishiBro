@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type ThemeMode = 'light' | 'dark' | 'system';
+export type ThemeMode = 'light' | 'dark' | 'system' | 'time';
 
 interface ThemeContextType {
   theme: ThemeMode;
@@ -42,6 +42,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (theme === 'system') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         active = prefersDark ? 'dark' : 'light';
+      } else if (theme === 'time') {
+        const hour = new Date().getHours();
+        active = hour >= 20 || hour < 7 ? 'dark' : 'light';
       } else {
         active = theme;
       }
@@ -64,13 +67,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     };
 
     updateResolved();
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    try { localStorage.setItem(THEME_STORAGE_KEY, theme); } catch { /* storage unavailable */ }
 
     if (theme === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const listener = () => updateResolved();
       mediaQuery.addEventListener('change', listener);
       return () => mediaQuery.removeEventListener('change', listener);
+    }
+    if (theme === 'time') {
+      const timer = window.setInterval(updateResolved, 60_000);
+      return () => window.clearInterval(timer);
     }
   }, [theme]);
 
