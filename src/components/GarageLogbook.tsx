@@ -49,7 +49,7 @@ export default function GarageLogbook() {
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
-  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId })));
+  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
 
   const [isAdding, setIsAdding] = useState(false);
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
@@ -69,6 +69,7 @@ export default function GarageLogbook() {
     const newRecord: LogEntry = {
       id: 'log-' + Date.now(),
       vehicleId,
+      currency: activeVehicle.currency || preferences.currency,
       date: newDate,
       mileage: Number(newMileage),
       category: newCategory,
@@ -125,7 +126,7 @@ export default function GarageLogbook() {
       fileReader.onload = (event) => {
         try {
           const parsed = parseValidatedJson<LogEntry[]>(event.target?.result as string, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')));
-          setEntries(parsed.map(item => ({ ...item, vehicleId })));
+          setEntries(parsed.map(item => ({ ...item, vehicleId, currency: item.currency || activeVehicle.currency || preferences.currency })));
         } catch (err) {
           alert('Ошибка чтения JSON файла');
         }
@@ -277,7 +278,7 @@ export default function GarageLogbook() {
             </div>
 
             <div>
-              <label className="text-xs text-slate-400 block mb-1">Сумма расходов (руб)</label>
+              <label className="text-xs text-slate-400 block mb-1">Сумма расходов ({activeVehicle.currency || preferences.currency})</label>
               <input
                 type="number" inputMode="decimal"
                 value={newCost}
@@ -336,7 +337,7 @@ export default function GarageLogbook() {
 
               <div className="flex items-center gap-3 self-end sm:self-auto">
                 <span className="text-sm font-bold font-mono text-emerald-400">
-                  {entry.costTotal.toLocaleString('ru-RU')} {currencySymbol}
+                  {entry.costTotal.toLocaleString('ru-RU')} {currencySymbols[entry.currency || 'RUB'] || '₽'}
                 </span>
                 <button
                   onClick={() => handleDelete(entry.id)}
