@@ -39,6 +39,7 @@ interface Props {
   selectedDrivetrain: DrivetrainType;
   setSelectedDrivetrain: (dt: DrivetrainType) => void;
   selectedBrandId?: string;
+  selectedModelId?: string;
   onSelectBrand?: (brandId: string) => void;
   onOpenBrandSelector?: () => void;
   onOpenApkGuide?: () => void;
@@ -64,6 +65,7 @@ export default function Header({
   selectedDrivetrain,
   setSelectedDrivetrain,
   selectedBrandId = 'mitsubishi',
+  selectedModelId,
   onSelectBrand,
   onOpenBrandSelector,
   onOpenApkGuide,
@@ -190,13 +192,14 @@ export default function Header({
   const currentBrand = JAPANESE_BRANDS.find(b => b.id === selectedBrandId) || JAPANESE_BRANDS[0];
   const currentSection = sections.find(s => s.id === activeTab) || sections[0];
 
+  const currentModel = currentBrand.models.find(model => model.id === selectedModelId) || currentBrand.models[0];
   const engines = [
     { id: 'ALL', label: 'Все ДВС' },
-    { id: '4G63', label: '2.0L 4G63 (136 л.с.)' },
-    { id: '4G64', label: '2.4L 4G64 (139-147 л.с.)' },
-    { id: '4G69', label: '2.4L 4G69 MIVEC (160 л.с.)' },
-    { id: '4G63T', label: '2.0L Turbo 4G63T (201-240 л.с.)' },
-  ] as const;
+    ...(currentModel?.engines || []).map(engine => ({
+      id: engine.code,
+      label: `${engine.displacement || ''} ${engine.code} (${engine.powerHp || 'мощность не указана'})`.trim()
+    }))
+  ];
 
   const goToHome = () => {
     setActiveTab('overview');
@@ -523,11 +526,11 @@ export default function Header({
           <div className="flex items-center gap-2 shrink-0">
             {/* Engine Picker */}
             <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-1 text-xs">
-              <span className="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold mr-1 hidden sm:inline">
+              <span className="text-xs text-slate-600 dark:text-slate-300 uppercase font-semibold mr-1 hidden sm:inline">
                 ДВС:
               </span>
               <select
-                value={selectedEngine}
+                value={engines.some(engine => engine.id === selectedEngine) ? selectedEngine : 'ALL'}
                 onChange={(e) => setSelectedEngine(e.target.value as EngineType)}
                 aria-label="Выбрать двигатель"
                 className="min-h-11 bg-transparent text-slate-900 dark:text-slate-100 font-mono font-medium outline-none cursor-pointer text-sm"
