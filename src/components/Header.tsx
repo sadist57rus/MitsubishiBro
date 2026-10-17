@@ -28,7 +28,7 @@ import {
 import { BrandLogo } from './BrandLogos';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
 
-export type TabId = 'overview' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook';
+export type TabId = 'overview' | 'garage' | 'settings' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook';
 type UiMode = 'phone' | 'wide';
 
 interface Props {
@@ -85,6 +85,8 @@ export default function Header({
       description: 'Центр управления, быстрый поиск и сводные данные',
       icon: Home
     },
+    { id: 'garage', title: 'Гараж автомобилей', shortTitle: 'Гараж', description: 'Список автомобилей и активная машина', icon: Car },
+    { id: 'settings', title: 'Настройки', shortTitle: 'Настройки', description: 'Валюта, единицы измерения и тема', icon: LayoutGrid },
     {
       id: 'brands',
       title: 'Японские автопроизводители и модели',
