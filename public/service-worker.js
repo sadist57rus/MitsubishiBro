@@ -1,5 +1,5 @@
-const CACHE_NAME = 'mitsubishi-bro-offline-v2';
-const APP_SHELL = ['/', '/index.html', '/app-icon.svg', '/manifest.webmanifest'];
+const CACHE_NAME = 'car-brother-offline-v3';
+const APP_SHELL = ['/', '/index.html', '/app-icon.svg', '/manifest.webmanifest', '/icons/car-brother-192.png', '/icons/car-brother-512.png', '/icons/car-brother-maskable-512.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -37,7 +37,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => key.startsWith('mitsubishi-bro-offline-') && key !== CACHE_NAME).map((key) => caches.delete(key)));
+    await Promise.all(keys.filter((key) => (key.startsWith('mitsubishi-bro-offline-') || key.startsWith('car-brother-offline-')) && key !== CACHE_NAME).map((key) => caches.delete(key)));
     await self.clients.claim();
   })());
 });
