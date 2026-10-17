@@ -168,13 +168,14 @@ function AppContent() {
     };
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
-  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, addVehicle } = useVehicle();
+  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
   const [setupBrandId, setSetupBrandId] = useState('nissan');
   const setupBrand = JAPANESE_BRANDS.find(brand => brand.id === setupBrandId) || JAPANESE_BRANDS[0];
   const [setupModelId, setSetupModelId] = useState(setupBrand.models[0]?.id || '');
   const [setupYear, setSetupYear] = useState(new Date().getFullYear() - 5);
   const [setupEngine, setSetupEngine] = useState(setupBrand.models[0]?.engines[0]?.code || '');
   const [setupMileage, setSetupMileage] = useState('0');
+  const [profileSelected, setProfileSelected] = useState(() => { try { return localStorage.getItem('car-brother-profile-selected-v1') === 'yes'; } catch { return false; } });
   useEffect(() => { const model=setupBrand.models.find(item=>item.id===setupModelId)||setupBrand.models[0]; if(model){setSetupModelId(model.id);setSetupEngine(model.engines[0]?.code||'');} }, [setupBrandId]);
   const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
     try { return JSON.parse(localStorage.getItem('car-brother-favorite-sections') || '[]') as FavoriteSection[]; } catch { return []; }
@@ -222,7 +223,7 @@ function AppContent() {
     );
   }
 
-  if (orientationChosen && vehicles.length === 0) {
+  if (orientationChosen && (!profileSelected || vehicles.length === 0)) {
     const model = setupBrand.models.find(item => item.id === setupModelId) || setupBrand.models[0];
     return (
       <main className={"car-vehicle-setup min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-white flex items-center justify-center p-4 " + (uiMode === 'wide' ? 'car-vehicle-setup-wide' : '')}>
@@ -236,7 +237,7 @@ function AppContent() {
             <label className="block text-base md:text-lg font-bold">Двигатель<select className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-lg md:text-xl" value={setupEngine} onChange={event=>setSetupEngine(event.target.value)}><option value="">Пока не знаю</option>{(model?.engines||[]).map(engine=><option key={engine.code} value={engine.code}>{engine.displacement||''} {engine.code} {engine.powerHp ? '(' + engine.powerHp + ' л.с.)' : ''}</option>)}</select></label>
             <label className="block text-base md:text-lg font-bold">Текущий пробег, км<input className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-xl" type="number" min="0" inputMode="numeric" value={setupMileage} onChange={event=>setSetupMileage(event.target.value)}/></label>
           </div>
-          <button className="mt-8 min-h-16 w-full rounded-2xl bg-red-600 px-6 text-xl md:text-2xl font-black text-white shadow-lg hover:bg-red-700" onClick={()=>addVehicle({brandId:setupBrand.id,modelId:model.id,year:setupYear,mileage:Math.max(0,Number(setupMileage)||0),engine:setupEngine||'не указан',drivetrain:'ALL',currency:'RUB'})}>Сохранить автомобиль и открыть приложение</button>
+          <button className="mt-8 min-h-16 w-full rounded-2xl bg-red-600 px-6 text-xl md:text-2xl font-black text-white shadow-lg hover:bg-red-700" onClick={()=>{ const vehicle={brandId:setupBrand.id,modelId:model.id,year:setupYear,mileage:Math.max(0,Number(setupMileage)||0),engine:setupEngine||'не указан',drivetrain:'ALL' as const,currency:'RUB'}; if(vehicles.length) updateVehicle({...activeVehicle,...vehicle}); else addVehicle(vehicle); try { localStorage.setItem('car-brother-profile-selected-v1','yes'); } catch {} setProfileSelected(true); }}>Сохранить автомобиль и открыть приложение</button>
         </section>
       </main>
     );
