@@ -225,6 +225,7 @@ function AppContent() {
         selectedDrivetrain={selectedDrivetrain}
         setSelectedDrivetrain={setSelectedDrivetrain}
         selectedBrandId={selectedBrandId}
+        selectedModelId={selectedModelId}
         onSelectBrand={setSelectedBrandId}
         onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
