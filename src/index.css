@@ -357,3 +357,25 @@ html[data-ui-mode="wide"] .car-brother-rail-item > span {
   white-space: nowrap;
   font-size: 11px;
 }
+
+
+/* User-selectable accent palettes. The light/dark mode remains independent. */
+:root { --palette-accent:#dc2626; --palette-accent-hover:#b91c1c; --palette-accent-soft:#fee2e2; --palette-accent-ink:#991b1b; }
+html[data-palette="black-yellow"] { --palette-accent:#facc15; --palette-accent-hover:#eab308; --palette-accent-soft:#fef9c3; --palette-accent-ink:#713f12; }
+html[data-palette="white-red"] { --palette-accent:#dc2626; --palette-accent-hover:#b91c1c; --palette-accent-soft:#fee2e2; --palette-accent-ink:#991b1b; }
+html[data-palette="black-orange"] { --palette-accent:#f97316; --palette-accent-hover:#ea580c; --palette-accent-soft:#ffedd5; --palette-accent-ink:#9a3412; }
+html[data-palette="midnight-blue"] { --palette-accent:#0284c7; --palette-accent-hover:#0369a1; --palette-accent-soft:#e0f2fe; --palette-accent-ink:#075985; }
+html[data-palette="forest-green"] { --palette-accent:#16a34a; --palette-accent-hover:#15803d; --palette-accent-soft:#dcfce7; --palette-accent-ink:#166534; }
+html[data-palette] .bg-red-600, html[data-palette] .bg-brand-600, html[data-palette] .ui-button-primary { background-color:var(--palette-accent) !important; }
+html[data-palette] .hover\\:bg-red-700:hover, html[data-palette] .ui-button-primary:hover:not(:disabled) { background-color:var(--palette-accent-hover) !important; }
+html[data-palette] .text-red-600, html[data-palette] .text-red-500, html[data-palette] .text-brand-600, html[data-palette] .ui-section-icon { color:var(--palette-accent) !important; }
+html[data-palette] .border-red-600, html[data-palette] .border-brand-600 { border-color:var(--palette-accent) !important; }
+html[data-palette] .ring-red-500\\/20 { --tw-ring-color:color-mix(in srgb, var(--palette-accent) 20%, transparent) !important; }
+html[data-palette] .bg-red-50, html[data-palette] .bg-brand-50, html[data-palette] .ui-chip-accent { background-color:var(--palette-accent-soft) !important; }
+html[data-palette] .text-red-700, html[data-palette] .text-red-800, html[data-palette] .ui-chip-accent { color:var(--palette-accent-ink) !important; }
+html.dark[data-palette="black-yellow"] .text-red-400,
+html.dark[data-palette="black-orange"] .text-red-400,
+html.dark[data-palette="midnight-blue"] .text-red-400,
+html.dark[data-palette="forest-green"] .text-red-400 { color:var(--palette-accent) !important; }
+html.dark[data-palette] .dark\\:bg-red-950\\/40,
+html.dark[data-palette] .dark\\:bg-red-950\\/50 { background-color:color-mix(in srgb, var(--palette-accent) 16%, #0f172a) !important; }
