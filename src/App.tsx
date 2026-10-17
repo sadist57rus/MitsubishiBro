@@ -12,6 +12,8 @@ import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
 import Header, { TabId } from './components/Header';
+const Garage = lazy(() => import('./components/Garage'));
+const Settings = lazy(() => import('./components/Settings'));
 const OverviewDashboard = lazy(async () => { await import('./data/specsData'); return import('./components/OverviewDashboard'); });
 const TechSpecs = lazy(async () => { await import('./data/specsData'); return import('./components/TechSpecs'); });
 const PartsCatalog = lazy(async () => { await import('./data/partsData'); return import('./components/PartsCatalog'); });
@@ -174,6 +176,8 @@ function AppContent() {
 
   const tabTitles: Record<TabId, { title: string; icon: LucideIcon }> = {
     overview: { title: 'Главная (Обзор)', icon: Home },
+    garage: { title: 'Гараж автомобилей', icon: Car },
+    settings: { title: 'Настройки', icon: Monitor },
     brands: { title: 'Японские автопроизводители и модели', icon: Award },
     fuel: { title: 'Мониторинг топлива и заправок', icon: Fuel },
     specs: { title: 'Технические характеристики и размеры', icon: Car },
@@ -272,6 +276,9 @@ function AppContent() {
             onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
           /></div>
         )}
+
+        {activeTab === 'garage' && <Garage />}
+        {activeTab === 'settings' && <Settings />}
 
         {activeTab === 'brands' && (
           <JapaneseBrandsHub
