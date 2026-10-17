@@ -226,7 +226,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
           </div>
           <div className="flex justify-between text-[11px] text-slate-300 pt-1 border-t border-slate-800">
             <span>Сумма чека:</span>
-            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} ₽</span>
+            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} {currencySymbol}</span>
           </div>
           <div className="text-[10px] text-slate-400 italic">
             {data.station}
@@ -307,7 +307,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800 col-span-2 sm:col-span-2">
               <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Сумма расходов на бензин</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
-                {Number(overallStats.totalSpent).toLocaleString()} <span className="text-xs font-normal text-slate-500">₽</span>
+                {Number(overallStats.totalSpent).toLocaleString()} <span className="text-xs font-normal text-slate-500">{currencySymbol}</span>
               </div>
             </div>
           </div>
@@ -644,13 +644,13 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     {stats.costPerKm && (
                       <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
                         <span>Стоимость 1 км пути:</span>
-                        <strong className="text-slate-900 dark:text-white font-mono">{stats.costPerKm} ₽/км</strong>
+                        <strong className="text-slate-900 dark:text-white font-mono">{stats.costPerKm} {currencySymbol}/км</strong>
                       </div>
                     )}
                     {stats.costPer100Km && (
                       <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
                         <span>Стоимость 100 км пути:</span>
-                        <strong className="text-slate-900 dark:text-white font-mono">{stats.costPer100Km} ₽</strong>
+                        <strong className="text-slate-900 dark:text-white font-mono">{stats.costPer100Km} {currencySymbol}</strong>
                       </div>
                     )}
                   </div>
@@ -768,7 +768,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-slate-600 dark:text-slate-400 font-semibold mb-1">
-                    Цена литра (₽):
+                    Цена литра ({currencySymbol}):
                   </label>
                   <input
                     type="text" inputMode="decimal"
@@ -873,7 +873,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                         {formatConsumption(log.consumption)} {consumptionUnit}
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-900 dark:text-white font-semibold">{log.totalCost.toFixed(0)} ₽</td>
+                    <td className="py-3 px-3 text-slate-900 dark:text-white font-semibold">{log.totalCost.toFixed(0)} {currencySymbol}</td>
                     <td className="py-3 px-3 font-sans text-slate-500">
                       {log.station} ({log.fuelType})
                     </td>
