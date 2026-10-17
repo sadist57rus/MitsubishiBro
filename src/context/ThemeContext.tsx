@@ -22,7 +22,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem(THEME_STORAGE_KEY, saved);
         localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
       }
-      if (saved && (saved === 'dark' || saved === 'light' || saved === 'system')) {
+      if (saved && (saved === 'dark' || saved === 'light' || saved === 'system' || saved === 'time')) {
         return saved;
       }
     } catch (e) {
