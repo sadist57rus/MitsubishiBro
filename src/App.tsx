@@ -26,6 +26,8 @@ import ApkGuideModal from './components/ApkGuideModal';
 import JapaneseBrandsHub from './components/JapaneseBrandsHub';
 import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
+import { VehicleProvider, useVehicle } from './context/VehicleContext';
+import VehicleDataGate from './components/VehicleDataGate';
 import { EngineType, DrivetrainType } from './types';
 import {
   ChevronLeft,
@@ -46,7 +48,7 @@ import {
   Award
 } from 'lucide-react';
 
-export default function App() {
+function AppContent() {
   const { resolvedTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [uiMode, setUiMode] = useState<'phone' | 'wide'>(() => {
@@ -69,10 +71,7 @@ export default function App() {
     document.documentElement.dataset.uiMode = uiMode;
     try { localStorage.setItem('car-brother-ui-mode', uiMode); } catch { /* storage may be unavailable */ }
   }, [uiMode]);
-  const [selectedEngine, setSelectedEngine] = useState<EngineType>('ALL');
-  const [selectedDrivetrain, setSelectedDrivetrain] = useState<DrivetrainType>('4WD');
-  const [selectedBrandId, setSelectedBrandId] = useState<string>('mitsubishi');
-  const [selectedModelId, setSelectedModelId] = useState<string>('outlander-1');
+  const { engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId } = useVehicle();
   const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
@@ -196,51 +195,47 @@ export default function App() {
         )}
 
         {activeTab === 'specs' && (
-          <TechSpecs />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TechSpecs /></VehicleDataGate>
         )}
 
         {activeTab === 'bulbs' && (
-          <BulbsCatalog />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><BulbsCatalog /></VehicleDataGate>
         )}
 
         {activeTab === 'parts' && (
-          <PartsAccessoriesHub selectedBrandId={selectedBrandId} selectedModelId={selectedModelId} />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><PartsAccessoriesHub selectedBrandId={selectedBrandId} selectedModelId={selectedModelId} /></VehicleDataGate>
         )}
 
         {activeTab === 'fuses' && (
-          <FuseDiagram />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><FuseDiagram /></VehicleDataGate>
         )}
 
         {activeTab === 'tuning' && (
-          <TuningHub />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TuningHub /></VehicleDataGate>
         )}
 
         {activeTab === 'guides' && (
-          <RepairGuides
-            selectedEngine={selectedEngine}
-          />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><RepairGuides selectedEngine={selectedEngine} /></VehicleDataGate>
         )}
 
         {activeTab === 'issues' && (
-          <Troubleshooter
-            selectedEngine={selectedEngine}
-          />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><Troubleshooter selectedEngine={selectedEngine} /></VehicleDataGate>
         )}
 
         {activeTab === 'wheels' && (
-          <TireWheelCalculator />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TireWheelCalculator /></VehicleDataGate>
         )}
 
         {activeTab === 'maintenance' && (
-          <MaintenanceHub />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><MaintenanceHub /></VehicleDataGate>
         )}
 
         {activeTab === 'obd' && (
-          <ObdDiagnostics />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><ObdDiagnostics /></VehicleDataGate>
         )}
 
         {activeTab === 'logbook' && (
-          <GarageLogbook />
+          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook /></VehicleDataGate>
         )}
       </main>
 
@@ -289,4 +284,9 @@ export default function App() {
       />
     </div>
   );
+}
+
+
+export default function App() {
+  return <VehicleProvider><AppContent /></VehicleProvider>;
 }
