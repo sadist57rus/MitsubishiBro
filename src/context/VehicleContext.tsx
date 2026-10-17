@@ -31,6 +31,8 @@ function initialGarage(): GarageState {
   if(saved.vehicles.length) return {...saved,activeVehicleId:saved.vehicles.some(v=>v.id===saved.activeVehicleId)?saved.activeVehicleId:saved.vehicles[0].id};
   let legacy: Record<string,unknown>={};
   try { const raw=localStorage.getItem(OLD_KEY); if(raw){const parsed:unknown=JSON.parse(raw);if(parsed&&typeof parsed==='object')legacy=parsed as Record<string,unknown>;} } catch {}
+  // Fresh installs start with an empty garage so the owner chooses their own vehicle.
+  if (!Object.keys(legacy).length) return {vehicles:[],activeVehicleId:''};
   const brand=JAPANESE_BRANDS.find(b=>b.id===legacy.brandId)||JAPANESE_BRANDS.find(b=>b.id===DEFAULT_VEHICLE.brandId)!;
   const model=brand.models.find(m=>m.id===legacy.modelId)||brand.models[0];
   const first:GarageVehicle={...DEFAULT_VEHICLE,id:'vehicle-'+Date.now(),brandId:brand.id,modelId:model.id,engine:typeof legacy.engine==='string'?legacy.engine:DEFAULT_VEHICLE.engine,drivetrain:legacy.drivetrain==='FWD'||legacy.drivetrain==='ALL'?legacy.drivetrain:'4WD'};
