@@ -82,66 +82,66 @@ export default function Header({
   const sections: NavSection[] = [
     {
       id: 'overview',
-      title: 'Главная (Начальная страница)',
+      title: 'Главная',
       shortTitle: 'Главная',
-      description: 'Центр управления, быстрый поиск и сводные данные',
+      description: 'Ваш автомобиль и быстрые действия',
       icon: Home
     },
     { id: 'garage', title: 'Гараж автомобилей', shortTitle: 'Гараж', description: 'Список автомобилей и активная машина', icon: Car },
     { id: 'settings', title: 'Настройки', shortTitle: 'Настройки', description: 'Валюта, единицы измерения и тема', icon: LayoutGrid },
     {
       id: 'brands',
-      title: 'Японские автопроизводители и модели',
+      title: 'Марки и модели',
       shortTitle: 'Авто Японии',
-      badge: '11 марок',
+      
       description: 'Все авто Mitsubishi, Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu, Isuzu',
       icon: Award
     },
     {
       id: 'fuel',
-      title: 'Мониторинг топлива и заправок',
+      title: 'Топливо',
       shortTitle: 'Мониторинг топлива',
-      badge: 'Новое',
+      
       description: 'Калькулятор среднего расхода (л/100км), история заправок, чеки',
       icon: Fuel
     },
     {
       id: 'specs',
-      title: 'Технические характеристики и размеры',
+      title: 'Характеристики',
       shortTitle: 'Размеры и ТТХ',
-      badge: 'ТТХ',
+      
       description: 'Габариты кузова, замеры салона, размеры багажника, моторы',
       icon: Car
     },
     {
       id: 'parts',
-      title: 'Каталог запчастей (OEM и аналоги)',
+      title: 'Запчасти',
       shortTitle: 'Запчасти и аксессуары',
-      badge: 'OEM',
+      
       description: 'Расходники, часто ломающиеся детали, каталог запчастей и аксессуары',
       icon: Layers
     },
     {
       id: 'fuses',
-      title: 'Схема предохранителей и реле',
+      title: 'Предохранители',
       shortTitle: 'Предохранители',
-      badge: 'Интерактив',
+      
       description: 'Блок в салоне (за монетницей) и под капотом',
       icon: Zap
     },
     {
       id: 'bulbs',
-      title: 'Автосвет и лампы (цоколи H7, H1, H3, T10, W21/5W)',
+      title: 'Лампы',
       shortTitle: 'Лампы и автосвет',
-      badge: 'Свет',
+      
       description: 'Все лампочки, цоколи, мощность, интерактивные схемы оптики и замена',
       icon: Lightbulb
     },
     {
       id: 'tuning',
-      title: 'Тюнинг, доработки и лайфхаки',
+      title: 'Тюнинг',
       shortTitle: 'Тюнинг',
-      badge: 'Топ',
+      
       description: 'Тормоза от XL, радиатор АКПП, распорки, свет, антикор',
       icon: Sparkles
     },
@@ -154,35 +154,35 @@ export default function Header({
     },
     {
       id: 'issues',
-      title: 'Типичные проблемы и болячки',
+      title: 'Типичные неисправности',
       shortTitle: 'Болячки',
       description: 'Блок вентиляторов, горловина бака, развальные болты',
       icon: AlertCircle
     },
     {
       id: 'wheels',
-      title: 'Диски, шины и калькулятор',
+      title: 'Диски и шины',
       shortTitle: 'Диски и шины',
       description: 'Шинный калькулятор, заводские параметры 5x114.3',
       icon: Disc
     },
     {
       id: 'maintenance',
-      title: 'Регламент ТО и заправочные объёмы',
+      title: 'Техническое обслуживание',
       shortTitle: 'Регламент ТО',
       description: 'Сетка обслуживания по пробегу, объемы масел и жидкостей',
       icon: Calendar
     },
     {
       id: 'obd',
-      title: 'Коды ошибок OBD-II (DTC)',
+      title: 'Ошибки OBD-II',
       shortTitle: 'Ошибки OBD',
       description: 'Расшифровка ошибок P0421, P0431, P0171 и методы устранения',
       icon: Stethoscope
     },
     {
       id: 'logbook',
-      title: 'Бортжурнал обслуживания',
+      title: 'Бортжурнал',
       shortTitle: 'Бортжурнал',
       description: 'Учет затрат и выполненных работ с локальным сохранением',
       icon: BookOpen
