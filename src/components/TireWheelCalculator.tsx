@@ -186,7 +186,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Ширина (мм)</label>
                 <select
                   value={oldWidth}
-                  onChange={(e) => setOldWidth(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldWidth(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[205, 215, 225, 235, 245].map(w => <option key={w} value={w}>{w}</option>)}
@@ -197,7 +197,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Профиль (%)</label>
                 <select
                   value={oldAspect}
-                  onChange={(e) => setOldAspect(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldAspect(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[45, 50, 55, 60, 65, 70, 75].map(a => <option key={a} value={a}>{a}</option>)}
@@ -208,7 +208,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Диаметр (R")</label>
                 <select
                   value={oldRim}
-                  onChange={(e) => setOldRim(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldRim(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[15, 16, 17, 18, 19].map(r => <option key={r} value={r}>R{r}</option>)}
@@ -221,7 +221,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Ширина диска (J)</label>
                 <select
                   value={oldRimWidth}
-                  onChange={(e) => setOldRimWidth(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldRimWidth(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[6.0, 6.5, 7.0, 7.5, 8.0].map(j => <option key={j} value={j}>{j}J</option>)}
@@ -231,9 +231,9 @@ export default function TireWheelCalculator() {
               <div>
                 <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
-                  type="number" inputMode="decimal"
+                  type="text" inputMode="decimal"
                   value={oldEt}
-                  onChange={(e) => setOldEt(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldEt(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                   min="25"
                   max="55"
@@ -272,7 +272,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Ширина (мм)</label>
                 <select
                   value={newWidth}
-                  onChange={(e) => setNewWidth(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewWidth(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[205, 215, 225, 235, 245, 255].map(w => <option key={w} value={w}>{w}</option>)}
@@ -283,7 +283,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Профиль (%)</label>
                 <select
                   value={newAspect}
-                  onChange={(e) => setNewAspect(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewAspect(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[40, 45, 50, 55, 60, 65, 70, 75].map(a => <option key={a} value={a}>{a}</option>)}
@@ -294,7 +294,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Диаметр (R")</label>
                 <select
                   value={newRim}
-                  onChange={(e) => setNewRim(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewRim(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[15, 16, 17, 18, 19].map(r => <option key={r} value={r}>R{r}</option>)}
@@ -307,7 +307,7 @@ export default function TireWheelCalculator() {
                 <label className="text-[11px] text-slate-400 block mb-1">Ширина диска (J)</label>
                 <select
                   value={newRimWidth}
-                  onChange={(e) => setNewRimWidth(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewRimWidth(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                 >
                   {[6.0, 6.5, 7.0, 7.5, 8.0, 8.5].map(j => <option key={j} value={j}>{j}J</option>)}
@@ -317,9 +317,9 @@ export default function TireWheelCalculator() {
               <div>
                 <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
-                  type="number" inputMode="decimal"
+                  type="text" inputMode="decimal"
                   value={newEt}
-                  onChange={(e) => setNewEt(Number(e.target.value))}
+                  onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewEt(parsed); }}
                   className="w-full bg-slate-900 border border-slate-700 text-white rounded px-2.5 py-1.5 text-xs font-mono focus:border-red-500 outline-none"
                   min="20"
                   max="55"
