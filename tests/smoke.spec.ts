@@ -80,6 +80,7 @@ async function assertReadableAndTouchSafe(page: Page, label: string) {
     }).map(el => ({ text: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 70), left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right) }));
     return { smallTargets, smallText, headerOverflow };
   });
+  console.log('[ui-audit] ' + label + ': text<12px=' + violations.smallText.length + ', interactive<44x44=' + violations.smallTargets.length);
   expect(violations.smallTargets, label + ': interactive targets smaller than 44x44: ' + JSON.stringify(violations.smallTargets)).toEqual([]);
   expect(violations.smallText, label + ': visible text smaller than 12px: ' + JSON.stringify(violations.smallText)).toEqual([]);
   expect(violations.headerOverflow, label + ': header controls outside viewport: ' + JSON.stringify(violations.headerOverflow)).toEqual([]);
@@ -101,10 +102,10 @@ for (const viewport of viewports) {
 
     test('home, garage and settings accessibility: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
-      await assertReadableAndTouchSafe(page, 'home');
+      await assertReadableAndTouchSafe(page, 'home ' + suffix);
       await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
-      await assertReadableAndTouchSafe(page, 'garage');
+      await assertReadableAndTouchSafe(page, 'garage ' + suffix);
 
       await page.getByRole('button', { name: /Добавить машину/i }).click();
       const brand = page.locator('form select').first();
@@ -122,7 +123,7 @@ for (const viewport of viewports) {
       await page.reload();
       await openNavItem(page, /Настройки/i);
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
-      await assertReadableAndTouchSafe(page, 'settings');
+      await assertReadableAndTouchSafe(page, 'settings ' + suffix);
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
 
