@@ -7,7 +7,7 @@ import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { Star, Monitor } from 'lucide-react';
+import { Star, Monitor, MoreHorizontal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import FavoriteSectionsPanel, { type FavoriteSection } from './components/FavoriteSectionsPanel';
@@ -362,7 +362,7 @@ function AppContent() {
         )}
 
         {activeTab === 'garage' && <Garage />}
-        {activeTab === 'settings' && <Settings />}
+        {activeTab === 'settings' && <Settings uiMode={uiMode} onChangeUiMode={(mode) => { void applyUiMode(mode); }} />}
 
         {activeTab === 'brands' && (
           <JapaneseBrandsHub
@@ -423,6 +423,25 @@ function AppContent() {
         )}
         </Suspense></SectionErrorBoundary>
       </main>
+
+      {uiMode === 'phone' && (
+        <nav aria-label="Основная навигация" className="car-brother-bottom-nav" data-testid="phone-bottom-navigation">
+          {([
+            { id: 'overview', label: 'Главная', icon: Home },
+            { id: 'garage', label: 'Авто', icon: Car },
+            { id: 'maintenance', label: 'ТО', icon: Calendar },
+            { id: 'obd', label: 'Диагностика', icon: Stethoscope },
+          ] as const).map(item => {
+            const Icon = item.icon;
+            return <button key={item.id} type="button" aria-current={activeTab === item.id ? 'page' : undefined} onClick={() => setActiveTab(item.id)} className={`car-brother-bottom-nav-item ${activeTab === item.id ? 'is-active' : ''}`}>
+              <Icon aria-hidden="true" size={21} /><span>{item.label}</span>
+            </button>;
+          })}
+          <button type="button" className="car-brother-bottom-nav-item" aria-label="Ещё" onClick={() => document.querySelector<HTMLButtonElement>('header button[aria-label="Открыть разделы приложения"]')?.click()}>
+            <MoreHorizontal aria-hidden="true" size={21} /><span>Ещё</span>
+          </button>
+        </nav>
+      )}
 
       {backHint && <div role="status" className="fixed bottom-5 left-1/2 z-[100] -translate-x-1/2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl">{backHint}</div>}
 
