@@ -226,9 +226,9 @@ for (const viewport of viewports) {
     test('brand selector grid and page overflow: ' + suffix, async ({ page }) => {
       await prepare(page, viewport, theme);
       await page.getByTestId('brand-selector-trigger').click();
-      const dialog = page.getByRole('region', { name: 'Выбор марки автомобиля' });
+      const dialog = page.getByRole('dialog', { name: 'Выбор японского производителя' });
       await expect(dialog).toBeVisible();
-      const grid = dialog.locator('.grid').first();
+      const grid = dialog.locator('.grid.grid-cols-3').first();
       await expect(grid).toBeVisible();
       const columns = await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length);
       expect(columns, 'brand selector must show at least three columns').toBeGreaterThanOrEqual(3);
