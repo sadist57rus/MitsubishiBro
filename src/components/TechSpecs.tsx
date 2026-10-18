@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useVehicle } from '../context/VehicleContext';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { OUTLANDER_TECH_SPECS, SpecCategory } from '../data/specsData';
 import SpecsBlueprintGraphic from './SpecsBlueprintGraphic';
 import { ENGINE_TECHNICAL_RECORDS, TECHNICAL_DATA_SOURCES } from '../data/technicalSpecRecords';
@@ -31,6 +33,10 @@ import {
 } from 'lucide-react';
 
 export default function TechSpecs() {
+  const { brandId, modelId } = useVehicle();
+  const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === brandId);
+  const activeModel = activeBrand?.models.find(model => model.id === modelId);
+  const isOutlanderSourceModel = modelId === 'outlander-1';
   // Start with dimensions, cabin and trunk open by default, rest collapsed
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     dimensions: true,
@@ -105,7 +111,7 @@ export default function TechSpecs() {
     <div className="space-y-6 animate-in fade-in duration-200">
       <JapaneseChassisIndexPanel />
       <PowertrainReferencePanel />
-      <section className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/70 dark:bg-blue-950/20 p-5 space-y-4">
+      {isOutlanderSourceModel && <section className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/70 dark:bg-blue-950/20 p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
             <div className="text-[11px] uppercase tracking-wider font-bold text-blue-700 dark:text-blue-300">Источник: сервисная документация · отдельная модификация</div>
@@ -128,7 +134,7 @@ export default function TechSpecs() {
           {ENGINE_TECHNICAL_RECORDS[0].limitations.map(note => <p key={note}>• {note}</p>)}
           <a href={TECHNICAL_DATA_SOURCES[0].url} target="_blank" rel="noreferrer" className="inline-block text-blue-700 dark:text-blue-300 underline underline-offset-2 mt-2">Открыть сервисный мануал 2006 года (раздел 4G69)</a>
         </div>
-      </section>
+      </section>}
 
       <ModelDataCoveragePanel />
       <GlobalModelRatingsPanel />
@@ -146,14 +152,14 @@ export default function TechSpecs() {
                 Заводские спецификации
               </span>
               <span className="text-slate-300 dark:text-slate-700">·</span>
-              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Mitsubishi Workshop Manual</span>
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Руководство производителя</span>
             </div>
             <h1 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2.5">
               <Car className="w-6 h-6 text-red-600" />
-              Технические характеристики Outlander I
+              Технические характеристики {activeBrand?.russianName || activeBrand?.name} {activeModel?.name} {activeModel?.generation}
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Габариты кузова, замеры салона, точные размеры багажника, характеристики двигателей 4G6 и трансмиссии
+              Справочные размеры кузова, салона и багажника, а также сведения о двигателе и трансмиссии выбранной модели
             </p>
           </div>
 
