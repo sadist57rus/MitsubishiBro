@@ -255,10 +255,10 @@ export default function Header({
   return (
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="h-16 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="min-h-12 flex items-center justify-between gap-1.5 sm:gap-3 py-1">
           
           {/* Left Block: Brand Logo Button + Home Jump + THE "РАЗДЕЛЫ" BUTTON */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 min-w-0 shrink">
             {/* BRAND LOGO MENU: "У каждого бренда в меню должен быть свой логотип!" */}
             <div className="relative" ref={brandDropdownRef}>
               <button
@@ -300,7 +300,7 @@ export default function Header({
 
               {/* BRAND DROPDOWN POPUP MENU - DISTINCT AUTHENTIC LOGO FOR EVERY BRAND */}
               {isBrandDropdownOpen && (
-                <div className="absolute left-0 top-full mt-2 w-[310px] sm:w-[350px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in duration-100 max-h-[85vh] overflow-y-auto">
+                <div className="absolute left-0 top-full mt-2 w-[min(310px,calc(100vw-1rem))] sm:w-[350px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in duration-100 max-h-[85vh] overflow-y-auto">
                   <div className="px-2.5 py-1.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     <span>Меню брендов ({JAPANESE_BRANDS.length})</span>
                     <span className="text-xs text-red-600 dark:text-red-400 font-bold">Оригинальные логотипы</span>
@@ -425,7 +425,7 @@ export default function Header({
 
               {/* DROPDOWN POPUP MENU - Generous width, full text visibility, NO TRUNCATION! */}
               {isDropdownOpen && (
-                <div className="absolute left-0 top-full mt-2 w-[310px] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
+                <div className="absolute left-0 top-full mt-2 w-[min(360px,calc(100vw-1rem))] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
                   <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>Все разделы приложения ({sections.length})</span>
                     <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
@@ -524,9 +524,9 @@ export default function Header({
           </div>
 
           {/* Right Controls: Engine selector & Theme switch */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             {/* Hide the engine picker when the selected model has no engine records. */}
-            {currentModel?.engines?.length ? <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-1 text-xs">
+            {currentModel?.engines?.length ? <div className="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-1.5 py-0.5 text-xs">
               <span className="text-xs text-slate-600 dark:text-slate-300 uppercase font-semibold mr-1 hidden sm:inline">
                 ДВС:
               </span>
@@ -534,7 +534,7 @@ export default function Header({
                 value={engines.some(engine => engine.id === selectedEngine) ? selectedEngine : 'ALL'}
                 onChange={(e) => setSelectedEngine(e.target.value as EngineType)}
                 aria-label="Выбрать двигатель"
-                className="min-h-11 bg-transparent text-slate-900 dark:text-slate-100 font-mono font-medium outline-none cursor-pointer text-sm"
+                className="min-h-9 bg-transparent text-slate-900 dark:text-slate-100 font-mono font-medium outline-none cursor-pointer text-xs"
               >
                 {engines.map(eng => (
                   <option key={eng.id} value={eng.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
@@ -570,7 +570,7 @@ export default function Header({
 
             {/* Interface profile selector */}
             {onChangeUiMode && (
-              <div className="flex items-center gap-0.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5" title="Профиль интерфейса">
+              <div className="hidden xl:flex items-center gap-0.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5" title="Профиль интерфейса">
                 <button type="button" onClick={() => onChangeUiMode('phone')} aria-pressed={uiMode === 'phone'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'phone' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Телефон</button>
                 <button type="button" onClick={() => onChangeUiMode('wide')} aria-pressed={uiMode === 'wide'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'wide' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Планшет / магнитола</button>
               </div>
@@ -581,7 +581,7 @@ export default function Header({
               <button
                 onClick={onOpenApkGuide}
                 aria-label="Инструкция по сборке APK"
-                className="flex min-h-11 items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold text-slate-800 dark:text-slate-200 transition shadow-2xs"
+                className="flex min-h-9 items-center gap-1 px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold text-slate-800 dark:text-slate-200 transition shadow-2xs"
                 title="Инструкция: как скачать или собрать APK для Android на GitHub"
               >
                 <Smartphone className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
