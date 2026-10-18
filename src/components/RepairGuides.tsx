@@ -60,9 +60,9 @@ export default function RepairGuides({ selectedEngine }: Props) {
                   : 'bg-slate-950/70 border-slate-800 text-slate-300 hover:bg-slate-800'
               }`}
             >
-              <div className="text-[10px] uppercase font-bold text-red-400 tracking-wider">{guide.system}</div>
+              <div className="text-xs uppercase font-bold text-red-400 tracking-wider">{guide.system}</div>
               <div className="text-xs font-semibold mt-0.5 max-w-[240px] truncate">{guide.title}</div>
-              <div className="flex items-center gap-2 text-[10px] text-slate-400 mt-1">
+              <div className="flex items-center gap-2 text-xs text-slate-400 mt-1">
                 <span>⏱ {guide.timeEstimate}</span>
                 <span>·</span>
                 <span className={guide.difficulty === 'Сложно' ? 'text-amber-400' : 'text-emerald-400'}>
@@ -81,17 +81,17 @@ export default function RepairGuides({ selectedEngine }: Props) {
           {/* Metadata Card */}
           <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
             <div>
-              <span className="text-[11px] text-red-400 font-bold uppercase tracking-wider">{activeGuide.system}</span>
+              <span className="text-xs text-red-400 font-bold uppercase tracking-wider">{activeGuide.system}</span>
               <h3 className="text-base font-bold text-white mt-1">{activeGuide.title}</h3>
             </div>
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span className="text-[10px] text-slate-400 block">Время работы</span>
+                <span className="text-xs text-slate-400 block">Время работы</span>
                 <span className="font-semibold text-slate-200 mt-0.5 block">{activeGuide.timeEstimate}</span>
               </div>
               <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span className="text-[10px] text-slate-400 block">Сложность</span>
+                <span className="text-xs text-slate-400 block">Сложность</span>
                 <span className={`font-semibold mt-0.5 block ${activeGuide.difficulty === 'Сложно' ? 'text-amber-400' : 'text-emerald-400'}`}>
                   {activeGuide.difficulty}
                 </span>
@@ -108,7 +108,7 @@ export default function RepairGuides({ selectedEngine }: Props) {
 
             {/* Symptoms / Causes */}
             <div className="space-y-1.5 pt-2 border-t border-slate-800">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Когда делать (симптомы):</span>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Когда делать (симптомы):</span>
               {activeGuide.symptoms.map((sym, i) => (
                 <div key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
                   <span className="text-red-500 font-bold shrink-0">•</span>
@@ -125,7 +125,7 @@ export default function RepairGuides({ selectedEngine }: Props) {
                 <Wrench className="w-4 h-4 text-amber-400" />
                 Чеклист инструмента в гараже
               </h4>
-              <span className="text-[10px] text-slate-500">
+              <span className="text-xs text-slate-500">
                 {Object.values(checkedTools).filter(Boolean).length} / {activeGuide.toolsRequired.length}
               </span>
             </div>
@@ -167,7 +167,7 @@ export default function RepairGuides({ selectedEngine }: Props) {
                 <div key={idx} className="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80 text-xs flex items-center justify-between">
                   <div>
                     <span className="font-medium text-slate-200 block">{part.name}</span>
-                    <span className="font-mono text-slate-400 text-[11px]">{part.oemOrAnalog}</span>
+                    <span className="font-mono text-slate-400 text-xs">{part.oemOrAnalog}</span>
                   </div>
                   <button
                     onClick={() => handleCopy(part.oemOrAnalog)}
