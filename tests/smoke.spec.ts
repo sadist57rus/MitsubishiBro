@@ -94,7 +94,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await expect(sectionMenu).toBeFocused();
 
       // APK guide dialog: Escape closes it and returns focus to the opener.
-      const apkTrigger = page.getByRole('button', { name: /Инструкция по сборке APK/i });
+      const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
       await apkTrigger.click();
       const apkDialog = page.getByRole('dialog');
       await expect(apkDialog).toBeVisible();
