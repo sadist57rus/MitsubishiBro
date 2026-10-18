@@ -48,6 +48,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
       await page.reload();
+      await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
       const garage = await page.evaluate(() => localStorage.getItem('car-brother-garage') || '');
       expect(garage).toContain('toyota');
