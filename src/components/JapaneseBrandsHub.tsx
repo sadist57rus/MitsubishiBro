@@ -451,7 +451,7 @@ export default function JapaneseBrandsHub({
                 </div>
               </div>
 
-              {/* Action Jump to Original Outlander I Tools */}
+              {/* Actions available for the selected model */}
               {currentModel.isOriginalSourceModel ? (
                 <div className="shrink-0 flex flex-col gap-2">
                   <button
