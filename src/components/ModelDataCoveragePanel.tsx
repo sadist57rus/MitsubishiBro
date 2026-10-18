@@ -50,14 +50,14 @@ export default function ModelDataCoveragePanel() {
     {selected && <div className="border-t border-slate-200 dark:border-slate-700 pt-4 space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
         <div><h3 className="font-bold text-slate-900 dark:text-white">{selected.make} {selected.model}</h3><p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{selected.verifiedScope}</p></div>
-        <span className={`inline-flex self-start rounded-full px-2.5 py-1 text-[10px] font-bold ${statusStyles[selected.coverage]}`}>{statusLabels[selected.coverage]}</span>
+        <span className={`inline-flex self-start rounded-full px-2.5 py-1 text-xs font-bold ${statusStyles[selected.coverage]}`}>{statusLabels[selected.coverage]}</span>
       </div>
       <div>
         <h4 className="text-sm font-bold mb-2 flex items-center gap-2"><ExternalLink className="w-4 h-4" /> Источники для проверки</h4>
         <div className="space-y-2">
           {selected.sources.map(source => <a key={source.label} href={source.url} target="_blank" rel="noreferrer" className="flex items-start gap-2 rounded-xl border border-slate-200 dark:border-slate-700 p-3 hover:border-blue-400">
             <BookOpen className="w-4 h-4 mt-0.5 shrink-0 text-blue-600" />
-            <span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{source.label}</span><span className="block text-xs text-slate-500 mt-1">{source.note}</span><span className="block text-[10px] text-blue-600 dark:text-blue-400 mt-1 break-all">{source.url}</span></span>
+            <span className="min-w-0 flex-1"><span className="block text-sm font-semibold">{source.label}</span><span className="block text-xs text-slate-500 mt-1">{source.note}</span><span className="block text-xs text-blue-600 dark:text-blue-400 mt-1 break-all">{source.url}</span></span>
           </a>)}
         </div>
       </div>
@@ -65,7 +65,7 @@ export default function ModelDataCoveragePanel() {
         <h4 className="text-sm font-bold mb-2 flex items-center gap-2"><ShieldAlert className="w-4 h-4 text-amber-600" /> Что нужно дополнить</h4>
         <ul className="space-y-1.5">{selected.remainingWork.map(task => <li key={task} className="flex gap-2 text-xs text-slate-700 dark:text-slate-200"><CircleDashed className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-600" />{task}</li>)}</ul>
       </div>
-      <p className="text-[11px] text-slate-500 dark:text-slate-400 flex gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Данные считаются подтверждёнными только для совпадающих рынка, даты выпуска, кузова, двигателя, коробки и VIN/номера рамы. Не используйте общую карточку поколения как единственную основу для заказа детали или ремонта.</p>
+      <p className="text-xs text-slate-500 dark:text-slate-400 flex gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" /> Данные считаются подтверждёнными только для совпадающих рынка, даты выпуска, кузова, двигателя, коробки и VIN/номера рамы. Не используйте общую карточку поколения как единственную основу для заказа детали или ремонта.</p>
     </div>}
   </section>;
 }
