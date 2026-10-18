@@ -359,7 +359,16 @@ test('full backup can be exported, validated and restored without losing local d
 
   await page.evaluate(() => localStorage.setItem('backup-roundtrip-test', 'preserve-me'));
   const file = { name: 'roundtrip.json', mimeType: 'application/json', buffer: Buffer.from(content) };
-  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles(file);
+  const fileInput = page.locator('input[type="file"][accept="application/json,.json"]');
+  await fileInput.setInputFiles(file);
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('merge');
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await expect(page.getByRole('status')).toContainText('Восстановление завершено');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBe('preserve-me');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
+
+  await fileInput.setInputFiles(file);
   await expect(page.getByText(/Файл проверен/)).toBeVisible();
   await page.getByLabel('Режим восстановления').selectOption('replace');
   await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
