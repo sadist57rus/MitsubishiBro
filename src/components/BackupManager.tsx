@@ -84,8 +84,11 @@ export default function BackupManager() {
       if (mode === 'replace') localStorage.clear();
       for (const [key, value] of Object.entries(pending.data)) localStorage.setItem(key, value);
       setPending(null);
-      setMessage('Восстановление завершено. Перезагрузите приложение, чтобы все разделы перечитали данные.');
+      setMessage('Восстановление завершено. Приложение перезагружается, чтобы перечитать все данные.');
       setError('');
+      // React providers may still hold pre-restore values in memory; reload before
+      // their effects can write those stale values back over the restored backup.
+      window.location.reload();
     } catch {
       try {
         localStorage.clear();
