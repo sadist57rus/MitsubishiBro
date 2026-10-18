@@ -19,3 +19,5 @@ function deduplicateModels(brand: JapaneseBrand): JapaneseCarModel[] {
 for (const brand of baseBrands) brand.models = deduplicateModels(brand);
 export const JAPANESE_BRANDS: JapaneseBrand[] = baseBrands;
 export function getVehicleCatalog(): JapaneseBrand[] { return JAPANESE_BRANDS; }
+
+export type { JapaneseBrand, JapaneseCarModel, JapaneseCarEngine } from './japaneseBrandsData';
