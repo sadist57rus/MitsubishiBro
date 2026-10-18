@@ -142,7 +142,7 @@ export default function JapaneseBrandsHub({
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-red-600/20 text-red-400 border border-red-500/30 font-mono">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-red-600/20 text-red-400 border border-red-500/30 font-mono">
                 <Award className="w-3.5 h-3.5" />
                 <span>Энциклопедия автомобильных брендов и моделей</span>
               </span>
@@ -162,15 +162,15 @@ export default function JapaneseBrandsHub({
           {/* Quick Stats Box */}
           <div className="shrink-0 grid grid-cols-2 sm:grid-cols-3 gap-2.5 bg-white/5 backdrop-blur-md p-3.5 rounded-xl border border-white/10 text-xs">
             <div className="space-y-0.5">
-              <span className="text-slate-400 block text-[11px]">Производители</span>
+              <span className="text-slate-400 block text-xs">Производители</span>
               <span className="font-mono font-bold text-red-400 text-sm">11 марок</span>
             </div>
             <div className="space-y-0.5">
-              <span className="text-slate-400 block text-[11px]">Модели & ТТХ</span>
+              <span className="text-slate-400 block text-xs">Модели & ТТХ</span>
               <span className="font-mono font-bold text-emerald-400 text-sm">Все поколения</span>
             </div>
             <div className="space-y-0.5 col-span-2 sm:col-span-1">
-              <span className="text-slate-400 block text-[11px]">Данные модели</span>
+              <span className="text-slate-400 block text-xs">Данные модели</span>
               <span className="font-mono font-bold text-amber-400 text-sm">Выбранный автомобиль</span>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function JapaneseBrandsHub({
                 </span>
 
                 <span
-                  className={`text-[10px] font-medium truncate w-full ${
+                  className={`text-xs font-medium truncate w-full ${
                     isSelected ? 'text-white/90' : 'text-slate-500 dark:text-slate-400'
                   }`}
                 >
@@ -234,7 +234,7 @@ export default function JapaneseBrandsHub({
                 </span>
 
                 {brand.id === 'mitsubishi' && (
-                  <span className="absolute -top-1.5 -right-1.5 px-1 py-0.2 bg-amber-500 text-black text-[9px] font-black rounded-md shadow-2xs">
+                  <span className="absolute -top-1.5 -right-1.5 px-1 py-0.2 bg-amber-500 text-black text-xs font-black rounded-md shadow-2xs">
                     База
                   </span>
                 )}
@@ -305,7 +305,7 @@ export default function JapaneseBrandsHub({
             <p className="text-slate-600 dark:text-slate-300">
               {currentBrand.headquarters}
             </p>
-            <p className="text-[11px] text-slate-500 font-mono">
+            <p className="text-xs text-slate-500 font-mono">
               Основан в {currentBrand.founded} году
             </p>
           </div>
@@ -352,7 +352,7 @@ export default function JapaneseBrandsHub({
               <button
                 key={bType}
                 onClick={() => setFilterBodyType(bType)}
-                className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition shrink-0 ${
+                className={`px-2.5 py-1 rounded-md text-xs font-medium transition shrink-0 ${
                   filterBodyType === bType
                     ? 'bg-red-600 text-white font-bold'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
@@ -380,16 +380,16 @@ export default function JapaneseBrandsHub({
                 }`}
               >
                 <span>{model.name}</span>
-                <span className="rounded bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium opacity-80">{model.bodyType}</span>
+                <span className="rounded bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-xs font-medium opacity-80">{model.bodyType}</span>
                 {searchQuery.trim() && (
-                  <span className="text-[10px] opacity-70">{JAPANESE_BRANDS.find(brand => brand.id === model.brandId)?.russianName}</span>
+                  <span className="text-xs opacity-70">{JAPANESE_BRANDS.find(brand => brand.id === model.brandId)?.russianName}</span>
                 )}
                 {model.isOriginalSourceModel && (
-                  <span className="px-1.5 py-0.2 rounded text-[10px] bg-red-500 text-white font-mono font-bold">
+                  <span className="px-1.5 py-0.2 rounded text-xs bg-red-500 text-white font-mono font-bold">
                     База
                   </span>
                 )}
-                <span className="text-[10px] opacity-70 font-mono">
+                <span className="text-xs opacity-70 font-mono">
                   {model.years}
                 </span>
               </button>
@@ -489,37 +489,37 @@ export default function JapaneseBrandsHub({
             {/* Quick Specs Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 mt-5 pt-4 border-t border-slate-200/80 dark:border-slate-800 text-xs">
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Габариты (Д×Ш×В)</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Габариты (Д×Ш×В)</span>
                 <span className="font-mono font-bold text-slate-900 dark:text-white">
                   {currentModel.dimensions.lengthMm}×{currentModel.dimensions.widthMm}×{currentModel.dimensions.heightMm} мм
                 </span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Клиренс (просвет)</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Клиренс (просвет)</span>
                 <span className="font-mono font-bold text-red-600 dark:text-red-400">
                   {currentModel.dimensions.groundClearanceMm} мм
                 </span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Колесная база</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Колесная база</span>
                 <span className="font-mono font-bold text-slate-900 dark:text-white">
                   {currentModel.dimensions.wheelbaseMm} мм
                 </span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Багажник</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Багажник</span>
                 <span className="font-mono font-bold text-slate-900 dark:text-white">
                   {currentModel.dimensions.trunkVolumeLiters}
                 </span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Топливный бак</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Топливный бак</span>
                 <span className="font-mono font-bold text-slate-900 dark:text-white">
                   {currentModel.dimensions.fuelTankLiters} л ({currentModel.fuelEconomy.fuelGrade})
                 </span>
               </div>
               <div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Трансмиссия 4WD</span>
+                <span className="text-xs text-slate-600 dark:text-slate-300 block">Трансмиссия 4WD</span>
                 <span className="font-bold text-emerald-600 dark:text-emerald-400 truncate block" title={currentModel.awdSystemName}>
                   {currentModel.awdSystemName}
                 </span>
@@ -553,7 +553,7 @@ export default function JapaneseBrandsHub({
                   <span>{tab.label}</span>
                   {tab.count !== undefined && (
                     <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                      className={`text-xs px-1.5 py-0.2 rounded-full font-mono ${
                         isActive ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-500'
                       }`}
                     >
@@ -608,19 +608,19 @@ export default function JapaneseBrandsHub({
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
                     <div>
-                      <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Городской цикл</span>
+                      <span className="text-xs text-slate-600 dark:text-slate-300 block">Городской цикл</span>
                       <span className="font-mono font-bold text-slate-900 dark:text-white">{currentModel.fuelEconomy.city}</span>
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Загородный (трасса)</span>
+                      <span className="text-xs text-slate-600 dark:text-slate-300 block">Загородный (трасса)</span>
                       <span className="font-mono font-bold text-slate-900 dark:text-white">{currentModel.fuelEconomy.highway}</span>
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Смешанный</span>
+                      <span className="text-xs text-slate-600 dark:text-slate-300 block">Смешанный</span>
                       <span className="font-mono font-bold text-slate-900 dark:text-white">{currentModel.fuelEconomy.combined}</span>
                     </div>
                     <div>
-                      <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Рекомендованный бензин</span>
+                      <span className="text-xs text-slate-600 dark:text-slate-300 block">Рекомендованный бензин</span>
                       <span className="font-mono font-bold text-red-600 dark:text-red-400">{currentModel.fuelEconomy.fuelGrade}</span>
                     </div>
                   </div>
@@ -656,7 +656,7 @@ export default function JapaneseBrandsHub({
                               {eng.name}
                             </span>
                           </div>
-                          <span className="text-[11px] text-slate-500 font-mono block">
+                          <span className="text-xs text-slate-500 font-mono block">
                             {eng.displacement} · {eng.valves}
                           </span>
                         </div>
@@ -665,13 +665,13 @@ export default function JapaneseBrandsHub({
                           <span className="font-mono font-bold text-xs text-slate-900 dark:text-white block">
                             {eng.powerHp}
                           </span>
-                          <span className="font-mono text-[11px] text-slate-600 dark:text-slate-300 block">
+                          <span className="font-mono text-xs text-slate-600 dark:text-slate-300 block">
                             {eng.torqueNm}
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 text-[11px]">
+                      <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <span className="text-slate-600 dark:text-slate-300 block">Система впрыска:</span>
                           <span className="font-medium text-slate-800 dark:text-slate-200">{eng.fuelSystem}</span>
@@ -685,11 +685,11 @@ export default function JapaneseBrandsHub({
                       {/* Strengths & Weaknesses */}
                       <div className="space-y-1.5 pt-1 text-xs">
                         <div className="space-y-1">
-                          <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                             <Check className="w-3 h-3" />
                             <span>Плюсы и ресурс:</span>
                           </span>
-                          <ul className="list-disc list-inside text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                          <ul className="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-0.5">
                             {eng.strengths.map((s, i) => (
                               <li key={i}>{s}</li>
                             ))}
@@ -697,11 +697,11 @@ export default function JapaneseBrandsHub({
                         </div>
 
                         <div className="space-y-1 pt-1">
-                          <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
                             <AlertCircle className="w-3 h-3" />
                             <span>Особенности и нюансы:</span>
                           </span>
-                          <ul className="list-disc list-inside text-[11px] text-slate-600 dark:text-slate-300 space-y-0.5">
+                          <ul className="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-0.5">
                             {eng.weaknesses.map((w, i) => (
                               <li key={i}>{w}</li>
                             ))}
@@ -730,35 +730,35 @@ export default function JapaneseBrandsHub({
                     <span className="font-mono font-bold text-red-600 dark:text-red-400 text-sm block">
                       {currentModel.fluidsAndCapacities.engineOilVolume}
                     </span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                       {currentModel.fluidsAndCapacities.engineOil}
                     </p>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1.5">
                     <span className="font-bold text-slate-900 dark:text-white block">Трансмиссионное масло (АКПП/Вариатор)</span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                       {currentModel.fluidsAndCapacities.transmissionFluid}
                     </p>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1.5">
                     <span className="font-bold text-slate-900 dark:text-white block">Раздатка и дифференциалы</span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                       {currentModel.fluidsAndCapacities.transferCaseAndDiff}
                     </p>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1.5">
                     <span className="font-bold text-slate-900 dark:text-white block">Охлаждающая жидкость (Антифриз)</span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                       {currentModel.fluidsAndCapacities.coolant}
                     </p>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1.5">
                     <span className="font-bold text-slate-900 dark:text-white block">Тормозная жидкость</span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                       {currentModel.fluidsAndCapacities.brakeFluid}
                     </p>
                   </div>
@@ -787,42 +787,42 @@ export default function JapaneseBrandsHub({
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Ближний свет</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Ближний свет</span>
                     <span className="font-mono font-bold text-red-600 dark:text-red-400 text-sm block">
                       {currentModel.bulbsSummary.lowBeam}
                     </span>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Дальний свет</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Дальний свет</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white text-sm block">
                       {currentModel.bulbsSummary.highBeam}
                     </span>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Противотуманки (ПТФ)</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Противотуманки (ПТФ)</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white text-sm block">
                       {currentModel.bulbsSummary.fogLights}
                     </span>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Передний поворотник</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Передний поворотник</span>
                     <span className="font-mono font-bold text-amber-500 text-sm block">
                       {currentModel.bulbsSummary.frontTurn}
                     </span>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Стоп-сигналы / габарит</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Стоп-сигналы / габарит</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white text-sm block">
                       {currentModel.bulbsSummary.tailStop}
                     </span>
                   </div>
 
                   <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block">Салон / плафоны</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-300 block">Салон / плафоны</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white text-sm block">
                       {currentModel.bulbsSummary.interior}
                     </span>
@@ -857,7 +857,7 @@ export default function JapaneseBrandsHub({
                   <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                     {currentModel.obdDiagnostics.portLocation}
                   </p>
-                  <div className="text-[11px] text-slate-500 font-mono pt-1">
+                  <div className="text-xs text-slate-500 font-mono pt-1">
                     Протокол обмена: <strong>{currentModel.obdDiagnostics.protocol}</strong>
                   </div>
                 </div>
@@ -881,7 +881,7 @@ export default function JapaneseBrandsHub({
                         <div className="font-semibold text-slate-900 dark:text-white">
                           {codeItem.title}
                         </div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
                           {codeItem.hint}
                         </p>
                       </div>
@@ -918,15 +918,15 @@ export default function JapaneseBrandsHub({
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
                         <div className="space-y-1">
-                          <span className="text-[11px] font-bold text-amber-600 block">Симптомы:</span>
+                          <span className="text-xs font-bold text-amber-600 block">Симптомы:</span>
                           <p className="text-slate-600 dark:text-slate-300">{issue.symptoms}</p>
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[11px] font-bold text-slate-600 dark:text-slate-300 block">Первопричина:</span>
+                          <span className="text-xs font-bold text-slate-600 dark:text-slate-300 block">Первопричина:</span>
                           <p className="text-slate-600 dark:text-slate-300">{issue.rootCause}</p>
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[11px] font-bold text-emerald-600 block">Метод устранения:</span>
+                          <span className="text-xs font-bold text-emerald-600 block">Метод устранения:</span>
                           <p className="text-slate-600 dark:text-slate-300">{issue.solution}</p>
                         </div>
                       </div>
