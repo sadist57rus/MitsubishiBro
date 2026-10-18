@@ -70,8 +70,6 @@ export default function Header({
   onSelectBrand,
   onOpenBrandSelector,
   onOpenApkGuide,
-  uiMode = 'phone',
-  onChangeUiMode,
   onRegisterBackHandler
 }: Props) {
   const { resolvedTheme, toggleTheme } = useTheme();
