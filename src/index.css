@@ -442,5 +442,5 @@ main .ui-card, main [class*="rounded"][class*="border"][class*="bg-white"] {
 .car-brother-bottom-nav-item.is-active { color: #dc2626; background: #fee2e2; }
 .dark .car-brother-bottom-nav-item.is-active { background: rgba(127,29,29,.35); color: #fca5a5; }
 @media (min-width: 641px) { .car-brother-bottom-nav { display: none; } }
-button, [role="button"], input, select, textarea { min-height: max(44px, var(--tap-size, 44px)); }
+button, [role="button"], input, select, textarea { min-height: max(44px, var(--tap-size, 44px)); min-width: 44px; }
 html[data-ui-mode="wide"] body { font-size: max(16px, calc(1rem * var(--ui-scale, 1))); }
