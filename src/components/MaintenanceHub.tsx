@@ -137,6 +137,9 @@ export default function MaintenanceHub() {
               const isChecked = !!completedItems[item.id];
               const isDueSoon = currentMileage % item.frequencyKm < 2000;
               const nextDueKm = Math.ceil(currentMileage / item.frequencyKm) * item.frequencyKm;
+              const verificationStatus = item.verificationStatus ?? 'unverified';
+              const verificationLabel = verificationStatus === 'verified' ? 'Регламент подтверждён' : verificationStatus === 'partially-verified' ? 'Подтверждён частично' : 'Не подтверждено';
+              const verificationClass = verificationStatus === 'verified' ? 'text-emerald-300 bg-emerald-950/40 border-emerald-800/60' : verificationStatus === 'partially-verified' ? 'text-amber-300 bg-amber-950/40 border-amber-800/60' : 'text-slate-300 bg-slate-900 border-slate-700';
 
               return (
                 <div
@@ -163,6 +166,10 @@ export default function MaintenanceHub() {
                       <span className="text-xs text-slate-500">
                         {item.system} · Каждые <strong className="font-mono text-slate-400">{item.frequencyKm.toLocaleString()} км</strong>
                       </span>
+                      <span className={`mt-1 inline-flex rounded border px-1.5 py-0.5 text-[11px] ${verificationClass}`}>
+                        {verificationLabel}
+                      </span>
+                      {item.dataQualityNote && <span className="mt-1 block text-xs text-amber-200">{item.dataQualityNote}</span>}
                     </div>
                   </div>
 
