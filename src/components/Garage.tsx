@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {JAPANESE_BRANDS} from '../data/japaneseBrandsData';
+import {JAPANESE_BRANDS} from '../data/vehicleCatalog';
 import {useVehicle,type GarageVehicle} from '../context/VehicleContext';
 import {usePreferences} from '../context/PreferencesContext';
 const field='w-full rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-white';
