@@ -460,7 +460,7 @@ export default function Header({
                               handleSelectSection(sec.id);
                             }
                           }}
-                          className={`w-full text-left px-3 py-2.5 rounded-xl transition flex items-start justify-between text-xs group cursor-pointer ${
+                          className={`w-full text-left px-3 py-2.5 rounded-xl transition flex items-start justify-between text-xs group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 ${
                             isActive
                               ? 'bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 font-bold border border-red-200 dark:border-red-900/60'
                               : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent'
