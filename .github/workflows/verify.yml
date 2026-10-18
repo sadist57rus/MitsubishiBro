@@ -8,6 +8,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -15,17 +16,25 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - run: npm run lint
-      - name: Reject text utility classes below 12px
-        run: if grep -R -n -E 'text-\[(8|9|10|11)px\]' src; then exit 1; fi
-      - run: npm run audit:catalog
-      - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
       - run: npm run test:smoke
       - name: Upload web build for testing
+        if: success()
         uses: actions/upload-artifact@v5
         with:
           name: Car-Brother-web-build
           path: dist/
           if-no-files-found: error
+          retention-days: 14
+      - name: Upload Playwright report and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-report-and-failures
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
           retention-days: 14

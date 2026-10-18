@@ -2,6 +2,8 @@ import { expect, test, type Page } from '@playwright/test';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
+type AuditScreen = 'home' | 'garage' | 'settings';
+type AuditThreshold = { smallText: number; smallTargets: number };
 
 const viewports: Viewport[] = [
   { width: 360, height: 800 },
@@ -10,12 +12,23 @@ const viewports: Viewport[] = [
 ];
 const themes: Theme[] = ['light', 'dark'];
 
-const sectionGroups: { name: string; sections: RegExp[] }[] = [
-  { name: 'core-and-catalog', sections: [/Главная/i, /Гараж/i, /Настройки/i, /Авто Японии|Марки и модели/i] },
-  { name: 'vehicle-data', sections: [/Мониторинг топлива|Топливо/i, /Размеры и ТТХ|Характеристики/i, /Лампы и автосвет|Лампы/i, /Запчасти/i] },
-  { name: 'maintenance', sections: [/Предохранители/i, /Тюнинг/i, /Ремонт/i, /Болячки|Типичные неисправности/i] },
-  { name: 'tools-and-records', sections: [/Диски и шины/i, /Регламент ТО|Техническое обслуживание/i, /Ошибки OBD/i, /Бортжурнал/i] },
+const sectionGroups: { name: string; sections: string[] }[] = [
+  { name: 'core-and-catalog', sections: ['overview', 'garage', 'settings', 'brands'] },
+  { name: 'vehicle-data', sections: ['fuel', 'specs', 'bulbs', 'parts'] },
+  { name: 'maintenance', sections: ['fuses', 'tuning', 'guides', 'issues'] },
+  { name: 'tools-and-records', sections: ['wheels', 'maintenance', 'obd', 'logbook'] },
 ];
+
+// Baselines are intentionally explicit. Any increase fails CI; new screen/viewport
+// combinations default to zero until reviewed and deliberately baselined.
+const auditThresholds: Record<string, AuditThreshold> = {
+  'home:360x800': { smallText: 0, smallTargets: 0 },
+  'garage:360x800': { smallText: 0, smallTargets: 0 },
+  'settings:360x800': { smallText: 0, smallTargets: 0 },
+  'home:800x480': { smallText: 0, smallTargets: 0 },
+  'garage:800x480': { smallText: 0, smallTargets: 0 },
+  'settings:800x480': { smallText: 0, smallTargets: 0 },
+};
 
 async function chooseToyota(page: Page) {
   await page.addInitScript(() => {
@@ -32,12 +45,7 @@ async function chooseToyota(page: Page) {
   const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
   if (await setupHeading.isVisible().catch(() => false)) {
     const brand = page.locator('select').first();
-    const toyotaValue = await brand.locator('option').evaluateAll(options => {
-      const match = options.find(option => /toyota|тойота/i.test(option.textContent || ''));
-      return match?.getAttribute('value') || '';
-    });
-    expect(toyotaValue, 'Toyota must exist in the shared catalog').not.toBe('');
-    await brand.selectOption(toyotaValue);
+    await brand.selectOption({ value: 'toyota' });
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
   }
@@ -58,7 +66,12 @@ async function prepare(page: Page, viewport: Viewport, theme: Theme) {
   return consoleErrors;
 }
 
-async function assertReadableAndTouchSafe(page: Page, label: string) {
+async function assertReadableAndTouchSafe(
+  page: Page,
+  label: string,
+  screen: AuditScreen,
+  viewport: Viewport,
+) {
   const violations = await page.evaluate(() => {
     const interactive = [...document.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea, [role="button"], [role="tab"], [role="switch"], [tabindex]:not([tabindex="-1"])')];
     const smallTargets = interactive.filter(el => {
@@ -75,25 +88,28 @@ async function assertReadableAndTouchSafe(page: Page, label: string) {
       return style.display !== 'none' && style.visibility !== 'hidden' && Number.parseFloat(style.fontSize) < 12;
     }).map(el => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 70), size: getComputedStyle(el).fontSize }));
     const headerOverflow = [...document.querySelectorAll<HTMLElement>('header button, header a[href], header select, header input')].filter(el => {
-      const r = el.getBoundingClientRect();
-      return r.width > 0 && (r.left < 0 || r.right > window.innerWidth);
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && (rect.left < 0 || rect.right > window.innerWidth);
     }).map(el => ({ text: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 70), left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right) }));
     return { smallTargets, smallText, headerOverflow };
   });
-  console.log('[ui-audit] ' + label + ': text<12px=' + violations.smallText.length + ', interactive<44x44=' + violations.smallTargets.length);
-  expect(violations.smallTargets, label + ': interactive targets smaller than 44x44: ' + JSON.stringify(violations.smallTargets)).toEqual([]);
-  expect(violations.smallText, label + ': visible text smaller than 12px: ' + JSON.stringify(violations.smallText)).toEqual([]);
+  const viewportKey = viewport.width + 'x' + viewport.height;
+  const threshold = auditThresholds[screen + ':' + viewportKey] ?? { smallText: 0, smallTargets: 0 };
+  console.log('[ui-audit] ' + label + ': text<12px=' + violations.smallText.length + ' (limit ' + threshold.smallText + '), interactive<44x44=' + violations.smallTargets.length + ' (limit ' + threshold.smallTargets + ')');
+  expect(violations.smallTargets.length, label + ': interactive targets below 44x44: ' + JSON.stringify(violations.smallTargets)).toBeLessThanOrEqual(threshold.smallTargets);
+  expect(violations.smallText.length, label + ': visible text below 12px: ' + JSON.stringify(violations.smallText)).toBeLessThanOrEqual(threshold.smallText);
   expect(violations.headerOverflow, label + ': header controls outside viewport: ' + JSON.stringify(violations.headerOverflow)).toEqual([]);
 }
 
-async function openNavItem(page: Page, label: RegExp) {
-  const menu = page.getByRole('button', { name: /Открыть разделы приложения/i });
+async function openNavItem(page: Page, sectionId: string) {
+  const menu = page.getByTestId('section-menu-trigger');
   await expect(menu).toBeVisible();
   await menu.click();
   const panel = page.getByTestId('section-menu-list');
-  const item = panel.getByRole('button', { name: label }).first();
+  const item = page.getByTestId('nav-item-' + sectionId);
   await expect(item).toBeVisible({ timeout: 5_000 });
-  await item.getByText(label).first().click();
+  await item.click();
+  await expect(panel).toBeHidden();
 }
 
 for (const viewport of viewports) {
@@ -102,18 +118,14 @@ for (const viewport of viewports) {
 
     test('home, garage and settings accessibility: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
-      await assertReadableAndTouchSafe(page, 'home ' + suffix);
-      await openNavItem(page, /Гараж/i);
+      await assertReadableAndTouchSafe(page, 'home ' + suffix, 'home', viewport);
+      await openNavItem(page, 'garage');
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
-      await assertReadableAndTouchSafe(page, 'garage ' + suffix);
+      await assertReadableAndTouchSafe(page, 'garage ' + suffix, 'garage', viewport);
 
       await page.getByRole('button', { name: /Добавить машину/i }).click();
       const brand = page.locator('form select').first();
-      const toyotaValue = await brand.locator('option').evaluateAll(options => {
-        const match = options.find(option => /toyota|тойота/i.test(option.textContent || ''));
-        return match?.getAttribute('value') || '';
-      });
-      await brand.selectOption(toyotaValue);
+      await brand.selectOption({ value: 'toyota' });
       const modelValues = await page.locator('form select').nth(1).locator('option').evaluateAll(options => options.map(option => option.getAttribute('value')));
       expect(new Set(modelValues).size, 'model ids in the garage selector must be unique').toBe(modelValues.length);
       const modelLabels = await page.locator('form select').nth(1).locator('option').evaluateAll(options => options.map(option => (option.textContent || '').trim().toLocaleLowerCase('ru-RU')));
@@ -121,18 +133,18 @@ for (const viewport of viewports) {
       await page.getByRole('button', { name: /Отмена/i }).click();
 
       await page.reload();
-      await openNavItem(page, /Настройки/i);
+      await openNavItem(page, 'settings');
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
-      await assertReadableAndTouchSafe(page, 'settings ' + suffix);
+      await assertReadableAndTouchSafe(page, 'settings ' + suffix, 'settings', viewport);
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
 
     for (const group of sectionGroups) {
       test('section group ' + group.name + ': ' + suffix, async ({ page }) => {
         const consoleErrors = await prepare(page, viewport, theme);
-        for (const section of group.sections) {
-          await openNavItem(page, section);
-          expect(await page.locator('body').innerText(), 'selected Toyota should not inherit Outlander copy in section ' + section).not.toMatch(/Outlander/i);
+        for (const sectionId of group.sections) {
+          await openNavItem(page, sectionId);
+          expect(await page.locator('body').innerText(), 'selected Toyota must not inherit Outlander copy in section ' + sectionId).not.toMatch(/Outlander/i);
           await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
         }
         expect(consoleErrors, 'browser console/page errors').toEqual([]);
@@ -142,10 +154,10 @@ for (const viewport of viewports) {
     test('dialogs and brand-specific copy: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
 
-      const sectionMenu = page.getByRole('button', { name: /Открыть разделы приложения/i });
+      const sectionMenu = page.getByTestId('section-menu-trigger');
       await sectionMenu.focus();
       await sectionMenu.press('Enter');
-      const settingsItem = page.getByTestId('section-menu-list').locator('[role="button"]').filter({ hasText: /^Настройки/ }).first();
+      const settingsItem = page.getByTestId('nav-item-settings');
       await expect(settingsItem).toBeVisible();
       await settingsItem.focus();
       await settingsItem.press('Enter');
@@ -164,21 +176,16 @@ for (const viewport of viewports) {
       await expect(apkDialog).toBeHidden();
       await expect(apkTrigger).toBeFocused();
 
-      const brandTrigger = page.getByRole('button', { name: /Выбрать марку автомобиля/i });
-      for (const brand of [
-        { name: 'Nissan', label: /Ниссан.*Nissan|Nissan.*Ниссан/i },
-        { name: 'Honda', label: /Хонда.*Honda|Honda.*Хонда/i },
-      ]) {
+      const brandTrigger = page.getByTestId('brand-selector-trigger');
+      for (const brandId of ['nissan', 'honda']) {
         await brandTrigger.click();
         await expect(page.getByRole('region', { name: 'Выбор марки автомобиля' })).toBeVisible();
-        await page.getByRole('button', { name: brand.label }).click();
-        const sectionMenuButton = page.getByRole('button', { name: /Открыть разделы приложения/i });
-        await sectionMenuButton.click();
+        await page.getByTestId('brand-option-' + brandId).click();
+        await page.getByTestId('section-menu-trigger').click();
         const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
-        expect(sectionMenuText, brand.name + ' section menu must be vehicle-neutral').not.toMatch(/Outlander/i);
-        const fuelItem = page.getByTestId('section-menu-list').getByRole('button', { name: /Топливо/i }).first();
-        await fuelItem.getByText(/Топливо/i).first().click();
-        expect(await page.locator('body').innerText(), brand.name + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
+        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander/i);
+        await page.getByTestId('nav-item-fuel').click();
+        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
       }
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });

@@ -269,6 +269,7 @@ export default function Header({
             <div className="relative" ref={brandDropdownRef}>
               <button
                 ref={brandTriggerRef}
+                data-testid="brand-selector-trigger"
                 type="button"
                 onClick={() => {
                   setIsBrandDropdownOpen(!isBrandDropdownOpen);
@@ -320,6 +321,7 @@ export default function Header({
                       return (
                         <button
                           key={brand.id}
+                          data-testid={`brand-option-${brand.id}`}
                           type="button"
                           onClick={() => {
                             if (onSelectBrand) onSelectBrand(brand.id);
@@ -406,6 +408,7 @@ export default function Header({
             <div className="relative" ref={dropdownRef}>
               <button
                 ref={sectionTriggerRef}
+                data-testid="section-menu-trigger"
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-sm font-bold transition border shadow-xs ${
@@ -450,6 +453,7 @@ export default function Header({
                         <div
                           key={sec.id}
                           role="button"
+                          data-testid={`nav-item-${sec.id}`}
                           tabIndex={0}
                           onClick={() => handleSelectSection(sec.id)}
                           onKeyDown={(event) => {
