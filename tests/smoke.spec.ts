@@ -439,3 +439,44 @@ test('maintenance intervals expose their verification level instead of implying 
   await expect(page.getByText('Не подтверждено').first()).toBeVisible();
   await expect(page.getByText('Регламент подтверждён')).toHaveCount(0);
 });
+
+
+test('journal and fuel records survive switching between two active vehicles', async ({ page }) => {
+  const firstVehicle = { id: 'test-car-one', brandId: 'mitsubishi', modelId: 'outlander-1', year: 2006, mileage: 120000, engine: '4G69', transmission: 'АКПП', drivetrain: '4WD', currency: 'RUB' };
+  const secondVehicle = { ...firstVehicle, id: 'test-car-two', mileage: 90000 };
+  const firstLog = [{ id: 'log-one', vehicleId: firstVehicle.id, currency: 'RUB', date: '2026-01-01', mileage: 120000, category: 'ТО', title: 'Запись первого автомобиля', costTotal: 1000 }];
+  const secondLog = [{ id: 'log-two', vehicleId: secondVehicle.id, currency: 'RUB', date: '2026-02-01', mileage: 90000, category: 'ТО', title: 'Запись второго автомобиля', costTotal: 2000 }];
+  const firstFuel = [{ id: 'fuel-one', vehicleId: firstVehicle.id, currency: 'RUB', date: '2026-01-02', odometer: 120100, distance: 400, liters: 40, pricePerLiter: 60, totalCost: 2400, consumption: 10, fuelType: 'АИ-95', station: 'АЗС первого авто' }];
+  const secondFuel = [{ id: 'fuel-two', vehicleId: secondVehicle.id, currency: 'RUB', date: '2026-02-02', odometer: 90100, distance: 300, liters: 30, pricePerLiter: 61, totalCost: 1830, consumption: 10, fuelType: 'АИ-95', station: 'АЗС второго авто' }];
+  await page.addInitScript(({ firstVehicle, secondVehicle, firstLog, secondLog, firstFuel, secondFuel }) => {
+    localStorage.clear();
+    sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    localStorage.setItem('car-brother-garage', JSON.stringify({ vehicles: [firstVehicle, secondVehicle], activeVehicleId: firstVehicle.id }));
+    localStorage.setItem('outlander1_garage_logbook_v1', JSON.stringify(firstLog));
+    localStorage.setItem('car-brother-logbook-' + secondVehicle.id, JSON.stringify(secondLog));
+    localStorage.setItem('outlander1_fuel_logs_v2', JSON.stringify(firstFuel));
+    localStorage.setItem('car-brother-fuel-logs-' + secondVehicle.id, JSON.stringify(secondFuel));
+  }, { firstVehicle, secondVehicle, firstLog, secondLog, firstFuel, secondFuel });
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+
+  await openNavItem(page, 'logbook');
+  await expect(page.getByText('Запись первого автомобиля')).toBeVisible();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('outlander1_garage_logbook_v1') || '[]').length)).toBe(1);
+
+  await openNavItem(page, 'garage');
+  await page.getByRole('button', { name: 'Сделать активной' }).nth(1).click();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-garage') || '{"activeVehicleId":""}').activeVehicleId)).toBe(secondVehicle.id);
+  await openNavItem(page, 'logbook');
+  await expect(page.getByText('Запись второго автомобиля')).toBeVisible();
+  await expect(page.getByText('Запись первого автомобиля')).toHaveCount(0);
+
+  await openNavItem(page, 'fuel');
+  await expect(page.getByText('АЗС второго авто')).toBeVisible();
+  await expect(page.getByText('АЗС первого авто')).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-logbook-test-car-two') || '[]')[0]?.title)).toBe('Запись второго автомобиля');
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-fuel-logs-test-car-two') || '[]')[0]?.station)).toBe('АЗС второго авто');
+});
