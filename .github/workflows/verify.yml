@@ -7,23 +7,23 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
-      - run: npm install --no-audit --no-fund
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
       - run: npm run lint
       - run: npm run audit:catalog
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:smoke
-
       - name: Upload web build for testing
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
-          name: MitsubishiBro-web-build
+          name: Car-Brother-web-build
           path: dist/
           if-no-files-found: error
           retention-days: 14
