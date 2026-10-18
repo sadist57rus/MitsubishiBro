@@ -77,7 +77,13 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       const garage = await page.evaluate(() => localStorage.getItem('car-brother-garage') || '');
       expect(garage).toContain('toyota');
 
-      await openNavItem(page, /Настройки/i);
+      const sectionMenu = page.getByRole('button', { name: /Открыть разделы приложения/i });
+      await sectionMenu.focus();
+      await sectionMenu.press('Enter');
+      const settingsItem = page.getByTestId('section-menu-list').locator('[role="button"]').filter({ hasText: /^Настройки/ }).first();
+      await expect(settingsItem).toBeVisible();
+      await settingsItem.focus();
+      await settingsItem.press('Enter');
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
