@@ -7,6 +7,7 @@ import {
 } from '../data/vehicleCatalog';
 import { BrandLogo } from './BrandLogos';
 import { TabId } from './Header';
+import { plural } from '../lib/plural';
 import {
   Car,
   Search,
@@ -54,7 +55,7 @@ export default function JapaneseBrandsHub({
 
   // Comparison drawer state
   const [isCompareMode, setIsCompareMode] = useState(false);
-  const [compareModelId, setCompareModelId] = useState<string>('outlander-1');
+  const [compareModelId, setCompareModelId] = useState<string>(() => initialModelId || JAPANESE_BRANDS.find(brand => brand.id === initialBrandId)?.models[0]?.id || '');
 
   // Currently active brand
   const currentBrand = useMemo(() => {
@@ -64,7 +65,7 @@ export default function JapaneseBrandsHub({
   // Currently active model
   const [currentModelId, setCurrentModelId] = useState<string>(() => {
     if (initialModelId) return initialModelId;
-    return currentBrand.models[0]?.id || 'outlander-1';
+    return currentBrand.models[0]?.id || '';
   });
 
   const currentModel = useMemo(() => {
@@ -331,7 +332,7 @@ export default function JapaneseBrandsHub({
         </label>
         {searchQuery.trim() && (
           <p className="text-xs text-slate-500">
-            Найдено моделей: {filteredModels.length}. Результаты поиска охватывают все марки.
+            Найдено {filteredModels.length} {plural(filteredModels.length, ['модель', 'модели', 'моделей'])}. Результаты поиска охватывают все марки.
           </p>
         )}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
