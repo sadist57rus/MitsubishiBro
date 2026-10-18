@@ -4,8 +4,7 @@ import {
   JapaneseBrand,
   JapaneseCarModel,
   JapaneseCarEngine
-} from '../data/japaneseBrandsData';
-import '../data/expandedJapaneseModels';
+} from '../data/vehicleCatalog';
 import { BrandLogo } from './BrandLogos';
 import { TabId } from './Header';
 import {
@@ -155,7 +154,7 @@ export default function JapaneseBrandsHub({
             </h1>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Справочник поколений и модификаций Mitsubishi, Toyota, Nissan, Suzuki, Subaru, Honda, Mazda, Lexus, Infiniti, Daihatsu и Isuzu. Состав и полнота данных зависят от конкретной модели и постепенно расширяются.
+              Справочник поколений и модификаций японских автомобилей. Состав и полнота данных зависят от конкретной модели и постепенно расширяются.
             </p>
           </div>
 
@@ -170,8 +169,8 @@ export default function JapaneseBrandsHub({
               <span className="font-mono font-bold text-emerald-400 text-sm">Все поколения</span>
             </div>
             <div className="space-y-0.5 col-span-2 sm:col-span-1">
-              <span className="text-slate-400 block text-[11px]">Базовый исходник</span>
-              <span className="font-mono font-bold text-amber-400 text-sm">Outlander I</span>
+              <span className="text-slate-400 block text-[11px]">Данные модели</span>
+              <span className="font-mono font-bold text-amber-400 text-sm">Выбранный автомобиль</span>
             </div>
           </div>
         </div>
@@ -280,7 +279,7 @@ export default function JapaneseBrandsHub({
               }`}
             >
               <Scale className="w-3.5 h-3.5" />
-              <span>{isCompareMode ? 'Скрыть сравнение' : 'Сравнить с Outlander I'}</span>
+              <span>{isCompareMode ? 'Скрыть сравнение' : 'Сравнить с выбранной моделью'}</span>
             </button>
           </div>
         </div>
@@ -480,7 +479,7 @@ export default function JapaneseBrandsHub({
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold transition shadow-sm"
                   >
                     <Scale className="w-4 h-4 text-amber-400 dark:text-amber-600" />
-                    <span>Сравнить с Outlander I</span>
+                    <span>Сравнить с выбранной моделью</span>
                   </button>
                 </div>
               )}
@@ -779,7 +778,7 @@ export default function JapaneseBrandsHub({
                       onClick={() => onNavigateTab('bulbs')}
                       className="text-xs text-red-600 hover:underline font-bold flex items-center gap-1"
                     >
-                      <span>Открыть интерактивные схемы оптики Outlander I</span>
+                      <span>Открыть интерактивные схемы оптики Выбранный автомобиль</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   )}
@@ -844,7 +843,7 @@ export default function JapaneseBrandsHub({
                       onClick={() => onNavigateTab('obd')}
                       className="text-xs text-red-600 hover:underline font-bold flex items-center gap-1"
                     >
-                      <span>Открыть каталог 85+ кодов и графику разъема Outlander I</span>
+                      <span>Открыть каталог 85+ кодов и графику разъема Выбранный автомобиль</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   )}
