@@ -25,12 +25,9 @@ jobs:
         with:
           node-version: 22
 
-      # One-time bootstrap: create and commit the lockfile before npm ci is used.
-      - name: Create npm lockfile if missing
-        run: |
-          if [ ! -f package-lock.json ]; then
-            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-          fi
+            # Keep the committed npm lockfile synchronized when package.json changes.
+      - name: Refresh npm lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
 
       - name: Cache npm
         uses: actions/cache@v4
