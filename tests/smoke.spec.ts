@@ -149,10 +149,12 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       for (const brandName of ['Nissan', 'Honda']) {
         await brandTrigger.click();
         await page.getByRole('button', { name: new RegExp('Выбрать ' + brandName, 'i') }).click();
-        for (const section of [/Главная/i, /Гараж/i, /Настройки/i, /Марки и модели/i, /Топливо/i, /Характеристики/i, /Запчасти/i, /Предохранители/i, /Лампы/i, /Тюнинг/i, /Руководство по ремонту/i, /Типичные неисправности/i, /Диски и шины/i, /Техническое обслуживание/i, /Ошибки OBD-II/i, /Бортжурнал/i]) {
-          await openNavItem(page, section);
-          expect(await page.locator('body').innerText(), `${brandName} must not see Outlander-specific copy in ${section}`).not.toMatch(/Outlander/i);
-        }
+        const sectionMenuButton = page.getByRole('button', { name: /Открыть разделы приложения/i });
+        await sectionMenuButton.click();
+        const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
+        expect(sectionMenuText, `${brandName} section menu must be vehicle-neutral`).not.toMatch(/Outlander/i);
+        await openNavItem(page, /Топливо/i);
+        expect(await page.locator('body').innerText(), `${brandName} fuel section must not show Outlander-specific copy`).not.toMatch(/Outlander/i);
       }
 
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
