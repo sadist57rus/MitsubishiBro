@@ -85,6 +85,14 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await settingsItem.focus();
       await settingsItem.press('Enter');
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
+
+      // Escape closes the section menu and restores focus to its trigger.
+      await sectionMenu.press('Enter');
+      await expect(page.getByTestId('section-menu-list')).toBeVisible();
+      await page.keyboard.press('Escape');
+      await expect(page.getByTestId('section-menu-list')).toBeHidden();
+      await expect(sectionMenu).toBeFocused();
+
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
   }
