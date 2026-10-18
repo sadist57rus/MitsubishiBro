@@ -16,7 +16,7 @@ export default function PowertrainReferencePanel() {
         <h2 className="text-xl font-black mt-1">Справочник силовых агрегатов</h2>
         <p className="text-sm text-slate-300 mt-1">Первые записи с привязкой к поколению, коду кузова и семейству двигателя. Применяемость зависит от рынка и VIN.</p>
       </div>
-      <div className="rounded-xl border border-amber-400/30 bg-black/30 px-3 py-2 text-center"><div className="text-2xl font-black text-amber-300">{POWERTRAIN_RECORDS.length}</div><div className="text-[10px] text-slate-400">записей</div></div>
+      <div className="rounded-xl border border-amber-400/30 bg-black/30 px-3 py-2 text-center"><div className="text-2xl font-black text-amber-300">{POWERTRAIN_RECORDS.length}</div><div className="text-xs text-slate-400">записей</div></div>
     </div>
     <label className="flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-2 bg-black/20"><Search className="w-4 h-4 text-amber-300" /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Модель, двигатель, кузов, КПП..." className="w-full bg-transparent outline-none text-sm placeholder:text-slate-500" /></label>
     <div className="space-y-2">
