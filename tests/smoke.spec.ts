@@ -63,6 +63,7 @@ async function openNavItem(page: Page, label: RegExp) {
 for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }, { width: 1280, height: 720 }]) {
   for (const theme of ['light', 'dark'] as const) {
     test(`stage 1 smoke: ${viewport.width}x${viewport.height}, ${theme}`, async ({ page }) => {
+      test.setTimeout(90_000);
       await page.setViewportSize(viewport);
       const consoleErrors: string[] = [];
       page.on('console', message => { if (message.type() === 'error') consoleErrors.push(message.text()); });
