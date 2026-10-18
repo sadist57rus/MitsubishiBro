@@ -226,7 +226,7 @@ for (const viewport of viewports) {
     test('brand selector grid and page overflow: ' + suffix, async ({ page }) => {
       await prepare(page, viewport, theme);
       await page.getByTestId('brand-selector-trigger').click();
-      const dialog = page.getByRole('dialog', { name: 'Выбор японского производителя' });
+      const dialog = page.locator('[role="dialog"]').filter({ has: page.getByRole('heading', { name: 'Выбор японского производителя' }) });
       await expect(dialog).toBeVisible();
       const grid = dialog.locator('.grid.grid-cols-3').first();
       await expect(grid).toBeVisible();
