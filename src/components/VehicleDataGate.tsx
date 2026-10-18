@@ -13,11 +13,11 @@ export default function VehicleDataGate({ children, onOpenJapaneseCars, required
 
   if (data && (!requiredModelId || modelId === requiredModelId)) return <>{children}</>;
 
-  const issueTitle = encodeURIComponent(`Запрос данных: \${brand?.name || brandId} \${model?.name || modelId}`);
+  const issueTitle = encodeURIComponent(`Запрос данных: ${brand?.name || brandId} ${model?.name || modelId}`);
   const issueBody = encodeURIComponent([
-    `Модель ID: \${modelId}`,
-    `Марка: \${brand?.name || brandId}`,
-    `Поколение: \${model?.generation || 'не указано'}`,
+    `Модель ID: ${modelId}`,
+    `Марка: ${brand?.name || brandId}`,
+    `Поколение: ${model?.generation || 'не указано'}`,
     '',
     'Прошу дополнить и проверить данные для этой модификации.',
   ].join('\n'));
@@ -28,7 +28,7 @@ export default function VehicleDataGate({ children, onOpenJapaneseCars, required
       modelName={model?.name || modelId}
       generation={model?.generation}
       onOpenModel={onOpenJapaneseCars}
-      issueUrl={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=\${issueTitle}&body=\${issueBody}`}
+      issueUrl={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=${issueTitle}&body=${issueBody}`}
     />
   );
 }
