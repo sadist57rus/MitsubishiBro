@@ -1,4 +1,5 @@
-import { JAPANESE_BRANDS } from '../src/data/vehicleCatalog';
+import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
+import '../src/data/expandedJapaneseModels';
 
 type Model = (typeof JAPANESE_BRANDS)[number]['models'][number];
 
