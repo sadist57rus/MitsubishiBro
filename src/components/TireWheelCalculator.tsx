@@ -90,39 +90,39 @@ export default function TireWheelCalculator() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Разболтовка (PCD)</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Разболтовка (PCD)</span>
             <span className="text-base font-bold font-mono text-white mt-0.5 block">5 x 114.3</span>
-            <span className="text-[10px] text-slate-500">5 отверстий на 114.3 мм</span>
+            <span className="text-xs text-slate-500">5 отверстий на 114.3 мм</span>
           </div>
 
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Ступица (DIA / ЦО)</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Ступица (DIA / ЦО)</span>
             <span className="text-base font-bold font-mono text-red-400 mt-0.5 block">67.1 мм</span>
-            <span className="text-[10px] text-slate-500">При большем нужны кольца</span>
+            <span className="text-xs text-slate-500">При большем нужны кольца</span>
           </div>
 
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Штатный вылет (ET)</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Штатный вылет (ET)</span>
             <span className="text-base font-bold font-mono text-white mt-0.5 block">46 мм</span>
-            <span className="text-[10px] text-slate-500">Допустимо: 38 – 46 мм</span>
+            <span className="text-xs text-slate-500">Допустимо: 38 – 46 мм</span>
           </div>
 
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Крепеж гайки</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Крепеж гайки</span>
             <span className="text-base font-bold font-mono text-white mt-0.5 block">M12 x 1.5</span>
-            <span className="text-[10px] text-slate-500">Конус 60° или пресс-шайба</span>
+            <span className="text-xs text-slate-500">Конус 60° или пресс-шайба</span>
           </div>
 
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Момент затяжки</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Момент затяжки</span>
             <span className="text-base font-bold font-mono text-amber-400 mt-0.5 block">98–118 Н·м</span>
-            <span className="text-[10px] text-slate-500">10 – 12 кгс·м динамометром</span>
+            <span className="text-xs text-slate-500">10 – 12 кгс·м динамометром</span>
           </div>
 
           <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider block">Штатное давление</span>
+            <span className="text-xs text-slate-400 uppercase tracking-wider block">Штатное давление</span>
             <span className="text-base font-bold font-mono text-white mt-0.5 block">2.1 – 2.2 bar</span>
-            <span className="text-[10px] text-slate-500">Перед: 2.1, Зад: 2.1 (на R16)</span>
+            <span className="text-xs text-slate-500">Перед: 2.1, Зад: 2.1 (на R16)</span>
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default function TireWheelCalculator() {
 
           {/* Quick presets */}
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[11px] text-slate-400 font-medium mr-1">Быстрые пресеты:</span>
+            <span className="text-xs text-slate-400 font-medium mr-1">Быстрые пресеты:</span>
             <button
               onClick={() => applyPreset(215, 60, 16, 6.5, 46)}
               className="px-2.5 py-1 text-xs rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
@@ -183,7 +183,7 @@ export default function TireWheelCalculator() {
 
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Ширина (мм)</label>
+                <label className="text-xs text-slate-400 block mb-1">Ширина (мм)</label>
                 <select
                   value={oldWidth}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldWidth(parsed); }}
@@ -194,7 +194,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Профиль (%)</label>
+                <label className="text-xs text-slate-400 block mb-1">Профиль (%)</label>
                 <select
                   value={oldAspect}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldAspect(parsed); }}
@@ -205,7 +205,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Диаметр (R")</label>
+                <label className="text-xs text-slate-400 block mb-1">Диаметр (R")</label>
                 <select
                   value={oldRim}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldRim(parsed); }}
@@ -218,7 +218,7 @@ export default function TireWheelCalculator() {
 
             <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-slate-800/80">
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Ширина диска (J)</label>
+                <label className="text-xs text-slate-400 block mb-1">Ширина диска (J)</label>
                 <select
                   value={oldRimWidth}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setOldRimWidth(parsed); }}
@@ -229,7 +229,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
+                <label className="text-xs text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
                   type="text" inputMode="decimal"
                   value={oldEt}
@@ -269,7 +269,7 @@ export default function TireWheelCalculator() {
 
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Ширина (мм)</label>
+                <label className="text-xs text-slate-400 block mb-1">Ширина (мм)</label>
                 <select
                   value={newWidth}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewWidth(parsed); }}
@@ -280,7 +280,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Профиль (%)</label>
+                <label className="text-xs text-slate-400 block mb-1">Профиль (%)</label>
                 <select
                   value={newAspect}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewAspect(parsed); }}
@@ -291,7 +291,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Диаметр (R")</label>
+                <label className="text-xs text-slate-400 block mb-1">Диаметр (R")</label>
                 <select
                   value={newRim}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewRim(parsed); }}
@@ -304,7 +304,7 @@ export default function TireWheelCalculator() {
 
             <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-slate-800/80">
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Ширина диска (J)</label>
+                <label className="text-xs text-slate-400 block mb-1">Ширина диска (J)</label>
                 <select
                   value={newRimWidth}
                   onChange={(e) => { const parsed = parseDecimalInput(e.target.value); if (parsed !== null) setNewRimWidth(parsed); }}
@@ -315,7 +315,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">Вылет (ET, мм)</label>
+                <label className="text-xs text-slate-400 block mb-1">Вылет (ET, мм)</label>
                 <input
                   type="text" inputMode="decimal"
                   value={newEt}
@@ -352,7 +352,7 @@ export default function TireWheelCalculator() {
               <Disc className="w-4 h-4 text-red-500" />
               Визуальное сравнение профилей колес и зазора до стойки
             </span>
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className="text-xs font-mono text-slate-400">
               Масштабированный чертёж 1:1
             </span>
           </div>
@@ -462,7 +462,7 @@ export default function TireWheelCalculator() {
 
             {/* Quick Speedometer Deviation Dial Graphic */}
             <div className="md:col-span-4 bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-3">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300 block">
                 Спидометр при 100 км/ч
               </span>
 
@@ -486,7 +486,7 @@ export default function TireWheelCalculator() {
                 <div className="text-xl font-black font-mono text-white">
                   {(100 * (1 + speedoDiffPercent / 100)).toFixed(1)} <span className="text-xs text-slate-400 font-normal">км/ч</span>
                 </div>
-                <div className={`text-[11px] font-semibold ${Math.abs(speedoDiffPercent) > 3 ? 'text-amber-400' : 'text-slate-400'}`}>
+                <div className={`text-xs font-semibold ${Math.abs(speedoDiffPercent) > 3 ? 'text-amber-400' : 'text-slate-400'}`}>
                   {speedoDiffPercent > 0 ? `Завышает на ${speedoDiffPercent}%` : speedoDiffPercent < 0 ? `Занижает на ${speedoDiffPercent}%` : 'Идеальное совпадение'}
                 </div>
               </div>
@@ -497,47 +497,47 @@ export default function TireWheelCalculator() {
         {/* Comparison Summary Banner */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
-            <span className="text-[11px] text-slate-400 uppercase">Изменение клиренса</span>
+            <span className="text-xs text-slate-400 uppercase">Изменение клиренса</span>
             <div className="my-1">
               <span className={`text-xl font-bold font-mono ${clearanceDiff > 0 ? 'text-emerald-400' : clearanceDiff < 0 ? 'text-red-400' : 'text-slate-200'}`}>
                 {clearanceDiff > 0 ? `+${clearanceDiff}` : clearanceDiff} мм
               </span>
             </div>
-            <span className="text-[10px] text-slate-500">
+            <span className="text-xs text-slate-500">
               {clearanceDiff > 0 ? 'Машина станет выше' : clearanceDiff < 0 ? 'Машина станет ниже' : 'Без изменений'}
             </span>
           </div>
 
           <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
-            <span className="text-[11px] text-slate-400 uppercase">Разница диаметра</span>
+            <span className="text-xs text-slate-400 uppercase">Разница диаметра</span>
             <div className="my-1">
               <span className={`text-xl font-bold font-mono ${diameterDiff > 0 ? 'text-amber-400' : diameterDiff < 0 ? 'text-blue-400' : 'text-slate-200'}`}>
                 {diameterDiff > 0 ? `+${diameterDiff}` : diameterDiff} мм
               </span>
             </div>
-            <span className="text-[10px] text-slate-500">Общий диаметр колеса</span>
+            <span className="text-xs text-slate-500">Общий диаметр колеса</span>
           </div>
 
           <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
-            <span className="text-[11px] text-slate-400 uppercase">Зазор до чашки стойки</span>
+            <span className="text-xs text-slate-400 uppercase">Зазор до чашки стойки</span>
             <div className="my-1">
               <span className={`text-xl font-bold font-mono ${clearanceToSpringCupMm < 8 ? 'text-red-400' : clearanceToSpringCupMm < 14 ? 'text-amber-400' : 'text-emerald-400'}`}>
                 ~{clearanceToSpringCupMm} мм
               </span>
             </div>
-            <span className="text-[10px] text-slate-500">
+            <span className="text-xs text-slate-500">
               {clearanceToSpringCupMm < 8 ? 'Критически мало!' : 'Безопасное расстояние'}
             </span>
           </div>
 
           <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 flex flex-col justify-between">
-            <span className="text-[11px] text-slate-400 uppercase">Погрешность спидометра</span>
+            <span className="text-xs text-slate-400 uppercase">Погрешность спидометра</span>
             <div className="my-1">
               <span className={`text-xl font-bold font-mono ${Math.abs(speedoDiffPercent) > 5 ? 'text-amber-400' : 'text-slate-200'}`}>
                 {speedoDiffPercent > 0 ? `+${speedoDiffPercent}%` : `${speedoDiffPercent}%`}
               </span>
             </div>
-            <span className="text-[10px] text-slate-500">При 100 км/ч: {(100 * (1 + speedoDiffPercent / 100)).toFixed(1)} км/ч</span>
+            <span className="text-xs text-slate-500">При 100 км/ч: {(100 * (1 + speedoDiffPercent / 100)).toFixed(1)} км/ч</span>
           </div>
         </div>
 
@@ -607,9 +607,9 @@ export default function TireWheelCalculator() {
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <div>
                     <span className="text-base font-bold font-mono text-white">{item.tireSize}</span>
-                    <span className="text-[11px] block text-slate-400 mt-0.5">{item.categoryLabel}</span>
+                    <span className="text-xs block text-slate-400 mt-0.5">{item.categoryLabel}</span>
                   </div>
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded border ${
                     item.compatibilityStatus === 'ideal'
                       ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/50'
                       : 'bg-amber-950/60 text-amber-400 border-amber-800/50'
@@ -626,9 +626,9 @@ export default function TireWheelCalculator() {
 
                 {/* Pros */}
                 <div className="space-y-1 mb-2">
-                  <span className="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider">Плюсы:</span>
+                  <span className="text-xs uppercase font-bold text-emerald-400 block tracking-wider">Плюсы:</span>
                   {item.pros.slice(0, 2).map((pro, i) => (
-                    <div key={i} className="text-[11px] text-slate-300 flex items-start gap-1.5">
+                    <div key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
                       <span className="text-emerald-500 font-bold shrink-0">+</span>
                       <span>{pro}</span>
                     </div>
@@ -637,9 +637,9 @@ export default function TireWheelCalculator() {
 
                 {/* Cons */}
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Минусы / Особенности:</span>
+                  <span className="text-xs uppercase font-bold text-amber-400 block tracking-wider">Минусы / Особенности:</span>
                   {item.cons.slice(0, 2).map((con, i) => (
-                    <div key={i} className="text-[11px] text-slate-400 flex items-start gap-1.5">
+                    <div key={i} className="text-xs text-slate-400 flex items-start gap-1.5">
                       <span className="text-amber-500 font-bold shrink-0">−</span>
                       <span>{con}</span>
                     </div>
@@ -648,7 +648,7 @@ export default function TireWheelCalculator() {
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
-                <span className="text-[10px] text-slate-500">{item.compatibilityLabel}</span>
+                <span className="text-xs text-slate-500">{item.compatibilityLabel}</span>
                 <button
                   onClick={() => {
                     const [w, rest] = item.tireSize.split('/');
@@ -692,14 +692,14 @@ export default function TireWheelCalculator() {
                   </span>
                 </div>
 
-                <div className="flex flex-wrap gap-2 text-[11px] font-mono text-slate-300 mb-3">
+                <div className="flex flex-wrap gap-2 text-xs font-mono text-slate-300 mb-3">
                   <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800">PCD: {wheel.pcd}</span>
                   <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800">DIA: {wheel.dia}</span>
                   <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-amber-400">OEM: {wheel.oemNumber}</span>
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed mb-3">{wheel.description}</p>
-                <div className="text-[11px] text-slate-500">Производитель: {wheel.origin}</div>
+                <div className="text-xs text-slate-500">Производитель: {wheel.origin}</div>
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
@@ -710,7 +710,7 @@ export default function TireWheelCalculator() {
                   {copiedText === wheel.oemNumber ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
                   <span>Копировать артикул</span>
                 </button>
-                <span className="text-[11px] text-slate-400">Гайки: под пресс-шайбу</span>
+                <span className="text-xs text-slate-400">Гайки: под пресс-шайбу</span>
               </div>
             </div>
           ))}
