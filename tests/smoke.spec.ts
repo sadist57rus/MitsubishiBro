@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
+import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -353,9 +354,10 @@ test('full backup can be exported, validated and restored without losing local d
   expect(path).toBeTruthy();
   const fs = await import('node:fs/promises');
   const content = await fs.readFile(path!, 'utf8');
-  const backup = JSON.parse(content) as { app: string; schemaVersion: number; data: Record<string, string> };
+  const backup = JSON.parse(content) as { app: string; schemaVersion: number; storageSchemaVersion: number; data: Record<string, string> };
   expect(backup.app).toBe('car-brother');
-  expect(backup.schemaVersion).toBe(1);
+  expect(backup.schemaVersion).toBe(BACKUP_SCHEMA_VERSION);
+  expect(backup.storageSchemaVersion).toBe(APP_STORAGE_SCHEMA_VERSION);
   expect(backup.data['car-brother-garage']).toBeTruthy();
 
   await page.evaluate(() => localStorage.setItem('backup-roundtrip-test', 'preserve-me'));
@@ -378,6 +380,49 @@ test('full backup can be exported, validated and restored without losing local d
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
 });
 
+
+
+test('legacy backup schema migrates without dropping data', async ({ page }) => {
+  const legacyBackup = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: '2026-01-01T12:00:00.000Z',
+    data: {
+      'legacy-migration-sentinel': 'keep-legacy-value',
+    },
+  };
+  const migrated = migrateBackup(legacyBackup);
+  expect(migrated).not.toBeNull();
+  expect(migrated?.schemaVersion).toBe(BACKUP_SCHEMA_VERSION);
+  expect(migrated?.storageSchemaVersion).toBe(APP_STORAGE_SCHEMA_VERSION);
+  expect(migrated?.data['legacy-migration-sentinel']).toBe('keep-legacy-value');
+  expect(migrated?.data['car-brother-storage-schema']).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'legacy-backup.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(legacyBackup)),
+  });
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await expect(page.getByRole('status')).toContainText('Восстановление завершено');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('legacy-migration-sentinel'))).toBe('keep-legacy-value');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-storage-schema'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+});
+
+test('backup migration rejects unknown schema versions and malformed storage entries', () => {
+  const validLegacy = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: '2026-01-01T12:00:00.000Z',
+    data: { 'sentinel': 'value' },
+  };
+  expect(migrateBackup({ ...validLegacy, schemaVersion: 999 })).toBeNull();
+  expect(migrateBackup({ ...validLegacy, data: { '   ': 'value' } })).toBeNull();
+  expect(migrateBackup({ ...validLegacy, data: { sentinel: 123 } })).toBeNull();
+});
 
 test('invalid backup is rejected without modifying local data', async ({ page }) => {
   await prepare(page, { width: 1280, height: 720 }, 'light');
