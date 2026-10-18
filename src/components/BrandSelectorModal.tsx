@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { JAPANESE_BRANDS, JapaneseBrand } from '../data/japaneseBrandsData';
+import { JAPANESE_BRANDS, JapaneseBrand } from '../data/vehicleCatalog';
 import { BrandLogo } from './BrandLogos';
 import { X, Search, Check, ChevronRight, Award, Sparkles } from 'lucide-react';
 
