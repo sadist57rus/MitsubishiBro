@@ -431,7 +431,7 @@ export default function Header({
                     <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
                   </div>
 
-                  <div className="py-1 space-y-1">
+                  <div data-testid="section-menu-list" className="py-1 space-y-1">
                     {sections.map((sec) => {
                       const Icon = sec.icon;
                       const isActive = activeTab === sec.id;
