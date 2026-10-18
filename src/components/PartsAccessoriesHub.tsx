@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { SOURCE_BACKED_PARTS, PARTS_CATALOG_SOURCES } from '../data/sourceBackedPartsCatalog';
 import { Search, Filter, Package, Wrench, ShoppingBag, ShieldCheck, AlertTriangle, BookOpen, CarFront } from 'lucide-react';
 
@@ -139,7 +139,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
         <Filter className="w-4 h-4 text-slate-400" />
         {categories.map(c => <button key={c} onClick={() => setCategory(c)} className={`rounded-full px-3 py-1.5 text-xs font-semibold border ${category === c ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-transparent' : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'}`}>{c === 'all' ? 'Все системы' : c}</button>)}
       </div>
-      {selectedModel && <div className="rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3 text-xs text-slate-600 dark:text-slate-300 flex gap-2"><BookOpen className="w-4 h-4 shrink-0 text-red-500" /><span>Выбрано: <strong>{brands.find(b => b.id === brandId)?.name} {selectedModel.name}</strong>. Для записей с номерами деталей учитывайте указанный рынок источника. Часть найденных OEM-номеров относится к североамериканскому Outlander 2006 2.4L, а не автоматически к европейскому CU5W/4G69. Перед заказом проверяйте VIN, код кузова, двигатель, коробку и дату выпуска.</span></div>}
+      {selectedModel && <div className="rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3 text-xs text-slate-600 dark:text-slate-300 flex gap-2"><BookOpen className="w-4 h-4 shrink-0 text-red-500" /><span>Выбрано: <strong>{brands.find(b => b.id === brandId)?.name} {selectedModel.name}</strong>. Для записей с номерами деталей учитывайте указанный рынок источника. Применимость каждой детали зависит от конкретной модификации и рынка. Перед заказом сверяйте VIN, код кузова, двигатель, коробку и дату выпуска. Перед заказом проверяйте VIN, код кузова, двигатель, коробку и дату выпуска.</span></div>}
       <div className="flex items-center justify-between text-xs text-slate-500"><span>Показано позиций: <strong>{items.length}</strong></span><span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Уровень проверки указан на каждой позиции</span></div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         {items.map(item => <article key={item.id} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4 space-y-3 hover:border-slate-400 dark:hover:border-slate-600 transition">
