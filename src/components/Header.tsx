@@ -525,8 +525,8 @@ export default function Header({
 
           {/* Right Controls: Engine selector & Theme switch */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* Engine Picker */}
-            <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-1 text-xs">
+            {/* Hide the engine picker when the selected model has no engine records. */}
+            {currentModel?.engines?.length ? <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-1 text-xs">
               <span className="text-xs text-slate-600 dark:text-slate-300 uppercase font-semibold mr-1 hidden sm:inline">
                 ДВС:
               </span>
@@ -542,7 +542,7 @@ export default function Header({
                   </option>
                 ))}
               </select>
-            </div>
+            </div> : null}
 
             {/* Drivetrain Picker (Desktop) */}
             <div className="hidden xl:flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-0.5 text-xs font-mono">
