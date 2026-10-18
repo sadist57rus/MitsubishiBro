@@ -414,3 +414,12 @@ test('currency, fuel unit, theme and palette persist after reload', async ({ pag
   await expect(page.getByLabel('Тема интерфейса')).toHaveValue('dark');
   await expect(page.getByRole('button', { name: /Чёрный \/ жёлтый/ })).toHaveAttribute('aria-pressed', 'true');
 });
+
+
+test('maintenance intervals expose their verification level instead of implying OEM approval', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'maintenance');
+  await expect(page.getByText(/Интервалы ниже — справочные/)).toBeVisible();
+  await expect(page.getByText('Не подтверждено').first()).toBeVisible();
+  await expect(page.getByText('Регламент подтверждён')).toHaveCount(0);
+});
