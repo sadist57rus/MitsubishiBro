@@ -42,7 +42,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
       <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-7">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-950 md:h-20 md:w-20">
-            {brand ? <BrandLogo brandId={brand.id} className="h-full w-full" /> : <Car className="h-10 w-10 text-slate-500" />}
+            {hasVehicle && brand ? <BrandLogo brandId={brand.id} className="h-full w-full" /> : <Car className="h-10 w-10 text-slate-500" />}
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Мой автомобиль</p>
