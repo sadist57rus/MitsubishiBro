@@ -601,11 +601,11 @@ export default function SpecsBlueprintGraphic() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
             <div className="space-y-0.5">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block">Контрольные точки:</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wide block">Контрольные точки:</span>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans">{activeCallout.points}</p>
             </div>
             <div className="space-y-0.5">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide block">Практическое значение для владельца:</span>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wide block">Практическое значение для владельца:</span>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans">{activeCallout.significance}</p>
             </div>
           </div>
@@ -614,7 +614,7 @@ export default function SpecsBlueprintGraphic() {
 
       {/* Quick Dimension Pill Selectors */}
       <div className="space-y-1.5 pt-1">
-        <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
           Быстрый выбор контрольной точки:
         </span>
         <div className="flex flex-wrap gap-1.5 text-xs">
