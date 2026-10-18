@@ -267,7 +267,7 @@ export default function Header({
                   setIsBrandDropdownOpen(!isBrandDropdownOpen);
                   setIsDropdownOpen(false);
                 }}
-                className={`flex items-center gap-2 p-2 sm:px-2.5 sm:py-1.5 rounded-xl border transition cursor-pointer group shadow-2xs ${
+                className={`flex items-center gap-1.5 p-1.5 sm:px-2 sm:py-1 rounded-lg border transition cursor-pointer group shadow-2xs ${
                   isBrandDropdownOpen
                     ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
                     : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
@@ -277,7 +277,7 @@ export default function Header({
                 aria-expanded={isBrandDropdownOpen}
                 aria-haspopup="dialog"
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center p-2 shadow-2xs group-hover:scale-105 transition shrink-0 ${
+                <div className={`w-7 h-7 rounded-md flex items-center justify-center p-1.5 shadow-2xs group-hover:scale-105 transition shrink-0 ${
                   isBrandDropdownOpen ? 'bg-white text-slate-900' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'
                 }`}>
                   <BrandLogo brandId={currentBrand.id} className="w-full h-full" useBrandColor={true} />
@@ -292,7 +292,7 @@ export default function Header({
                     </span>
                     <ChevronDown className={`w-3 h-3 transition-transform ${isBrandDropdownOpen ? 'rotate-180 text-white' : 'text-slate-400 group-hover:text-red-600'}`} />
                   </div>
-                  <span className={`text-xs block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
+                  <span className={`text-[11px] hidden sm:block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
                     Все бренды
                   </span>
                 </div>
@@ -399,7 +399,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className={`flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-sm font-bold transition border shadow-xs ${
+                className={`flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-sm font-bold transition border shadow-xs ${
                   isDropdownOpen
                     ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
                     : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700'
@@ -592,7 +592,7 @@ export default function Header({
             {/* Day / Night Theme Switch */}
             <button
               onClick={toggleTheme}
-              className={`flex min-h-11 items-center gap-2 px-2.5 py-1.5 rounded-xl border text-sm font-semibold transition shadow-2xs ${
+              className={`flex min-h-9 items-center gap-1.5 px-2 py-1 rounded-lg border text-xs font-semibold transition shadow-2xs ${
                 isLight
                   ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
                   : 'bg-slate-800 text-amber-300 border-slate-700 hover:bg-slate-700'
