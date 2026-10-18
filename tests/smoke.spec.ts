@@ -619,3 +619,23 @@ test('journal and fuel records survive switching between two active vehicles', a
   await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-logbook-test-car-two') || '[]')[0]?.title)).toBe('Запись второго автомобиля');
   await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-fuel-logs-test-car-two') || '[]')[0]?.station)).toBe('АЗС второго авто');
 });
+
+
+test('axe accessibility audit covers core screens', async ({ page }) => {
+  test.setTimeout(120_000);
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await page.addScriptTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.3/axe.min.js' });
+  const audit = async (screen: string) => {
+    const violations = await page.evaluate(async () => {
+      const axeWindow = window as Window & { axe?: { run: (context: Document, options: { runOnly: { type: 'tag'; values: string[] } }) => Promise<{ violations: Array<{ id: string; impact: string | null; help: string; nodes: Array<{ target: string[] }> }> }> } };
+      if (!axeWindow.axe) throw new Error('axe-core did not load');
+      const report = await axeWindow.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } });
+      return report.violations.map(item => ({ id: item.id, impact: item.impact, help: item.help, targets: item.nodes.slice(0, 5).map(node => node.target) }));
+    });
+    expect(violations, 'axe violations on ' + screen + ': ' + JSON.stringify(violations)).toEqual([]);
+  };
+  for (const section of ['overview', 'garage', 'fuel', 'settings', 'brands']) {
+    if (section !== 'overview') await openNavItem(page, section);
+    await audit(section);
+  }
+});
