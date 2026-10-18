@@ -20,6 +20,34 @@ async function chooseToyota(page: Page) {
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
 }
 
+
+async function assertReadableAndTouchSafe(page: Page, label: string) {
+  const violations = await page.evaluate(() => {
+    const interactive = [...document.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea, [role="button"], [role="tab"], [role="switch"], [tabindex]:not([tabindex="-1"])')];
+    const smallTargets = interactive.filter(el => {
+      const rect = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || rect.width === 0 || rect.height === 0) return false;
+      return rect.width < 44 || rect.height < 44;
+    }).map(el => ({ tag: el.tagName, text: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 70), width: Math.round(el.getBoundingClientRect().width), height: Math.round(el.getBoundingClientRect().height) }));
+    const smallText = [...document.querySelectorAll<HTMLElement>('body *')].filter(el => {
+      if (el.children.length > 0) return false;
+      const text = (el.textContent || '').trim();
+      if (!text) return false;
+      const style = getComputedStyle(el);
+      return style.display !== 'none' && style.visibility !== 'hidden' && Number.parseFloat(style.fontSize) < 12;
+    }).map(el => ({ tag: el.tagName, text: (el.textContent || '').trim().slice(0, 70), size: getComputedStyle(el).fontSize }));
+    const headerOverflow = [...document.querySelectorAll<HTMLElement>('header button, header a[href], header select, header input')].filter(el => {
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && (r.left < 0 || r.right > window.innerWidth);
+    }).map(el => ({ text: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 70), left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right) }));
+    return { smallTargets, smallText, headerOverflow };
+  });
+  expect(violations.smallTargets, `${label}: interactive targets smaller than 44x44: ${JSON.stringify(violations.smallTargets)}`).toEqual([]);
+  expect(violations.smallText, `${label}: visible text smaller than 12px: ${JSON.stringify(violations.smallText)}`).toEqual([]);
+  expect(violations.headerOverflow, `${label}: header controls outside viewport: ${JSON.stringify(violations.headerOverflow)}`).toEqual([]);
+}
+
 async function openNavItem(page: Page, label: RegExp) {
   const menu = page.getByRole('button', { name: /Открыть разделы приложения/i });
   await expect(menu).toBeVisible();
@@ -45,6 +73,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
         document.documentElement.dataset.theme = mode;
       }, theme);
       await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+      await assertReadableAndTouchSafe(page, 'home');
 
       const sections: RegExp[] = [
         /Главная/i, /Гараж/i, /Настройки/i, /Авто Японии|Марки и модели/i,
@@ -60,6 +89,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
 
       await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
+      await assertReadableAndTouchSafe(page, 'garage');
       await page.getByRole('button', { name: /Добавить машину/i }).click();
       const brand = page.locator('form select').first();
       const toyotaValue = await brand.locator('option').evaluateAll(options => {
@@ -69,6 +99,8 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await brand.selectOption(toyotaValue);
       const modelValues = await page.locator('form select').nth(1).locator('option').evaluateAll(options => options.map(option => option.getAttribute('value')));
       expect(new Set(modelValues).size, 'model ids in the garage selector must be unique').toBe(modelValues.length);
+      const modelLabels = await page.locator('form select').nth(1).locator('option').evaluateAll(options => options.map(option => (option.textContent || '').trim().toLocaleLowerCase('ru-RU')));
+      expect(new Set(modelLabels).size, 'model names and years in the garage selector must be unique').toBe(modelLabels.length);
 
       await page.getByRole('button', { name: /Отмена/i }).click();
       await page.reload();
@@ -85,6 +117,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await settingsItem.focus();
       await settingsItem.press('Enter');
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
+      await assertReadableAndTouchSafe(page, 'settings');
 
       // Escape closes the section menu and restores focus to its trigger.
       await sectionMenu.press('Enter');
