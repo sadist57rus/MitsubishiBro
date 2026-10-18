@@ -42,7 +42,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
       await openNavItem(page, /Топливо|Fuel/i);
-      await expect(page.getByText(/Расходы на топливо/i)).toBeVisible();
+      await expect(page.getByText(/Расходы на топливо/i).first()).toBeVisible();
       expect(await page.locator('body').innerText()).not.toMatch(/Outlander/i);
 
       await openNavItem(page, /Гараж/i);
