@@ -2,16 +2,8 @@ import { useState } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
-import { isRecord } from '../lib/storage';
-
-const BACKUP_SCHEMA_VERSION = 1;
-type BackupPayload = { app: 'car-brother'; schemaVersion: number; createdAt: string; data: Record<string, string> };
+import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup, type BackupPayload } from '../lib/backupSchema';
 type RestoreMode = 'merge' | 'replace';
-
-function isBackup(value: unknown): value is BackupPayload {
-  if (!isRecord(value) || value.app !== 'car-brother' || value.schemaVersion !== BACKUP_SCHEMA_VERSION || typeof value.createdAt !== 'string' || !Number.isFinite(Date.parse(value.createdAt)) || !isRecord(value.data)) return false;
-  return Object.entries(value.data).every(([key, item]) => key.trim().length > 0 && typeof item === 'string');
-}
 
 function createBackup(): BackupPayload {
   const data: Record<string, string> = {};
@@ -22,7 +14,8 @@ function createBackup(): BackupPayload {
       if (value !== null) data[key] = value;
     }
   }
-  return { app: 'car-brother', schemaVersion: BACKUP_SCHEMA_VERSION, createdAt: new Date().toISOString(), data };
+  data['car-brother-storage-schema'] = String(APP_STORAGE_SCHEMA_VERSION);
+  return { app: 'car-brother', schemaVersion: BACKUP_SCHEMA_VERSION, createdAt: new Date().toISOString(), storageSchemaVersion: APP_STORAGE_SCHEMA_VERSION, data };
 }
 
 function downloadJson(fileName: string, content: string) {
@@ -67,8 +60,9 @@ export default function BackupManager() {
     if (!file) return;
     try {
       const parsed: unknown = JSON.parse(await file.text());
-      if (!isBackup(parsed)) throw new Error('invalid backup');
-      setPending(parsed);
+      const migrated = migrateBackup(parsed);
+      if (!migrated) throw new Error('invalid backup');
+      setPending(migrated);
       setMessage('Файл проверен. Выберите режим восстановления и подтвердите операцию.');
     } catch {
       setPending(null);
