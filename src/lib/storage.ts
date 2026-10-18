@@ -43,8 +43,9 @@ export function readStored<T>(key: string, guard: Guard<T>, fallback: T): T {
     if (raw === null) return fallback;
     const parsed: unknown = JSON.parse(raw);
     const keyVersionRaw = storage.getItem(key + KEY_VERSION_SUFFIX);
-    const legacyVersionRaw = storage.getItem(VERSION_KEY);
-    const versionRaw = keyVersionRaw ?? legacyVersionRaw;
+    // The global marker cannot establish the schema of every individual key.
+    // Missing per-key markers are treated as legacy so restored backups migrate safely.
+    const versionRaw = keyVersionRaw;
     const version = versionRaw === null ? 1 : Number(versionRaw);
     if (!Number.isInteger(version) || version < 1 || version > STORAGE_SCHEMA_VERSION) return fallback;
     const migrated = migrateValue(parsed, version, key);
