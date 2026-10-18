@@ -158,7 +158,7 @@ export default function SettingsModal({
               >
                 <div>
                   <span className="block font-bold">4WD (Полный привод)</span>
-                  <span className="text-[10px] text-slate-500">Постоянный 50:50 с вискомуфтой</span>
+                  <span className="text-xs text-slate-500">Постоянный 50:50 с вискомуфтой</span>
                 </div>
                 {selectedDrivetrain === '4WD' && <Check className="w-4 h-4 text-red-600 dark:text-red-400" />}
               </button>
@@ -173,7 +173,7 @@ export default function SettingsModal({
               >
                 <div>
                   <span className="block font-bold">2WD (Передний привод)</span>
-                  <span className="text-[10px] text-slate-500">Модели без раздатки и редуктора</span>
+                  <span className="text-xs text-slate-500">Модели без раздатки и редуктора</span>
                 </div>
                 {selectedDrivetrain === 'FWD' && <Check className="w-4 h-4 text-red-600 dark:text-red-400" />}
               </button>
@@ -187,7 +187,7 @@ export default function SettingsModal({
               <span className="font-bold text-slate-900 dark:text-white block">
                 Mitsubishi Outlander I (CU_W / Airtrek)
               </span>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 Кузова: CU2W (2.0), CU4W (2.4 GDI/SOHC), CU5W (2.4 MIVEC). Колесная база 2625 мм, клиренс 195–205 мм.
               </p>
             </div>
