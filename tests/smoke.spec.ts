@@ -382,6 +382,24 @@ test('full backup can be exported, validated and restored without losing local d
 
 
 
+
+test('legacy preferences are migrated and versioned per storage key', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await page.evaluate(() => {
+    localStorage.setItem('car-brother-preferences', JSON.stringify({ currency: 'USD', fuelUnit: 'mpg' }));
+    localStorage.setItem('car-brother-storage-schema', '1');
+    localStorage.removeItem('car-brother-preferences:schema-version');
+  });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => {
+    const raw = localStorage.getItem('car-brother-preferences');
+    return raw ? JSON.parse(raw).autoTheme : null;
+  })).toBe('system');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(3));
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences'))).toContain('"currency":"USD"');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences'))).toContain('"fuelUnit":"mpg"');
+});
+
 test('legacy backup schema migrates without dropping data', async ({ page }) => {
   const legacyBackup = {
     app: 'car-brother',
