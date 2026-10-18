@@ -372,6 +372,7 @@ test('full backup can be exported, validated and restored without losing local d
   await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBe('preserve-me');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
 
+  await openNavItem(page, 'settings');
   await fileInput.setInputFiles(file);
   await expect(page.getByText(/Файл проверен/)).toBeVisible();
   await page.getByLabel('Режим восстановления').selectOption('replace');
