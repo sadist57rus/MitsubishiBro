@@ -942,7 +942,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         )}
       </div>
 
-      {/* Guide: Why Does Outlander 1 Consume Fuel & How to Reduce It */}
+      {/* General guidance for diagnosing high fuel consumption */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <AlertTriangle className="w-5 h-5 text-amber-500" />
