@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
-type AuditScreen = 'home' | 'garage' | 'settings';
+type AuditScreen = 'home' | 'garage' | 'settings' | 'section';
 type AuditThreshold = { smallText: number; smallTargets: number };
 
 const viewports: Viewport[] = [
@@ -28,6 +28,9 @@ const auditThresholds: Record<string, AuditThreshold> = {
   'home:800x480': { smallText: 0, smallTargets: 0 },
   'garage:800x480': { smallText: 0, smallTargets: 0 },
   'settings:800x480': { smallText: 0, smallTargets: 0 },
+  'home:1280x720': { smallText: 0, smallTargets: 0 },
+  'garage:1280x720': { smallText: 0, smallTargets: 0 },
+  'settings:1280x720': { smallText: 0, smallTargets: 0 },
 };
 
 async function chooseToyota(page: Page) {
@@ -199,6 +202,7 @@ for (const viewport of viewports) {
             await expect(page.getByTestId('vehicle-data-empty-state')).toBeVisible();
             await expect(page.getByRole('heading', { name: 'Данные для этой модели ещё не проверены' })).toBeVisible();
           }
+          await assertReadableAndTouchSafe(page, 'section ' + sectionId + ' ' + suffix, 'section', viewport);
           await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
         }
         expect(consoleErrors, 'browser console/page errors').toEqual([]);

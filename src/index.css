@@ -397,7 +397,7 @@ html.dark[data-palette] .dark\\:bg-red-950\\/40,
 html.dark[data-palette] .dark\\:bg-red-950\\/50 { background-color:color-mix(in srgb, var(--palette-accent) 16%, #0f172a) !important; }
 
 
-/* Stage 3 readability and touch ergonomics. Use device-local system fonts: no network font dependency. */
+/* Stage 3 readability and touch ergonomics. Self-hosted WOFF2 font faces above are cached by the service worker. */
 :root {
   --font-secondary-min: 0.75rem;
   --font-primary-min: 0.875rem;
@@ -405,7 +405,7 @@ html.dark[data-palette] .dark\\:bg-red-950\\/50 { background-color:color-mix(in 
   --tap-size: 2.75rem;
 }
 html[data-ui-mode="wide"] {
-  --font-secondary-min: 0.875rem;
+  --font-secondary-min: 1rem;
   --font-primary-min: 1rem;
   --font-heading-min: 1rem;
   --tap-size: 3.5rem;
@@ -415,6 +415,11 @@ main h1, main h2, main h3, main h4 { font-size: max(var(--font-heading-min), 1em
 main small, main .text-xs {
   font-size: max(12px, 0.75rem);
   line-height: 1.4;
+}
+html[data-ui-mode="wide"] main small,
+html[data-ui-mode="wide"] main .text-xs,
+html[data-ui-mode="wide"] main .text-sm {
+  font-size: max(16px, 1rem) !important;
 }
 main p, main label, main input, main select, main textarea, main table, main th, main td {
   font-size: max(var(--font-secondary-min), 0.875rem);
