@@ -175,14 +175,14 @@ jobs:
           retention-days: 14
 
       - name: Publish test release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: test-build-${{ github.run_number }}
-          name: Car Brother test build ${{ github.run_number }}
-          generate_release_notes: true
-          draft: false
-          prerelease: true
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "test-build-${GITHUB_RUN_NUMBER}" \
+            android/app/build/outputs/apk/debug/app-debug.apk \
+            --title "Car Brother test build ${GITHUB_RUN_NUMBER}" \
+            --generate-notes \
+            --prerelease
 
   release-apk:
     name: Build and publish signed release APK
