@@ -453,12 +453,12 @@ function AppContent() {
               <div className="font-bold text-slate-900 dark:text-slate-200">
                 Car Brother — справочник японских автомобилей
               </div>
-              <p className="text-slate-500 dark:text-slate-400 text-[11px]">
+              <p className="text-slate-500 dark:text-slate-400 text-xs">
                 Технические данные, диагностика OBD-II и обслуживание. Сверяйте характеристики с руководством для конкретной модификации.
               </p>
             </div>
 
-            <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
               <button
                 onClick={() => setIsApkGuideOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition font-sans font-bold"
