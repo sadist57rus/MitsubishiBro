@@ -386,7 +386,7 @@ test('invalid backup is rejected without modifying local data', async ({ page })
 
   const invalidBackup = {
     app: 'car-brother',
-    schemaVersion: 999,
+    schemaVersion: 1,
     createdAt: 'not-a-valid-date',
     data: { 'backup-validation-sentinel': 'overwritten' },
   };
