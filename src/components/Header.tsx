@@ -26,7 +26,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogos';
-import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 
 export type TabId = 'overview' | 'garage' | 'settings' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook';
 type UiMode = 'phone' | 'wide';
