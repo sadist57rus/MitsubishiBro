@@ -316,12 +316,25 @@ test('wide mode keeps controls large, text readable and keyboard focus visible',
   expect(metrics.scrollWidth, 'wide mode must not create horizontal page scrolling').toBeLessThanOrEqual(metrics.clientWidth);
 
   const trigger = page.getByTestId('section-menu-trigger');
-  await trigger.focus();
-  await expect(trigger).toBeFocused();
+  let triggerFocused = false;
+  for (let attempt = 0; attempt < 30; attempt += 1) {
+    await page.keyboard.press('Tab');
+    if (await trigger.evaluate(element => element === document.activeElement)) {
+      triggerFocused = true;
+      break;
+    }
+  }
+  expect(triggerFocused, 'section menu trigger should be reachable by keyboard').toBe(true);
   const focusStyle = await trigger.evaluate(element => {
     const style = getComputedStyle(element);
-    return { outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, outlineColor: style.outlineColor };
+    return {
+      focusVisible: element.matches(':focus-visible'),
+      outlineStyle: style.outlineStyle,
+      outlineWidth: style.outlineWidth,
+      outlineColor: style.outlineColor
+    };
   });
+  expect(focusStyle.focusVisible, 'keyboard navigation should activate focus-visible styling').toBe(true);
   expect(focusStyle.outlineStyle).not.toBe('none');
   expect(Number.parseFloat(focusStyle.outlineWidth)).toBeGreaterThanOrEqual(2);
 });
