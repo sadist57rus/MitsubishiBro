@@ -426,7 +426,7 @@ export default function Header({
                 <span className="tracking-tight whitespace-nowrap">
                   Разделы
                 </span>
-                <span className="text-xs font-normal text-slate-500 dark:text-slate-400 hidden lg:inline max-w-[120px] truncate">
+                <span className="text-xs font-normal text-slate-600 dark:text-slate-300 hidden lg:inline max-w-[120px] truncate">
                   ({currentSection.shortTitle})
                 </span>
                 <ChevronDown
