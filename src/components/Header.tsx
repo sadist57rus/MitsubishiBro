@@ -300,7 +300,7 @@ export default function Header({
                     </span>
                     <ChevronDown className={`w-3 h-3 transition-transform ${isBrandDropdownOpen ? 'rotate-180 text-white' : 'text-slate-400 group-hover:text-red-600'}`} />
                   </div>
-                  <span className={`text-[11px] hidden sm:block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
+                  <span className={`text-xs hidden sm:block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
                     Все бренды
                   </span>
                 </div>
