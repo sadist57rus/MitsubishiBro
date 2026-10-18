@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
+import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -375,4 +376,41 @@ test('full backup can be exported, validated and restored without losing local d
   await expect(page.getByRole('status')).toContainText('Восстановление завершено');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBeNull();
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
+});
+
+test('fuel and logbook storage keys stay isolated per vehicle and preserve legacy keys', () => {
+  const firstLogbook = getLogbookStorageKey('vehicle-one', true);
+  const secondLogbook = getLogbookStorageKey('vehicle-two', false);
+  const thirdLogbook = getLogbookStorageKey('vehicle-three', false);
+  expect(firstLogbook).toBe(LEGACY_LOGBOOK_STORAGE_KEY);
+  expect(new Set([firstLogbook, secondLogbook, thirdLogbook]).size).toBe(3);
+
+  const firstOutlanderFuel = getFuelStorageKey('vehicle-one', true, true);
+  const secondVehicleFuel = getFuelStorageKey('vehicle-two', false, false);
+  const thirdVehicleFuel = getFuelStorageKey('vehicle-three', false, true);
+  expect(firstOutlanderFuel).toBe(LEGACY_FUEL_STORAGE_KEY);
+  expect(new Set([firstOutlanderFuel, secondVehicleFuel, thirdVehicleFuel]).size).toBe(3);
+});
+
+test('currency, fuel unit, theme and palette persist after reload', async ({ page }) => {
+  await prepare(page, { width: 360, height: 800 }, 'light');
+  await openNavItem(page, 'settings');
+
+  await page.getByLabel('Валюта по умолчанию').selectOption('USD');
+  await page.getByLabel('Расход топлива').selectOption('mpg');
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
+  await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
+
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').fuelUnit)).toBe('mpg');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-theme'))).toBe('dark');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-color-palette'))).toBe('black-yellow');
+
+  await page.reload();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'settings');
+  await expect(page.getByLabel('Валюта по умолчанию')).toHaveValue('USD');
+  await expect(page.getByLabel('Расход топлива')).toHaveValue('mpg');
+  await expect(page.getByLabel('Тема интерфейса')).toHaveValue('dark');
+  await expect(page.getByRole('button', { name: /Чёрный \/ жёлтый/ })).toHaveAttribute('aria-pressed', 'true');
 });
