@@ -437,10 +437,18 @@ export default function Header({
                       const isActive = activeTab === sec.id;
 
                       return (
-                        <button
+                        <div
                           key={sec.id}
+                          role="button"
+                          tabIndex={0}
                           onClick={() => handleSelectSection(sec.id)}
-                          className={`w-full text-left px-3 py-2.5 rounded-xl transition flex items-start justify-between text-xs group ${
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault();
+                              handleSelectSection(sec.id);
+                            }
+                          }}
+                          className={`w-full text-left px-3 py-2.5 rounded-xl transition flex items-start justify-between text-xs group cursor-pointer ${
                             isActive
                               ? 'bg-red-50 dark:bg-red-950/60 text-red-600 dark:text-red-400 font-bold border border-red-200 dark:border-red-900/60'
                               : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-transparent'
@@ -514,7 +522,7 @@ export default function Header({
                           {isActive && (
                             <Check className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-1" />
                           )}
-                        </button>
+                        </div>
                       );
                     })}
                   </div>
