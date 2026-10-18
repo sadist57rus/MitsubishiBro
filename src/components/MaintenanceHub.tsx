@@ -1,11 +1,24 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useVehicle } from '../context/VehicleContext';
+import { readStored, writeStored } from '../lib/storage';
 import { FLUIDS_DATA, TORQUE_SPECS_DATA, MAINTENANCE_SCHEDULE_TEMPLATE } from '../data/maintenanceData';
 import { Droplet, Gauge, Calendar, CheckCircle2, AlertTriangle, Search, Info, Fuel, Calculator, RotateCcw, Sparkles } from 'lucide-react';
 
 export default function MaintenanceHub() {
-  const [currentMileage, setCurrentMileage] = useState<number>(180000);
+  const { vehicleId, activeVehicle } = useVehicle();
+  const checklistKey = 'car-brother-maintenance-checklist-' + vehicleId;
+  const [currentMileage, setCurrentMileage] = useState<number>(activeVehicle.mileage);
   const [torqueSearch, setTorqueSearch] = useState('');
-  const [completedItems, setCompletedItems] = useState<Record<string, boolean>>({});
+  const [completedItems, setCompletedItems] = useState<Record<string, boolean>>(() => readStored<Record<string, boolean>>(checklistKey, (value): value is Record<string, boolean> => !!value && typeof value === 'object' && !Array.isArray(value) && Object.values(value).every(item => typeof item === 'boolean'), {}));
+
+  useEffect(() => {
+    setCurrentMileage(activeVehicle.mileage);
+    setCompletedItems(readStored<Record<string, boolean>>(checklistKey, (value): value is Record<string, boolean> => !!value && typeof value === 'object' && !Array.isArray(value) && Object.values(value).every(item => typeof item === 'boolean'), {}));
+  }, [activeVehicle.mileage, checklistKey]);
+
+  useEffect(() => {
+    writeStored(checklistKey, completedItems, (value): value is Record<string, boolean> => !!value && typeof value === 'object' && !Array.isArray(value) && Object.values(value).every(item => typeof item === 'boolean'));
+  }, [checklistKey, completedItems]);
 
   // Fuel consumption calculator state
   const [distanceKm, setDistanceKm] = useState<string>('420');
@@ -90,7 +103,7 @@ export default function MaintenanceHub() {
               Регламент ТО и калькулятор обслуживания
             </h2>
             <p className="text-xs text-slate-400 mt-1">
-              Введите ваш текущий одометр, чтобы увидеть регламентные работы и состояние жидкостей
+              Введите пробег автомобиля. Отметки обслуживания сохраняются отдельно для каждой машины.
             </p>
           </div>
 
@@ -111,12 +124,13 @@ export default function MaintenanceHub() {
         <div className="pt-2 border-t border-slate-800">
           <div className="flex items-center justify-between mb-3 text-xs">
             <span className="text-slate-400 font-medium uppercase tracking-wider text-xs">
-              План регламентного обслуживания:
+              Ориентировочный план обслуживания:
             </span>
             <span className="text-slate-500">
               Выполнено: {Object.values(completedItems).filter(Boolean).length} из {MAINTENANCE_SCHEDULE_TEMPLATE.length}
             </span>
           </div>
+          <p className="text-xs text-amber-300/90 mb-3">Интервалы ниже — справочные и не подтверждены для каждой модификации. Сверьте их с руководством по эксплуатации именно вашего автомобиля; автоматические напоминания не заменяют регламент производителя.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {MAINTENANCE_SCHEDULE_TEMPLATE.map((item) => {
