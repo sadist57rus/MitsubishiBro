@@ -451,6 +451,7 @@ test('journal and fuel records survive switching between two active vehicles', a
   await page.addInitScript(({ firstVehicle, secondVehicle, firstLog, secondLog, firstFuel, secondFuel }) => {
     localStorage.clear();
     sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    localStorage.setItem('car-brother-profile-selected-v1', 'yes');
     localStorage.setItem('car-brother-garage', JSON.stringify({ vehicles: [firstVehicle, secondVehicle], activeVehicleId: firstVehicle.id }));
     localStorage.setItem('outlander1_garage_logbook_v1', JSON.stringify(firstLog));
     localStorage.setItem('car-brother-logbook-' + secondVehicle.id, JSON.stringify(secondLog));
