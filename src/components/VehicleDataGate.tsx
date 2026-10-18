@@ -4,12 +4,12 @@ import { getDataFor } from '../data/vehicleDataRegistry';
 import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { BookOpen, CarFront, MessageSquareWarning } from 'lucide-react';
 
-export default function VehicleDataGate({ children, onOpenJapaneseCars }: { children: ReactNode; onOpenJapaneseCars: () => void }) {
+export default function VehicleDataGate({ children, onOpenJapaneseCars, requiredModelId }: { children: ReactNode; onOpenJapaneseCars: () => void; requiredModelId?: string }) {
   const { brandId, modelId } = useVehicle();
   const brand = JAPANESE_BRANDS.find(item => item.id === brandId);
   const model = brand?.models.find(item => item.id === modelId);
   const data = getDataFor(modelId);
-  if (data) return <>{children}</>;
+  if (data && (!requiredModelId || modelId === requiredModelId)) return <>{children}</>;
   const issueTitle = encodeURIComponent(`Запрос данных: ${brand?.name || brandId} ${model?.name || modelId}`);
   const issueBody = encodeURIComponent(`Модель ID: ${modelId}\\nМарка: ${brand?.name || brandId}\\nПоколение: ${model?.generation || 'не указано'}\\n\\nПрошу дополнить и проверить данные для этой модификации.`);
   return (
