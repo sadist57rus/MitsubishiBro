@@ -132,11 +132,11 @@ export default function TuningHub() {
 
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] text-red-400 font-bold uppercase tracking-wider">
+                      <span className="text-xs text-red-400 font-bold uppercase tracking-wider">
                         {item.categoryLabel}
                       </span>
                       <span className="text-slate-600">·</span>
-                      <span className={`text-[11px] font-semibold ${
+                      <span className={`text-xs font-semibold ${
                         item.difficulty === 'Легко' ? 'text-emerald-400' : item.difficulty === 'Средне' ? 'text-blue-400' : 'text-amber-400'
                       }`}>
                         Сложность: {item.difficulty}
@@ -161,7 +161,7 @@ export default function TuningHub() {
 
                 <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
                   <div className="text-right">
-                    <span className="text-[10px] text-slate-500 uppercase block">Ориентир цены</span>
+                    <span className="text-xs text-slate-500 uppercase block">Ориентир цены</span>
                     <span className="text-xs font-mono font-bold text-emerald-400">
                       {item.approxCostRub}
                     </span>
@@ -190,7 +190,7 @@ export default function TuningHub() {
                 <div className="px-5 pb-5 pt-2 border-t border-slate-800 space-y-5 text-xs">
                   {/* Why Needed / Physics */}
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                    <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                       <AlertCircle className="w-4 h-4 text-amber-400" />
                       Зачем это нужно (суть проблемы и эффект):
                     </span>
@@ -201,7 +201,7 @@ export default function TuningHub() {
 
                   {/* Required Parts Table */}
                   <div className="space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
                       Что потребуется для доработки:
                     </span>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
@@ -209,7 +209,7 @@ export default function TuningHub() {
                         <div key={idx} className="bg-slate-950 p-3 rounded-lg border border-slate-800 flex items-center justify-between">
                           <div>
                             <span className="font-semibold text-slate-200 block">{part.name}</span>
-                            <span className="font-mono text-red-400 text-[11px] block">{part.partNumberOrSource}</span>
+                            <span className="font-mono text-red-400 text-xs block">{part.partNumberOrSource}</span>
                           </div>
                           <div className="flex items-center gap-2">
                             {part.approxPrice && (
@@ -232,13 +232,13 @@ export default function TuningHub() {
 
                   {/* Step by step installation */}
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block">
                       Порядок действий и монтажа:
                     </span>
                     <ol className="space-y-2">
                       {item.steps.map((step, idx) => (
                         <li key={idx} className="flex items-start gap-2.5 text-slate-300 leading-relaxed">
-                          <span className="w-5 h-5 rounded-full bg-emerald-950 text-emerald-400 font-mono font-bold text-[10px] flex items-center justify-center border border-emerald-800/60 shrink-0 mt-0.5">
+                          <span className="w-5 h-5 rounded-full bg-emerald-950 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center border border-emerald-800/60 shrink-0 mt-0.5">
                             {idx + 1}
                           </span>
                           <span>{step}</span>
@@ -273,7 +273,7 @@ export default function TuningHub() {
                           «{item.clubVerdict}»
                         </p>
                       </div>
-                      <span className="text-[10px] text-slate-500 mt-2 block">
+                      <span className="text-xs text-slate-500 mt-2 block">
                         Оценка полезности: {item.effectRating} из 5 ★
                       </span>
                     </div>
