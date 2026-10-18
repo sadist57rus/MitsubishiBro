@@ -70,7 +70,7 @@ export default function ExpandedModelDossiers() {
       </div>
       <div className="space-y-3">
         <h4 className="font-bold flex items-center gap-2"><ClipboardList className="w-4 h-4" /> Регламент и проверки</h4>
-        {selected.maintenance.map(m => <div key={m.task} className="rounded-lg bg-slate-50 dark:bg-slate-800 p-3"><div className="text-[11px] font-bold text-blue-700 dark:text-blue-300">{m.interval} · {m.applicability}</div><p className="text-xs mt-1">{m.task}</p></div>)}
+        {selected.maintenance.map(m => <div key={m.task} className="rounded-lg bg-slate-50 dark:bg-slate-800 p-3"><div className="text-xs font-bold text-blue-700 dark:text-blue-300">{m.interval} · {m.applicability}</div><p className="text-xs mt-1">{m.task}</p></div>)}
       </div>
       <div className="space-y-2">
         <h4 className="font-bold flex items-center gap-2"><Gauge className="w-4 h-4" /> Диагностика</h4>
@@ -78,18 +78,18 @@ export default function ExpandedModelDossiers() {
       </div>
       <div className="space-y-3">
         <h4 className="font-bold flex items-center gap-2"><Package className="w-4 h-4" /> Расходники и часто заменяемые детали</h4>
-        {selected.wearParts.map(group => <div key={group.group} className="rounded-xl border border-slate-200 dark:border-slate-700 p-3"><div className="font-bold text-sm">{group.group}</div><ul className="list-disc pl-4 mt-2 space-y-1">{group.items.map(item => <li key={item} className="text-xs">{item}</li>)}</ul><p className="text-[11px] text-amber-800 dark:text-amber-200 mt-2">{group.partNumberPolicy}</p></div>)}
+        {selected.wearParts.map(group => <div key={group.group} className="rounded-xl border border-slate-200 dark:border-slate-700 p-3"><div className="font-bold text-sm">{group.group}</div><ul className="list-disc pl-4 mt-2 space-y-1">{group.items.map(item => <li key={item} className="text-xs">{item}</li>)}</ul><p className="text-xs text-amber-800 dark:text-amber-200 mt-2">{group.partNumberPolicy}</p></div>)}
       </div>
       <div className="space-y-2">
         <h4 className="font-bold flex items-center gap-2"><Package className="w-4 h-4" /> Полный перечень групп каталога</h4>
-        <div className="flex flex-wrap gap-2">{selected.assemblies.map(a => <span key={a} className="rounded-full border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-[11px]">{a}</span>)}</div>
+        <div className="flex flex-wrap gap-2">{selected.assemblies.map(a => <span key={a} className="rounded-full border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-xs">{a}</span>)}</div>
       </div>
       <div className="space-y-2">
         <h4 className="font-bold flex items-center gap-2"><BookOpen className="w-4 h-4" /> Оригинальные аксессуары и источники</h4>
         <ul className="list-disc pl-4 space-y-1">{selected.accessories.map(a => <li key={a} className="text-xs text-slate-700 dark:text-slate-300">{a}</li>)}</ul>
-        {selected.sources.map(source => <a key={source.label} href={source.url} target="_blank" rel="noreferrer" className="flex items-start gap-2 rounded-xl border border-slate-200 dark:border-slate-700 p-3 hover:border-blue-400"><ExternalLink className="w-4 h-4 mt-0.5 shrink-0 text-blue-600" /><span><span className="block text-sm font-semibold">{source.label}</span><span className="block text-xs text-slate-500 mt-1">{source.scope}</span><span className="block text-[10px] text-blue-600 dark:text-blue-400 mt-1 break-all">{source.url}</span></span></a>)}
+        {selected.sources.map(source => <a key={source.label} href={source.url} target="_blank" rel="noreferrer" className="flex items-start gap-2 rounded-xl border border-slate-200 dark:border-slate-700 p-3 hover:border-blue-400"><ExternalLink className="w-4 h-4 mt-0.5 shrink-0 text-blue-600" /><span><span className="block text-sm font-semibold">{source.label}</span><span className="block text-xs text-slate-500 mt-1">{source.scope}</span><span className="block text-xs text-blue-600 dark:text-blue-400 mt-1 break-all">{source.url}</span></span></a>)}
       </div>
-      <p className="text-[11px] text-slate-500 border-t border-slate-200 dark:border-slate-700 pt-3">Статус данных: техническая структура и основные семейства агрегатов внесены. Точные моменты затяжки, номера OEM и универсальные интервалы намеренно не указаны без совпадающего заводского руководства/EPC для конкретной версии.</p>
+      <p className="text-xs text-slate-500 border-t border-slate-200 dark:border-slate-700 pt-3">Статус данных: техническая структура и основные семейства агрегатов внесены. Точные моменты затяжки, номера OEM и универсальные интервалы намеренно не указаны без совпадающего заводского руководства/EPC для конкретной версии.</p>
     </>}
   </section>;
 }
