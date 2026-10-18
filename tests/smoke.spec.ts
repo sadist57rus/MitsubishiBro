@@ -338,3 +338,32 @@ test('wide mode keeps controls large, text readable and keyboard focus visible',
   expect(focusStyle.outlineStyle).not.toBe('none');
   expect(Number.parseFloat(focusStyle.outlineWidth)).toBeGreaterThanOrEqual(2);
 });
+
+
+test('full backup can be exported, validated and restored without losing local data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  const exportButton = page.getByRole('button', { name: 'Создать полную резервную копию' });
+  const downloadPromise = page.waitForEvent('download');
+  await exportButton.click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toMatch(/^car-brother-backup-\\d{4}-\\d{2}-\\d{2}\\.json$/);
+  const path = await download.path();
+  expect(path).toBeTruthy();
+  const fs = await import('node:fs/promises');
+  const content = await fs.readFile(path!, 'utf8');
+  const backup = JSON.parse(content) as { app: string; schemaVersion: number; data: Record<string, string> };
+  expect(backup.app).toBe('car-brother');
+  expect(backup.schemaVersion).toBe(1);
+  expect(backup.data['car-brother-garage']).toBeTruthy();
+
+  await page.evaluate(() => localStorage.setItem('backup-roundtrip-test', 'preserve-me'));
+  const file = { name: 'roundtrip.json', mimeType: 'application/json', buffer: Buffer.from(content) };
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles(file);
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('replace');
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await expect(page.getByRole('status')).toContainText('Восстановление завершено');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBeNull();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
+});
