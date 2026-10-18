@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
+import { parseDecimalInput } from '../src/lib/storage';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -439,6 +440,14 @@ test('legacy backup schema migrates without dropping data', async ({ page }) => 
   })).toBe('system');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
   await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
+});
+
+test('decimal input parser accepts comma and dot separators', () => {
+  expect(parseDecimalInput('58,5')).toBe(58.5);
+  expect(parseDecimalInput('58.5')).toBe(58.5);
+  expect(parseDecimalInput(' 1 234,75 ')).toBe(1234.75);
+  expect(parseDecimalInput('')).toBeNull();
+  expect(parseDecimalInput('58,5,2')).toBeNull();
 });
 
 test('backup migration rejects unknown schema versions and malformed storage entries', () => {
