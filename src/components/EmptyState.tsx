@@ -33,7 +33,7 @@ export default function EmptyState({
             Не подставляем сведения от другой машины. Для ремонта и подбора деталей нужны данные именно для выбранной модификации и источники, которые можно проверить.
           </p>
           <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">
-            {brandName} {modelName}{generation ? \` · \${generation}\` : ''}
+            {brandName} {modelName}{generation ? ` · \${generation}` : ''}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button
