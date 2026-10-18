@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function chooseToyota(page: Page) {
-  await page.addInitScript(() => localStorage.clear());
+  await page.addInitScript(() => { if (!sessionStorage.getItem('__car_brother_smoke_initialized')) { localStorage.clear(); sessionStorage.setItem('__car_brother_smoke_initialized', 'yes'); } });
   await page.goto('/');
   const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
   if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
