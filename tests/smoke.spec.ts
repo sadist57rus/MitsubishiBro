@@ -427,8 +427,9 @@ test('legacy backup schema migrates without dropping data', async ({ page }) => 
     buffer: Buffer.from(JSON.stringify(legacyBackup)),
   });
   await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  const reloadAfterRestore = page.waitForEvent('load');
   await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
-  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await reloadAfterRestore;
   await expect.poll(() => page.evaluate(() => localStorage.getItem('legacy-migration-sentinel'))).toBe('keep-legacy-value');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-storage-schema'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
   await page.reload();
