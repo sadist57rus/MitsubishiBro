@@ -223,15 +223,12 @@ for (const viewport of viewports) {
       });
     }
 
-    test('brand selector grid and page overflow: ' + suffix, async ({ page }) => {
+    test('brand selector menu and page overflow: ' + suffix, async ({ page }) => {
       await prepare(page, viewport, theme);
       await page.getByTestId('brand-selector-trigger').click();
-      const dialog = page.locator('[role="dialog"]').filter({ has: page.getByRole('heading', { name: 'Выбор японского производителя' }) });
-      await expect(dialog).toBeVisible();
-      const grid = dialog.locator('.grid.grid-cols-3').first();
-      await expect(grid).toBeVisible();
-      const columns = await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length);
-      expect(columns, 'brand selector must show at least three columns').toBeGreaterThanOrEqual(3);
+      const brandMenu = page.getByRole('region', { name: 'Выбор марки автомобиля' });
+      await expect(brandMenu).toBeVisible();
+      await expect(brandMenu.getByTestId('brand-option-toyota')).toBeVisible();
       await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     });
 
