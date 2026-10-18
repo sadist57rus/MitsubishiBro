@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { EngineType } from '../types';
 import { parseDecimalInput, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { usePreferences } from '../context/PreferencesContext';
 import {
   ResponsiveContainer,
@@ -52,7 +53,11 @@ export interface FuelLog {
 const STORAGE_KEY = 'outlander1_fuel_logs_v2';
 
 export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine?: EngineType }) {
-  const { vehicleId, vehicles } = useVehicle();
+  const { vehicleId, vehicles, activeVehicle } = useVehicle();
+  const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === activeVehicle.brandId);
+  const activeModel = activeBrand?.models.find(model => model.id === activeVehicle.modelId);
+  const vehicleLabel = [activeBrand?.russianName || activeBrand?.name, activeModel?.name, activeModel?.generation].filter(Boolean).join(' ');
+  const tankCapacity = activeModel?.dimensions?.fuelTankLiters;
   const activeStorageKey = vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-fuel-logs-' + vehicleId;
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
@@ -92,7 +97,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       const consumption = (litNum / distNum) * 100;
       const costPerKm = priceNum > 0 ? (litNum * priceNum) / distNum : 0;
       const costPer100Km = costPerKm * 100;
-      const tankRange = (60 / consumption) * 100; // 60L full tank Outlander 1
+      const tankRange = tankCapacity && tankCapacity > 0 ? (tankCapacity / consumption) * 100 : 0;
 
       // Assessment
       let verdict = '';
@@ -124,7 +129,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       };
     }
     return null;
-  }, [distance, liters, fuelPrice]);
+  }, [distance, liters, fuelPrice, tankCapacity]);
 
   // Overall Logs Statistics
   const overallStats = useMemo(() => {
@@ -659,10 +664,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                         <Fuel className="w-3.5 h-3.5 text-red-500" />
-                        Бак Outlander 1 (60 л)
+                        Бак {vehicleLabel || 'автомобиля'} {tankCapacity ? `(${tankCapacity} л)` : '(объём не указан)'}
                       </span>
                       <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                        Запас ~{stats.tankRange} км
+                        {tankCapacity ? `Запас ~${stats.tankRange} км` : 'Запас хода не рассчитан'}
                       </span>
                     </div>
 
@@ -674,7 +679,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                           width: `${Math.min(100, Math.max(20, (parseFloat(stats.tankRange) / 750) * 100))}%`
                         }}
                       >
-                        60L Full
+                        {tankCapacity ? `${tankCapacity} л` : 'Объём неизвестен'}
                       </div>
                     </div>
                   </div>
@@ -704,12 +709,12 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             {/* Benchmark Comparison Bars */}
             <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] space-y-2">
               <span className="font-bold text-slate-900 dark:text-slate-200 block">
-                Заводские ориентиры Outlander I (трасса / город):
+                Ориентиры расхода для {vehicleLabel || 'выбранного автомобиля'}:
               </span>
               <div className="space-y-1.5 font-mono text-[10px]">
                 <div>
                   <div className="flex justify-between text-slate-500 mb-0.5">
-                    <span>2.0L 4G63 (МКПП/АКПП)</span>
+                    <span>Расход на трассе</span>
                     <span className="font-bold text-slate-700 dark:text-slate-300">7.6 – 12.5 л</span>
                   </div>
                   <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
@@ -942,7 +947,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
           <AlertTriangle className="w-5 h-5 text-amber-500" />
           <h2 className="text-base font-bold text-slate-900 dark:text-white">
-            Причины повышенного расхода топлива на Outlander I и методы решения
+            Возможные причины повышенного расхода топлива
           </h2>
         </div>
 
@@ -964,10 +969,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               2. Подклинивание тормозных суппортов
             </span>
             <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
-              Главная болезнь тормозов Outlander 1 — закисание направляющих пальцев суппортов. Колодка постоянно трет о диск, увеличивая сопротивление качению (до <strong>+1.5...2 л</strong>).
+              Закисание направляющих суппортов может увеличивать сопротивление качению и расход топлива. Проверьте свободное вращение колёс и равномерность нагрева тормозов.
             </p>
             <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
-              Решение: Проверка наката, ремкомплект Seinsa D4554 и смазка TRW PFG110.
+              Решение: диагностика тормозного механизма и подбор ремонтного комплекта по VIN.
             </div>
           </div>
 
