@@ -163,7 +163,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
               {/* Card Header */}
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <span className="text-[11px] text-slate-400 uppercase tracking-wider block">{part.categoryLabel}</span>
+                  <span className="text-xs text-slate-400 uppercase tracking-wider block">{part.categoryLabel}</span>
                   <h3 className="text-base font-bold text-white mt-0.5">{part.name}</h3>
                 </div>
 
@@ -178,7 +178,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
               {/* OEM Badges with One-Click Copy */}
               <div className="mt-3 flex items-center flex-wrap gap-2">
                 <div className="flex items-center bg-slate-950 border border-slate-800 rounded-lg overflow-hidden group">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-800 px-2 py-1 tracking-wider">
+                  <span className="text-xs uppercase font-bold text-slate-400 bg-slate-800 px-2 py-1 tracking-wider">
                     OEM
                   </span>
                   <span className="text-xs font-mono font-bold text-white px-2.5 py-1">
@@ -199,7 +199,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
 
                 {part.alternateOem?.map((alt) => (
                   <div key={alt} className="flex items-center bg-slate-950/70 border border-slate-800/80 rounded-lg overflow-hidden">
-                    <span className="text-[10px] text-slate-400 px-2 py-1 font-mono">
+                    <span className="text-xs text-slate-400 px-2 py-1 font-mono">
                       {alt}
                     </span>
                     <button
@@ -245,7 +245,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
 
               {/* Verified Analogs Table */}
               <div className="mt-3.5 space-y-1.5">
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
                   Проверенные аналоги:
                 </span>
                 <div className="space-y-1">
@@ -258,13 +258,13 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
                         <span className="font-semibold text-slate-200">{analog.brand}</span>
                         <span className="font-mono text-slate-400">{analog.partNumber}</span>
                         {analog.comment && (
-                          <span className="text-[11px] text-slate-500 hidden sm:inline">· {analog.comment}</span>
+                          <span className="text-xs text-slate-500 hidden sm:inline">· {analog.comment}</span>
                         )}
                       </div>
 
                       <div className="flex items-center gap-2">
                         <span
-                          className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
+                          className={`text-xs px-1.5 py-0.5 rounded font-medium ${
                             analog.quality === 'premium'
                               ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/50'
                               : analog.quality === 'recommended'
@@ -295,11 +295,11 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
             {/* Card Footer: Compatible engines and Store search shortcuts */}
             <div className="pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[11px] text-slate-500">Моторы:</span>
+                <span className="text-xs text-slate-500">Моторы:</span>
                 {part.engines.map((e) => (
                   <span
                     key={e}
-                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                    className={`text-xs font-mono px-1.5 py-0.5 rounded ${
                       selectedEngine === e
                         ? 'bg-red-950 text-red-300 font-bold border border-red-800'
                         : 'bg-slate-800 text-slate-400'
@@ -312,7 +312,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
 
               {/* Direct links to search on aggregators */}
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-[11px] text-slate-500">Найти в:</span>
+                <span className="text-xs text-slate-500">Найти в:</span>
                 <a
                   href={`https://www.autodoc.ru/price/579/${part.oemNumber}`}
                   target="_blank"
