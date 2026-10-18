@@ -93,6 +93,25 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await expect(page.getByTestId('section-menu-list')).toBeHidden();
       await expect(sectionMenu).toBeFocused();
 
+      // APK guide dialog: Escape closes it and returns focus to the opener.
+      const apkTrigger = page.getByRole('button', { name: /Инструкция по сборке APK/i });
+      await apkTrigger.click();
+      const apkDialog = page.getByRole('dialog');
+      await expect(apkDialog).toBeVisible();
+      await page.keyboard.press('Escape');
+      await expect(apkDialog).toBeHidden();
+      await expect(apkTrigger).toBeFocused();
+
+      // Brand selector dialog: Escape closes it; focus should return to the brand trigger.
+      const brandTrigger = page.getByRole('button', { name: /Выбрать марку автомобиля/i });
+      await brandTrigger.click();
+      await page.getByRole('button', { name: /Открыть окно расширенного поиска по всем моделям/i }).click();
+      const brandDialog = page.getByRole('dialog', { name: /Выбор японского производителя/i });
+      await expect(brandDialog).toBeVisible();
+      await page.keyboard.press('Escape');
+      await expect(brandDialog).toBeHidden();
+      await expect(brandTrigger).toBeFocused();
+
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
   }
