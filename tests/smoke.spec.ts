@@ -153,7 +153,8 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
         await sectionMenuButton.click();
         const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
         expect(sectionMenuText, `${brandName} section menu must be vehicle-neutral`).not.toMatch(/Outlander/i);
-        await openNavItem(page, /Топливо/i);
+        const fuelItem = page.getByTestId('section-menu-list').getByRole('button', { name: /Топливо/i }).first();
+        await fuelItem.getByText(/Топливо/i).first().click();
         expect(await page.locator('body').innerText(), `${brandName} fuel section must not show Outlander-specific copy`).not.toMatch(/Outlander/i);
       }
 
