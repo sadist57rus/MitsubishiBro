@@ -28,7 +28,9 @@ function validVehicle(v: unknown): v is GarageVehicle {
 }
 function initialGarage(): GarageState {
   const saved=readStored<GarageState>(GARAGE_KEY,(v):v is GarageState=>!!v&&typeof v==='object'&&Array.isArray((v as GarageState).vehicles)&&(v as GarageState).vehicles.every(validVehicle)&&typeof (v as GarageState).activeVehicleId==='string',{vehicles:[],activeVehicleId:''});
-  if(saved.vehicles.length) return {...saved,activeVehicleId:saved.vehicles.some(v=>v.id===saved.activeVehicleId)?saved.activeVehicleId:saved.vehicles[0].id};
+  // Migrate the old hard-coded starter vehicle out of the garage so onboarding asks the owner to choose their own car.
+  const savedVehicles = saved.vehicles.filter(v => !(v.id === 'vehicle-default' && v.brandId === 'mitsubishi' && v.modelId === 'outlander-1'));
+  if(savedVehicles.length) return {vehicles:savedVehicles,activeVehicleId:savedVehicles.some(v=>v.id===saved.activeVehicleId)?saved.activeVehicleId:savedVehicles[0].id};
   let legacy: Record<string,unknown>={};
   try { const raw=localStorage.getItem(OLD_KEY); if(raw){const parsed:unknown=JSON.parse(raw);if(parsed&&typeof parsed==='object')legacy=parsed as Record<string,unknown>;} } catch {}
   // Fresh installs start with an empty garage so the owner chooses their own vehicle.
