@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { readStored, writeStored } from '../lib/storage';
 import type { EngineType, DrivetrainType } from '../types';
 
