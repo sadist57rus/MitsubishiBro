@@ -396,7 +396,7 @@ html[data-ui-mode="wide"] {
 }
 body { font-size: max(14px, calc(1rem * var(--ui-scale, 1))); }
 main h1, main h2, main h3, main h4 { font-size: max(var(--font-heading-min), 1em); }
-main small, main .text-xs, main [class~="text-[11px]"], main [class~="text-[10px]"], main [class~="text-[9px]"], main [class~="text-[8px]"] {
+main small, main .text-xs {
   font-size: max(12px, 0.75rem);
   line-height: 1.4;
 }
