@@ -97,7 +97,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
       <div className="absolute -right-12 -top-16 w-64 h-64 rounded-full bg-red-500/15 blur-3xl pointer-events-none" />
       <div className="relative flex flex-col xl:flex-row xl:items-end justify-between gap-4">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-bold text-red-300"><CarFront className="w-4 h-4" /> Car Brother · parts intelligence</div>
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-bold text-red-300"><CarFront className="w-4 h-4" /> Car Brother · parts intelligence</div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-2">Запчасти и аксессуары</h1>
           <p className="text-sm text-slate-300 mt-2 leading-relaxed">Три независимых каталога с подбором по марке и модели. Артикулы, официальность и применимость показываются только при наличии источника — неподтверждённые позиции помечены явно.</p>
         </div>
@@ -144,14 +144,14 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
         {items.map(item => <article key={item.id} className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-4 space-y-3 hover:border-slate-400 dark:hover:border-slate-600 transition">
           <div className="flex items-start justify-between gap-3">
-            <div><div className="text-[10px] uppercase tracking-wider text-red-600 dark:text-red-400 font-bold">{item.category}</div><h2 className="font-bold text-sm mt-1 text-slate-900 dark:text-white">{item.title}</h2></div>
-            <span className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold ${item.verification === 'verified' ? 'bg-emerald-100 text-emerald-800' : item.verification === 'partial' ? 'bg-amber-100 text-amber-900' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}`}>{statusText[item.verification]}</span>
+            <div><div className="text-xs uppercase tracking-wider text-red-600 dark:text-red-400 font-bold">{item.category}</div><h2 className="font-bold text-sm mt-1 text-slate-900 dark:text-white">{item.title}</h2></div>
+            <span className={`shrink-0 rounded-md px-2 py-1 text-xs font-bold ${item.verification === 'verified' ? 'bg-emerald-100 text-emerald-800' : item.verification === 'partial' ? 'bg-amber-100 text-amber-900' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'}`}>{statusText[item.verification]}</span>
           </div>
           <div className="text-xs text-slate-500 dark:text-slate-400">Применимость: {item.fitment}</div>
-          {item.kind && <div className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 text-[11px] font-bold"><ShieldCheck className="w-3.5 h-3.5" />{item.kind === 'official' ? 'Категория: оригинальный аксессуар — артикул требует проверки' : 'Сторонний аксессуар'}</div>}
+          {item.kind && <div className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 text-xs font-bold"><ShieldCheck className="w-3.5 h-3.5" />{item.kind === 'official' ? 'Категория: оригинальный аксессуар — артикул требует проверки' : 'Сторонний аксессуар'}</div>}
           {item.oemNumber && <div className="font-mono text-xs">OEM: {item.oemNumber}</div>}
           <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300">{item.note}</p>
-          {item.source && <div className="text-[11px]"><a className="text-blue-600 dark:text-blue-400 underline underline-offset-2 break-all" href={item.source.split(' ')[0]} target="_blank" rel="noreferrer">Открыть источник OEM-каталога</a></div>}
+          {item.source && <div className="text-xs"><a className="text-blue-600 dark:text-blue-400 underline underline-offset-2 break-all" href={item.source.split(' ')[0]} target="_blank" rel="noreferrer">Открыть источник OEM-каталога</a></div>}
         </article>)}
         {items.length === 0 && <div className="col-span-full text-center p-10 text-sm text-slate-500">Ничего не найдено. Измени поисковый запрос или категорию.</div>}
       </div>
