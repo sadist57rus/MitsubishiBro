@@ -17,6 +17,8 @@ jobs:
       - run: npm run lint
       - run: npm run audit:catalog
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:smoke
 
       - name: Upload web build for testing
         uses: actions/upload-artifact@v4
