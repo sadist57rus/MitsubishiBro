@@ -79,6 +79,8 @@ export default function Header({
   const [isBrandDropdownOpen, setIsBrandDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const brandDropdownRef = useRef<HTMLDivElement>(null);
+  const sectionTriggerRef = useRef<HTMLButtonElement>(null);
+  const brandTriggerRef = useRef<HTMLButtonElement>(null);
 
   const sections: NavSection[] = [
     {
@@ -221,8 +223,14 @@ export default function Header({
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        setIsDropdownOpen(false);
-        setIsBrandDropdownOpen(false);
+        if (isDropdownOpen) {
+          setIsDropdownOpen(false);
+          sectionTriggerRef.current?.focus();
+        }
+        if (isBrandDropdownOpen) {
+          setIsBrandDropdownOpen(false);
+          brandTriggerRef.current?.focus();
+        }
       }
     }
 
@@ -262,6 +270,7 @@ export default function Header({
             {/* BRAND LOGO MENU: "У каждого бренда в меню должен быть свой логотип!" */}
             <div className="relative" ref={brandDropdownRef}>
               <button
+                ref={brandTriggerRef}
                 type="button"
                 onClick={() => {
                   setIsBrandDropdownOpen(!isBrandDropdownOpen);
@@ -275,6 +284,7 @@ export default function Header({
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
                 aria-label={`Выбрать марку автомобиля, сейчас ${currentBrand.russianName || currentBrand.name}`}
                 aria-expanded={isBrandDropdownOpen}
+                aria-controls={isBrandDropdownOpen ? 'brand-dropdown-panel' : undefined}
                 aria-haspopup="dialog"
               >
                 <div className={`w-7 h-7 rounded-md flex items-center justify-center p-1.5 shadow-2xs group-hover:scale-105 transition shrink-0 ${
@@ -300,7 +310,7 @@ export default function Header({
 
               {/* BRAND DROPDOWN POPUP MENU - DISTINCT AUTHENTIC LOGO FOR EVERY BRAND */}
               {isBrandDropdownOpen && (
-                <div className="absolute left-0 top-full mt-2 w-[min(310px,calc(100vw-1rem))] sm:w-[350px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in duration-100 max-h-[85vh] overflow-y-auto">
+                <div id="brand-dropdown-panel" role="region" aria-label="Выбор марки автомобиля" className="absolute left-0 top-full mt-2 w-[min(310px,calc(100vw-1rem))] sm:w-[350px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in duration-100 max-h-[85vh] overflow-y-auto">
                   <div className="px-2.5 py-1.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     <span>Меню брендов ({JAPANESE_BRANDS.length})</span>
                     <span className="text-xs text-red-600 dark:text-red-400 font-bold">Оригинальные логотипы</span>
@@ -397,6 +407,7 @@ export default function Header({
             {/* THE "РАЗДЕЛЫ" DROPDOWN BUTTON - Crisp, clear, NO truncated text */}
             <div className="relative" ref={dropdownRef}>
               <button
+                ref={sectionTriggerRef}
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-sm font-bold transition border shadow-xs ${
@@ -407,6 +418,7 @@ export default function Header({
                 title="Нажмите, чтобы открыть меню всех разделов"
                 aria-label="Открыть разделы приложения"
                 aria-expanded={isDropdownOpen}
+                aria-controls={isDropdownOpen ? 'section-menu-panel' : undefined}
                 aria-haspopup="dialog"
               >
                 <LayoutGrid className={`w-4 h-4 shrink-0 ${isDropdownOpen ? 'text-white' : 'text-red-600 dark:text-red-400'}`} />
@@ -425,7 +437,7 @@ export default function Header({
 
               {/* DROPDOWN POPUP MENU - Generous width, full text visibility, NO TRUNCATION! */}
               {isDropdownOpen && (
-                <div className="absolute left-0 top-full mt-2 w-[min(360px,calc(100vw-1rem))] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
+                <div id="section-menu-panel" role="region" aria-label="Разделы приложения" className="absolute left-0 top-full mt-2 w-[min(360px,calc(100vw-1rem)] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
                   <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>Все разделы приложения ({sections.length})</span>
                     <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
