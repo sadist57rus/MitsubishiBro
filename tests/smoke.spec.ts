@@ -108,7 +108,8 @@ async function openNavItem(page: Page, sectionId: string) {
   const panel = page.getByTestId('section-menu-list');
   const item = page.getByTestId('nav-item-' + sectionId);
   await expect(item).toBeVisible({ timeout: 5_000 });
-  await item.click();
+  // Click the section title, not nested brand-switch buttons inside the Brands row.
+  await item.locator('span').first().click();
   await expect(panel).toBeHidden();
 }
 
