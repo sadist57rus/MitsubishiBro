@@ -1,8 +1,8 @@
-export const STORAGE_SCHEMA_VERSION = 2;
+export const STORAGE_SCHEMA_VERSION = 3;
 const VERSION_KEY = 'car-brother-storage-schema';
 type Guard<T> = (value: unknown) => value is T;
 type Migration = (value: unknown) => unknown;
-const migrations: Record<number, Migration> = { 1: value => value };
+const migrations: Record<number, Migration> = { 1: value => value, 2: value => value };
 function safeStorage(): Storage | null { try { return typeof localStorage === 'undefined' ? null : localStorage; } catch { return null; } }
 export function isRecord(value: unknown): value is Record<string, unknown> { return typeof value === 'object' && value !== null && !Array.isArray(value); }
 export function migrateValue(value: unknown, fromVersion: number): unknown { let current=value; for(let version=fromVersion;version<STORAGE_SCHEMA_VERSION;version++){const migration=migrations[version];if(!migration)throw new Error('Missing storage migration from schema '+version);current=migration(current);}return current; }
