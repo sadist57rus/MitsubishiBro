@@ -78,7 +78,7 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       expect(garage).toContain('toyota');
 
       await openNavItem(page, /Настройки/i);
-      await expect(page.getByText(/Настройки/i).first()).toBeVisible();
+      await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
   }
