@@ -24,7 +24,7 @@ async function openNavItem(page: Page, label: RegExp) {
   const menu = page.getByRole('button', { name: /Открыть разделы приложения/i });
   await expect(menu).toBeVisible();
   await menu.click();
-  const panel = page.locator('div.py-1.space-y-1').first();
+  const panel = page.getByTestId('section-menu-list');
   const item = panel.getByRole('button', { name: label }).first();
   await expect(item).toBeVisible({ timeout: 5_000 });
   await item.click();
