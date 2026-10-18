@@ -146,16 +146,16 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       await expect(brandTrigger).toBeFocused();
 
       // Brand-specific regression: neutral navigation copy must not leak Outlander into other makes.
-      for (const brandName of ['Nissan', 'Honda']) {
+      for (const brand of [{ name: 'Nissan', label: /Выбрать (Nissan|Ниссан)/i }, { name: 'Honda', label: /Выбрать (Honda|Хонда)/i }]) {
         await brandTrigger.click();
-        await page.getByRole('button', { name: new RegExp('Выбрать ' + brandName, 'i') }).click();
+        await page.getByRole('button', { name: brand.label }).click();
         const sectionMenuButton = page.getByRole('button', { name: /Открыть разделы приложения/i });
         await sectionMenuButton.click();
         const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
-        expect(sectionMenuText, `${brandName} section menu must be vehicle-neutral`).not.toMatch(/Outlander/i);
+        expect(sectionMenuText, `${brand.name} section menu must be vehicle-neutral`).not.toMatch(/Outlander/i);
         const fuelItem = page.getByTestId('section-menu-list').getByRole('button', { name: /Топливо/i }).first();
         await fuelItem.getByText(/Топливо/i).first().click();
-        expect(await page.locator('body').innerText(), `${brandName} fuel section must not show Outlander-specific copy`).not.toMatch(/Outlander/i);
+        expect(await page.locator('body').innerText(), `${brand.name} fuel section must not show Outlander-specific copy`).not.toMatch(/Outlander/i);
       }
 
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
