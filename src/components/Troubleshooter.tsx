@@ -143,15 +143,15 @@ export default function Troubleshooter({ selectedEngine }: Props) {
 
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] text-slate-400 uppercase tracking-wider">{issue.systemLabel}</span>
+                      <span className="text-xs text-slate-400 uppercase tracking-wider">{issue.systemLabel}</span>
                       <span className="text-slate-600">·</span>
-                      <span className={`text-[11px] font-semibold ${
+                      <span className={`text-xs font-semibold ${
                         issue.severity === 'Критическая' ? 'text-red-400' : issue.severity === 'Высокая' ? 'text-amber-400' : 'text-blue-400'
                       }`}>
                         Опасность: {issue.severity}
                       </span>
                       <span className="text-slate-600">·</span>
-                      <span className="text-[11px] text-slate-400">Частота: {issue.frequency}</span>
+                      <span className="text-xs text-slate-400">Частота: {issue.frequency}</span>
                     </div>
 
                     <h3 className="text-base font-bold text-white mt-1">{issue.title}</h3>
@@ -179,7 +179,7 @@ export default function Troubleshooter({ selectedEngine }: Props) {
                   {/* Symptoms & Root Cause */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 block mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-2">
                         Как проявляется (симптомы):
                       </span>
                       <ul className="space-y-1.5">
@@ -193,7 +193,7 @@ export default function Troubleshooter({ selectedEngine }: Props) {
                     </div>
 
                     <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-red-400 block mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-red-400 block mb-2">
                         Первопричина неисправности:
                       </span>
                       <p className="text-slate-300 leading-relaxed">
@@ -204,13 +204,13 @@ export default function Troubleshooter({ selectedEngine }: Props) {
 
                   {/* Verified Solution Steps */}
                   <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block mb-1">
                       Проверенное решение проблемы:
                     </span>
                     <ol className="space-y-2">
                       {issue.solution.map((step, idx) => (
                         <li key={idx} className="flex items-start gap-2.5 text-slate-300 leading-relaxed">
-                          <span className="w-5 h-5 rounded-full bg-emerald-950 text-emerald-400 font-mono font-bold text-[10px] flex items-center justify-center border border-emerald-800/60 shrink-0 mt-0.5">
+                          <span className="w-5 h-5 rounded-full bg-emerald-950 text-emerald-400 font-mono font-bold text-xs flex items-center justify-center border border-emerald-800/60 shrink-0 mt-0.5">
                             {idx + 1}
                           </span>
                           <span>{step}</span>
@@ -221,7 +221,7 @@ export default function Troubleshooter({ selectedEngine }: Props) {
 
                   {/* Required Parts for Fix with Copy Buttons */}
                   <div className="space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
                       Детали для устранения поломки:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
@@ -229,8 +229,8 @@ export default function Troubleshooter({ selectedEngine }: Props) {
                         <div key={idx} className="bg-slate-950 p-3 rounded-lg border border-slate-800 flex items-center justify-between">
                           <div>
                             <span className="font-semibold text-slate-200 block">{part.name}</span>
-                            <span className="font-mono text-red-400 text-[11px] block">{part.oem}</span>
-                            <span className="text-[10px] text-slate-500">{part.recommendation}</span>
+                            <span className="font-mono text-red-400 text-xs block">{part.oem}</span>
+                            <span className="text-xs text-slate-500">{part.recommendation}</span>
                           </div>
                           <button
                             onClick={() => handleCopy(part.oem)}
