@@ -82,6 +82,15 @@ export default function BackupManager() {
     }
     try {
       if (mode === 'replace') localStorage.clear();
+      // If the backup omits a per-key schema marker, discard any newer marker
+      // left by the current installation so restored legacy data is migrated.
+      for (const key of Object.keys(pending.data)) {
+        if (key.endsWith(':schema-version')) continue;
+        const markerKey = key + ':schema-version';
+        if (!Object.prototype.hasOwnProperty.call(pending.data, markerKey)) {
+          localStorage.removeItem(markerKey);
+        }
+      }
       for (const [key, value] of Object.entries(pending.data)) localStorage.setItem(key, value);
       setPending(null);
       setMessage('Восстановление завершено. Приложение перезагружается, чтобы перечитать все данные.');
