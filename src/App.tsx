@@ -29,10 +29,10 @@ const TuningHub = lazy(async () => { await import('./data/tuningData'); return i
 const FuelMonitor = lazy(async () => { return import('./components/FuelMonitor'); });
 const BulbsCatalog = lazy(async () => { await import('./data/bulbsData'); return import('./components/BulbsCatalog'); });
 import ApkGuideModal from './components/ApkGuideModal';
-const JapaneseBrandsHub = lazy(async () => { await import('./data/japaneseBrandsData'); return import('./components/JapaneseBrandsHub'); });
+const JapaneseBrandsHub = lazy(async () => { await import('./data/vehicleCatalog'); return import('./components/JapaneseBrandsHub'); });
 import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
-import { JAPANESE_BRANDS } from './data/japaneseBrandsData';
+import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
 import { EngineType, DrivetrainType } from './types';
