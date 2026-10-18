@@ -25,10 +25,10 @@ for (const brand of JAPANESE_BRANDS) {
     check(model.brandId === brand.id, `Brand mismatch: ${brand.id}/${model.id} has brandId=${model.brandId}`);
     if (seenIds.has(model.id)) errors.push(`Duplicate model id: ${model.id}`);
     seenIds.add(model.id);
-    const bodyYearsKey = `${brand.id}|${model.bodyType}|${model.years.replace(/[–—]/g, '-').replace(/\\s+/g, '')}`.toLocaleLowerCase('ru-RU');
+    const bodyYearsKey = `${brand.id}|${model.bodyType}|${model.years.replace(/[–—]/g, '-').replace(/\s+/g, '')}`.toLocaleLowerCase('ru-RU');
     if (seenBodyYears.has(bodyYearsKey)) errors.push(`Duplicate make+body+years: ${brand.id}/${model.bodyType}/${model.years} (${model.id})`);
     seenBodyYears.add(bodyYearsKey);
-    const normalizedName = `${brand.id}:${model.name.trim().toLocaleLowerCase('ru-RU').replace(/\\s+/g, ' ')}`;
+    const normalizedName = `${brand.id}:${model.name.trim().toLocaleLowerCase('ru-RU').replace(/\s+/g, ' ')}`;
     duplicateNames.set(normalizedName, [...(duplicateNames.get(normalizedName) ?? []), model.id]);
     check(Array.isArray(model.engines) && model.engines.length > 0, `No engine entries: ${model.id}`);
     check(Array.isArray(model.transmissions) && model.transmissions.length > 0, `No transmission entries: ${model.id}`);
