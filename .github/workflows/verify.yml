@@ -17,7 +17,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run lint
       - name: Reject text utility classes below 12px
-        run: if grep -R -n -E 'text-\\[(8|9|10|11)px\\]' src; then exit 1; fi
+        run: if grep -R -n -E 'text-\[(8|9|10|11)px\]' src; then exit 1; fi
       - run: npm run audit:catalog
       - run: npm run build
       - run: npx playwright install --with-deps chromium
