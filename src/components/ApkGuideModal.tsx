@@ -23,14 +23,16 @@ export default function ApkGuideModal({ isOpen, onClose }: Props) {
   const [activeTab, setActiveTab] = useState<'actions' | 'capacitor' | 'pwa'>('actions');
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   useEffect(() => {
     if (!isOpen) return;
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const dialog = dialogRef.current;
-    const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])') || []);
+    const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>('button:not([disabled]):not([tabindex="-1"]), input:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]):not([tabindex="-1"]), select:not([disabled]):not([tabindex="-1"]), [href], [contenteditable="true"], [tabindex]:not([tabindex="-1"])') || []).filter(item => item.getClientRects().length > 0);
     focusable()[0]?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { event.preventDefault(); onClose(); return; }
+      if (event.key === 'Escape') { event.preventDefault(); onCloseRef.current(); return; }
       if (event.key !== 'Tab') return;
       const items = focusable();
       if (!items.length) { event.preventDefault(); dialog?.focus(); return; }
@@ -40,7 +42,7 @@ export default function ApkGuideModal({ isOpen, onClose }: Props) {
     };
     document.addEventListener('keydown', onKeyDown);
     return () => { document.removeEventListener('keydown', onKeyDown); previousFocusRef.current?.focus(); };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
