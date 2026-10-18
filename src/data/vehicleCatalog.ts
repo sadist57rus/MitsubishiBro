@@ -9,7 +9,7 @@ function deduplicateModels(brand: JapaneseBrand): JapaneseCarModel[] {
     if (seenIds.has(model.id)) return false;
     seenIds.add(model.id);
     const years = model.years.replace(/[–—]/g, '-').replace(/\s+/g, '');
-    const key = [brand.id, model.bodyType, years].join('|').toLocaleLowerCase('ru-RU');
+    const key = [brand.id, model.name.trim().toLocaleLowerCase('ru-RU'), model.bodyType, years].join('|').toLocaleLowerCase('ru-RU');
     if (seenBodyYears.has(key)) return false;
     seenBodyYears.add(key);
     return true;
