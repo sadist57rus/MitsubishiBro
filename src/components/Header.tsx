@@ -588,14 +588,6 @@ export default function Header({
               </button>
             </div>
 
-            {/* Interface profile selector */}
-            {onChangeUiMode && (
-              <div className="hidden xl:flex items-center gap-0.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5" title="Профиль интерфейса">
-                <button type="button" onClick={() => onChangeUiMode('phone')} aria-pressed={uiMode === 'phone'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'phone' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Телефон</button>
-                <button type="button" onClick={() => onChangeUiMode('wide')} aria-pressed={uiMode === 'wide'} className={`rounded-lg px-2 py-1.5 text-xs font-bold transition ${uiMode === 'wide' ? 'bg-white dark:bg-slate-700 text-red-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>Планшет / магнитола</button>
-              </div>
-            )}
-
             {/* APK Guide Button */}
             {onOpenApkGuide && (
               <button
