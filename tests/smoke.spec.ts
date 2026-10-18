@@ -113,6 +113,52 @@ async function openNavItem(page: Page, sectionId: string) {
   await expect(panel).toBeHidden();
 }
 
+test('model-specific sections never reuse Outlander data for another active vehicle', async ({ page }) => {
+  await prepare(page, { width: 360, height: 800 }, 'light');
+
+  const selectBrand = async (brandId: string) => {
+    await page.getByTestId('brand-selector-trigger').click();
+    await expect(page.getByRole('region', { name: 'Выбор марки автомобиля' })).toBeVisible();
+    await page.getByTestId('brand-option-' + brandId).click();
+  };
+  const allSections = sectionGroups.flatMap(group => group.sections);
+  const technicalSections = ['specs', 'bulbs', 'parts', 'fuses', 'tuning', 'guides', 'issues', 'wheels', 'maintenance', 'obd', 'logbook'];
+
+  for (const brandId of ['toyota', 'nissan', 'honda', 'mazda']) {
+    await selectBrand(brandId);
+    for (const sectionId of allSections) {
+      await openNavItem(page, sectionId);
+      const content = await page.locator('main').innerText();
+      expect(content, brandId + ' must not show Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+      if (technicalSections.includes(sectionId)) {
+        await expect(page.getByTestId('vehicle-data-empty-state'), brandId + ' must show an explicit empty state in ' + sectionId).toBeVisible();
+      }
+    }
+  }
+
+  // Exercise a Mitsubishi model other than Outlander without inventing vehicle specifications.
+  await page.evaluate(() => {
+    const raw = localStorage.getItem('car-brother-garage');
+    if (!raw) throw new Error('Garage fixture is missing');
+    const garage = JSON.parse(raw) as { vehicles: Array<{ id: string; brandId: string; modelId: string }>; activeVehicleId: string };
+    const active = garage.vehicles.find(vehicle => vehicle.id === garage.activeVehicleId);
+    if (!active) throw new Error('Active vehicle fixture is missing');
+    active.brandId = 'mitsubishi';
+    active.modelId = 'lancer-9';
+    localStorage.setItem('car-brother-garage', JSON.stringify(garage));
+  });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-vehicle') || '')).toContain('lancer-9');
+  for (const sectionId of allSections.filter(id => id !== 'brands')) {
+    await openNavItem(page, sectionId);
+    const content = await page.locator('main').innerText();
+    expect(content, 'Mitsubishi Lancer must not inherit Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+    if (technicalSections.includes(sectionId)) {
+      await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
+    }
+  }
+});
+
 for (const viewport of viewports) {
   for (const theme of themes) {
     const suffix = viewport.width + 'x' + viewport.height + ', ' + theme;
@@ -145,7 +191,11 @@ for (const viewport of viewports) {
         const consoleErrors = await prepare(page, viewport, theme);
         for (const sectionId of group.sections) {
           await openNavItem(page, sectionId);
-          expect(await page.locator('body').innerText(), 'selected Toyota must not inherit Outlander copy in section ' + sectionId).not.toMatch(/Outlander/i);
+          expect(await page.locator('main').innerText(), 'selected Toyota must not inherit Outlander/4G6x copy in section ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+          if (['specs', 'bulbs', 'parts', 'fuses', 'tuning', 'guides', 'issues', 'wheels', 'maintenance', 'obd', 'logbook'].includes(sectionId)) {
+            await expect(page.getByTestId('vehicle-data-empty-state')).toBeVisible();
+            await expect(page.getByRole('heading', { name: 'Данные для этой модели ещё не проверены' })).toBeVisible();
+          }
           await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
         }
         expect(consoleErrors, 'browser console/page errors').toEqual([]);
