@@ -111,7 +111,7 @@ export default function FuseDiagram() {
               <span className="text-slate-400 leading-relaxed">{currentMeta.location}</span>
             </div>
           </div>
-          <div className="shrink-0 text-[11px] text-amber-300/90 bg-amber-950/30 px-2.5 py-1.5 rounded border border-amber-900/40">
+          <div className="shrink-0 text-xs text-amber-300/90 bg-amber-950/30 px-2.5 py-1.5 rounded border border-amber-900/40">
             {currentMeta.accessTip}
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function FuseDiagram() {
 
           {/* Quick Problem Shortcuts */}
           <div className="flex items-center gap-1.5 flex-wrap text-xs">
-            <span className="text-[11px] text-slate-500 font-medium mr-1">Частые проблемы:</span>
+            <span className="text-xs text-slate-500 font-medium mr-1">Частые проблемы:</span>
             {quickFilters.map((qf, idx) => (
               <button
                 key={idx}
@@ -157,12 +157,12 @@ export default function FuseDiagram() {
 
           {/* Amperage Filter Buttons */}
           <div className="flex items-center gap-1.5 flex-wrap pt-1 text-xs">
-            <span className="text-[11px] text-slate-500 font-medium mr-1">Номинал:</span>
+            <span className="text-xs text-slate-500 font-medium mr-1">Номинал:</span>
             {(['ALL', 7.5, 10, 15, 20, 30, 40, 100] as const).map((amp) => (
               <button
                 key={String(amp)}
                 onClick={() => setSelectedAmperage(amp)}
-                className={`px-2.5 py-0.5 rounded font-mono text-[11px] transition ${
+                className={`px-2.5 py-0.5 rounded font-mono text-xs transition ${
                   selectedAmperage === amp
                     ? 'bg-slate-700 text-white font-bold'
                     : 'bg-slate-950/80 text-slate-400 hover:text-slate-200 border border-slate-800'
@@ -187,7 +187,7 @@ export default function FuseDiagram() {
                   Интерактивная панель блока ({activeBox === 'cabin' ? 'Салон' : 'Моторный отсек'})
                 </span>
               </div>
-              <span className="text-[11px] text-slate-400">
+              <span className="text-xs text-slate-400">
                 Нажмите на предохранитель для подробностей
               </span>
             </div>
@@ -196,7 +196,7 @@ export default function FuseDiagram() {
             <div className="bg-black/60 p-4 sm:p-6 rounded-2xl border-2 border-slate-800 shadow-inner relative overflow-hidden">
               {/* Notch / Label indicating top of box */}
               <div className="flex justify-center mb-4">
-                <div className="bg-slate-800 text-[10px] text-slate-400 px-4 py-1 rounded-full font-mono uppercase tracking-widest border border-slate-700">
+                <div className="bg-slate-800 text-xs text-slate-400 px-4 py-1 rounded-full font-mono uppercase tracking-widest border border-slate-700">
                   ▲ ВЕРХ БЛОКА (ОРИЕНТАЦИЯ) ▲
                 </div>
               </div>
@@ -225,7 +225,7 @@ export default function FuseDiagram() {
                     >
                       {/* Fuse Pin Head Simulation */}
                       <div className="flex items-center justify-between w-full">
-                        <span className="text-[11px] font-mono font-bold text-slate-700 dark:text-slate-300">
+                        <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
                           {fuse.slotNumber}
                         </span>
 
@@ -244,14 +244,14 @@ export default function FuseDiagram() {
 
                       {/* Name / function label */}
                       <div className="mt-2 w-full">
-                        <span className="text-[11px] font-semibold text-slate-900 dark:text-slate-200 line-clamp-2 leading-tight block">
+                        <span className="text-xs font-semibold text-slate-900 dark:text-slate-200 line-clamp-2 leading-tight block">
                           {fuse.name}
                         </span>
                       </div>
 
                       {/* Fusible link tag if >= 30A */}
                       {fuse.amperage >= 30 && (
-                        <div className="mt-1 text-[9px] uppercase font-mono text-amber-400 tracking-wider">
+                        <div className="mt-1 text-xs uppercase font-mono text-amber-400 tracking-wider">
                           {fuse.amperage >= 40 ? 'Maxi вставка' : 'Силовой'}
                         </div>
                       )}
@@ -264,20 +264,20 @@ export default function FuseDiagram() {
               <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-white/80 rounded-sm"></div>
-                  <span className="text-[11px]">Белый пинцет-съемник: на крышке под капотом</span>
+                  <span className="text-xs">Белый пинцет-съемник: на крышке под капотом</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px]">Резервные слоты (Spare): 10A, 15A, 20A</span>
+                  <span className="text-xs">Резервные слоты (Spare): 10A, 15A, 20A</span>
                 </div>
               </div>
             </div>
 
             {/* Standard Color Code Legend */}
             <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1.5 text-xs">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
                 Стандартная цветовая маркировка автомобильных предохранителей:
               </span>
-              <div className="flex items-center gap-2.5 flex-wrap text-[11px] font-mono">
+              <div className="flex items-center gap-2.5 flex-wrap text-xs font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="w-3 h-3 rounded bg-[#a16207]"></span> 7.5A (Коричневый)
                 </span>
@@ -325,7 +325,7 @@ export default function FuseDiagram() {
                 </div>
 
                 <div className="text-right shrink-0">
-                  <span className="text-[10px] text-slate-500 uppercase block">Монтажный блок</span>
+                  <span className="text-xs text-slate-500 uppercase block">Монтажный блок</span>
                   <span className="text-xs font-semibold text-slate-300">
                     {activeFuse.box === 'cabin' ? 'Салон' : 'Под капотом'}
                   </span>
@@ -334,7 +334,7 @@ export default function FuseDiagram() {
 
               {/* Symptom Callout if Blown */}
               <div className="p-3.5 bg-red-950/40 border border-red-900/60 rounded-xl text-xs text-red-200 space-y-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-red-400 flex items-center gap-1.5">
+                <span className="text-xs font-bold uppercase tracking-wider text-red-400 flex items-center gap-1.5">
                   <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
                   Что произойдет при перегорании:
                 </span>
@@ -345,7 +345,7 @@ export default function FuseDiagram() {
 
               {/* Protected Consumers List */}
               <div className="space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
                   Защищаемые потребители цепи:
                 </span>
                 <div className="space-y-1.5">
@@ -366,14 +366,14 @@ export default function FuseDiagram() {
                 <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-start gap-2">
                   <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-amber-400 block text-[11px]">Совет мастера:</span>
+                    <span className="font-semibold text-amber-400 block text-xs">Совет мастера:</span>
                     <span className="leading-relaxed">{activeFuse.notes}</span>
                   </div>
                 </div>
               )}
 
               {/* Critical Safety Notice */}
-              <div className="p-3 bg-amber-950/20 border border-amber-900/40 rounded-xl text-[11px] text-amber-200/90 leading-relaxed space-y-1">
+              <div className="p-3 bg-amber-950/20 border border-amber-900/40 rounded-xl text-xs text-amber-200/90 leading-relaxed space-y-1">
                 <span className="font-bold text-amber-400 block">Правило безопасности:</span>
                 <span>
                   Категорически запрещается устанавливать предохранители большего номинала (например, вместо 15A ставить 25A) или проволочные «жучки»! Это может привести к оплавлению проводки и возгоранию.
