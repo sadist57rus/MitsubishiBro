@@ -47,7 +47,7 @@ export default function GenerationBodyCatalogPanel() {
                 <div className="font-bold text-slate-900 dark:text-white mt-0.5">{item.model}</div>
                 <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">Кузова: {item.chassisCodes.join(', ')} · {item.bodyStyles.join(', ')}</div>
               </div>
-              <div className="flex items-center gap-2 shrink-0"><span className="text-[10px] rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-900 dark:text-amber-200 px-2 py-1">черновая запись</span>{isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}</div>
+              <div className="flex items-center gap-2 shrink-0"><span className="text-xs rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-900 dark:text-amber-200 px-2 py-1">черновая запись</span>{isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}</div>
             </button>
             {isOpen && <div className="p-4 pt-0 border-t border-slate-200 dark:border-slate-800 space-y-3 text-sm">
               {base && <p className="text-xs text-slate-500">Связанная карточка приложения: {base.name} · {base.years}</p>}
