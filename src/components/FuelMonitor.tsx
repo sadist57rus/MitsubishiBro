@@ -58,7 +58,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   const activeModel = activeBrand?.models.find(model => model.id === activeVehicle.modelId);
   const vehicleLabel = [activeBrand?.russianName || activeBrand?.name, activeModel?.name, activeModel?.generation].filter(Boolean).join(' ');
   const tankCapacity = activeModel?.dimensions?.fuelTankLiters;
-  const activeStorageKey = vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-fuel-logs-' + vehicleId;
+  const activeStorageKey = activeModel?.id === 'outlander-1' && vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-fuel-logs-' + vehicleId;
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[preferences.currency] || '₽';
