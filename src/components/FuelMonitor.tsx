@@ -217,19 +217,19 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               {formatConsumption(data.consumption)} {consumptionUnit}
             </strong>
           </div>
-          <div className="flex justify-between text-[11px] text-slate-300">
+          <div className="flex justify-between text-xs text-slate-300">
             <span>Заправлено:</span>
             <span>{data.liters} л ({data.fuelType})</span>
           </div>
-          <div className="flex justify-between text-[11px] text-slate-300">
+          <div className="flex justify-between text-xs text-slate-300">
             <span>Дистанция:</span>
             <span>{data.distance} км</span>
           </div>
-          <div className="flex justify-between text-[11px] text-slate-300 pt-1 border-t border-slate-800">
+          <div className="flex justify-between text-xs text-slate-300 pt-1 border-t border-slate-800">
             <span>Сумма чека:</span>
             <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} {currencySymbols[data.currency || 'RUB'] || '₽'}</span>
           </div>
-          <div className="text-[10px] text-slate-400 italic">
+          <div className="text-xs text-slate-400 italic">
             {data.station}
           </div>
         </div>
@@ -276,14 +276,14 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         {overallStats && (
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Средний расход</span>
+              <span className="text-slate-500 dark:text-slate-400 text-xs block">Средний расход</span>
               <div className="text-red-600 dark:text-red-400 font-mono font-black text-lg">
                 {formatConsumption(overallStats.avgConsumption)} <span className="text-xs font-normal text-slate-500">{consumptionUnit}</span>
               </div>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Мин. / Макс.</span>
+              <span className="text-slate-500 dark:text-slate-400 text-xs block">Мин. / Макс.</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-sm mt-1">
                 <span className="text-emerald-600 dark:text-emerald-400">{overallStats.minConsumption}</span>
                 <span className="text-slate-400 mx-1">/</span>
@@ -292,21 +292,21 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Учтённый пробег</span>
+              <span className="text-slate-500 dark:text-slate-400 text-xs block">Учтённый пробег</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
                 {overallStats.totalDist.toLocaleString()} <span className="text-xs font-normal text-slate-500">км</span>
               </div>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Всего заправлено</span>
+              <span className="text-slate-500 dark:text-slate-400 text-xs block">Всего заправлено</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
                 {overallStats.totalLiters} <span className="text-xs font-normal text-slate-500">л</span>
               </div>
             </div>
 
             <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/60 dark:border-slate-800 col-span-2 sm:col-span-2">
-              <span className="text-slate-500 dark:text-slate-400 text-[11px] block">Сумма расходов на бензин</span>
+              <span className="text-slate-500 dark:text-slate-400 text-xs block">Сумма расходов на бензин</span>
               <div className="text-slate-900 dark:text-white font-mono font-bold text-lg">
                 {Number(overallStats.totalSpent).toLocaleString()} <span className="text-xs font-normal text-slate-500">{currencySymbol}</span>
               </div>
@@ -524,7 +524,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     <button
                       key={val}
                       onClick={() => setDistance(val.toString())}
-                      className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
+                      className="px-1.5 py-0.5 rounded text-xs font-mono bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                     >
                       {val}км
                     </button>
@@ -550,7 +550,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     <button
                       key={val}
                       onClick={() => setLiters(val.toString())}
-                      className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
+                      className="px-1.5 py-0.5 rounded text-xs font-mono bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300"
                     >
                       {val}л
                     </button>
@@ -625,7 +625,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
                   {/* VISUAL GAUGE SPECTRUM BAR */}
                   <div className="space-y-1.5 pt-2">
-                    <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+                    <div className="flex justify-between text-xs text-slate-400 font-mono">
                       <span>7.0 л (Трасса)</span>
                       <span>12.5 л (Норма 4WD)</span>
                       <span>18.0+ л (Ошибки)</span>
@@ -650,7 +650,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                             style={{ left: `${pct}%` }}
                           >
                             <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-slate-900 dark:border-b-white" />
-                            <span className="text-[9px] font-mono font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-1 rounded shadow-xs border border-slate-300 dark:border-slate-700">
+                            <span className="text-xs font-mono font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-1 rounded shadow-xs border border-slate-300 dark:border-slate-700">
                               {stats.consumption}
                             </span>
                           </div>
@@ -674,7 +674,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                     {/* Tank Level Liquid Visualization */}
                     <div className="h-4 rounded-lg bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 overflow-hidden relative">
                       <div
-                        className="h-full bg-gradient-to-r from-red-600 via-amber-500 to-emerald-500 rounded-lg transition-all duration-500 flex items-center justify-end pr-2 text-[9px] font-bold text-white font-mono"
+                        className="h-full bg-gradient-to-r from-red-600 via-amber-500 to-emerald-500 rounded-lg transition-all duration-500 flex items-center justify-end pr-2 text-xs font-bold text-white font-mono"
                         style={{
                           width: `${Math.min(100, Math.max(20, (parseFloat(stats.tankRange) / 750) * 100))}%`
                         }}
@@ -707,11 +707,11 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             </div>
 
             {/* Keep factory benchmark values scoped to the exact model they describe. */}
-            {activeModel?.id === 'outlander-1' ? <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] space-y-2">
+            {activeModel?.id === 'outlander-1' ? <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-2">
               <span className="font-bold text-slate-900 dark:text-slate-200 block">
                 Ориентиры расхода для {vehicleLabel || 'выбранного автомобиля'}:
               </span>
-              <div className="space-y-1.5 font-mono text-[10px]">
+              <div className="space-y-1.5 font-mono text-xs">
                 <div>
                   <div className="flex justify-between text-slate-500 mb-0.5">
                     <span>Расход на трассе</span>
@@ -887,7 +887,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
         {logs.length > 0 ? (
           <div className="overflow-x-auto no-scrollbar">
             <table className="w-full text-xs text-left">
-              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 uppercase text-xs font-semibold border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="py-2.5 px-3">Дата</th>
                   <th className="py-2.5 px-3">Пробег</th>
@@ -956,10 +956,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               1. Верхний кислородный датчик (Лямбда)
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               «Уставшая» первая лямбда до катализатора медленно реагирует на обеднение смеси. ЭБУ перестраховывается и обогащает смесь, добавляя <strong>+2...3 л / 100 км</strong> без ошибок на приборной панели.
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Замена на Denso DOX-0313 или оригинал MN153010.
             </div>
           </div>
@@ -968,10 +968,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               2. Подклинивание тормозных суппортов
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Главная болезнь тормозов Outlander 1 — закисание направляющих пальцев суппортов. Колодка постоянно трет о диск, увеличивая сопротивление качению (до <strong>+1.5...2 л</strong>).
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Проверка наката, ремкомплект Seinsa D4554 и смазка TRW PFG110.
             </div>
           </div>
@@ -980,10 +980,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               3. Загрязнение ДМРВ и дроссельной заслонки
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Масляный налет на нитях ДМРВ (MD343605) и грязь вокруг дроссельной заслонки искажают расчет циклового наполнения воздуха на холостых и переходных режимах.
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Промывка датчика спецспреем Liqui Moly для ДМРВ (без касания кистью!).
             </div>
           </div>
@@ -992,10 +992,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               4. Забитый катализатор (ошибки P0421/P0431)
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               К 180–200 тыс. км керамические соты катколлектора оплавляются, создавая высокое противодавление на выпуске. Двигатель «душится», требуя сильнее жать на газ.
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Замена на пламегаситель из нержавейки + механическая обманка с миникатализатором.
             </div>
           </div>
@@ -1004,10 +1004,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               5. Давление в шинах и вылет дисков
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               При снижении давления в шинах 215/60 R16 с 2.1 до 1.7 бар сопротивление качению возрастает на 20%. Установка тяжелых колес 225/55 R18 также добавляет около 1 л.
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Держать штатное давление 2.1 – 2.2 бар (2.3 при полной загрузке).
             </div>
           </div>
@@ -1016,10 +1016,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
             <span className="font-bold text-slate-900 dark:text-white block text-sm">
               6. Коррозия заливной горловины бака
             </span>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Специфическая проблема первого поколения: под пластиковым щитком труба горловины сгнивает до дыр. Пары бензина испаряются, а в бак попадает влага и песок.
             </p>
-            <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
+            <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Осмотр горловины в арке заднего левого колеса, замена на MR512211.
             </div>
           </div>
