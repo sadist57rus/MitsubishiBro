@@ -44,10 +44,10 @@ export default function ObdPortLocationGraphic() {
         {/* Left: Driver Footwell Visual Schematic (SVG) */}
         <div className="lg:col-span-7 bg-white dark:bg-[#070b12] rounded-xl border border-slate-200 dark:border-slate-850 p-4 sm:p-5 shadow-inner overflow-hidden">
           <div className="flex justify-between items-center mb-3">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Схема водительского места (под торпедо)
             </span>
-            <span className="text-[10px] text-red-600 dark:text-red-400 font-mono font-bold bg-red-50 dark:bg-red-950/60 px-2 py-0.5 rounded">
+            <span className="text-xs text-red-600 dark:text-red-400 font-mono font-bold bg-red-50 dark:bg-red-950/60 px-2 py-0.5 rounded">
               Разъем DLC направлен вниз
             </span>
           </div>
@@ -137,7 +137,7 @@ export default function ObdPortLocationGraphic() {
               <Zap className="w-4 h-4 text-red-600" />
               Распиновка 16-контактного разъема DLC
             </span>
-            <span className="text-[10px] font-mono text-slate-400">J1962</span>
+            <span className="text-xs font-mono text-slate-400">J1962</span>
           </div>
 
           {/* Trapezoid 16-Pin Visual Graphic */}
@@ -148,7 +148,7 @@ export default function ObdPortLocationGraphic() {
                 <button
                   key={p}
                   onClick={() => setSelectedPin(p)}
-                  className={`w-7 h-7 rounded text-[10px] font-mono font-bold flex items-center justify-center transition border ${
+                  className={`w-7 h-7 rounded text-xs font-mono font-bold flex items-center justify-center transition border ${
                     selectedPin === p
                       ? 'bg-red-600 text-white border-red-600 shadow-xs'
                       : p === 7 || p === 16
@@ -170,7 +170,7 @@ export default function ObdPortLocationGraphic() {
                 <button
                   key={p}
                   onClick={() => setSelectedPin(p)}
-                  className={`w-7 h-7 rounded text-[10px] font-mono font-bold flex items-center justify-center transition border ${
+                  className={`w-7 h-7 rounded text-xs font-mono font-bold flex items-center justify-center transition border ${
                     selectedPin === p
                       ? 'bg-red-600 text-white border-red-600 shadow-xs'
                       : p === 16 || p === 7
@@ -184,7 +184,7 @@ export default function ObdPortLocationGraphic() {
               ))}
             </div>
 
-            <span className="text-[10px] text-slate-400 mt-2 font-mono">
+            <span className="text-xs text-slate-400 mt-2 font-mono">
               Трапеция (широкая сторона сверху)
             </span>
           </div>
@@ -194,18 +194,18 @@ export default function ObdPortLocationGraphic() {
             <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-md bg-red-600 text-white font-mono text-[11px] flex items-center justify-center font-bold">
+                  <span className="w-5 h-5 rounded-md bg-red-600 text-white font-mono text-xs flex items-center justify-center font-bold">
                     {activePinInfo.pin}
                   </span>
                   <span>{activePinInfo.name}</span>
                 </span>
                 {activePinInfo.important && (
-                  <span className="text-[9px] font-mono font-bold text-red-600 bg-red-100 dark:bg-red-950/60 px-1.5 py-0.5 rounded">
+                  <span className="text-xs font-mono font-bold text-red-600 bg-red-100 dark:bg-red-950/60 px-1.5 py-0.5 rounded">
                     Ключевой
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">
                 {activePinInfo.desc}
               </p>
             </div>
@@ -221,7 +221,7 @@ export default function ObdPortLocationGraphic() {
               <Info className="w-4 h-4 text-amber-600 shrink-0" />
               <span>Сканер не светится и нет питания?</span>
             </div>
-            <p className="text-[11px] text-amber-700 dark:text-amber-400 leading-snug">
+            <p className="text-xs text-amber-700 dark:text-amber-400 leading-snug">
               Питание +12V на 16-й контакт подается через <strong>предохранитель F13 (10A)</strong> в салонном блоке (за монетницей слева от руля). Замените F13!
             </p>
           </div>
@@ -235,7 +235,7 @@ export default function ObdPortLocationGraphic() {
             <Smartphone className="w-3.5 h-3.5 text-red-500" />
             ELM327 Bluetooth / Wi-Fi:
           </span>
-          <p className="text-slate-500 text-[11px] leading-snug">
+          <p className="text-slate-500 text-xs leading-snug">
             СТРОГО версия <strong>1.5</strong> на оригинальном чипе <strong>PIC18F25K80</strong>. Урезанные версии 2.1 НЕ читают протокол K-Line Outlander I!
           </p>
         </div>
@@ -245,7 +245,7 @@ export default function ObdPortLocationGraphic() {
             <Wrench className="w-3.5 h-3.5 text-red-500" />
             Дилерское оборудование:
           </span>
-          <p className="text-slate-500 text-[11px] leading-snug">
+          <p className="text-slate-500 text-xs leading-snug">
             <strong>OpenPort 2.0</strong> (прошивка, чтение логов в EvoScan) и дилерский комплекс <strong>Mitsubishi MUT-III</strong> (чтение всех блоков, ABS, SRS, АКПП).
           </p>
         </div>
@@ -255,7 +255,7 @@ export default function ObdPortLocationGraphic() {
             <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
             Программы для смартфона:
           </span>
-          <p className="text-slate-500 text-[11px] leading-snug">
+          <p className="text-slate-500 text-xs leading-snug">
             <strong>Car Scanner ELM OBD2</strong> (профиль Mitsubishi), <strong>NMPS Reader</strong> (чтение АКПП W4A42 и температуры масла), <strong>Torque Pro</strong> с плагином MUT.
           </p>
         </div>
