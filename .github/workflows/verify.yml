@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -22,7 +22,7 @@ jobs:
       - run: npm run test:smoke
       - name: Upload web build for testing
         if: success()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: Car-Brother-web-build
           path: dist/
@@ -30,7 +30,7 @@ jobs:
           retention-days: 14
       - name: Upload Playwright report and failure screenshots
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-and-failures
           path: |
