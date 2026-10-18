@@ -27,7 +27,9 @@ async function openNavItem(page: Page, label: RegExp) {
   const panel = page.getByTestId('section-menu-list');
   const item = panel.getByRole('button', { name: label }).first();
   await expect(item).toBeVisible({ timeout: 5_000 });
-  await item.click();
+  // The brand section contains nested brand-switch controls; click its title text
+  // rather than the parent button's center, which can land on a nested logo.
+  await item.getByText(label).first().click();
 }
 
 for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }, { width: 1280, height: 720 }]) {
