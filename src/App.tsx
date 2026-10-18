@@ -464,7 +464,12 @@ function AppContent() {
       {/* Brand Selector Modal */}
       <BrandSelectorModal
         isOpen={isBrandSelectorOpen}
-        onClose={() => setIsBrandSelectorOpen(false)}
+        onClose={() => {
+          setIsBrandSelectorOpen(false);
+          window.requestAnimationFrame(() => {
+            document.querySelector<HTMLButtonElement>('[aria-label^="Выбрать марку автомобиля"]')?.focus();
+          });
+        }}
         selectedBrandId={selectedBrandId}
         onSelectBrand={setSelectedBrandId}
         onSelectModel={setSelectedModelId}
