@@ -32,7 +32,7 @@ export default function JapaneseModelFamilyDirectory() {
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1 mb-2"><h3 className="font-bold">{brand}</h3><span className="text-xs text-slate-500">{models.length} моделей</span></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">{models.map(item => <div key={item.id} className="rounded-lg border border-slate-200 dark:border-slate-800 p-3">
           <div className="font-semibold text-sm">{item.model}</div>
-          <div className="text-[10px] text-amber-700 dark:text-amber-300 mt-1">Поколения и модификации: в очереди импорта</div>
+          <div className="text-xs text-amber-700 dark:text-amber-300 mt-1">Поколения и модификации: в очереди импорта</div>
         </div>)}</div>
       </div>)}
       {filtered.length === 0 && <p className="text-center text-sm text-slate-500 py-8">Модели не найдены.</p>}
