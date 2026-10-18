@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useVehicle } from '../context/VehicleContext';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { OBD_CODES_DATA } from '../data/obdData';
 import ObdPortLocationGraphic from './ObdPortLocationGraphic';
 import {
@@ -19,6 +21,10 @@ import {
 } from 'lucide-react';
 
 export default function ObdDiagnostics() {
+  const { brandId, modelId } = useVehicle();
+  const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === brandId);
+  const activeModel = activeBrand?.models.find(model => model.id === modelId);
+  const isOutlanderSourceModel = modelId === 'outlander-1';
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSystem, setSelectedSystem] = useState<string>('all');
   const [selectedSeverity, setSelectedSeverity] = useState<string>('all');
@@ -77,6 +83,8 @@ export default function ObdDiagnostics() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
+  if (!isOutlanderSourceModel) return <section className="rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900"><h2 className="text-base font-bold">Диагностика для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Эта база кодов и пояснений подготовлена для Mitsubishi Outlander I. Чтобы не показывать неподтверждённые сведения для другой машины, откройте карточку выбранной модели в «Авто Японии» или запросите данные.</p><a className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white" href={\`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=OBD%20data%20request%3A%20\${encodeURIComponent(activeBrand?.name || brandId)}%20\${encodeURIComponent(activeModel?.name || modelId)}\`} target="_blank" rel="noreferrer">Запросить данные для модели</a></section>;
+
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Header Card */}
@@ -95,7 +103,7 @@ export default function ObdDiagnostics() {
             </div>
             <h1 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2.5">
               <Activity className="w-6 h-6 text-red-600" />
-              Коды ошибок OBD-II для Mitsubishi Outlander I
+              Коды ошибок OBD-II для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name} {activeModel?.generation}
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-3xl">
               Полный диагностический справочник со спецификой для моторов 4G63, 4G64, 4G69 MIVEC, турбо 4G63T, автомата INVECS-II (W4A42), систем ABS, SRS и EVAP.
