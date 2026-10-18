@@ -166,13 +166,13 @@ export default function BrandSelectorModal({
                       )}
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-1 text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
+                    <div className="flex flex-wrap items-center justify-center gap-1 text-xs sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
                       <span>{brand.russianName}</span>
                       <span>·</span>
                       <span>с {brand.founded} г.</span>
                     </div>
 
-                    <p className="hidden sm:block text-[11px] text-slate-600 dark:text-slate-400 mt-1 break-words">
+                    <p className="hidden sm:block text-xs text-slate-600 dark:text-slate-400 mt-1 break-words">
                       Модели: {brand.models.map(m => m.name.split(' ')[0]).join(', ')}
                     </p>
                   </div>
