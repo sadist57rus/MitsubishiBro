@@ -706,8 +706,8 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               )}
             </div>
 
-            {/* Benchmark Comparison Bars */}
-            <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] space-y-2">
+            {/* Keep factory benchmark values scoped to the exact model they describe. */}
+            {activeModel?.id === 'outlander-1' ? <div className="p-3.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] space-y-2">
               <span className="font-bold text-slate-900 dark:text-slate-200 block">
                 Ориентиры расхода для {vehicleLabel || 'выбранного автомобиля'}:
               </span>
@@ -742,7 +742,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   </div>
                 </div>
               </div>
-            </div>
+            </div> : <p className="rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">Заводские ориентиры для этой модификации пока не добавлены. Ведите журнал заправок для расчёта фактического расхода.</p>}
           </div>
         </div>
       </div>
@@ -957,10 +957,10 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               1. Верхний кислородный датчик (Лямбда)
             </span>
             <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
-              «Уставшая» первая лямбда до катализатора медленно реагирует на обеднение смеси. ЭБУ перестраховывается и обогащает смесь, добавляя <strong>+2...3 л / 100 км</strong> без ошибок на приборной панели.
+              Неисправный датчик кислорода или проблемы со смесью могут повышать расход. Проверьте ошибки, топливные коррекции и показания датчиков диагностическим сканером.
             </p>
             <div className="text-[10px] font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
-              Решение: Замена на Denso DOX-0313 или оригинал MN153010.
+              Решение: проверка по сервисной документации конкретного двигателя; не заменяйте датчик без диагностики.
             </div>
           </div>
 
