@@ -115,18 +115,18 @@ export default function TechSpecs() {
       {isOutlanderSourceModel && <section className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/70 dark:bg-blue-950/20 p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <div className="text-[11px] uppercase tracking-wider font-bold text-blue-700 dark:text-blue-300">Источник: сервисная документация · отдельная модификация</div>
+            <div className="text-xs uppercase tracking-wider font-bold text-blue-700 dark:text-blue-300">Источник: сервисная документация · отдельная модификация</div>
             <h2 className="text-lg font-black text-slate-900 dark:text-white mt-1">Outlander CU5W · двигатель 4G69</h2>
             <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 mt-1">{ENGINE_TECHNICAL_RECORDS[0].summary}</p>
           </div>
-          <span className="shrink-0 rounded-lg px-2.5 py-1.5 text-[10px] font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">Частично подтверждено</span>
+          <span className="shrink-0 rounded-lg px-2.5 py-1.5 text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">Частично подтверждено</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
           {ENGINE_TECHNICAL_RECORDS[0].values.map(value => (
             <div key={value.label} className="rounded-lg border border-blue-100 dark:border-blue-900/50 bg-white dark:bg-slate-900 p-3">
-              <div className="text-[11px] text-slate-500 dark:text-slate-400">{value.label}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">{value.label}</div>
               <div className="font-bold text-sm text-slate-900 dark:text-white mt-1">{value.value}</div>
-              {value.conditions && <div className="text-[10px] leading-relaxed text-slate-500 dark:text-slate-400 mt-1">{value.conditions}</div>}
+              {value.conditions && <div className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 mt-1">{value.conditions}</div>}
             </div>
           ))}
         </div>
@@ -190,7 +190,7 @@ export default function TechSpecs() {
                 <Maximize2 className="w-4 h-4 text-red-600" />
                 <span>Габариты кузова</span>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">CU_W</span>
+              <span className="text-xs font-mono text-slate-500">CU_W</span>
             </div>
             <div className="space-y-1.5 text-xs font-mono">
               <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
@@ -223,7 +223,7 @@ export default function TechSpecs() {
                 <UserCheck className="w-4 h-4 text-red-600" />
                 <span>Размеры салона</span>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">5 мест</span>
+              <span className="text-xs font-mono text-slate-500">5 мест</span>
             </div>
             <div className="space-y-1.5 text-xs font-mono">
               <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
@@ -256,7 +256,7 @@ export default function TechSpecs() {
                 <Package className="w-4 h-4 text-red-600" />
                 <span>Багажное отделение</span>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">402 – 1705 л</span>
+              <span className="text-xs font-mono text-slate-500">402 – 1705 л</span>
             </div>
             <div className="space-y-1.5 text-xs font-mono">
               <div className="flex justify-between items-center text-slate-600 dark:text-slate-400">
@@ -330,14 +330,14 @@ export default function TechSpecs() {
                   <div className="min-w-0">
                     <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                       <span>{section.title}</span>
-                      <span className="text-[11px] font-normal text-slate-400 hidden sm:inline">
+                      <span className="text-xs font-normal text-slate-400 hidden sm:inline">
                         ({section.items.length} параметров)
                       </span>
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
                       {section.subtitle}
                     </p>
-                    <span title={verificationStatus === 'verified' ? 'Подтверждено источником для указанной модификации' : verificationStatus === 'partially-verified' ? 'Подтверждены только параметры, перечисленные в связанном источнике' : 'Для этого блока нет привязанного подтверждающего источника'} className={'mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold '+(verificationStatus === 'verified' ? 'bg-green-100 text-green-800' : verificationStatus === 'partially-verified' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-900')}>
+                    <span title={verificationStatus === 'verified' ? 'Подтверждено источником для указанной модификации' : verificationStatus === 'partially-verified' ? 'Подтверждены только параметры, перечисленные в связанном источнике' : 'Для этого блока нет привязанного подтверждающего источника'} className={'mt-1 inline-flex rounded-full px-2 py-0.5 text-xs font-bold '+(verificationStatus === 'verified' ? 'bg-green-100 text-green-800' : verificationStatus === 'partially-verified' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-900')}>
                       {verificationLabel}
                     </span>
                   </div>
@@ -393,7 +393,7 @@ export default function TechSpecs() {
                             {item.value}
                           </div>
                           {item.detail && (
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-snug">
                               {item.detail}
                             </p>
                           )}
@@ -409,7 +409,7 @@ export default function TechSpecs() {
                         <Info className="w-3.5 h-3.5 text-red-500" />
                         <span>Практические заметки и особенности:</span>
                       </div>
-                      <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 text-[11px] pl-1">
+                      <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 text-xs pl-1">
                         {section.notes.map((note, nIdx) => (
                           <li key={nIdx}>{note}</li>
                         ))}
