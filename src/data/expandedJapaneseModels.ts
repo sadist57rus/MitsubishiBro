@@ -1105,7 +1105,11 @@ for (const seed of commercialBrandSeeds) {
 
 for (const model of supplementalModels) {
   const brand = JAPANESE_BRANDS.find(item => item.id === model.brandId);
-  if (brand && !brand.models.some(item => item.id === model.id)) {
-    brand.models.push(model);
-  }
+  if (!brand) continue;
+  const normalizedYears = (years: string) => years.replace(/[–—]/g, '-').replace(/\s+/g, '');
+  const duplicate = brand.models.some(item =>
+    item.id === model.id ||
+    (item.bodyType === model.bodyType && normalizedYears(item.years) === normalizedYears(model.years))
+  );
+  if (!duplicate) brand.models.push(model);
 }
