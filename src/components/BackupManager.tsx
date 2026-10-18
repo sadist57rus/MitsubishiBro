@@ -9,8 +9,8 @@ type BackupPayload = { app: 'car-brother'; schemaVersion: number; createdAt: str
 type RestoreMode = 'merge' | 'replace';
 
 function isBackup(value: unknown): value is BackupPayload {
-  if (!isRecord(value) || value.app !== 'car-brother' || value.schemaVersion !== BACKUP_SCHEMA_VERSION || typeof value.createdAt !== 'string' || !isRecord(value.data)) return false;
-  return Object.values(value.data).every(item => typeof item === 'string');
+  if (!isRecord(value) || value.app !== 'car-brother' || value.schemaVersion !== BACKUP_SCHEMA_VERSION || typeof value.createdAt !== 'string' || !Number.isFinite(Date.parse(value.createdAt)) || !isRecord(value.data)) return false;
+  return Object.entries(value.data).every(([key, item]) => key.trim().length > 0 && typeof item === 'string');
 }
 
 function createBackup(): BackupPayload {
