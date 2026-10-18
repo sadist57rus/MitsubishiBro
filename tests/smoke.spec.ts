@@ -15,17 +15,17 @@ async function chooseToyota(page: Page) {
     expect(toyotaValue, 'Toyota must exist in the shared catalog').not.toBe('');
     await brand.selectOption(toyotaValue);
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
   }
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
 }
 
 async function openNavItem(page: Page, label: RegExp) {
-  let item = page.getByRole('button', { name: label }).first();
-  if (!(await item.isVisible().catch(() => false))) {
-    const menu = page.getByRole('button', { name: /Разделы|Меню/i }).first();
-    if (await menu.isVisible().catch(() => false)) await menu.click();
-    item = page.getByRole('button', { name: label }).first();
-  }
+  const menu = page.getByRole('button', { name: /Открыть разделы приложения/i });
+  await expect(menu).toBeVisible();
+  await menu.click();
+  const panel = page.locator('div.absolute').filter({ hasText: 'Все разделы приложения' }).first();
+  const item = panel.getByRole('button', { name: label }).first();
   await expect(item).toBeVisible({ timeout: 5_000 });
   await item.click();
 }
