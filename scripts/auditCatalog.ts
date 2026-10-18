@@ -1,11 +1,11 @@
-import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
-import '../src/data/expandedJapaneseModels';
+import { JAPANESE_BRANDS } from '../src/data/vehicleCatalog';
 
 type Model = (typeof JAPANESE_BRANDS)[number]['models'][number];
 
 const errors: string[] = [];
 const warnings: string[] = [];
 const seenIds = new Set<string>();
+const seenBodyYears = new Set<string>();
 let modelCount = 0;
 let unverifiedCount = 0;
 let sourceBackedCount = 0;
@@ -25,6 +25,9 @@ for (const brand of JAPANESE_BRANDS) {
     check(model.brandId === brand.id, `Brand mismatch: ${brand.id}/${model.id} has brandId=${model.brandId}`);
     if (seenIds.has(model.id)) errors.push(`Duplicate model id: ${model.id}`);
     seenIds.add(model.id);
+    const bodyYearsKey = `${brand.id}|${model.bodyType}|${model.years.replace(/[–—]/g, '-').replace(/\\s+/g, '')}`.toLocaleLowerCase('ru-RU');
+    if (seenBodyYears.has(bodyYearsKey)) errors.push(`Duplicate make+body+years: ${brand.id}/${model.bodyType}/${model.years} (${model.id})`);
+    seenBodyYears.add(bodyYearsKey);
     const normalizedName = `${brand.id}:${model.name.trim().toLocaleLowerCase('ru-RU').replace(/\\s+/g, ' ')}`;
     duplicateNames.set(normalizedName, [...(duplicateNames.get(normalizedName) ?? []), model.id]);
     check(Array.isArray(model.engines) && model.engines.length > 0, `No engine entries: ${model.id}`);
