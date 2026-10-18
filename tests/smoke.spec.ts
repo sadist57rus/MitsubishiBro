@@ -347,7 +347,7 @@ test('full backup can be exported, validated and restored without losing local d
   const downloadPromise = page.waitForEvent('download');
   await exportButton.click();
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toMatch(/^car-brother-backup-\\d{4}-\\d{2}-\\d{2}\\.json$/);
+  expect(download.suggestedFilename()).toMatch(/^car-brother-backup-\d{4}-\d{2}-\d{2}\.json$/);
   const path = await download.path();
   expect(path).toBeTruthy();
   const fs = await import('node:fs/promises');
