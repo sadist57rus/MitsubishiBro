@@ -180,21 +180,21 @@ export default function GarageLogbook() {
         {/* Stats strip */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-800">
           <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-            <span className="text-[10px] uppercase text-slate-400 tracking-wider block">Всего расходов</span>
+            <span className="text-xs uppercase text-slate-400 tracking-wider block">Всего расходов</span>
             <span className="text-lg font-bold font-mono text-emerald-400 mt-0.5 block">
               {totalSpent.toLocaleString('ru-RU')} ₽
             </span>
           </div>
 
           <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-            <span className="text-[10px] uppercase text-slate-400 tracking-wider block">Записей в журнале</span>
+            <span className="text-xs uppercase text-slate-400 tracking-wider block">Записей в журнале</span>
             <span className="text-lg font-bold font-mono text-white mt-0.5 block">
               {entries.length}
             </span>
           </div>
 
           <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 col-span-2 sm:col-span-1">
-            <span className="text-[10px] uppercase text-slate-400 tracking-wider block">Средний чек ремонта</span>
+            <span className="text-xs uppercase text-slate-400 tracking-wider block">Средний чек ремонта</span>
             <span className="text-lg font-bold font-mono text-amber-400 mt-0.5 block">
               {entries.length > 0 ? Math.round(totalSpent / entries.length).toLocaleString('ru-RU') : 0} ₽
             </span>
