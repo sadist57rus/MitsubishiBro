@@ -379,11 +379,11 @@ function AppContent() {
         )}
 
         {activeTab === 'specs' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TechSpecs /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><TechSpecs /></VehicleDataGate>
         )}
 
         {activeTab === 'bulbs' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><BulbsCatalog /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><BulbsCatalog /></VehicleDataGate>
         )}
 
         {activeTab === 'parts' && (
@@ -391,31 +391,31 @@ function AppContent() {
         )}
 
         {activeTab === 'fuses' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><FuseDiagram /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><FuseDiagram /></VehicleDataGate>
         )}
 
         {activeTab === 'tuning' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TuningHub /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><TuningHub /></VehicleDataGate>
         )}
 
         {activeTab === 'guides' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><RepairGuides selectedEngine={selectedEngine} /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><RepairGuides selectedEngine={selectedEngine} /></VehicleDataGate>
         )}
 
         {activeTab === 'issues' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><Troubleshooter selectedEngine={selectedEngine} /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><Troubleshooter selectedEngine={selectedEngine} /></VehicleDataGate>
         )}
 
         {activeTab === 'wheels' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><TireWheelCalculator /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><TireWheelCalculator /></VehicleDataGate>
         )}
 
         {activeTab === 'maintenance' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><MaintenanceHub /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><MaintenanceHub /></VehicleDataGate>
         )}
 
         {activeTab === 'obd' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><ObdDiagnostics /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><ObdDiagnostics /></VehicleDataGate>
         )}
 
         {activeTab === 'logbook' && (
