@@ -41,12 +41,31 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 800, height: 480 }
       }, theme);
       await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
-      await openNavItem(page, /Топливо|Fuel/i);
-      await expect(page.getByText(/Расходы на топливо/i).first()).toBeVisible();
-      expect(await page.locator('body').innerText()).not.toMatch(/Outlander/i);
+      const sections: RegExp[] = [
+        /Домой|Главная/i, /Гараж/i, /Настройки/i, /Марки|Авто Японии/i,
+        /Топливо|Fuel/i, /Характеристики/i, /Лампы|Автосвет/i, /Запчасти/i,
+        /Предохранители/i, /Тюнинг/i, /Ремонт/i, /Неисправности/i,
+        /Колёса|Диски/i, /ТО|Обслуживание/i, /OBD|Диагностика/i, /Журнал|Бортжурнал/i,
+      ];
+      for (const section of sections) {
+        await openNavItem(page, section);
+        expect(await page.locator('body').innerText(), `selected Toyota should not inherit Outlander copy in section ${section}`).not.toMatch(/Outlander/i);
+        await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+      }
 
       await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
+      await page.getByRole('button', { name: /Добавить машину/i }).click();
+      const brand = page.locator('form select').first();
+      const toyotaValue = await brand.locator('option').evaluateAll(options => {
+        const match = options.find(option => /toyota|тойота/i.test(option.textContent || ''));
+        return match?.getAttribute('value') || '';
+      });
+      await brand.selectOption(toyotaValue);
+      const modelValues = await page.locator('form select').nth(1).locator('option').evaluateAll(options => options.map(option => option.getAttribute('value')));
+      expect(new Set(modelValues).size, 'model ids in the garage selector must be unique').toBe(modelValues.length);
+
+      await page.getByRole('button', { name: /Отмена/i }).click();
       await page.reload();
       await openNavItem(page, /Гараж/i);
       await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
