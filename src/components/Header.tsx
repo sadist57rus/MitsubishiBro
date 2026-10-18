@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogos';
 import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
+import { plural } from '../lib/plural';
 
 export type TabId = 'overview' | 'garage' | 'settings' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook';
 type UiMode = 'phone' | 'wide';
@@ -348,7 +349,7 @@ export default function Header({
                                 )}
                               </div>
                               <span className="text-xs text-slate-500 dark:text-slate-400 font-mono block">
-                                {brand.models.length} моделей · с {brand.founded} г.
+                                {brand.models.length} {plural(brand.models.length, ['модель', 'модели', 'моделей'])} · с {brand.founded} г.
                               </span>
                             </div>
                           </div>
