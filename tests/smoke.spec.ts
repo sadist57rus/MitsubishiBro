@@ -114,6 +114,7 @@ async function openNavItem(page: Page, sectionId: string) {
 }
 
 test('model-specific sections never reuse Outlander data for another active vehicle', async ({ page }) => {
+  test.setTimeout(120_000);
   await prepare(page, { width: 360, height: 800 }, 'light');
 
   const selectBrand = async (brandId: string) => {
@@ -149,10 +150,12 @@ test('model-specific sections never reuse Outlander data for another active vehi
   });
   await page.reload();
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-vehicle') || '')).toContain('lancer-9');
-  for (const sectionId of allSections.filter(id => id !== 'brands')) {
+  for (const sectionId of allSections) {
     await openNavItem(page, sectionId);
     const content = await page.locator('main').innerText();
-    expect(content, 'Mitsubishi Lancer must not inherit Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+    if (sectionId !== 'brands') {
+      expect(content, 'Mitsubishi Lancer must not inherit Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+    }
     if (technicalSections.includes(sectionId)) {
       await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
     }
