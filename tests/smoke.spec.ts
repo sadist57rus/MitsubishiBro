@@ -401,6 +401,47 @@ test('invalid backup is rejected without modifying local data', async ({ page })
   await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-validation-sentinel'))).toBe('keep-this-value');
 });
 
+
+test('failed backup restore rolls back all previously stored data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.evaluate(() => localStorage.setItem('restore-rollback-sentinel', 'original-value'));
+
+  const backup = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: new Date().toISOString(),
+    data: {
+      'restore-rollback-sentinel': 'overwritten-value',
+      'restore-failure-trigger': 'boom',
+    },
+  };
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'rollback-test.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(backup)),
+  });
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('merge');
+
+  await page.evaluate(() => {
+    const originalSetItem = Storage.prototype.setItem;
+    let shouldFail = true;
+    Storage.prototype.setItem = function (key: string, value: string) {
+      if (shouldFail && key === 'restore-failure-trigger') {
+        shouldFail = false;
+        throw new DOMException('Storage quota exceeded', 'QuotaExceededError');
+      }
+      originalSetItem.call(this, key, value);
+    };
+  });
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+
+  await expect(page.getByRole('alert')).toContainText('Предыдущие данные восстановлены');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('restore-rollback-sentinel'))).toBe('original-value');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('restore-failure-trigger'))).toBeNull();
+});
+
 test('fuel and logbook storage keys stay isolated per vehicle and preserve legacy keys', () => {
   const firstLogbook = getLogbookStorageKey('vehicle-one', true);
   const secondLogbook = getLogbookStorageKey('vehicle-two', false);
