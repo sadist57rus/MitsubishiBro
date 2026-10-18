@@ -98,15 +98,15 @@ export default function BulbsCatalog() {
           {/* Quick Stat Badges */}
           <div className="flex flex-wrap gap-2 shrink-0">
             <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 rounded-xl px-3 py-1.5 text-xs">
-              <span className="text-[10px] text-amber-600 dark:text-amber-400 block font-semibold">Ближний свет</span>
+              <span className="text-xs text-amber-600 dark:text-amber-400 block font-semibold">Ближний свет</span>
               <strong className="text-slate-900 dark:text-white font-mono font-bold">H7 · 55W</strong>
             </div>
             <div className="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 rounded-xl px-3 py-1.5 text-xs">
-              <span className="text-[10px] text-blue-600 dark:text-blue-400 block font-semibold">Дальний свет</span>
+              <span className="text-xs text-blue-600 dark:text-blue-400 block font-semibold">Дальний свет</span>
               <strong className="text-slate-900 dark:text-white font-mono font-bold">H1 · 55W</strong>
             </div>
             <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-xl px-3 py-1.5 text-xs">
-              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block font-semibold">ПТФ туманки</span>
+              <span className="text-xs text-emerald-600 dark:text-emerald-400 block font-semibold">ПТФ туманки</span>
               <strong className="text-slate-900 dark:text-white font-mono font-bold">H3 · 55W</strong>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function BulbsCatalog() {
 
         {/* Socket Quick Filters */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
-          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
             <SlidersHorizontal className="w-3 h-3" />
             Цоколь:
           </span>
@@ -157,7 +157,7 @@ export default function BulbsCatalog() {
             <button
               key={st.id}
               onClick={() => setSelectedSocket(st.id)}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition shrink-0 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-mono transition shrink-0 ${
                 selectedSocket === st.id
                   ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-bold'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -488,7 +488,7 @@ export default function BulbsCatalog() {
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
               Лампы в каталоге ({filteredBulbs.length}):
             </span>
-            <span className="text-[11px] text-slate-400 font-mono">Outlander I CU_W</span>
+            <span className="text-xs text-slate-400 font-mono">Outlander I CU_W</span>
           </div>
 
           <div className="space-y-2 max-h-[720px] overflow-y-auto pr-1">
@@ -509,17 +509,17 @@ export default function BulbsCatalog() {
                       <span className="px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-700 dark:text-amber-400 font-mono text-xs font-black">
                         {item.socket}
                       </span>
-                      <span className="text-[11px] font-mono text-slate-400">
+                      <span className="text-xs font-mono text-slate-400">
                         {item.power}
                       </span>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-xs text-slate-400">
                         · {item.quantity} шт.
                       </span>
                     </div>
                     <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
                       {item.name}
                     </div>
-                    <div className="text-[11px] text-slate-500 line-clamp-1">
+                    <div className="text-xs text-slate-500 line-clamp-1">
                       {item.location}
                     </div>
                   </div>
@@ -546,10 +546,10 @@ export default function BulbsCatalog() {
                     <span className="text-2xl font-black text-amber-500 font-mono">
                       {activeBulb.socket}
                     </span>
-                    <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono text-slate-600 dark:text-slate-300 font-semibold">
+                    <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-600 dark:text-slate-300 font-semibold">
                       Цоколь: {activeBulb.baseCode}
                     </span>
-                    <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 text-[11px] font-mono font-bold">
+                    <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60 text-xs font-mono font-bold">
                       {activeBulb.power} · 12V
                     </span>
                   </div>
@@ -562,10 +562,10 @@ export default function BulbsCatalog() {
                 </div>
 
                 <div className="flex flex-col items-end gap-1.5 shrink-0">
-                  <span className="text-[11px] px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
                     Сложность: {activeBulb.difficulty}
                   </span>
-                  <span className="text-[11px] text-slate-400 font-mono">
+                  <span className="text-xs text-slate-400 font-mono">
                     Кол-во: <strong>{activeBulb.quantity} шт.</strong> на авто
                   </span>
                 </div>
@@ -581,7 +581,7 @@ export default function BulbsCatalog() {
                   {activeBulb.oemCode && (
                     <button
                       onClick={() => handleCopy(activeBulb.oemCode!)}
-                      className="flex items-center gap-1 text-[11px] font-mono text-slate-500 hover:text-amber-600 transition"
+                      className="flex items-center gap-1 text-xs font-mono text-slate-500 hover:text-amber-600 transition"
                       title="Скопировать артикул OEM"
                     >
                       <span>OEM: <strong>{activeBulb.oemCode}</strong></span>
@@ -604,7 +604,7 @@ export default function BulbsCatalog() {
                         <div className="font-bold text-slate-900 dark:text-white">
                           {item.brand} {item.code}
                         </div>
-                        <div className="text-[11px] text-slate-500">{item.name}</div>
+                        <div className="text-xs text-slate-500">{item.name}</div>
                       </div>
                       <button
                         onClick={() => handleCopy(`${item.brand} ${item.code}`)}
@@ -631,7 +631,7 @@ export default function BulbsCatalog() {
                       key={idx}
                       className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/60 dark:bg-slate-950/40 p-2.5 rounded-xl border border-slate-100 dark:border-slate-850"
                     >
-                      <span className="w-5 h-5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-mono text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="w-5 h-5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                         {idx + 1}
                       </span>
                       <span>{step}</span>
@@ -646,7 +646,7 @@ export default function BulbsCatalog() {
                   <Flame className="w-4 h-4 text-amber-600" />
                   <span>Важные нюансы при замене на Outlander I:</span>
                 </div>
-                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-[11px]">
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-xs">
                   {activeBulb.tips}
                 </p>
               </div>
@@ -657,7 +657,7 @@ export default function BulbsCatalog() {
                   <Sparkles className="w-4 h-4 text-blue-600" />
                   <span>Переход на светодиоды (LED):</span>
                 </div>
-                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-[11px]">
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-xs">
                   {activeBulb.ledUpgradeNotes}
                 </p>
               </div>
@@ -680,7 +680,7 @@ export default function BulbsCatalog() {
 
         <div className="overflow-x-auto no-scrollbar">
           <table className="w-full text-xs text-left">
-            <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 uppercase text-[10px] font-semibold border-b border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-950 text-slate-500 uppercase text-xs font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-2.5 px-3">Узел / Место установки</th>
                 <th className="py-2.5 px-3">Тип цоколя</th>
