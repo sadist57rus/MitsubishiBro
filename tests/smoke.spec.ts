@@ -308,7 +308,7 @@ test('wide mode keeps controls large, text readable and keyboard focus visible',
     }).map(element => ({ text: (element.innerText || element.getAttribute('aria-label') || '').trim().slice(0, 60), width: Math.round(element.getBoundingClientRect().width), height: Math.round(element.getBoundingClientRect().height) }));
     const readableText = [...document.querySelectorAll<HTMLElement>('main p, main label, main button, main a[href], main input, main select, main textarea, main small, main [class*="text-xs"], main [class*="text-sm"]')].filter(visible);
     const smallText = readableText.filter(element => Number.parseFloat(getComputedStyle(element).fontSize) < 16)
-      .map(element => ({ text: (element.innerText || element.getAttribute('aria-label') || element.value || '').trim().slice(0, 60), size: getComputedStyle(element).fontSize }));
+      .map(element => ({ text: (element.innerText || element.getAttribute('aria-label') || (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement ? element.value : '')).trim().slice(0, 60), size: getComputedStyle(element).fontSize }));
     return { tooSmallControls, smallText, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth };
   });
   expect(metrics.tooSmallControls, 'wide-mode controls below 56x56').toEqual([]);
