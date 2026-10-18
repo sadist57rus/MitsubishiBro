@@ -450,6 +450,18 @@ test('decimal input parser accepts comma and dot separators', () => {
   expect(parseDecimalInput('58,5,2')).toBeNull();
 });
 
+test('maintenance fuel calculator accepts decimal comma on text inputs', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'maintenance');
+
+  await page.getByPlaceholder('Например: 420').fill('420,5');
+  await page.getByPlaceholder('Например: 48').fill('48,5');
+  await page.getByPlaceholder('58.5').fill('58,5');
+
+  await expect(page.getByText('Всего: 2 837 ₽').or(page.getByText('Всего: 2 837 ₽'))).toBeVisible();
+  await expect(page.getByText('11.53', { exact: true })).toBeVisible();
+});
+
 test('backup migration rejects unknown schema versions and malformed storage entries', () => {
   const validLegacy = {
     app: 'car-brother',
