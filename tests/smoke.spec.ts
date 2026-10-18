@@ -378,6 +378,29 @@ test('full backup can be exported, validated and restored without losing local d
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
 });
 
+
+test('invalid backup is rejected without modifying local data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.evaluate(() => localStorage.setItem('backup-validation-sentinel', 'keep-this-value'));
+
+  const invalidBackup = {
+    app: 'car-brother',
+    schemaVersion: 999,
+    createdAt: 'not-a-valid-date',
+    data: { 'backup-validation-sentinel': 'overwritten' },
+  };
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'invalid-backup.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(invalidBackup)),
+  });
+
+  await expect(page.getByRole('alert')).toContainText('Файл повреждён');
+  await expect(page.getByRole('button', { name: 'Подтвердить восстановление' })).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-validation-sentinel'))).toBe('keep-this-value');
+});
+
 test('fuel and logbook storage keys stay isolated per vehicle and preserve legacy keys', () => {
   const firstLogbook = getLogbookStorageKey('vehicle-one', true);
   const secondLogbook = getLogbookStorageKey('vehicle-two', false);
