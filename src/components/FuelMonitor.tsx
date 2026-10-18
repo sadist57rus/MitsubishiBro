@@ -4,6 +4,7 @@ import { parseDecimalInput, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
 import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { usePreferences } from '../context/PreferencesContext';
+import { getFuelStorageKey } from '../lib/vehicleStorageKeys';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -50,15 +51,13 @@ export interface FuelLog {
   station: string;
 }
 
-const STORAGE_KEY = 'outlander1_fuel_logs_v2';
-
 export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine?: EngineType }) {
   const { vehicleId, vehicles, activeVehicle } = useVehicle();
   const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === activeVehicle.brandId);
   const activeModel = activeBrand?.models.find(model => model.id === activeVehicle.modelId);
   const vehicleLabel = [activeBrand?.russianName || activeBrand?.name, activeModel?.name, activeModel?.generation].filter(Boolean).join(' ');
   const tankCapacity = activeModel?.dimensions?.fuelTankLiters;
-  const activeStorageKey = activeModel?.id === 'outlander-1' && vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-fuel-logs-' + vehicleId;
+  const activeStorageKey = getFuelStorageKey(vehicleId, vehicleId === vehicles[0]?.id, activeModel?.id === 'outlander-1');
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[preferences.currency] || '₽';
