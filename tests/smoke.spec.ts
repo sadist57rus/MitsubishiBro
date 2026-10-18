@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -272,3 +273,19 @@ for (const viewport of viewports) {
     });
   }
 }
+
+
+test('vehicle catalog has no duplicate models by name, body type and years', () => {
+  for (const brand of JAPANESE_BRANDS) {
+    const seen = new Map<string, string>();
+    for (const model of brand.models) {
+      const key = [model.name, model.bodyType, model.years]
+        .map(value => value.trim().toLocaleLowerCase('ru-RU').replace(/\\s+/g, ' '))
+        .join('|');
+      const previousId = seen.get(key);
+      expect(previousId, `${brand.id} has duplicate model entry for ${model.name} / ${model.bodyType} / ${model.years}`)
+        .toBeUndefined();
+      seen.set(key, model.id);
+    }
+  }
+});
