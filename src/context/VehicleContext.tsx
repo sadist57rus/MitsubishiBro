@@ -5,7 +5,7 @@ import type { EngineType, DrivetrainType } from '../types';
 
 export interface GarageVehicle {
   id: string; brandId: string; modelId: string; year: number; vin?: string;
-  mileage: number; engine: string; drivetrain: DrivetrainType; currency: string;
+  mileage: number; engine: string; transmission?: string; drivetrain: DrivetrainType; currency: string;
 }
 interface GarageState { vehicles: GarageVehicle[]; activeVehicleId: string; }
 interface VehicleContextValue {
@@ -19,7 +19,7 @@ interface VehicleContextValue {
 }
 const GARAGE_KEY='car-brother-garage';
 const OLD_KEY='car-brother-vehicle';
-const DEFAULT_VEHICLE: GarageVehicle={id:'vehicle-default',brandId:'mitsubishi',modelId:'outlander-1',year:2006,mileage:0,engine:'4G69',drivetrain:'4WD',currency:'RUB'};
+const DEFAULT_VEHICLE: GarageVehicle={id:'vehicle-default',brandId:'mitsubishi',modelId:'outlander-1',year:2006,mileage:0,engine:'4G69',transmission:'не указана',drivetrain:'4WD',currency:'RUB'};
 const GarageContext=createContext<VehicleContextValue|null>(null);
 function validVehicle(v: unknown): v is GarageVehicle {
   if(!v||typeof v!=='object')return false; const x=v as Record<string,unknown>;
@@ -35,7 +35,7 @@ function initialGarage(): GarageState {
   if (!Object.keys(legacy).length) return {vehicles:[],activeVehicleId:''};
   const brand=JAPANESE_BRANDS.find(b=>b.id===legacy.brandId)||JAPANESE_BRANDS.find(b=>b.id===DEFAULT_VEHICLE.brandId)!;
   const model=brand.models.find(m=>m.id===legacy.modelId)||brand.models[0];
-  const first:GarageVehicle={...DEFAULT_VEHICLE,id:'vehicle-'+Date.now(),brandId:brand.id,modelId:model.id,engine:typeof legacy.engine==='string'?legacy.engine:DEFAULT_VEHICLE.engine,drivetrain:legacy.drivetrain==='FWD'||legacy.drivetrain==='ALL'?legacy.drivetrain:'4WD'};
+  const first:GarageVehicle={...DEFAULT_VEHICLE,id:'vehicle-'+Date.now(),brandId:brand.id,modelId:model.id,engine:typeof legacy.engine==='string'?legacy.engine:DEFAULT_VEHICLE.engine,transmission:typeof legacy.transmission==='string'?legacy.transmission:'не указана',drivetrain:legacy.drivetrain==='FWD'||legacy.drivetrain==='ALL'?legacy.drivetrain:'4WD'};
   return {vehicles:[first],activeVehicleId:first.id};
 }
 export function VehicleProvider({children}:{children:ReactNode}) {
