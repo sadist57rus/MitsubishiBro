@@ -407,6 +407,7 @@ test('legacy backup schema migrates without dropping data', async ({ page }) => 
     createdAt: '2026-01-01T12:00:00.000Z',
     data: {
       'legacy-migration-sentinel': 'keep-legacy-value',
+      'car-brother-preferences': JSON.stringify({ currency: 'USD', fuelUnit: 'mpg' }),
     },
   };
   const migrated = migrateBackup(legacyBackup);
@@ -428,6 +429,13 @@ test('legacy backup schema migrates without dropping data', async ({ page }) => 
   await expect(page.getByRole('status')).toContainText('Восстановление завершено');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('legacy-migration-sentinel'))).toBe('keep-legacy-value');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-storage-schema'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => {
+    const raw = localStorage.getItem('car-brother-preferences');
+    return raw ? JSON.parse(raw).autoTheme : null;
+  })).toBe('system');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
 });
 
 test('backup migration rejects unknown schema versions and malformed storage entries', () => {
