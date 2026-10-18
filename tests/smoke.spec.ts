@@ -289,3 +289,39 @@ test('vehicle catalog has no duplicate models by name, body type and years', () 
     }
   }
 });
+
+
+test('wide mode keeps controls large, text readable and keyboard focus visible', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await page.evaluate(() => { document.documentElement.dataset.uiMode = 'wide'; });
+  await openNavItem(page, 'settings');
+  const metrics = await page.evaluate(() => {
+    const visible = (element: HTMLElement) => {
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+    };
+    const controls = [...document.querySelectorAll<HTMLElement>('main button, main a[href], main input, main select, main textarea, main [role="button"]')].filter(visible);
+    const tooSmallControls = controls.filter(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width < 56 || rect.height < 56;
+    }).map(element => ({ text: (element.innerText || element.getAttribute('aria-label') || '').trim().slice(0, 60), width: Math.round(element.getBoundingClientRect().width), height: Math.round(element.getBoundingClientRect().height) }));
+    const readableText = [...document.querySelectorAll<HTMLElement>('main p, main label, main button, main a[href], main input, main select, main textarea, main small, main [class*="text-xs"], main [class*="text-sm"]')].filter(visible);
+    const smallText = readableText.filter(element => Number.parseFloat(getComputedStyle(element).fontSize) < 16)
+      .map(element => ({ text: (element.innerText || element.getAttribute('aria-label') || element.value || '').trim().slice(0, 60), size: getComputedStyle(element).fontSize }));
+    return { tooSmallControls, smallText, scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth };
+  });
+  expect(metrics.tooSmallControls, 'wide-mode controls below 56x56').toEqual([]);
+  expect(metrics.smallText, 'wide-mode text below 16px in primary controls and labels').toEqual([]);
+  expect(metrics.scrollWidth, 'wide mode must not create horizontal page scrolling').toBeLessThanOrEqual(metrics.clientWidth);
+
+  const trigger = page.getByTestId('section-menu-trigger');
+  await trigger.focus();
+  await expect(trigger).toBeFocused();
+  const focusStyle = await trigger.evaluate(element => {
+    const style = getComputedStyle(element);
+    return { outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, outlineColor: style.outlineColor };
+  });
+  expect(focusStyle.outlineStyle).not.toBe('none');
+  expect(Number.parseFloat(focusStyle.outlineWidth)).toBeGreaterThanOrEqual(2);
+});
