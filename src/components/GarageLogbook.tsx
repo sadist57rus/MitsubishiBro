@@ -6,9 +6,8 @@ import { Capacitor } from '@capacitor/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { LogEntry } from '../types';
+import { getLogbookStorageKey, LEGACY_LOGBOOK_STORAGE_KEY } from '../lib/vehicleStorageKeys';
 import { BookOpen, Plus, Trash2, Download, Upload, DollarSign, Wrench, Calendar, Sparkles } from 'lucide-react';
-
-const STORAGE_KEY = 'outlander1_garage_logbook_v1';
 
 const INITIAL_RECORDS: LogEntry[] = [
   {
@@ -45,11 +44,11 @@ const INITIAL_RECORDS: LogEntry[] = [
 
 export default function GarageLogbook() {
   const { vehicleId, vehicles, activeVehicle } = useVehicle();
-  const activeStorageKey = vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-logbook-' + vehicleId;
+  const activeStorageKey = getLogbookStorageKey(vehicleId, vehicleId === vehicles[0]?.id);
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
-  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
+  const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), activeStorageKey === LEGACY_LOGBOOK_STORAGE_KEY ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
 
   const [isAdding, setIsAdding] = useState(false);
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
