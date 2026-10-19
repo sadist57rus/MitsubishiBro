@@ -259,9 +259,9 @@ export default function Header({
   const isLight = resolvedTheme === 'light';
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="min-h-12 flex items-center justify-between gap-1.5 sm:gap-3 py-1">
+        <div className="min-h-12 flex flex-nowrap items-center justify-between gap-1.5 sm:gap-3 py-1">
           
           {/* Left Block: Brand Logo Button + Home Jump + THE "РАЗДЕЛЫ" BUTTON */}
           <div className="flex items-center gap-1 sm:gap-2 min-w-0 shrink">
@@ -278,7 +278,7 @@ export default function Header({
                 className={`flex items-center gap-1.5 p-1.5 sm:px-2 sm:py-1 rounded-lg border transition cursor-pointer group shadow-2xs ${
                   isBrandDropdownOpen
                     ? 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 border-red-600 ring-2 ring-red-500/20'
-                    : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
+                    : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
                 }`}
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
                 aria-label={`Выбрать марку автомобиля, сейчас ${currentBrand.russianName || currentBrand.name}`}
@@ -287,7 +287,7 @@ export default function Header({
                 aria-haspopup="dialog"
               >
                 <div className={`w-7 h-7 rounded-md flex items-center justify-center p-1.5 shadow-2xs group-hover:scale-105 transition shrink-0 ${
-                  isBrandDropdownOpen ? 'bg-white text-slate-900' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700'
+                  isBrandDropdownOpen ? 'bg-white text-slate-900' : 'bg-white dark:bg-white border border-slate-200 dark:border-slate-600'
                 }`}>
                   <BrandLogo brandId={currentBrand.id} className="w-full h-full" useBrandColor={true} />
                 </div>
@@ -338,8 +338,8 @@ export default function Header({
                             {/* Every brand has its distinct authentic logo in the menu */}
                             <div className={`w-9 h-9 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform group-hover:scale-105 border ${
                               isSelected
-                                ? 'bg-white dark:bg-slate-900 border-red-300 dark:border-red-800 shadow-2xs'
-                                : 'bg-white dark:bg-slate-850 border-slate-200 dark:border-slate-700 group-hover:border-red-300'
+                                ? 'bg-white dark:bg-white border-red-300 dark:border-red-800 shadow-2xs'
+                                : 'bg-white dark:bg-white border-slate-200 dark:border-slate-700 group-hover:border-red-300'
                             }`}>
                               <BrandLogo brandId={brand.id} className="w-6 h-6" useBrandColor={true} />
                             </div>
@@ -438,7 +438,7 @@ export default function Header({
 
               {/* DROPDOWN POPUP MENU - Generous width, full text visibility, NO TRUNCATION! */}
               {isDropdownOpen && (
-                <div id="section-menu-panel" role="region" aria-label="Разделы приложения" className="absolute left-0 top-full mt-2 w-[min(360px,calc(100vw-1rem))] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
+                <div id="section-menu-panel" role="region" aria-label="Разделы приложения" className="fixed inset-x-2 bottom-2 top-auto w-auto max-w-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto sm:absolute sm:inset-x-auto sm:bottom-auto sm:left-0 sm:top-full sm:mt-2 sm:w-[min(22rem,calc(100vw-16px))] sm:max-w-[calc(100vw-16px)]">
                   <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>Все разделы приложения ({sections.length})</span>
                     <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
