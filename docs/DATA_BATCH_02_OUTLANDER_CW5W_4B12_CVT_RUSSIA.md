@@ -1,33 +1,31 @@
 # Outlander CW5W / 4B12 — Russia market evidence (CVT)
 
-Status: **unverified / human review required**. This is a source-tracking note, not an approved technical-data pack.
+Status: **partially verified at source-document level; app data not approved**. This note records the exact manual pages found; it is not a production data pack.
 
-## Candidate identity
+## Candidate identity — Russia market only
 
-- Market: Russia only; do not generalize to all CIS markets.
 - Chassis: CW5W
-- Engine: 4B12 DOHC MIVEC petrol, displacement listed as 2,359 mL in the 2008–2010 service-manual tables.
-- Transmission: W1CJA, electronically controlled 4WD CVT (CVT with sport mode in the 2010 table).
-- Russian model code shown in tables: XTHHZL6Z.
+- Engine: 4B12 DOHC MIVEC petrol, 2,359 mL.
+- Transmission: W1CJA, 4WD CVT.
+- Russian model code: XTHHZL6Z.
+- Factory manual lists output 125 kW at 6,000 rpm and torque 232 N·m at 4,100 rpm for the 4B12 CW5W specification table. Verify exact MY/VIN scope before exposing these values in app UI.
 
-## Sources reviewed
+## Technical evidence located
 
-1. [2008 service-manual mirror — Models / Vehicles for Russia](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/2008/00/html/M100100030216500ENG.HTM)
-2. [2010 service-manual mirror — Models / Vehicles for Russia](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/2010/00/html/M100100030430900ENG.HTM)
-3. [Official Mitsubishi Motors aftersales bulletin MSB-08E23-506](https://mmc-manuals.ru/msb/BASE/003/2008/MSB-08E23-506/E/MSB-08E23-506.pdf) — identifies 2008/2009 Outlander (CW0W) workshop-manual publications and includes an EUR/Russia applicability heading; it is a CVT data-list correction, not a complete workshop manual.
-4. [Official Mitsubishi Motors aftersales bulletin MSB-08E11-508](https://mmc-manuals.ru/msb/BASE/003/2008/MSB-08E11-508/E/MSB-08E11-508.pdf) — identifies the 2008 Outlander Workshop Manual publication CGXE08E2-CD and related language editions; it is an aftersales bulletin, not the full manual.
-5. [Official Mitsubishi Motors Russia owner-manual portal](https://www.mitsubishi-motors.ru/for-mitsubishi-owners/manuals/) — current visible Outlander entries cover model years 2014 and later; a CW5W-era owner manual was not found in the public list.
-6. [Official Mitsubishi Motors Russia announcement, 3 March 2010](https://www.mitsubishi-motors.ru/news/news_80/) — confirms Outlander XL was sold in Russia, but is not a service specification source.
+1. [2009 Outlander service manual — Russia model table](https://mmc-manuals.ru/manuals/outlander_xl/online/Service_Manual/2009/00/html/M100100030323200ENG.HTM) lists CW5W, 4B12 (2,359 mL), W1CJA 4WD CVT, and Russia model code XTHHZL6Z.
+2. [2009 W1CJA CVT general information](https://mmc-manuals.ru/manuals/outlander_xl/online/Service_Manual/2009/23/html/M223100010026200ENG.HTM) lists DIA QUEEN CVTF-J1 and approximate total capacity 7.8 L, plus gear ratios and CVT specification.
+3. [Official Mitsubishi Motors Corporation bulletin MSB-08E23-506](https://mmc-manuals.ru/msb/BASE/003/2008/MSB-08E23-506/E/MSB-08E23-506.pdf) explicitly states EUR/Russia applicability for 2008–2009 Outlander CW0W and identifies workshop manual publications CGXE08E2-CD / CGXE09E1-CD. This bulletin corrects CVT diagnostic data-list values; it does not itself establish fluid capacity.
+4. [2010 CW5W major specifications](https://mmc-manuals.ru/manuals/outlander_xl/online/Service_Manual/2010/00/html/M100100090445300ENG.HTM) lists Russia model codes XNSHZL6Z, XNHHZL6Z, XTHHZL6Z, 4B12, 2,359 mL, 125 kW / 6,000 rpm, 232 N·m / 4,100 rpm, and W1CJA CVT for XTHHZL6Z.
+5. [Official Mitsubishi Motors Russia owner-manual portal](https://www.mitsubishi-motors.ru/for-mitsubishi-owners/manuals/) — the visible public list did not show a CW5W-era owner manual.
 
-## Primary-source availability finding
+## Source-quality assessment
 
-Official Mitsubishi Motors aftersales bulletins establish that factory workshop-manual publications exist for the relevant generation and identify publication IDs. However, the full applicable CW5W service-manual pages for the Russia-market configuration have not been obtained and checked directly in this pass. The public Russian owner-manual portal does not currently show a CW5W-era owner manual in its visible Outlander list. The technical tables used for the candidate identity above remain mirror-hosted copies.
+The technical pages are copies of Mitsubishi workshop-manual content hosted by MMC-Manuals.ru, not pages on a Mitsubishi corporate domain. The separate MSB PDF is issued by Mitsubishi Motors Corporation and confirms the factory manual publication/revision family and EUR/Russia scope for the CVT diagnostic correction. I have not obtained the full manual through an authorized dealer portal or confirmed the exact revision/VIN boundaries for a particular vehicle.
 
-Next source step: obtain the applicable factory workshop manual (publication and revision matched to model year/market) through an authorized Mitsubishi service channel or legitimate service-information access, then compare its market table and technical sections against the candidate record.
+## Stop conditions
 
-## Limitations / stop condition
-
-- Do not set status to verified on the basis of mirrors or bulletin indexes alone.
-- Model-year applicability, VIN/trim boundaries, fluids, capacities, service intervals, torque values, and parts remain unverified and must stay null until supported by the applicable primary manual.
-- No service-critical values have been promoted into the app data.
-- A separate pack is required for the 5-speed manual version. Do not combine its values with the CVT variant.
+- Do not mark all fields as verified solely because a manual copy is available on a mirror.
+- CVTF-J1 and approximately 7.8 L are recorded as source values, not yet approved for production data; total service refill quantity may differ from dry/assembly capacity.
+- Model year, VIN/trim boundaries, maintenance interval, and exact service refill quantity remain unresolved.
+- No service-critical values have been promoted into app data.
+- Do not mix these values with later CVT revisions (e.g. CVTF-J4) or other model generations.
