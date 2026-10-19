@@ -174,7 +174,7 @@ test('model-specific sections never reuse Outlander data for another active vehi
     await openNavItem(page, sectionId);
     const content = await page.locator('main').innerText();
     if (sectionId !== 'brands') {
-      expect(content, 'Mitsubishi Lancer must not inherit Outlander/engine-specific copy in ' + sectionId).not.toMatch(/Outlander|4G6\\d|MIVEC/i);
+      expect(content, 'Mitsubishi Lancer must not inherit Outlander/engine-specific copy in ' + sectionId).not.toMatch(/Outlander|4G6\d|MIVEC/i);
     }
     if (technicalSections.includes(sectionId)) {
       await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
