@@ -198,7 +198,7 @@ for (const viewport of viewports) {
 test('настройки применяют цветовую палитру и выбор марки читаем в ночной теме', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await chooseToyota(page);
-  await openNavItem(page, /Настройки/i);
+  await openNavItem(page, 'settings');
   await page.getByLabel('Тема интерфейса').selectOption('dark');
   await expect.poll(() => page.locator('html').getAttribute('data-theme')).toBe('dark');
 
