@@ -1,6 +1,10 @@
 name: Retain latest five releases
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/release-retention.yml"
   workflow_dispatch:
   schedule:
     - cron: "23 4 * * 1"
