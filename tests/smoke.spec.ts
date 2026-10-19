@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
-// @ts-ignore axe-core is installed as a pinned CI-only smoke-test dependency.
-import axe from 'axe-core';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const axe = require('axe-core') as { source: string };
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
