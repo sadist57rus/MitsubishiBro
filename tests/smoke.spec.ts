@@ -330,3 +330,28 @@ test('theme mode and color palette selections update the active document styles'
   await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('light');
   await expect.poll(() => page.evaluate(() => document.documentElement.classList.contains('dark'))).toBe(false);
 });
+
+
+test('active accent controls keep readable contrast across all color palettes', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'settings');
+
+  const palettes = [
+    { name: 'Чёрный / жёлтый', id: 'black-yellow', background: 'rgb(250, 204, 21)', foreground: 'rgb(17, 24, 39)' },
+    { name: 'Белый / красный', id: 'white-red', background: 'rgb(220, 38, 38)', foreground: 'rgb(255, 255, 255)' },
+    { name: 'Чёрный / оранжевый', id: 'black-orange', background: 'rgb(249, 115, 22)', foreground: 'rgb(67, 20, 7)' },
+    { name: 'Ночной синий', id: 'midnight-blue', background: 'rgb(56, 189, 248)', foreground: 'rgb(8, 47, 73)' },
+    { name: 'Графит / зелёный', id: 'forest-green', background: 'rgb(34, 197, 94)', foreground: 'rgb(5, 46, 22)' },
+  ];
+
+  const sectionTrigger = page.getByTestId('section-menu-trigger');
+  for (const palette of palettes) {
+    await page.getByRole('button', { name: new RegExp(palette.name) }).click();
+    await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
+    await sectionTrigger.click();
+    await expect.poll(() => sectionTrigger.evaluate(el => getComputedStyle(el).backgroundColor)).toBe(palette.background);
+    await expect.poll(() => sectionTrigger.evaluate(el => getComputedStyle(el).color)).toBe(palette.foreground);
+    await page.keyboard.press('Escape');
+  }
+});
