@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 
-async function startWithToyota(page: Page) {
+async function startWithSupportedOutlander(page: Page) {
   await page.addInitScript(() => {
     if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
       localStorage.clear();
@@ -14,7 +14,7 @@ async function startWithToyota(page: Page) {
   }
   const setup = page.getByRole('heading', { name: /Добавим вашу машину/i });
   if (await setup.isVisible().catch(() => false)) {
-    await page.locator('select').first().selectOption({ value: 'toyota' });
+    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
   }
   await expect(page.getByTestId('section-menu-trigger')).toBeVisible();
@@ -41,19 +41,19 @@ async function addLogbookEntry(page: Page, title: string) {
 
 test('бортжурнал сохраняет записи отдельно для каждого автомобиля при переключении и перезагрузке', async ({ page }) => {
   test.setTimeout(90_000);
-  await startWithToyota(page);
+  await startWithSupportedOutlander(page);
   await openSection(page, 'logbook');
-  const toyotaEntry = 'Проверка журнала Toyota — уникальная запись';
+  const toyotaEntry = 'Проверка журнала Outlander — уникальная запись';
   await addLogbookEntry(page, toyotaEntry);
 
   await openSection(page, 'garage');
   await page.getByRole('button', { name: /Добавить машину/i }).click();
-  await page.locator('form select').first().selectOption({ value: 'nissan' });
+  await page.locator('form select').first().selectOption({ value: 'mitsubishi' });
   await page.getByRole('button', { name: /^Сохранить$/i }).click();
 
   await openSection(page, 'logbook');
   await expect(page.getByText(toyotaEntry, { exact: true })).toHaveCount(0);
-  const nissanEntry = 'Проверка журнала Nissan — отдельная запись';
+  const nissanEntry = 'Проверка второго Outlander — отдельная запись';
   await addLogbookEntry(page, nissanEntry);
 
   await openSection(page, 'garage');
