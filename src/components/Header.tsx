@@ -277,7 +277,7 @@ export default function Header({
                 className={`flex items-center gap-1.5 p-1.5 sm:px-2 sm:py-1 rounded-lg border transition cursor-pointer group shadow-2xs ${
                   isBrandDropdownOpen
                     ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
-                    : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
+                    : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 hover:border-red-500/50'
                 }`}
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
                 aria-label={`Выбрать марку автомобиля, сейчас ${currentBrand.russianName || currentBrand.name}`}
@@ -298,9 +298,9 @@ export default function Header({
                     }`}>
                       {currentBrand.russianName || currentBrand.name.split(' ')[0]}
                     </span>
-                    <ChevronDown className={`w-3 h-3 transition-transform ${isBrandDropdownOpen ? 'rotate-180 text-white' : 'text-slate-400 group-hover:text-red-600'}`} />
+                    <ChevronDown className={`w-3 h-3 transition-transform ${isBrandDropdownOpen ? 'rotate-180 text-white' : 'text-slate-500 dark:text-slate-300 group-hover:text-red-600 dark:group-hover:text-red-400'}`} />
                   </div>
-                  <span className={`text-xs hidden sm:block ${isBrandDropdownOpen ? 'text-white/80' : 'text-slate-500'}`}>
+                  <span className={`text-xs hidden sm:block ${isBrandDropdownOpen ? 'text-white/90' : 'text-slate-600 dark:text-slate-300'}`}>
                     Все бренды
                   </span>
                 </div>

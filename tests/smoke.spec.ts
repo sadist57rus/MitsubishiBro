@@ -184,3 +184,29 @@ for (const viewport of viewports) {
     });
   }
 }
+
+
+test('настройки применяют цветовую палитру и выбор марки читаем в ночной теме', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await chooseToyota(page);
+  await openNavItem(page, /Настройки/i);
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
+  await expect.poll(() => page.locator('html').getAttribute('data-theme')).toBe('dark');
+
+  const paletteButton = page.getByRole('button', { name: /Чёрный \/ жёлтый/ });
+  await paletteButton.click();
+  await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe('black-yellow');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-color-palette'))).toBe('black-yellow');
+  await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent').trim())).toBe('#facc15');
+
+  const brandTrigger = page.getByRole('button', { name: /Выбрать марку автомобиля/i });
+  await expect(brandTrigger).toBeVisible();
+  await expect(brandTrigger).toHaveClass(/dark:bg-slate-800/);
+  await expect(brandTrigger).toHaveClass(/dark:text-slate-100/);
+  await expect(brandTrigger.locator('span').filter({ hasText: /Все бренды/ })).toHaveClass(/dark:text-slate-300/);
+  await brandTrigger.click();
+  const brandPanel = page.getByRole('region', { name: 'Выбор марки автомобиля' });
+  await expect(brandPanel).toBeVisible();
+  await expect(brandPanel.getByText(/Оригинальные логотипы/)).toHaveClass(/dark:text-red-400/);
+
+});
