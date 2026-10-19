@@ -292,3 +292,22 @@ test('maintenance fuel calculator accepts decimal comma on text inputs', async (
   await expect(page.getByText('Всего: 2 837 ₽').or(page.getByText('Всего: 2 837 ₽'))).toBeVisible();
   await expect(page.getByText('11.53', { exact: true })).toBeVisible();
 });
+
+
+test('theme mode and color palette selections update the active document styles', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'settings');
+  const themeSelect = page.getByLabel('Тема интерфейса');
+  await themeSelect.selectOption('dark');
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('dark');
+  await expect.poll(() => page.evaluate(() => document.documentElement.classList.contains('dark'))).toBe(true);
+
+  await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.palette)).toBe('black-yellow');
+  await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent').trim())).toBe('#facc15');
+
+  await themeSelect.selectOption('light');
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.theme)).toBe('light');
+  await expect.poll(() => page.evaluate(() => document.documentElement.classList.contains('dark'))).toBe(false);
+});
