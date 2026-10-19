@@ -650,3 +650,15 @@ html[data-ui-mode="phone"] header button {
     padding-inline: 0.375rem;
   }
 }
+
+
+/* Stage 2: keep the wide rail compact, with readable labels and six primary destinations. */
+html[data-ui-mode="wide"] .car-brother-rail-item {
+  min-height: 56px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+html[data-ui-mode="wide"] .car-brother-rail-item svg {
+  width: 28px;
+  height: 28px;
+}
