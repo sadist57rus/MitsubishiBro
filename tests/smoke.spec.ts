@@ -214,7 +214,7 @@ test('настройки применяют цветовую палитру и �
 
 test('мобильные меню полностью помещаются на экране, логотипы марок не обрезаются', async ({ page }) => {
   await prepare(page, { width: 360, height: 800 }, 'light');
-  await page.getByTestId('section-menu-trigger').click();
+  await page.getByRole('button', { name: /Открыть разделы приложения/i }).click();
   const panel = page.locator('#section-menu-panel');
   await expect(panel).toBeVisible();
   const panelBounds = await panel.evaluate(el => {
