@@ -55,7 +55,8 @@ async function seedLogbook(page: Page, records: LogRecord[]) {
 
 async function openLogbook(page: Page) {
   await page.getByRole('button', { name: /Открыть разделы приложения/i }).click();
-  await page.getByTestId('section-menu-list').getByRole('button', { name: /Бортжурнал/i }).first().click();
+  const item = page.getByTestId('section-menu-list').getByRole('button', { name: /Бортжурнал/i }).first();
+  await item.getByText(/Бортжурнал/i).first().click();
   await expect(page.getByRole('heading', { name: /Бортжурнал владельца/i })).toBeVisible();
 }
 
