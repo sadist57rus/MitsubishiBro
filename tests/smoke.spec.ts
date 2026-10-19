@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+// @ts-ignore axe-core is installed as a pinned CI-only smoke-test dependency.
+import axe from 'axe-core';
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
@@ -187,7 +189,7 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
   await page.emulateMedia({ colorScheme: 'dark' });
   await chooseToyota(page);
   await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
-  await page.addScriptTag({ path: 'node_modules/axe-core/axe.min.js' });
+  await page.addScriptTag({ content: axe.source });
   const audit = async (screen: string) => {
     const results = await page.evaluate(async () => {
       const axe = (window as unknown as { axe: { run: (context: Document, options: object) => Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } }).axe;
