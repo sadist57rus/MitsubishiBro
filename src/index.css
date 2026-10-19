@@ -568,3 +568,85 @@ html[data-palette] [class~="bg-red-600"].text-white,
 html[data-palette] [class~="bg-red-700"].text-white {
   color: var(--palette-on-accent) !important;
 }
+
+/* Driver mode baseline: one source of truth for readable type and touch targets.
+   Screen-specific layout changes belong in components; these tokens define the floor. */
+:root {
+  --font-primary-min: 1rem;
+  --font-secondary-min: 0.875rem;
+  --tap-size: 3rem;
+  --tap-size-wide: 3.5rem;
+  --max-primary-actions: 6;
+  --max-button-label-words: 2;
+  --max-inline-help-lines: 1;
+}
+html[data-ui-mode="phone"] {
+  --font-primary-min: 1rem;
+  --font-secondary-min: 0.875rem;
+  --tap-size: 3rem;
+}
+html[data-ui-mode="wide"] {
+  --font-primary-min: 1rem;
+  --font-secondary-min: 0.875rem;
+  --tap-size: var(--tap-size-wide);
+}
+body {
+  font-size: max(var(--font-primary-min), calc(1rem * var(--ui-scale, 1)));
+}
+main .text-xs, header .text-xs, main small, header small {
+  font-size: max(var(--font-secondary-min), 0.875rem) !important;
+  line-height: 1.35;
+}
+html[data-ui-mode="wide"] main .text-xs,
+html[data-ui-mode="wide"] header .text-xs,
+html[data-ui-mode="wide"] main small,
+html[data-ui-mode="wide"] header small {
+  font-size: 0.875rem !important;
+}
+main p, main label, main input, main select, main textarea,
+main table, main th, main td, header button, header select {
+  font-size: max(var(--font-secondary-min), 0.875rem);
+}
+.ui-button, .ui-tab {
+  min-height: var(--tap-size);
+  font-size: max(var(--font-secondary-min), 0.875rem);
+}
+.ui-chip {
+  min-height: 2rem;
+  font-size: max(var(--font-secondary-min), 0.875rem);
+}
+button.ui-chip, a.ui-chip, .ui-chip[role="button"], .ui-chip[tabindex] {
+  min-height: var(--tap-size);
+}
+button, [role="button"], input, select, textarea {
+  min-height: var(--tap-size);
+}
+html[data-ui-mode="wide"] button,
+html[data-ui-mode="wide"] [role="button"],
+html[data-ui-mode="wide"] input,
+html[data-ui-mode="wide"] select,
+html[data-ui-mode="wide"] textarea {
+  min-height: 56px;
+}
+.car-brother-bottom-nav-item {
+  min-height: var(--tap-size);
+  font-size: 0.875rem;
+}
+html[data-ui-mode="wide"] .car-brother-bottom-nav-item {
+  min-height: 56px;
+}
+
+html[data-ui-mode="phone"] main button,
+html[data-ui-mode="phone"] main a,
+html[data-ui-mode="phone"] main [role="button"],
+html[data-ui-mode="phone"] header button {
+  min-height: 48px;
+}
+
+/* Keep the theme toggle inside the compact 800px landscape header. */
+@media (min-width: 641px) and (max-width: 820px) {
+  header button[aria-label="Переключить светлую или тёмную тему"] {
+    gap: 0.25rem;
+    padding-inline: 0.375rem;
+  }
+}
