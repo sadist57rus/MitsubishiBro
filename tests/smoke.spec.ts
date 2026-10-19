@@ -381,7 +381,7 @@ test('driver mode tokens enforce readable text and minimum touch targets', async
       return { tapSize: Number.parseFloat(root.getPropertyValue('--tap-size')) * 16, minHeight, smallText };
     });
     const target = mode === 'wide' ? 56 : 48;
-    const fontFloor = mode === 'wide' ? 16 : 14;
+    const fontFloor = 14;
     expect(metrics.tapSize, mode + ' token').toBeGreaterThanOrEqual(target);
     expect(metrics.minHeight.filter(item => item.height + 0.5 < target), mode + ' undersized controls: ' + JSON.stringify(metrics.minHeight.filter(item => item.height + 0.5 < target))).toEqual([]);
     expect(metrics.smallText.filter(item => item.size + 0.1 < fontFloor), mode + ' undersized secondary text: ' + JSON.stringify(metrics.smallText.filter(item => item.size + 0.1 < fontFloor))).toEqual([]);
