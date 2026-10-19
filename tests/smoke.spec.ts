@@ -177,7 +177,8 @@ for (const viewport of viewports) {
       await expect(page.getByTestId('header-back')).toBeVisible();
       await page.getByTestId('header-back').focus();
       await page.getByTestId('header-back').press('Enter');
-      await expect(page.getByRole('heading', { name: /Мой автомобиль/i })).toBeVisible();
+      await expect(page.getByTestId('header-section-title')).toHaveText('Главная (Обзор)');
+      await expect(page.getByRole('button', { name: /Выбрать или изменить автомобиль/i })).toBeVisible();
 
       const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
       await apkTrigger.click();
@@ -321,7 +322,7 @@ test('theme mode and color palette selections update the active document styles'
 });
 
 
-test('active accent controls keep readable contrast across all color palettes', async ({ page }) => {
+test('palette selection persists and the section header remains visible', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await chooseToyota(page);
   await openNavItem(page, 'settings');
