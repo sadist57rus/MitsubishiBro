@@ -509,36 +509,42 @@ html[data-ui-mode="wide"] button, html[data-ui-mode="wide"] [role="button"], htm
   --palette-accent-hover: #b91c1c;
   --palette-accent-soft: #fee2e2;
   --palette-accent-content: #991b1b;
+  --palette-on-accent: #ffffff;
 }
 html[data-palette="black-yellow"] {
   --palette-accent: #facc15;
   --palette-accent-hover: #eab308;
   --palette-accent-soft: #422006;
   --palette-accent-content: #fef08a;
+  --palette-on-accent: #111827;
 }
 html[data-palette="white-red"] {
   --palette-accent: #dc2626;
   --palette-accent-hover: #b91c1c;
   --palette-accent-soft: #fee2e2;
   --palette-accent-content: #991b1b;
+  --palette-on-accent: #ffffff;
 }
 html[data-palette="black-orange"] {
   --palette-accent: #f97316;
   --palette-accent-hover: #ea580c;
   --palette-accent-soft: #431407;
   --palette-accent-content: #fed7aa;
+  --palette-on-accent: #431407;
 }
 html[data-palette="midnight-blue"] {
   --palette-accent: #38bdf8;
   --palette-accent-hover: #0284c7;
   --palette-accent-soft: #082f49;
   --palette-accent-content: #bae6fd;
+  --palette-on-accent: #082f49;
 }
 html[data-palette="forest-green"] {
   --palette-accent: #22c55e;
   --palette-accent-hover: #16a34a;
   --palette-accent-soft: #052e16;
   --palette-accent-content: #bbf7d0;
+  --palette-on-accent: #052e16;
 }
 .ui-button-primary { background-color: var(--palette-accent); }
 .ui-button-primary:hover:not(:disabled) { background-color: var(--palette-accent-hover); }
@@ -556,3 +562,9 @@ html[data-palette] [class~="border-red-500"],
 html[data-palette] [class~="border-red-600"] { border-color: var(--palette-accent) !important; }
 html[data-palette] [class~="ring-red-500"],
 html[data-palette] [class~="ring-red-600"] { --tw-ring-color: var(--palette-accent) !important; }
+
+/* Keep active accent controls readable across every selectable palette. */
+html[data-palette] [class~="bg-red-600"].text-white,
+html[data-palette] [class~="bg-red-700"].text-white {
+  color: var(--palette-on-accent) !important;
+}
