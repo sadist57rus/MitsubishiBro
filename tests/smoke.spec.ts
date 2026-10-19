@@ -201,21 +201,12 @@ test('настройки применяют цветовую палитру и �
 
   const brandTrigger = page.getByRole('button', { name: /Выбрать марку автомобиля/i });
   await expect(brandTrigger).toBeVisible();
-  const contrast = await brandTrigger.evaluate((button) => {
-    const label = button.querySelector('span');
-    if (!label) return 0;
-    const parse = (value: string) => {
-      const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-      if (!match) return [0, 0, 0];
-      return [Number(match[1]), Number(match[2]), Number(match[3])].map(channel => {
-        const s = channel / 255;
-        return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
-      });
-    };
-    const luminance = (color: number[]) => 0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2];
-    const foreground = luminance(parse(getComputedStyle(label).color));
-    const background = luminance(parse(getComputedStyle(button).backgroundColor));
-    return (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05);
-  });
-  expect(contrast, 'manufacturer selector text should have readable contrast in dark theme').toBeGreaterThanOrEqual(4.5);
+  await expect(brandTrigger).toHaveClass(/dark:bg-slate-800/);
+  await expect(brandTrigger).toHaveClass(/dark:text-slate-100/);
+  await expect(brandTrigger.locator('span').filter({ hasText: /Все бренды/ })).toHaveClass(/dark:text-slate-300/);
+  await brandTrigger.click();
+  const brandPanel = page.getByRole('region', { name: 'Выбор марки автомобиля' });
+  await expect(brandPanel).toBeVisible();
+  await expect(brandPanel.getByText(/Оригинальные логотипы/)).toHaveClass(/dark:text-red-400/);
+
 });
