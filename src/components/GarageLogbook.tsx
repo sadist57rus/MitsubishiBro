@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { parseValidatedJson, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { usePreferences } from '../context/PreferencesContext';
 import { Capacitor } from '@capacitor/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
@@ -48,7 +49,13 @@ export default function GarageLogbook() {
   const activeStorageKey = vehicleId === vehicles[0]?.id ? STORAGE_KEY : 'car-brother-logbook-' + vehicleId;
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
-  const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
+  const selectedBrand = JAPANESE_BRANDS.find(brand => brand.id === activeVehicle.brandId);
+  const selectedModel = selectedBrand?.models.find(model => model.id === activeVehicle.modelId);
+  const vehicleLabel = selectedModel?.name || activeVehicle.modelId;
+  const [pendingImport, setPendingImport] = useState<{ fileName: string; records: LogEntry[]; foreignVehicleIds: string[]; duplicateIdsInFile: number } | null>(null);
+  const [importMode, setImportMode] = useState<'add' | 'replace'>('add');
+  const [dialogMessage, setDialogMessage] = useState<string | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
   const [entries, setEntries] = useState<LogEntry[]>(() => readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), vehicleId === vehicles[0]?.id ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || 'RUB' })));
 
   const [isAdding, setIsAdding] = useState(false);
@@ -87,11 +94,7 @@ export default function GarageLogbook() {
     setNewNotes('');
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('Удалить эту запись из бортжурнала?')) {
-      setEntries(entries.filter(e => e.id !== id));
-    }
-  };
+  const handleDelete = (id: string) => setPendingDeleteId(id);
 
   const handleExportJson = async () => {
     const date = new Date().toISOString().slice(0, 10);
@@ -103,7 +106,7 @@ export default function GarageLogbook() {
         await Share.share({ title: 'Бортжурнал Car Brother', text: 'Экспорт бортжурнала', url: saved.uri, dialogTitle: 'Поделиться бортжурналом' });
       } catch (error) {
         console.error('Native logbook export failed:', error);
-        alert('Не удалось подготовить файл для отправки. Попробуйте ещё раз.');
+        setDialogMessage('Не удалось подготовить файл для отправки. Попробуйте ещё раз.');
       }
       return;
     }
@@ -120,18 +123,60 @@ export default function GarageLogbook() {
   };
 
   const handleImportJson = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+
     const fileReader = new FileReader();
-    if (e.target.files && e.target.files[0]) {
-      fileReader.readAsText(e.target.files[0], 'UTF-8');
-      fileReader.onload = (event) => {
-        try {
-          const parsed = parseValidatedJson<LogEntry[]>(event.target?.result as string, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')));
-          setEntries(parsed.map(item => ({ ...item, vehicleId, currency: item.currency || activeVehicle.currency || preferences.currency })));
-        } catch (err) {
-          alert('Ошибка чтения JSON файла');
+    fileReader.onerror = () => setDialogMessage('Не удалось прочитать выбранный JSON-файл.');
+    fileReader.onload = (event) => {
+      try {
+        const parsed = parseValidatedJson<LogEntry[]>(event.target?.result as string, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')));
+        const seenIds = new Set<string>();
+        let duplicateIdsInFile = 0;
+        for (const record of parsed) {
+          if (seenIds.has(record.id)) duplicateIdsInFile += 1;
+          seenIds.add(record.id);
         }
-      };
+        const foreignVehicleIds = [...new Set(parsed
+          .map(record => record.vehicleId)
+          .filter((id): id is string => typeof id === 'string' && id !== vehicleId))];
+        setImportMode('add');
+        setPendingImport({ fileName: file.name, records: parsed, foreignVehicleIds, duplicateIdsInFile });
+      } catch {
+        setDialogMessage('Ошибка чтения JSON-файла. Проверьте, что это корректный экспорт бортжурнала Car Brother.');
+      }
+    };
+    fileReader.readAsText(file, 'UTF-8');
+  };
+
+  const confirmImport = () => {
+    if (!pendingImport) return;
+    const records = pendingImport.records.map(item => ({
+      ...item,
+      currency: item.currency || activeVehicle.currency || preferences.currency,
+    }));
+    if (importMode === 'replace') {
+      const seen = new Set<string>();
+      const uniqueRecords = records.filter(record => {
+        if (seen.has(record.id)) return false;
+        seen.add(record.id);
+        return true;
+      });
+      setEntries(uniqueRecords);
+      setDialogMessage(`Импорт завершён: заменено записей — ${uniqueRecords.length}. Дубликаты ID внутри файла пропущены: ${records.length - uniqueRecords.length}.`);
+    } else {
+      const seen = new Set(entries.map(record => record.id));
+      const additions = records.filter(record => {
+        if (seen.has(record.id)) return false;
+        seen.add(record.id);
+        return true;
+      });
+      const skipped = records.length - additions.length;
+      setEntries([...entries, ...additions]);
+      setDialogMessage(`Импорт завершён: добавлено записей — ${additions.length}; пропущено записей с повторяющимися ID — ${skipped}.`);
     }
+    setPendingImport(null);
   };
 
   const totalSpent = entries.reduce((acc, curr) => acc + (curr.costTotal || 0), 0);
@@ -144,7 +189,7 @@ export default function GarageLogbook() {
           <div>
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-red-500" />
-              Бортжурнал владельца Outlander I
+              {`Бортжурнал владельца ${vehicleLabel}`}
             </h2>
             <p className="text-xs text-slate-400 mt-1">
               Учет выполненных работ, пробегов, потраченных средств и артикулов установленных запчастей
@@ -366,6 +411,73 @@ export default function GarageLogbook() {
           </div>
         ))}
       </div>
+
+      {pendingImport && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" role="presentation">
+          <section role="dialog" aria-modal="true" aria-labelledby="logbook-import-title" className="w-full max-w-lg rounded-xl border border-slate-700 bg-slate-900 p-5 shadow-2xl space-y-4">
+            <div>
+              <h3 id="logbook-import-title" className="text-lg font-bold text-white">Импорт бортжурнала</h3>
+              <p className="mt-1 text-sm text-slate-300 break-words">Файл: {pendingImport.fileName}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="rounded-lg border border-slate-700 bg-slate-950 p-3">
+                <span className="block text-slate-400">В файле</span>
+                <strong className="text-white">{pendingImport.records.length} записей</strong>
+              </div>
+              <div className="rounded-lg border border-slate-700 bg-slate-950 p-3">
+                <span className="block text-slate-400">Сейчас в журнале</span>
+                <strong className="text-white">{entries.length} записей</strong>
+              </div>
+            </div>
+            <fieldset className="space-y-2">
+              <legend className="text-sm font-semibold text-white">Как импортировать?</legend>
+              <label className="flex items-start gap-2 rounded-lg border border-slate-700 p-3 cursor-pointer">
+                <input type="radio" name="logbook-import-mode" value="add" checked={importMode === 'add'} onChange={() => setImportMode('add')} className="mt-1" />
+                <span><strong className="block text-white">Добавить к существующим</strong><span className="text-xs text-slate-400">По умолчанию. Записи с уже существующими ID будут пропущены.</span></span>
+              </label>
+              <label className="flex items-start gap-2 rounded-lg border border-slate-700 p-3 cursor-pointer">
+                <input type="radio" name="logbook-import-mode" value="replace" checked={importMode === 'replace'} onChange={() => setImportMode('replace')} className="mt-1" />
+                <span><strong className="block text-white">Заменить все записи</strong><span className="text-xs text-slate-400">Текущий журнал будет заменён содержимым файла.</span></span>
+              </label>
+            </fieldset>
+            {pendingImport.duplicateIdsInFile > 0 && (
+              <p className="rounded-lg border border-amber-700/70 bg-amber-950/30 p-3 text-sm text-amber-200">В файле найдено повторяющихся ID: {pendingImport.duplicateIdsInFile}. Повторные записи будут пропущены.</p>
+            )}
+            {pendingImport.foreignVehicleIds.length > 0 && (
+              <p className="rounded-lg border border-amber-700/70 bg-amber-950/30 p-3 text-sm text-amber-200">В файле есть записи для других автомобилей ({pendingImport.foreignVehicleIds.join(', ')}). Их vehicleId будет сохранён без изменений; проверьте принадлежность записей перед импортом.</p>
+            )}
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setPendingImport(null)} className="rounded-lg px-4 py-2 text-sm text-slate-300 hover:bg-slate-800">Отмена</button>
+              <button type="button" onClick={confirmImport} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700">Подтвердить импорт</button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {pendingDeleteId && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" role="presentation">
+          <section role="dialog" aria-modal="true" aria-labelledby="logbook-delete-title" className="w-full max-w-md rounded-xl border border-slate-700 bg-slate-900 p-5 shadow-2xl space-y-4">
+            <h3 id="logbook-delete-title" className="text-lg font-bold text-white">Удалить запись?</h3>
+            <p className="text-sm text-slate-300">Запись будет удалена из текущего бортжурнала. Это действие нельзя отменить.</p>
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setPendingDeleteId(null)} className="rounded-lg px-4 py-2 text-sm text-slate-300 hover:bg-slate-800">Отмена</button>
+              <button type="button" onClick={() => { setEntries(entries.filter(entry => entry.id !== pendingDeleteId)); setPendingDeleteId(null); }} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700">Удалить</button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {dialogMessage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" role="presentation">
+          <section role="dialog" aria-modal="true" aria-labelledby="logbook-message-title" className="w-full max-w-md rounded-xl border border-slate-700 bg-slate-900 p-5 shadow-2xl space-y-4">
+            <h3 id="logbook-message-title" className="text-lg font-bold text-white">Бортжурнал</h3>
+            <p className="text-sm text-slate-300">{dialogMessage}</p>
+            <div className="flex justify-end">
+              <button type="button" onClick={() => setDialogMessage(null)} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700">Понятно</button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
