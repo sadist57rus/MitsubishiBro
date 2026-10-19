@@ -94,7 +94,7 @@ export default function MaintenanceHub() {
 
   const dueMaintenanceItems = MAINTENANCE_SCHEDULE_TEMPLATE.filter((item) => {
     const status = item.verificationStatus ?? 'unverified';
-    if (status !== 'verified' && status !== 'partially-verified') return false;
+    if (status !== 'verified') return false;
     if (currentMileage <= 0 || item.frequencyKm <= 0) return false;
     const remainder = currentMileage % item.frequencyKm;
     return remainder === 0 || remainder >= item.frequencyKm - 2000;
@@ -159,7 +159,7 @@ export default function MaintenanceHub() {
               const isChecked = !!completedItems[item.id];
               const verificationStatus = item.verificationStatus ?? 'unverified';
               const remainder = item.frequencyKm > 0 ? currentMileage % item.frequencyKm : 0;
-              const isDueSoon = currentMileage > 0 && (verificationStatus === 'verified' || verificationStatus === 'partially-verified') && item.frequencyKm > 0 && (remainder === 0 || remainder >= item.frequencyKm - 2000);
+              const isDueSoon = currentMileage > 0 && (verificationStatus === 'verified') && item.frequencyKm > 0 && (remainder === 0 || remainder >= item.frequencyKm - 2000);
               const nextDueKm = remainder === 0 ? currentMileage : currentMileage + item.frequencyKm - remainder;
               const verificationLabel = verificationStatus === 'verified' ? 'Регламент подтверждён' : verificationStatus === 'partially-verified' ? 'Подтверждён частично' : 'Не подтверждено';
               const verificationClass = verificationStatus === 'verified' ? 'text-emerald-300 bg-emerald-950/40 border-emerald-800/60' : verificationStatus === 'partially-verified' ? 'text-amber-300 bg-amber-950/40 border-amber-800/60' : 'text-slate-300 bg-slate-900 border-slate-700';
