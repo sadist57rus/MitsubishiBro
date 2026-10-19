@@ -683,7 +683,11 @@ test('maintenance intervals expose their verification level instead of implying 
   if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
   const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
   if (await setupHeading.isVisible().catch(() => false)) {
-    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
+    const selects = page.locator('main select');
+    await selects.nth(0).selectOption({ value: 'mitsubishi' });
+    await selects.nth(1).selectOption({ value: 'outlander-1' });
+    const year = page.locator('main input[type="number"]').first();
+    await year.fill((await year.getAttribute('min')) || '2003');
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
   }
