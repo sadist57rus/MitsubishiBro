@@ -502,3 +502,57 @@ html[data-ui-mode="wide"] button, html[data-ui-mode="wide"] [role="button"], htm
     padding-inline: .25rem;
   }
 }
+
+/* Live color-palette tokens. ThemeContext sets data-palette; keep the selected palette visible across the app. */
+:root {
+  --palette-accent: #dc2626;
+  --palette-accent-hover: #b91c1c;
+  --palette-accent-soft: #fee2e2;
+  --palette-accent-content: #991b1b;
+}
+html[data-palette="black-yellow"] {
+  --palette-accent: #facc15;
+  --palette-accent-hover: #eab308;
+  --palette-accent-soft: #422006;
+  --palette-accent-content: #fef08a;
+}
+html[data-palette="white-red"] {
+  --palette-accent: #dc2626;
+  --palette-accent-hover: #b91c1c;
+  --palette-accent-soft: #fee2e2;
+  --palette-accent-content: #991b1b;
+}
+html[data-palette="black-orange"] {
+  --palette-accent: #f97316;
+  --palette-accent-hover: #ea580c;
+  --palette-accent-soft: #431407;
+  --palette-accent-content: #fed7aa;
+}
+html[data-palette="midnight-blue"] {
+  --palette-accent: #38bdf8;
+  --palette-accent-hover: #0284c7;
+  --palette-accent-soft: #082f49;
+  --palette-accent-content: #bae6fd;
+}
+html[data-palette="forest-green"] {
+  --palette-accent: #22c55e;
+  --palette-accent-hover: #16a34a;
+  --palette-accent-soft: #052e16;
+  --palette-accent-content: #bbf7d0;
+}
+.ui-button-primary { background-color: var(--palette-accent); }
+.ui-button-primary:hover:not(:disabled) { background-color: var(--palette-accent-hover); }
+.ui-section-icon, .ui-empty-icon { color: var(--palette-accent); }
+.ui-tab.is-active { border-color: var(--palette-accent); color: var(--palette-accent-content); }
+.ui-card-interactive:hover { border-color: var(--palette-accent); }
+html[data-palette] [class~="bg-red-500"],
+html[data-palette] [class~="bg-red-600"] { background-color: var(--palette-accent) !important; }
+html[data-palette] [class~="hover:bg-red-700"]:hover,
+html[data-palette] [class~="bg-red-700"]:hover { background-color: var(--palette-accent-hover) !important; }
+html[data-palette] [class~="text-red-500"],
+html[data-palette] [class~="text-red-600"],
+html[data-palette] [class~="text-red-700"] { color: var(--palette-accent-content) !important; }
+html[data-palette] [class~="border-red-500"],
+html[data-palette] [class~="border-red-600"] { border-color: var(--palette-accent) !important; }
+html[data-palette] [class~="ring-red-500"],
+html[data-palette] [class~="ring-red-600"] { --tw-ring-color: var(--palette-accent) !important; }
