@@ -37,22 +37,23 @@
 | 20 | `toyota-camry-xv30` | Toyota Camry | XV30 | 2001–2006 | Этап 0 — подготовка | 0% | true | не проверены | — |
 | 21 | `toyota-camry-40` | Toyota Camry | XV40 | 2006–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
 | 22 | `toyota-camry-xv40-sedan` | Toyota Camry | XV40 | 2006–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 23 | `toyota-corolla-e100` | Toyota Corolla | E100 | 1991–1998 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 24 | `toyota-corolla-e120` | Toyota Corolla | E120 / E130 | 2000–2007 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 25 | `toyota-corolla-axio-e140-sedan` | Toyota Corolla Axio | E140, седан | 2006–2012 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 26 | `toyota-corolla-fielder-e140-wagon` | Toyota Corolla Fielder | E140, универсал | 2006–2012 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 27 | `toyota-prius-xw10` | Toyota Prius | XW10 | 1997–2003 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 28 | `toyota-prius-xw20` | Toyota Prius | XW20 | 2003–2009 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 29 | `toyota-prius-xw30-liftback` | Toyota Prius | XW30 | 2009–2015 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 30 | `toyota-prius-xw50` | Toyota Prius | XW50 | 2015–2022 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 31 | `toyota-hilux-n50` | Toyota Hilux | N50 / N60 / N70 | 2004–2015 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 32 | `toyota-hilux-an120-pickup` | Toyota Hilux | AN120 / AN130 | 2015–2025 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 33 | `toyota-yaris-xp10` | Toyota Yaris / Vitz | XP10 | 1999–2005 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 34 | `toyota-yaris-xp90` | Toyota Yaris / Vitz | XP90 | 2005–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 35 | `toyota-yaris-xp90-hatchback` | Toyota Yaris / Vitz | XP90 | 2005–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 36 | `toyota-yaris-xp130` | Toyota Yaris / Vitz | XP130 | 2010–2020 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 37 | `toyota-estima-xr50` | Toyota Estima | XR50 | 2006–2019 | Этап 0 — подготовка | 0% | true | не проверены | — |
-| 38 | `toyota-hiace-h200` | Toyota HiAce | H200 | 2004–н.в. | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 23 | `toyota-camry-xv40` | Toyota Camry | XV40 | 2006–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 24 | `toyota-corolla-e100` | Toyota Corolla | E100 | 1991–1998 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 25 | `toyota-corolla-e120` | Toyota Corolla | E120 / E130 | 2000–2007 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 26 | `toyota-corolla-axio-e140-sedan` | Toyota Corolla Axio | E140, седан | 2006–2012 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 27 | `toyota-corolla-fielder-e140-wagon` | Toyota Corolla Fielder | E140, универсал | 2006–2012 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 28 | `toyota-prius-xw10` | Toyota Prius | XW10 | 1997–2003 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 29 | `toyota-prius-xw20` | Toyota Prius | XW20 | 2003–2009 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 30 | `toyota-prius-xw30-liftback` | Toyota Prius | XW30 | 2009–2015 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 31 | `toyota-prius-xw50` | Toyota Prius | XW50 | 2015–2022 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 32 | `toyota-hilux-n50` | Toyota Hilux | N50 / N60 / N70 | 2004–2015 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 33 | `toyota-hilux-an120-pickup` | Toyota Hilux | AN120 / AN130 | 2015–2025 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 34 | `toyota-yaris-xp10` | Toyota Yaris / Vitz | XP10 | 1999–2005 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 35 | `toyota-yaris-xp90` | Toyota Yaris / Vitz | XP90 | 2005–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 36 | `toyota-yaris-xp90-hatchback` | Toyota Yaris / Vitz | XP90 | 2005–2011 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 37 | `toyota-yaris-xp130` | Toyota Yaris / Vitz | XP130 | 2010–2020 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 38 | `toyota-estima-xr50` | Toyota Estima | XR50 | 2006–2019 | Этап 0 — подготовка | 0% | true | не проверены | — |
+| 39 | `toyota-hiace-h200` | Toyota HiAce | H200 | 2004–н.в. | Этап 0 — подготовка | 0% | true | не проверены | — |
 
 ## Обнаруженные пробелы и дубли каталога
 
