@@ -15,7 +15,7 @@ This verifies that the model/transmission combination exists in the Russia-marke
 
 ## Cross-edition comparison
 
-Two third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection and Maintenance* schedule were compared at the schedule-table level. The mileage intervals below match between the 2009 and 2011 editions, although operation item numbers change in the 2011 edition because it includes separate SST operations. A 2012 edition search-index extract independently corroborates the transfer and rear-differential intervals; the available extract does not fully expose the manual-transmission row, so it is not counted as a complete third-edition check.
+Three third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection and Maintenance* schedule were compared at the schedule-table level. The mileage intervals below match between the 2009, 2011, and 2012 editions, although operation item numbers change between editions because SST-related operations differ. The 2012 schedule extract exposes the manual-transmission row as well as the transfer and rear-differential rows.
 
 | Operation | 2009 edition item | 2011 edition item | Normal usage | Severe usage |
 |---|---:|---:|---:|---:|
@@ -29,9 +29,9 @@ The 2012 edition extract lists transfer oil change at 80,000 km normal / 40,000 
 Sources:
 - [2009 Outlander XL PDI schedule PDF copy](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/spec/pdf/4753343558CW_W_09_003_ENG.pdf), printed page 2-7.
 - [2011 Outlander XL PDI schedule PDF copy](https://mmc-manuals.ru/manuals/outlander_xl/online/Service_Manual/spec/pdf/PDI_4753343558CW_W_11_003_ENG_100.pdf), printed page 2-7.
-- [2012 Outlander XL PDI schedule PDF copy](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/spec/pdf/PDI_4753343558CW_W_12_003_ENG_100.pdf), schedule extract for transfer and rear differential operations.
+- [2012 Outlander XL PDI schedule PDF copy](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/spec/pdf/PDI_4753343558CW_W_12_003_ENG_100.pdf), printed page 2-6 to 2-7; search-indexed schedule text includes manual-transmission, transfer and rear-differential operations.
 
-The search-indexed schedule text from both editions independently exposes the same interval values and operation descriptions. When both distance and time are listed, the 2011 document says whichever comes first applies. Severe-usage schedules are separate and should not be applied automatically to every vehicle; the manual describes conditions such as dusty/rough roads, prolonged idling or short cold-weather trips, frequent sudden braking, and trailer towing.
+The search-indexed schedule text from all three editions independently exposes the same interval values and operation descriptions. When both distance and time are listed, the 2011 document says whichever comes first applies. Severe-usage schedules are separate and should not be applied automatically to every vehicle; the manual describes conditions such as dusty/rough roads, prolonged idling or short cold-weather trips, frequent sudden braking, and trailer towing.
 
 ## What the comparison establishes — and what it does not
 
@@ -52,7 +52,7 @@ Therefore:
 
 ## Decision
 
-- Candidate normal/severe intervals, corroborated across the 2009 and 2011 schedule copies: manual transmission 200,000/100,000 km; transfer case 80,000/40,000 km; rear differential oil 80,000/40,000 km.
+- Candidate normal/severe intervals, corroborated across the 2009, 2011 and 2012 schedule copies: manual transmission 200,000/100,000 km; transfer case 80,000/40,000 km; rear differential oil 80,000/40,000 km.
 - Rear differential leak inspection candidate: every 20,000 km or 12 months.
 - Exact Russia-market model-year/VIN applicability: unresolved.
 - Do not promote these to production data until exact publication and model applicability are confirmed.
