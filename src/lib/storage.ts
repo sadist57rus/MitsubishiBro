@@ -11,3 +11,12 @@ export function writeStored<T>(key:string,value:T,guard:Guard<T>):boolean {const
 export function parseValidatedJson<T>(text:string,guard:Guard<T>):T {const parsed:unknown=JSON.parse(text);if(!guard(parsed))throw new Error('JSON does not match the expected schema');return parsed;}
 export function removeStored(key:string):void {try{safeStorage()?.removeItem(key);}catch(error){console.warn('Could not remove stored value:',key,error);}}
 export function parseDecimalInput(value:string):number|null {const normalized=value.trim().replace(/\s/g,'').replace(',','.');if(!normalized||!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized))return null;const number=Number(normalized);return Number.isFinite(number)?number:null;}
+
+
+/** Parse localized decimal input while rejecting partial or malformed numbers. */
+export function parseDecimalInput(value: string): number | null {
+  const normalized = value.trim().replace(/\\s/g, '').replace(',', '.');
+  if (!normalized || !/^[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(normalized)) return null;
+  const number = Number(normalized);
+  return Number.isFinite(number) ? number : null;
+}
