@@ -19,6 +19,8 @@ jobs:
       - run: npm run check
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
+      - name: Install axe-core for accessibility smoke tests
+        run: npm install --no-save --package-lock=false --ignore-scripts --no-audit --no-fund axe-core@4.10.3
       - run: npm run test:smoke
       - name: Upload web build for testing
         if: success()
