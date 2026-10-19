@@ -7,6 +7,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 import { LogEntry } from '../types';
 import { getLogbookStorageKey, LEGACY_LOGBOOK_STORAGE_KEY } from '../lib/vehicleStorageKeys';
+import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { BookOpen, Plus, Trash2, Download, Upload, DollarSign, Wrench, Calendar, Sparkles } from 'lucide-react';
 
 const INITIAL_RECORDS: LogEntry[] = [
@@ -45,6 +46,9 @@ const INITIAL_RECORDS: LogEntry[] = [
 export default function GarageLogbook() {
   const { vehicleId, vehicles, activeVehicle } = useVehicle();
   const activeStorageKey = getLogbookStorageKey(vehicleId, vehicleId === vehicles[0]?.id, activeVehicle.modelId === 'outlander-1');
+  const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === activeVehicle.brandId);
+  const activeModel = activeBrand?.models.find(model => model.id === activeVehicle.modelId);
+  const vehicleLabel = [activeBrand?.russianName || activeBrand?.name, activeModel?.name, activeModel?.generation].filter(Boolean).join(' ');
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
@@ -157,7 +161,7 @@ export default function GarageLogbook() {
           <div>
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-red-500" />
-              Бортжурнал владельца Outlander I
+              Бортжурнал владельца {vehicleLabel}
             </h2>
             <p className="text-xs text-slate-400 mt-1">
               Учет выполненных работ, пробегов, потраченных средств и артикулов установленных запчастей
