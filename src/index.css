@@ -642,3 +642,11 @@ html[data-ui-mode="phone"] main [role="button"],
 html[data-ui-mode="phone"] header button {
   min-height: 48px;
 }
+
+/* Keep the theme toggle inside the compact 800px landscape header. */
+@media (min-width: 641px) and (max-width: 820px) {
+  header button[aria-label="Переключить светлую или тёмную тему"] {
+    gap: 0.25rem;
+    padding-inline: 0.375rem;
+  }
+}
