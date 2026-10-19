@@ -51,7 +51,7 @@ export default function GarageLogbook() {
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const selectedBrand = JAPANESE_BRANDS.find(brand => brand.id === activeVehicle.brandId);
   const selectedModel = selectedBrand?.models.find(model => model.id === activeVehicle.modelId);
-  const vehicleLabel = selectedModel?.name || activeVehicle.modelId;
+  const vehicleLabel = activeVehicle.brandId === 'mitsubishi' && activeVehicle.modelId === 'outlander-1' ? 'Outlander I' : selectedModel?.name || activeVehicle.modelId;
   const [pendingImport, setPendingImport] = useState<{ fileName: string; records: LogEntry[]; foreignVehicleIds: string[]; duplicateIdsInFile: number } | null>(null);
   const [importMode, setImportMode] = useState<'add' | 'replace'>('add');
   const [dialogMessage, setDialogMessage] = useState<string | null>(null);
