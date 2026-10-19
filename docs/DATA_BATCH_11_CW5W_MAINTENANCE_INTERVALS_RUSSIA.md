@@ -5,7 +5,7 @@
 
 ## Cross-edition comparison
 
-Two third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection and Maintenance* schedule were compared at the schedule-table level. The mileage intervals below match between the 2009 and 2011 editions, although operation item numbers change in the 2011 edition because it includes separate SST operations.
+Two third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection and Maintenance* schedule were compared at the schedule-table level. The mileage intervals below match between the 2009 and 2011 editions, although operation item numbers change in the 2011 edition because it includes separate SST operations. A 2012 edition search-index extract independently corroborates the transfer and rear-differential intervals; the available extract does not fully expose the manual-transmission row, so it is not counted as a complete third-edition check.
 
 | Operation | 2009 edition item | 2011 edition item | Normal usage | Severe usage |
 |---|---:|---:|---:|---:|
@@ -14,9 +14,12 @@ Two third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection 
 | Check rear differential for oil leakage; if leaking, check level | B9 | B12 | Every 20,000 km or 12 months | Same listed interval |
 | Change rear differential gear oil | B10 | B13 | Every 80,000 km | Every 40,000 km |
 
+The 2012 edition extract lists transfer oil change at 80,000 km normal / 40,000 km severe and rear differential oil change at 80,000 km / 40,000 km; it also retains rear differential leakage/level inspection at 20,000 km or 12 months.
+
 Sources:
 - [2009 Outlander XL PDI schedule PDF copy](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/spec/pdf/4753343558CW_W_09_003_ENG.pdf), printed page 2-7.
 - [2011 Outlander XL PDI schedule PDF copy](https://mmc-manuals.ru/manuals/outlander_xl/online/Service_Manual/spec/pdf/PDI_4753343558CW_W_11_003_ENG_100.pdf), printed page 2-7.
+- [2012 Outlander XL PDI schedule PDF copy](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/spec/pdf/PDI_4753343558CW_W_12_003_ENG_100.pdf), schedule extract for transfer and rear differential operations.
 
 The search-indexed schedule text from both editions independently exposes the same interval values and operation descriptions. When both distance and time are listed, the 2011 document says whichever comes first applies. Severe-usage schedules are separate and should not be applied automatically to every vehicle; the manual describes conditions such as dusty/rough roads, prolonged idling or short cold-weather trips, frequent sudden braking, and trailer towing.
 
