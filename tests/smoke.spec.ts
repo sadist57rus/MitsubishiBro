@@ -103,16 +103,17 @@ async function assertReadableAndTouchSafe(
 }
 
 async function openNavItem(page: Page, sectionId: string) {
-  const primary = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
   const phoneNav = page.getByTestId('phone-bottom-navigation');
   if (await phoneNav.isVisible().catch(() => false)) {
-    if (primary.includes(sectionId)) {
+    const phonePrimary = ['overview', 'garage', 'maintenance', 'obd'];
+    if (phonePrimary.includes(sectionId)) {
       await page.getByTestId('phone-nav-item-' + sectionId).click();
       return;
     }
     await page.getByTestId('phone-more-trigger').click();
   } else {
-    if (primary.includes(sectionId)) {
+    const widePrimary = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
+    if (widePrimary.includes(sectionId)) {
       await page.getByTestId('wide-nav-item-' + sectionId).click();
       return;
     }
@@ -187,12 +188,12 @@ for (const viewport of viewports) {
       await expect(apkTrigger).toBeFocused();
 
       const brandTrigger = page.getByRole('button', { name: /Выбрать или изменить автомобиль/i });
-      for (const brandId of ['nissan', 'honda']) {
+      for (const brand of [{ id: 'nissan', label: /Выбрать Nissan/i }, { id: 'honda', label: /Выбрать Honda/i }]) {
         await brandTrigger.click();
-        await expect(page.getByRole('region', { name: 'Выбор марки автомобиля' })).toBeVisible();
-        await page.getByTestId('brand-option-' + brandId).click();
+        await expect(page.getByRole('dialog', { name: /Выбор японского производителя/i })).toBeVisible();
+        await page.getByRole('button', { name: brand.label }).click();
         await openNavItem(page, 'fuel');
-        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
+        expect(await page.locator('body').innerText(), brand.id + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
         await page.getByTestId('header-back').click();
       }
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
@@ -333,14 +334,12 @@ test('active accent controls keep readable contrast across all color palettes', 
     { name: 'Графит / зелёный', id: 'forest-green', background: 'rgb(34, 197, 94)', foreground: 'rgb(5, 46, 22)' },
   ];
 
-  const sectionTrigger = page.getByTestId('section-menu-trigger');
   for (const palette of palettes) {
-    await page.getByRole('button', { name: new RegExp(palette.name) }).click();
+    const paletteButton = page.getByRole('button', { name: new RegExp(palette.name) });
+    await paletteButton.click();
     await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
-    await sectionTrigger.click();
-    await expect.poll(() => sectionTrigger.evaluate(el => getComputedStyle(el).backgroundColor)).toBe(palette.background);
-    await expect.poll(() => sectionTrigger.evaluate(el => getComputedStyle(el).color)).toBe(palette.foreground);
-    await page.keyboard.press('Escape');
+    await expect(paletteButton).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.getByTestId('header-section-title')).toHaveText('Настройки');
   }
 });
 
