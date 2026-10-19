@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { parseDecimalInput } from '../src/lib/storage';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -197,7 +198,7 @@ for (const viewport of viewports) {
 test('настройки применяют цветовую палитру и выбор марки читаем в ночной теме', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await chooseToyota(page);
-  await openNavItem(page, /Настройки/i);
+  await openNavItem(page, 'settings');
   await page.getByLabel('Тема интерфейса').selectOption('dark');
   await expect.poll(() => page.locator('html').getAttribute('data-theme')).toBe('dark');
 
@@ -252,4 +253,42 @@ test('мобильные меню полностью помещаются на �
   expect(brandPanelBounds.right).toBeLessThanOrEqual(360);
   expect(brandPanelBounds.top).toBeGreaterThanOrEqual(0);
   expect(brandPanelBounds.bottom).toBeLessThanOrEqual(800);
+});
+
+
+test('decimal input parser accepts comma and dot separators', () => {
+  expect(parseDecimalInput('58,5')).toBe(58.5);
+  expect(parseDecimalInput('58.5')).toBe(58.5);
+  expect(parseDecimalInput(' 1 234,75 ')).toBe(1234.75);
+  expect(parseDecimalInput('')).toBeNull();
+  expect(parseDecimalInput('58,5,2')).toBeNull();
+});
+
+test('maintenance fuel calculator accepts decimal comma on text inputs', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
+      localStorage.clear();
+      sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    }
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'maintenance');
+  await expect(page.getByRole('heading', { name: /Калькулятор расхода топлива/ })).toBeVisible();
+
+  await page.getByPlaceholder('Например: 420').fill('420,5');
+  await page.getByPlaceholder('Например: 48').fill('48,5');
+  await page.getByPlaceholder('58.5').fill('58,5');
+
+  await expect(page.getByText('Всего: 2 837 ₽').or(page.getByText('Всего: 2 837 ₽'))).toBeVisible();
+  await expect(page.getByText('11.53', { exact: true })).toBeVisible();
 });

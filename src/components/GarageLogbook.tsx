@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { parseValidatedJson, readStored, writeStored } from '../lib/storage';
+import { parseDecimalInput, parseValidatedJson, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
 import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { usePreferences } from '../context/PreferencesContext';
@@ -60,11 +60,11 @@ export default function GarageLogbook() {
 
   const [isAdding, setIsAdding] = useState(false);
   const [newDate, setNewDate] = useState(new Date().toISOString().split('T')[0]);
-  const [newMileage, setNewMileage] = useState<number>(185000);
+  const [newMileage, setNewMileage] = useState<string>('185000');
   const [newCategory, setNewCategory] = useState('Плановое ТО');
   const [newTitle, setNewTitle] = useState('');
   const [newParts, setNewParts] = useState('');
-  const [newCost, setNewCost] = useState<number>(0);
+  const [newCost, setNewCost] = useState<string>('0');
   const [newNotes, setNewNotes] = useState('');
 
   useEffect(() => { writeStored(activeStorageKey, entries, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string'))); }, [entries, activeStorageKey]);
@@ -78,11 +78,11 @@ export default function GarageLogbook() {
       vehicleId,
       currency: activeVehicle.currency || preferences.currency,
       date: newDate,
-      mileage: Number(newMileage),
+      mileage: parseDecimalInput(newMileage) ?? 0,
       category: newCategory,
       title: newTitle.trim(),
       partsUsed: newParts.trim() || undefined,
-      costTotal: Number(newCost) || 0,
+      costTotal: parseDecimalInput(newCost) ?? 0,
       notes: newNotes.trim() || undefined
     };
 
@@ -90,7 +90,7 @@ export default function GarageLogbook() {
     setIsAdding(false);
     setNewTitle('');
     setNewParts('');
-    setNewCost(0);
+    setNewCost('0');
     setNewNotes('');
   };
 
@@ -270,9 +270,9 @@ export default function GarageLogbook() {
             <div>
               <label className="text-xs text-slate-400 block mb-1">Пробег (км)</label>
               <input
-                type="number" inputMode="decimal"
+                type="text" inputMode="decimal"
                 value={newMileage}
-                onChange={(e) => setNewMileage(Number(e.target.value))}
+                onChange={(e) => setNewMileage(e.target.value)}
                 required
                 className="w-full bg-slate-950 border border-slate-800 text-xs text-white font-mono rounded-lg p-2.5 focus:border-red-500 outline-none"
               />
@@ -325,9 +325,9 @@ export default function GarageLogbook() {
             <div>
               <label className="text-xs text-slate-400 block mb-1">Сумма расходов ({activeVehicle.currency || preferences.currency})</label>
               <input
-                type="number" inputMode="decimal"
+                type="text" inputMode="decimal"
                 value={newCost}
-                onChange={(e) => setNewCost(Number(e.target.value))}
+                onChange={(e) => setNewCost(e.target.value)}
                 placeholder="4500"
                 className="w-full bg-slate-950 border border-slate-800 text-xs text-white font-mono rounded-lg p-2.5 focus:border-red-500 outline-none"
               />
