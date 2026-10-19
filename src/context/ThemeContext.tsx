@@ -53,6 +53,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
+    root.setAttribute('data-palette', palette);
+    try { localStorage.setItem(PALETTE_STORAGE_KEY, palette); } catch { /* storage unavailable */ }
 
     const updateResolved = () => {
       let active: 'light' | 'dark' = 'light';
