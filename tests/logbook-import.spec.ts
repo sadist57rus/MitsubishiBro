@@ -35,6 +35,7 @@ async function chooseToyota(page: Page) {
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
   }
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
 }
 
 async function seedLogbook(page: Page, records: LogRecord[]) {
