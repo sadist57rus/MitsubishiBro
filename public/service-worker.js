@@ -1,5 +1,5 @@
 const CACHE_NAME = 'car-brother-offline-v4';
-const APP_SHELL = ['/', '/index.html', '/app-icon.svg', '/manifest.webmanifest', '/icons/car-brother-192.png', '/icons/car-brother-512.png', '/icons/car-brother-maskable-512.png', '/fonts/roboto-latin-400-normal.woff2', '/fonts/roboto-cyrillic-400-normal.woff2', '/fonts/roboto-cyrillic-ext-400-normal.woff2'];
+const APP_SHELL = ['/', '/index.html', '/app-icon.svg', '/manifest.webmanifest', '/icons/car-brother-192.png', '/icons/car-brother-512.png', '/icons/car-brother-maskable-512.png', '/fonts/roboto-latin-400-normal.woff2', '/fonts/roboto-cyrillic-400-normal.woff2', '/fonts/roboto-cyrillic-ext-400-normal.woff2', '/fonts/roboto-latin-500-normal.woff2', '/fonts/roboto-cyrillic-500-normal.woff2', '/fonts/roboto-cyrillic-ext-500-normal.woff2', '/fonts/roboto-latin-700-normal.woff2', '/fonts/roboto-cyrillic-700-normal.woff2', '/fonts/roboto-cyrillic-ext-700-normal.woff2'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {

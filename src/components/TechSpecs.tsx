@@ -32,12 +32,21 @@ import {
   Info
 } from 'lucide-react';
 
+type ActiveBrand = (typeof JAPANESE_BRANDS)[number];
+type ActiveModel = ActiveBrand['models'][number];
+
 export default function TechSpecs() {
   const { brandId, modelId } = useVehicle();
   const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === brandId);
   const activeModel = activeBrand?.models.find(model => model.id === modelId);
-  const isOutlanderSourceModel = modelId === 'outlander-1';
-  if (!isOutlanderSourceModel) return <section className="mx-auto max-w-2xl rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900"><h2 className="text-base font-bold">Технические данные для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">В этом разделе пока доступны подробные технические данные только для одной исходной модификации справочника. Чтобы не подменять их характеристиками другой машины, откройте карточку выбранной модели в «Авто Японии» или запросите данные.</p><button type="button" onClick={() => window.history.back()} className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white">Вернуться к предыдущему экрану</button><a className="ml-2 inline-flex min-h-11 items-center rounded-xl border px-4 py-2 text-sm font-bold" href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=Tech%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные</a></section>;
+  if (modelId !== 'outlander-1' || !activeBrand || !activeModel) {
+    return <section className="mx-auto max-w-2xl rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900"><h2 className="text-base font-bold">Технические данные для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">В этом разделе пока доступны подробные технические данные только для одной исходной модификации справочника. Чтобы не подменять их характеристиками другой машины, откройте карточку выбранной модели в «Авто Японии» или запросите данные.</p><button type="button" onClick={() => window.history.back()} className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white">Вернуться к предыдущему экрану</button><a className="ml-2 inline-flex min-h-11 items-center rounded-xl border px-4 py-2 text-sm font-bold" href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=Tech%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные</a></section>;
+  }
+  return <OutlanderTechSpecsContent activeBrand={activeBrand} activeModel={activeModel} />;
+}
+
+function OutlanderTechSpecsContent({ activeBrand, activeModel }: { activeBrand: ActiveBrand; activeModel: ActiveModel }) {
+  const isOutlanderSourceModel = true;
   // Start with dimensions, cabin and trunk open by default, rest collapsed
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     dimensions: true,

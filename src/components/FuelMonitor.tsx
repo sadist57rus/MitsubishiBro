@@ -6,17 +6,6 @@ import { JAPANESE_BRANDS } from '../data/vehicleCatalog';
 import { usePreferences } from '../context/PreferencesContext';
 import { getFuelStorageKey } from '../lib/vehicleStorageKeys';
 import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ReferenceLine
-} from 'recharts';
-import {
   Fuel,
   Calculator,
   RotateCcw,
@@ -165,6 +154,19 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
       }));
   }, [logs, chartXMode, preferences.fuelUnit]);
 
+  const chartGeometry = useMemo(() => {
+    const min = preferences.fuelUnit === 'mpg' ? 14 : 6;
+    const max = preferences.fuelUnit === 'mpg' ? 32 : 17;
+    const points = chartData.map((item, index) => ({
+      ...item,
+      x: chartData.length === 1 ? 400 : 48 + index * 704 / (chartData.length - 1),
+      y: 20 + (max - item.consumptionVal) / (max - min) * 180,
+    }));
+    const linePath = points.map((point, index) => `${index ? 'L' : 'M'} ${point.x} ${point.y}`).join(' ');
+    const areaPath = points.length ? `${linePath} L ${points[points.length - 1].x} 210 L ${points[0].x} 210 Z` : '';
+    return { min, max, points, linePath, areaPath };
+  }, [chartData, preferences.fuelUnit]);
+
   const handleSaveLog = (e: React.FormEvent) => {
     e.preventDefault();
     const distNum = parseDecimalInput(newDistance) ?? NaN;
@@ -198,43 +200,6 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
 
   const deleteLog = (id: string) => {
     setLogs(logs.filter((l) => l.id !== id));
-  };
-
-  // Custom Tooltip for Recharts
-  const CustomChartTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload as FuelLog;
-      return (
-        <div className="bg-slate-900 border border-slate-700 p-3 rounded-xl shadow-xl text-xs space-y-1.5 text-white font-mono">
-          <div className="flex justify-between items-center gap-4 text-slate-400 border-b border-slate-800 pb-1">
-            <span>{data.date}</span>
-            <span className="text-white font-bold">{data.odometer.toLocaleString()} км</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-red-400 font-bold">Расход:</span>
-            <strong className="text-base text-red-500 font-black">
-              {formatConsumption(data.consumption)} {consumptionUnit}
-            </strong>
-          </div>
-          <div className="flex justify-between text-xs text-slate-300">
-            <span>Заправлено:</span>
-            <span>{data.liters} л ({data.fuelType})</span>
-          </div>
-          <div className="flex justify-between text-xs text-slate-300">
-            <span>Дистанция:</span>
-            <span>{data.distance} км</span>
-          </div>
-          <div className="flex justify-between text-xs text-slate-300 pt-1 border-t border-slate-800">
-            <span>Сумма чека:</span>
-            <span className="text-emerald-400 font-bold">{data.totalCost.toFixed(0)} {currencySymbols[data.currency || 'RUB'] || '₽'}</span>
-          </div>
-          <div className="text-xs text-slate-400 italic">
-            {data.station}
-          </div>
-        </div>
-      );
-    }
-    return null;
   };
 
   return (
@@ -418,73 +383,14 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
           </div>
         </div>
 
-        {/* Recharts Container */}
         <div className="h-72 w-full pt-3">
-          {chartData.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={chartData}
-                margin={{ top: 10, right: 20, left: -15, bottom: 0 }}
-              >
-                <defs>
-                  <linearGradient id="fuelGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#dc2626" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#dc2626" stopOpacity={0.0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                <XAxis
-                  dataKey="label"
-                  stroke="#94a3b8"
-                  fontSize={11}
-                  tickLine={false}
-                />
-                <YAxis
-                  stroke="#94a3b8"
-                  fontSize={11}
-                  domain={preferences.fuelUnit === 'mpg' ? [14, 32] : [6, 17]}
-                  tickLine={false}
-                  unit={preferences.fuelUnit === 'mpg' ? " mpg" : " л"}
-                />
-                <Tooltip content={<CustomChartTooltip />} />
-
-                {/* Benchmark Lines */}
-                <ReferenceLine
-                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 7.6 : 7.6}
-                  stroke="#10b981"
-                  strokeDasharray="4 4"
-                  label={{ value: preferences.fuelUnit === 'mpg' ? '31 mpg трасса' : '7.6 л трасса', fill: '#10b981', fontSize: 10, position: 'insideBottomRight' }}
-                />
-                <ReferenceLine
-                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 12.5 : 12.5}
-                  stroke="#f59e0b"
-                  strokeDasharray="4 4"
-                  label={{ value: preferences.fuelUnit === 'mpg' ? '18.8 mpg город' : '12.5 л город', fill: '#f59e0b', fontSize: 10, position: 'insideBottomRight' }}
-                />
-                <ReferenceLine
-                  y={preferences.fuelUnit === 'mpg' ? 235.214583 / 15.0 : 15.0}
-                  stroke="#ef4444"
-                  strokeDasharray="3 3"
-                  label={{ value: preferences.fuelUnit === 'mpg' ? '15.7 mpg лимит' : '15 л лимит', fill: '#ef4444', fontSize: 10, position: 'insideBottomRight' }}
-                />
-
-                <Area
-                  type="monotone"
-                  dataKey="consumptionVal"
-                  stroke="#dc2626"
-                  strokeWidth={3}
-                  fillOpacity={1}
-                  fill="url(#fuelGradient)"
-                  dot={{ r: 4, fill: '#dc2626', stroke: '#ffffff', strokeWidth: 2 }}
-                  activeDot={{ r: 6, fill: '#ef4444' }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          ) : (
-            <div className="h-full flex items-center justify-center text-xs text-slate-400">
-              Нет данных для построения графика. Добавьте записи в журнал заправок.
-            </div>
-          )}
+          {chartData.length ? <svg viewBox="0 0 800 260" className="h-full w-full" role="img" aria-label={`График расхода топлива, ${chartData.length} записей`}>
+            <defs><linearGradient id="fuelGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#dc2626" stopOpacity=".35" /><stop offset="100%" stopColor="#dc2626" stopOpacity=".02" /></linearGradient></defs>
+            {Array.from({ length: 5 }, (_, i) => { const y = 20 + i * 45; const value = chartGeometry.max - i * (chartGeometry.max - chartGeometry.min) / 4; return <g key={i}><line x1="48" y1={y} x2="770" y2={y} stroke="currentColor" opacity=".12" strokeDasharray="3 5" /><text x="40" y={y + 4} textAnchor="end" fill="#94a3b8" fontSize="11">{value.toFixed(0)}</text></g>; })}
+            <path d={chartGeometry.areaPath} fill="url(#fuelGradient)" />
+            <path d={chartGeometry.linePath} fill="none" stroke="#dc2626" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+            {chartGeometry.points.map((point, i) => <g key={point.id}><circle cx={point.x} cy={point.y} r="4" fill="#dc2626" stroke="#fff" strokeWidth="2"><title>{point.date}: {formatConsumption(point.consumption)} {consumptionUnit}; {point.liters} л; {point.distance} км</title></circle>{(i === 0 || i === Math.floor((chartGeometry.points.length - 1) / 2) || i === chartGeometry.points.length - 1) && <text x={point.x} y="242" textAnchor={i === 0 ? 'start' : i === chartGeometry.points.length - 1 ? 'end' : 'middle'} fill="#94a3b8" fontSize="11">{point.label}</text>}</g>)}
+          </svg> : <div className="h-full flex items-center justify-center text-xs text-slate-400">Нет данных для построения графика. Добавьте записи в журнал заправок.</div>}
         </div>
       </div>
 
