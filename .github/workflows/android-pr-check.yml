@@ -1,6 +1,8 @@
 name: Android APK pull request check
 
 on:
+  push:
+    branches: [fix/android-workflow-reproducible-lockfile]
   pull_request:
     paths:
       - 'android/**'
