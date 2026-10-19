@@ -3,6 +3,16 @@
 **Date:** 2026-10-19  
 **Scope:** Outlander XL / CW5W / 4B12, Russia-market candidate. Research ledger only; no production import.
 
+
+## Russia-market identity cross-check
+
+The service-manual model-identification tables explicitly include a **VEHICLES FOR RUSSIA** section and list CW5W / 4B12 / W5MBB (4WD, 5-speed manual) as a Russian-market combination in both the 2008-era and 2012-era manual sets:
+
+- [2008-era manual, Russia model table](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/2008/00/html/M100100030216500ENG.HTM) — the table lists CW5W, engine 4B12, transmission W5MBB under “VEHICLES FOR RUSSIA”.
+- [2012 manual, Russia model table](https://faq.out-club.ru/download/outlander-xl/maintenance/Service_Manual_2008_2012/2012/00/html/M100100030615600ENG.HTM) — the Russia section again lists CW5W / 4B12 / W5MBB and distinguishes it from the W1CJA CVT variant.
+
+This verifies that the model/transmission combination exists in the Russia-market documentation set; it **does not by itself prove** that the maintenance schedule table's candidate intervals apply to every Russian production date, model-code suffix, or VIN. The interval values therefore remain research candidates and are not approved for production import.
+
 ## Cross-edition comparison
 
 Two third-party-hosted copies of Mitsubishi's Outlander XL *Periodic Inspection and Maintenance* schedule were compared at the schedule-table level. The mileage intervals below match between the 2009 and 2011 editions, although operation item numbers change in the 2011 edition because it includes separate SST operations. A 2012 edition search-index extract independently corroborates the transfer and rear-differential intervals; the available extract does not fully expose the manual-transmission row, so it is not counted as a complete third-edition check.
