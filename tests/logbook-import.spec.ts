@@ -59,7 +59,7 @@ async function openLogbook(page: Page) {
   const item = page.getByTestId('section-menu-list').getByRole('button', { name: /Бортжурнал/i }).first();
   await expect(item).toBeVisible({ timeout: 5_000 });
   await item.getByText(/Бортжурнал/i).first().click();
-  await expect(page.getByRole('heading', { name: /Бортжурнал владельца/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Бортжурнал владельца/ })).toBeVisible();
 }
 
 const existingRecord: LogRecord = {
