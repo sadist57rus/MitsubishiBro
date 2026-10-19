@@ -207,9 +207,9 @@ test('model-specific sections never reuse Outlander data for another active vehi
 test('axe accessibility audit in dark theme: home, garage and settings', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await page.emulateMedia({ colorScheme: 'dark' });
-  await chooseToyota(page);
-  // Avoid auditing transient interpolated colors while theme/brand transitions are still running.
+  // Disable transitions before changing vehicle/theme so axe never samples interpolated colors.
   await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation: none !important; }' });
+  await chooseToyota(page);
   await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
     const audit = async (screen: string) => {
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
