@@ -36,6 +36,7 @@ import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
 import { EngineType, DrivetrainType } from './types';
+import { readStored } from './lib/storage';
 import {
   ChevronLeft,
   Home,
@@ -180,9 +181,16 @@ function AppContent() {
   const [setupVin, setSetupVin] = useState('');
   const [profileSelected, setProfileSelected] = useState(() => { try { return localStorage.getItem('car-brother-profile-selected-v1') === 'yes'; } catch { return false; } });
   useEffect(() => { const model=setupBrand.models.find(item=>item.id===setupModelId)||setupBrand.models[0]; if(model){setSetupModelId(model.id);setSetupEngine(model.engines[0]?.code||'');setSetupTransmission(model.transmissions[0]||'');} }, [setupBrandId]);
-  const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => {
-    try { return JSON.parse(localStorage.getItem('car-brother-favorite-sections') || '[]') as FavoriteSection[]; } catch { return []; }
-  });
+  const [favoriteSections, setFavoriteSections] = useState<FavoriteSection[]>(() => readStored<FavoriteSection[]>(
+    'car-brother-favorite-sections',
+    (value): value is FavoriteSection[] => Array.isArray(value) && value.every((item) =>
+      !!item && typeof item === 'object' &&
+      typeof (item as FavoriteSection).id === 'string' &&
+      typeof (item as FavoriteSection).title === 'string' &&
+      typeof (item as FavoriteSection).savedAt === 'number'
+    ),
+    []
+  ));
   useEffect(() => { try { localStorage.setItem('car-brother-favorite-sections', JSON.stringify(favoriteSections)); } catch { /* local storage may be unavailable */ } }, [favoriteSections]);
   const toggleFavorite = (tab: TabId) => setFavoriteSections(previous => previous.some(item => item.id === tab) ? previous.filter(item => item.id !== tab) : [...previous, { id: tab, title: tabTitles[tab]?.title || tab, savedAt: Date.now() }]);
   const removeFavorite = (tab: TabId) => setFavoriteSections(previous => previous.filter(item => item.id !== tab));

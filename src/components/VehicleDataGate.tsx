@@ -11,7 +11,7 @@ export default function VehicleDataGate({ children, onOpenJapaneseCars, required
   const data = getDataFor(modelId);
   if (data && (!requiredModelId || modelId === requiredModelId)) return <>{children}</>;
   const issueTitle = encodeURIComponent(`Запрос данных: ${brand?.name || brandId} ${model?.name || modelId}`);
-  const issueBody = encodeURIComponent(`Модель ID: ${modelId}\\nМарка: ${brand?.name || brandId}\\nПоколение: ${model?.generation || 'не указано'}\\n\\nПрошу дополнить и проверить данные для этой модификации.`);
+  const issueBody = encodeURIComponent(`Модель ID: ${modelId}\nМарка: ${brand?.name || brandId}\nПоколение: ${model?.generation || 'не указано'}\n\nПрошу дополнить и проверить данные для этой модификации.`);
   return (
     <section className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-white p-4 shadow-sm dark:border-amber-900/60 dark:bg-slate-900 sm:p-5">
       <div className="flex items-start gap-3">

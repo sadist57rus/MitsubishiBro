@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { removeStored } from '../lib/storage';
 import { useTheme, ThemeMode } from '../context/ThemeContext';
 import { EngineType, DrivetrainType } from '../types';
 import { X, Sun, Moon, Laptop, Settings, Fuel, Wrench, Shield, Check, Trash2, Info, Car } from 'lucide-react';
@@ -22,17 +23,34 @@ export default function SettingsModal({
 }: Props) {
   const { theme, setTheme } = useTheme();
   const [resetConfirmed, setResetConfirmed] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleClearCache = () => {
-    if (confirm('Очистить данные бортжурнала и локальные настройки?')) {
-      localStorage.clear();
-      setResetConfirmed(true);
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
+  const handleClearCache = () => setShowResetConfirm(true);
+
+  const confirmClearAppData = () => {
+    const appKeys = [
+      'car-brother-garage', 'car-brother-vehicle', 'car-brother-storage-schema',
+      'car-brother-theme', 'outlander1_theme_v2', 'car-brother-color-palette',
+      'outlander1_garage_logbook_v1', 'outlander1_fuel_logs_v2',
+      'car-brother-ui-mode', 'car-brother-orientation-chosen-v2',
+      'car-brother-profile-selected-v1', 'car-brother-favorite-sections',
+    ];
+    appKeys.forEach(removeStored);
+    try {
+      const dynamicKeys: string[] = [];
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith('car-brother-logbook-') || key.startsWith('car-brother-fuel-logs-'))) dynamicKeys.push(key);
+      }
+      dynamicKeys.forEach(removeStored);
+    } catch (error) {
+      console.warn('Could not enumerate application storage keys:', error);
     }
+    setShowResetConfirm(false);
+    setResetConfirmed(true);
+    window.setTimeout(() => window.location.reload(), 800);
   };
 
   return (
@@ -205,6 +223,20 @@ export default function SettingsModal({
             </button>
           </div>
         </div>
+
+        {showResetConfirm && (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4" role="dialog" aria-modal="true" aria-labelledby="clear-app-data-title">
+            <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-5 text-slate-900 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+              <h2 id="clear-app-data-title" className="text-lg font-bold">Очистить данные Car Brother?</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Будут удалены сохранённые автомобили, записи бортжурнала и заправок, избранные разделы и настройки приложения. Другие данные сайта в браузере не затрагиваются.</p>
+              <div className="mt-5 flex justify-end gap-2">
+                <button type="button" onClick={() => setShowResetConfirm(false)} className="rounded-xl border border-slate-300 px-4 py-2 font-semibold dark:border-slate-600">Отмена</button>
+                <button type="button" onClick={confirmClearAppData} className="rounded-xl bg-red-600 px-4 py-2 font-bold text-white">Очистить данные приложения</button>
+              </div>
+            </div>
+          </div>
+        )}
+        {resetConfirmed && <p role="status" className="px-5 pb-3 text-sm text-emerald-700 dark:text-emerald-300">Данные приложения очищены. Перезапуск…</p>}
 
         {/* Modal Footer */}
         <div className="p-4 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-200 dark:border-slate-800 flex justify-end">
