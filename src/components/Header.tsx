@@ -259,7 +259,7 @@ export default function Header({
   const isLight = resolvedTheme === 'light';
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="min-h-12 flex items-center justify-between gap-1.5 sm:gap-3 py-1">
           
@@ -499,7 +499,7 @@ export default function Header({
                                     <span>Логотипы всех марок:</span>
                                     <span className="text-red-600 dark:text-red-400 font-bold">{currentBrand.russianName}</span>
                                   </div>
-                                  <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-11 gap-1">
+                                  <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,3rem),1fr))] gap-1 min-w-0 w-full">
                                     {JAPANESE_BRANDS.map(b => (
                                       <button
                                         key={b.id}

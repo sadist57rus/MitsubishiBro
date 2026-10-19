@@ -462,3 +462,43 @@ button, [role="button"], input, select, textarea { min-height: max(44px, var(--t
 html[data-ui-mode="wide"] body { font-size: max(16px, calc(1rem * var(--ui-scale, 1))); }
 
 html[data-ui-mode="wide"] button, html[data-ui-mode="wide"] [role="button"], html[data-ui-mode="wide"] input, html[data-ui-mode="wide"] select, html[data-ui-mode="wide"] textarea { min-width: 56px; }
+
+
+/* Mobile navigation panels are bottom sheets, not header-relative dropdowns.
+   Removing backdrop-filter from the header keeps fixed positioning viewport-relative. */
+@media (max-width: 640px) {
+  header #section-menu-panel,
+  header #brand-dropdown-panel {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: max(8px, env(safe-area-inset-bottom, 8px));
+    top: auto;
+    width: auto;
+    max-width: none;
+    max-height: calc(100dvh - 7rem - env(safe-area-inset-top, 0px));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 1rem;
+    z-index: 100;
+  }
+
+  header #section-menu-panel [data-testid="section-menu-list"],
+  header #section-menu-panel [data-testid="section-menu-list"] > [role="button"] {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  header #section-menu-panel .grid {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 3rem), 1fr));
+  }
+
+  header #section-menu-panel .grid > button {
+    width: 100%;
+    min-width: 0;
+    padding-inline: .25rem;
+  }
+}
