@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 const AxeBuilder = require('@axe-core/playwright').default as new (options: { page: Page }) => { withTags(tags: string[]): { analyze(): Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } };
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
