@@ -11,7 +11,7 @@ type LogRecord = {
   costTotal: number;
 };
 
-async function chooseToyota(page: Page) {
+async function chooseOutlander(page: Page) {
   await page.addInitScript(() => {
     if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
       localStorage.clear();
@@ -26,16 +26,23 @@ async function chooseToyota(page: Page) {
   const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
   if (await setupHeading.isVisible().catch(() => false)) {
     const brand = page.locator('select').first();
-    const toyotaValue = await brand.locator('option').evaluateAll(options => {
-      const match = options.find(option => /toyota|тойота/i.test(option.textContent || ''));
+    const mitsubishiValue = await brand.locator('option').evaluateAll(options => {
+      const match = options.find(option => /mitsubishi|митсубиси/i.test(option.textContent || ''));
       return match?.getAttribute('value') || '';
     });
-    expect(toyotaValue, 'Toyota must exist in the shared catalog').not.toBe('');
-    await brand.selectOption(toyotaValue);
+    expect(mitsubishiValue, 'Mitsubishi must exist in the shared catalog').not.toBe('');
+    await brand.selectOption(mitsubishiValue);
+    const model = page.locator('select').nth(1);
+    const outlanderValue = await model.locator('option').evaluateAll(options => {
+      const match = options.find(option => option.getAttribute('value') === 'outlander-1');
+      return match?.getAttribute('value') || '';
+    });
+    expect(outlanderValue, 'Outlander I must exist in the shared catalog').toBe('outlander-1');
+    await model.selectOption(outlanderValue);
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
   }
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
-  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
 }
 
 async function seedLogbook(page: Page, records: LogRecord[]) {
@@ -83,7 +90,7 @@ const importedRecord: LogRecord = {
 };
 
 test('импорт по умолчанию добавляет новые записи, пропускает совпадающие ID и сохраняет чужой vehicleId', async ({ page }) => {
-  await chooseToyota(page);
+  await chooseOutlander(page);
   const storageKey = await seedLogbook(page, [existingRecord]);
   await openLogbook(page);
 
@@ -116,7 +123,7 @@ test('импорт по умолчанию добавляет новые зап�
 });
 
 test('режим «Заменить все записи» действительно заменяет текущий журнал после подтверждения', async ({ page }) => {
-  await chooseToyota(page);
+  await chooseOutlander(page);
   await seedLogbook(page, [existingRecord]);
   await openLogbook(page);
 
