@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { parseValidatedJson, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
 import { usePreferences } from '../context/PreferencesContext';
@@ -59,7 +59,21 @@ export default function GarageLogbook() {
   const [newCost, setNewCost] = useState<number>(0);
   const [newNotes, setNewNotes] = useState('');
 
-  useEffect(() => { writeStored(activeStorageKey, entries, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string'))); }, [entries, activeStorageKey]);
+  const skipNextStorageWrite = useRef(false);
+
+  useEffect(() => {
+    skipNextStorageWrite.current = true;
+    setEntries(readStored(activeStorageKey, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item): item is LogEntry => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')), activeStorageKey === LEGACY_LOGBOOK_STORAGE_KEY ? INITIAL_RECORDS : []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || activeVehicle.currency || preferences.currency })));
+    setIsAdding(false);
+  }, [activeStorageKey, vehicleId, activeVehicle.currency, preferences.currency]);
+
+  useEffect(() => {
+    if (skipNextStorageWrite.current) {
+      skipNextStorageWrite.current = false;
+      return;
+    }
+    writeStored(activeStorageKey, entries, (value: unknown): value is LogEntry[] => Array.isArray(value) && value.every((item) => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.mileage === 'number' && typeof item.category === 'string' && typeof item.title === 'string' && typeof item.costTotal === 'number' && (item.partsUsed === undefined || typeof item.partsUsed === 'string') && (item.notes === undefined || typeof item.notes === 'string')));
+  }, [entries, activeStorageKey]);
 
   const handleAddEntry = (e: React.FormEvent) => {
     e.preventDefault();
