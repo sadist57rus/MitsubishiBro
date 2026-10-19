@@ -1,7 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const AxeBuilder = require('@axe-core/playwright').default as new (options: { page: Page }) => { withTags(tags: string[]): { analyze(): Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } };
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
+import { parseDecimalInput } from '../src/lib/storage';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -52,8 +56,31 @@ async function chooseToyota(page: Page) {
   if (await setupHeading.isVisible().catch(() => false)) {
     const brand = page.locator('select').first();
     await brand.selectOption({ value: 'toyota' });
+    await page.locator('select').nth(1).selectOption({ index: 1 });
+    const yearInput = page.locator('input[type="number"]').first();
+    const minimumYear = await yearInput.getAttribute('min');
+    await yearInput.fill(minimumYear || '2000');
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+}
+
+async function chooseOutlander(page: Page) {
+  await page.addInitScript(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('main select').nth(0).selectOption({ value: 'mitsubishi' });
+    await page.locator('main select').nth(1).selectOption({ value: 'outlander-1' });
+    const year = page.locator('main input[type="number"]').first();
+    await year.fill((await year.getAttribute('min')) || '2003');
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
   }
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
 }
@@ -150,7 +177,7 @@ test('model-specific sections never reuse Outlander data for another active vehi
     for (const sectionId of allSections) {
       await openNavItem(page, sectionId);
       const content = await page.locator('main').innerText();
-      expect(content, brandId + ' must not show Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+      if (sectionId !== 'brands') expect(content, brandId + ' must not show Mitsubishi-specific copy in ' + sectionId).not.toMatch(/(?:Outlander|Mitsubishi|Мицубиси|4G6\d|MIVEC)/i);
       if (technicalSections.includes(sectionId)) {
         await expect(page.getByTestId('vehicle-data-empty-state'), brandId + ' must show an explicit empty state in ' + sectionId).toBeVisible();
       }
@@ -174,12 +201,85 @@ test('model-specific sections never reuse Outlander data for another active vehi
     await openNavItem(page, sectionId);
     const content = await page.locator('main').innerText();
     if (sectionId !== 'brands') {
-      expect(content, 'Mitsubishi Lancer must not inherit Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+      expect(content, 'Mitsubishi Lancer must not inherit Outlander/engine-specific copy in ' + sectionId).not.toMatch(/Outlander|4G6\d|MIVEC/i);
     }
     if (technicalSections.includes(sectionId)) {
       await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
     }
   }
+});
+
+test('populated OBD, parts, specs, bulbs and tire screens meet touch/text thresholds', async ({ page }) => {
+  test.setTimeout(120_000);
+  const targetViewports: Viewport[] = [{ width: 360, height: 800 }, { width: 800, height: 480 }];
+  const sections = ['obd', 'parts', 'specs', 'bulbs', 'wheels'];
+  for (const viewport of targetViewports) {
+    for (const theme of themes) {
+      await page.setViewportSize(viewport);
+      await chooseOutlander(page);
+      await page.evaluate(mode => {
+        document.documentElement.classList.toggle('dark', mode === 'dark');
+        document.documentElement.dataset.theme = mode;
+      }, theme);
+      for (const sectionId of sections) {
+        await openNavItem(page, sectionId);
+        await assertReadableAndTouchSafe(page, 'populated ' + sectionId + ' ' + viewport.width + 'x' + viewport.height + ' ' + theme, 'section', viewport);
+      }
+    }
+  }
+});
+
+test('onboarding requires a chosen make and model and constrains the year', async ({ page }) => {
+  await page.addInitScript(() => { localStorage.clear(); sessionStorage.clear(); });
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  await expect(page.getByRole('heading', { name: /Добавим вашу машину/i })).toBeVisible();
+  const brand = page.locator('main select').nth(0);
+  const model = page.locator('main select').nth(1);
+  const year = page.locator('main input[type="number"]').first();
+  const save = page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i });
+  await expect(brand).toHaveValue('');
+  await expect(model).toHaveValue('');
+  await expect(model).toBeDisabled();
+  await expect(year).toHaveValue('');
+  await expect(page.locator('main select').nth(2)).toHaveValue('');
+  await expect(page.locator('main select').nth(3)).toHaveValue('');
+  await expect(page.locator('main select').nth(2).locator('option').first()).toHaveText('Выберите…');
+  await expect(page.locator('main select').nth(3).locator('option').first()).toHaveText('Выберите…');
+  await expect(save).toBeDisabled();
+  await brand.selectOption('toyota');
+  await expect(model).toBeEnabled();
+  await expect(model).toHaveValue('');
+  await model.selectOption({ index: 1 });
+  const min = Number(await year.getAttribute('min'));
+  const max = Number(await year.getAttribute('max'));
+  expect(Number.isInteger(min) && Number.isInteger(max) && min <= max, 'year bounds must come from the selected model').toBe(true);
+  await expect(year).toHaveValue('');
+  await year.fill(String(min));
+  await expect(save).toBeEnabled();
+  await year.fill(String(min - 1));
+  await expect(save).toBeDisabled();
+});
+
+test('axe accessibility audit in dark theme: home, garage and settings', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await chooseToyota(page);
+  await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
+    const audit = async (screen: string) => {
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    const summary = results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }));
+    expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(summary)).toEqual([]);
+  };
+  await audit('home');
+  await openNavItem(page, 'garage');
+  await audit('garage');
+  await page.reload();
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await openNavItem(page, 'settings');
+  await audit('settings');
 });
 
 for (const viewport of viewports) {
@@ -214,7 +314,7 @@ for (const viewport of viewports) {
         const consoleErrors = await prepare(page, viewport, theme);
         for (const sectionId of group.sections) {
           await openNavItem(page, sectionId);
-          expect(await page.locator('main').innerText(), 'selected Toyota must not inherit Outlander/4G6x copy in section ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+          if (sectionId !== 'brands') expect(await page.locator('main').innerText(), 'selected Toyota must not inherit Mitsubishi-specific copy in section ' + sectionId).not.toMatch(/(?:Outlander|Mitsubishi|Мицубиси|4G6\d|MIVEC)/i);
           if (['specs', 'bulbs', 'parts', 'fuses', 'tuning', 'guides', 'issues', 'wheels', 'maintenance', 'obd', 'logbook'].includes(sectionId)) {
             await expect(page.getByTestId('vehicle-data-empty-state')).toBeVisible();
             await expect(page.getByRole('heading', { name: 'Данные для этой модели ещё не проверены' })).toBeVisible();
@@ -228,6 +328,24 @@ for (const viewport of viewports) {
 
     test('brand selector menu and page overflow: ' + suffix, async ({ page }) => {
       await prepare(page, viewport, theme);
+      await page.getByTestId('section-menu-trigger').click();
+      const sectionPanel = page.locator('#section-menu-panel');
+      await expect(sectionPanel).toBeVisible();
+      if (viewport.width === 360) {
+        const bounds = await sectionPanel.boundingBox();
+        expect(bounds, 'section menu must have a visible bounding box').not.toBeNull();
+        expect(bounds!.x, 'section menu left edge must stay inside viewport').toBeGreaterThanOrEqual(0);
+        expect(bounds!.x + bounds!.width, 'section menu right edge must stay inside viewport').toBeLessThanOrEqual(viewport.width);
+        expect(bounds!.y, 'section menu top edge must stay inside viewport').toBeGreaterThanOrEqual(0);
+        expect(bounds!.y + bounds!.height, 'section menu bottom edge must stay inside viewport').toBeLessThanOrEqual(viewport.height);
+        const buttons = await sectionPanel.locator('button, a[href]').evaluateAll(elements => elements.map(element => {
+          const rect = element.getBoundingClientRect();
+          return { text: (element.textContent || '').trim(), left: rect.left, right: rect.right };
+        }));
+        expect(buttons.filter(button => button.left < 0 || button.right > viewport.width), 'all section menu buttons must fit in viewport: ' + JSON.stringify(buttons)).toEqual([]);
+      }
+      await page.keyboard.press('Escape');
+      await expect(sectionPanel).toBeHidden();
       await page.getByTestId('brand-selector-trigger').click();
       const brandMenu = page.getByRole('region', { name: 'Выбор марки автомобиля' });
       await expect(brandMenu).toBeVisible();
@@ -267,9 +385,9 @@ for (const viewport of viewports) {
         await page.getByTestId('brand-option-' + brandId).click();
         await page.getByTestId('section-menu-trigger').click();
         const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
-        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander/i);
+        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander|4G6\d|MIVEC/i);
         await page.getByTestId('nav-item-fuel').click();
-        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
+        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Mitsubishi-specific copy').not.toMatch(/Outlander|Mitsubishi|Мицубиси|4G6\d|MIVEC/i);
       }
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
@@ -439,6 +557,47 @@ test('legacy backup schema migrates without dropping data', async ({ page }) => 
   })).toBe('system');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
   await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
+});
+
+test('decimal input parser accepts comma and dot separators', () => {
+  expect(parseDecimalInput('58,5')).toBe(58.5);
+  expect(parseDecimalInput('58.5')).toBe(58.5);
+  expect(parseDecimalInput(' 1 234,75 ')).toBe(1234.75);
+  expect(parseDecimalInput('')).toBeNull();
+  expect(parseDecimalInput('58,5,2')).toBeNull();
+});
+
+test('maintenance fuel calculator accepts decimal comma on text inputs', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
+      localStorage.clear();
+      sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    }
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
+    await page.locator('select').nth(1).selectOption({ index: 1 });
+    const yearInput = page.locator('input[type="number"]').first();
+    const minimumYear = await yearInput.getAttribute('min');
+    await yearInput.fill(minimumYear || '2000');
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'maintenance');
+  await expect(page.getByRole('heading', { name: /Калькулятор расхода топлива/ })).toBeVisible();
+
+  await page.getByPlaceholder('Например: 420').fill('420,5');
+  await page.getByPlaceholder('Например: 48').fill('48,5');
+  await page.getByPlaceholder('58.5').fill('58,5');
+
+  await expect(page.getByText('Всего: 2 837 ₽').or(page.getByText('Всего: 2 837 ₽'))).toBeVisible();
+  await expect(page.getByText('11.53', { exact: true })).toBeVisible();
 });
 
 test('backup migration rejects unknown schema versions and malformed storage entries', () => {
