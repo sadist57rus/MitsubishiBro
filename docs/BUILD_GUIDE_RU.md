@@ -2,7 +2,7 @@
 
 ## Требования
 
-- Node.js 22 LTS и npm.
+- Node.js 24 и npm (как в CI workflow).
 - Git.
 - Для локальной Android-сборки: Android SDK/Android Studio и Java 21.
 
