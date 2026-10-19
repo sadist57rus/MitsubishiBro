@@ -1,7 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const axe = require('axe-core') as { source: string };
+const AxeBuilder = require('@axe-core/playwright').default as new (options: { page: Page }) => { withTags(tags: string[]): { analyze(): Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } };
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
@@ -190,12 +188,8 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
   await page.emulateMedia({ colorScheme: 'dark' });
   await chooseToyota(page);
   await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
-  await page.addScriptTag({ content: axe.source });
-  const audit = async (screen: string) => {
-    const results = await page.evaluate(async () => {
-      const axe = (window as unknown as { axe: { run: (context: Document, options: object) => Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } }).axe;
-      return axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } });
-    });
+    const audit = async (screen: string) => {
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
     const summary = results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }));
     expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(summary)).toEqual([]);
   };
