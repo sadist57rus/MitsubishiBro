@@ -97,6 +97,9 @@ export interface ServiceCheckItem {
   frequencyKm: number;
   frequencyMonths: number;
   importance: 'critical' | 'standard';
+  verificationStatus?: 'unverified' | 'partially-verified' | 'verified';
+  sourceReferences?: { label: string; url: string; scope: string }[];
+  dataQualityNote?: string;
 }
 
 export const MAINTENANCE_SCHEDULE_TEMPLATE: ServiceCheckItem[] = [

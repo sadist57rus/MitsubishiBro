@@ -52,6 +52,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
+    try { localStorage.setItem(PALETTE_STORAGE_KEY, palette); } catch { /* storage unavailable */ }
+  }, [palette]);
+
+  useEffect(() => {
     const root = document.documentElement;
 
     const updateResolved = () => {

@@ -411,7 +411,7 @@ function AppContent() {
         )}
 
         {activeTab === 'maintenance' && (
-          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><MaintenanceHub /></VehicleDataGate>
+          <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><MaintenanceHub key={activeVehicleId} /></VehicleDataGate>
         )}
 
         {activeTab === 'obd' && (

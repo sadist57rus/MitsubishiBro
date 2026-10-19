@@ -1,5 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
+import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
+import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
 
 type Viewport = { width: number; height: number };
 type Theme = 'light' | 'dark';
@@ -337,4 +339,285 @@ test('wide mode keeps controls large, text readable and keyboard focus visible',
   expect(focusStyle.focusVisible, 'keyboard navigation should activate focus-visible styling').toBe(true);
   expect(focusStyle.outlineStyle).not.toBe('none');
   expect(Number.parseFloat(focusStyle.outlineWidth)).toBeGreaterThanOrEqual(2);
+});
+
+
+test('full backup can be exported, validated and restored without losing local data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  const exportButton = page.getByRole('button', { name: 'Создать полную резервную копию' });
+  const downloadPromise = page.waitForEvent('download');
+  await exportButton.click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toMatch(/^car-brother-backup-\d{4}-\d{2}-\d{2}\.json$/);
+  const path = await download.path();
+  expect(path).toBeTruthy();
+  const fs = await import('node:fs/promises');
+  const content = await fs.readFile(path!, 'utf8');
+  const backup = JSON.parse(content) as { app: string; schemaVersion: number; storageSchemaVersion: number; data: Record<string, string> };
+  expect(backup.app).toBe('car-brother');
+  expect(backup.schemaVersion).toBe(BACKUP_SCHEMA_VERSION);
+  expect(backup.storageSchemaVersion).toBe(APP_STORAGE_SCHEMA_VERSION);
+  expect(backup.data['car-brother-garage']).toBeTruthy();
+
+  await page.evaluate(() => localStorage.setItem('backup-roundtrip-test', 'preserve-me'));
+  const file = { name: 'roundtrip.json', mimeType: 'application/json', buffer: Buffer.from(content) };
+  const fileInput = page.locator('input[type="file"][accept="application/json,.json"]');
+  await openNavItem(page, 'settings');
+  await fileInput.setInputFiles(file);
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('merge');
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBe('preserve-me');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
+
+  await openNavItem(page, 'settings');
+  await fileInput.setInputFiles(file);
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('replace');
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-roundtrip-test'))).toBeNull();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage'))).toBe(backup.data['car-brother-garage']);
+});
+
+
+
+
+test('legacy preferences are migrated and versioned per storage key', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await page.evaluate(() => {
+    localStorage.setItem('car-brother-preferences', JSON.stringify({ currency: 'USD', fuelUnit: 'mpg' }));
+    localStorage.setItem('car-brother-storage-schema', '1');
+    localStorage.removeItem('car-brother-preferences:schema-version');
+  });
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => {
+    const raw = localStorage.getItem('car-brother-preferences');
+    return raw ? JSON.parse(raw).autoTheme : null;
+  })).toBe('system');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(3));
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences'))).toContain('"currency":"USD"');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences'))).toContain('"fuelUnit":"mpg"');
+});
+
+test('legacy backup schema migrates without dropping data', async ({ page }) => {
+  const legacyBackup = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: '2026-01-01T12:00:00.000Z',
+    data: {
+      'legacy-migration-sentinel': 'keep-legacy-value',
+      'car-brother-preferences': JSON.stringify({ currency: 'USD', fuelUnit: 'mpg' }),
+    },
+  };
+  const migrated = migrateBackup(legacyBackup);
+  expect(migrated).not.toBeNull();
+  expect(migrated?.schemaVersion).toBe(BACKUP_SCHEMA_VERSION);
+  expect(migrated?.storageSchemaVersion).toBe(APP_STORAGE_SCHEMA_VERSION);
+  expect(migrated?.data['legacy-migration-sentinel']).toBe('keep-legacy-value');
+  expect(migrated?.data['car-brother-storage-schema']).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'legacy-backup.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(legacyBackup)),
+  });
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  const reloadAfterRestore = page.waitForEvent('load');
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+  await reloadAfterRestore;
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('legacy-migration-sentinel'))).toBe('keep-legacy-value');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-storage-schema'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+  await page.reload();
+  await expect.poll(() => page.evaluate(() => {
+    const raw = localStorage.getItem('car-brother-preferences');
+    return raw ? JSON.parse(raw).autoTheme : null;
+  })).toBe('system');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-preferences:schema-version'))).toBe(String(APP_STORAGE_SCHEMA_VERSION));
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
+});
+
+test('backup migration rejects unknown schema versions and malformed storage entries', () => {
+  const validLegacy = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: '2026-01-01T12:00:00.000Z',
+    data: { 'sentinel': 'value' },
+  };
+  expect(migrateBackup({ ...validLegacy, schemaVersion: 999 })).toBeNull();
+  expect(migrateBackup({ ...validLegacy, data: { '   ': 'value' } })).toBeNull();
+  expect(migrateBackup({ ...validLegacy, data: { sentinel: 123 } })).toBeNull();
+});
+
+test('invalid backup is rejected without modifying local data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.evaluate(() => localStorage.setItem('backup-validation-sentinel', 'keep-this-value'));
+
+  const invalidBackup = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: 'not-a-valid-date',
+    data: { 'backup-validation-sentinel': 'overwritten' },
+  };
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'invalid-backup.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(invalidBackup)),
+  });
+
+  await expect(page.getByRole('alert')).toContainText('Файл повреждён');
+  await expect(page.getByRole('button', { name: 'Подтвердить восстановление' })).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('backup-validation-sentinel'))).toBe('keep-this-value');
+});
+
+
+test('failed backup restore rolls back all previously stored data', async ({ page }) => {
+  await prepare(page, { width: 1280, height: 720 }, 'light');
+  await openNavItem(page, 'settings');
+  await page.evaluate(() => localStorage.setItem('restore-rollback-sentinel', 'original-value'));
+
+  const backup = {
+    app: 'car-brother',
+    schemaVersion: 1,
+    createdAt: new Date().toISOString(),
+    data: {
+      'restore-rollback-sentinel': 'overwritten-value',
+      'restore-failure-trigger': 'boom',
+    },
+  };
+  await page.locator('input[type="file"][accept="application/json,.json"]').setInputFiles({
+    name: 'rollback-test.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(backup)),
+  });
+  await expect(page.getByText(/Файл проверен/)).toBeVisible();
+  await page.getByLabel('Режим восстановления').selectOption('merge');
+
+  await page.evaluate(() => {
+    const originalSetItem = Storage.prototype.setItem;
+    let shouldFail = true;
+    Storage.prototype.setItem = function (key: string, value: string) {
+      if (shouldFail && key === 'restore-failure-trigger') {
+        shouldFail = false;
+        throw new DOMException('Storage quota exceeded', 'QuotaExceededError');
+      }
+      originalSetItem.call(this, key, value);
+    };
+  });
+  await page.getByRole('button', { name: 'Подтвердить восстановление' }).click();
+
+  await expect(page.getByRole('alert')).toContainText('Предыдущие данные восстановлены');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('restore-rollback-sentinel'))).toBe('original-value');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('restore-failure-trigger'))).toBeNull();
+});
+
+test('fuel and logbook storage keys stay isolated per vehicle and preserve legacy keys', () => {
+  const firstOutlanderLogbook = getLogbookStorageKey('vehicle-one', true, true);
+  const firstOtherMakeLogbook = getLogbookStorageKey('vehicle-toyota', true, false);
+  const secondLogbook = getLogbookStorageKey('vehicle-two', false, false);
+  const thirdLogbook = getLogbookStorageKey('vehicle-three', false, true);
+  expect(firstOutlanderLogbook).toBe(LEGACY_LOGBOOK_STORAGE_KEY);
+  expect(firstOtherMakeLogbook).toBe('car-brother-logbook-vehicle-toyota');
+  expect(new Set([firstOutlanderLogbook, firstOtherMakeLogbook, secondLogbook, thirdLogbook]).size).toBe(4);
+
+  const firstOutlanderFuel = getFuelStorageKey('vehicle-one', true, true);
+  const secondVehicleFuel = getFuelStorageKey('vehicle-two', false, false);
+  const thirdVehicleFuel = getFuelStorageKey('vehicle-three', false, true);
+  expect(firstOutlanderFuel).toBe(LEGACY_FUEL_STORAGE_KEY);
+  expect(new Set([firstOutlanderFuel, secondVehicleFuel, thirdVehicleFuel]).size).toBe(3);
+});
+
+test('currency, fuel unit, theme and palette persist after reload', async ({ page }) => {
+  await prepare(page, { width: 360, height: 800 }, 'light');
+  await openNavItem(page, 'settings');
+
+  await page.getByLabel('Валюта по умолчанию').selectOption('USD');
+  await page.getByLabel('Расход топлива').selectOption('mpg');
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
+  await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
+
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').currency)).toBe('USD');
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-preferences') || '{}').fuelUnit)).toBe('mpg');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-theme'))).toBe('dark');
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-color-palette'))).toBe('black-yellow');
+
+  await page.reload();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'settings');
+  await expect(page.getByLabel('Валюта по умолчанию')).toHaveValue('USD');
+  await expect(page.getByLabel('Расход топлива')).toHaveValue('mpg');
+  await expect(page.getByLabel('Тема интерфейса')).toHaveValue('dark');
+  await expect(page.getByRole('button', { name: /Чёрный \/ жёлтый/ })).toHaveAttribute('aria-pressed', 'true');
+});
+
+
+test('maintenance intervals expose their verification level instead of implying OEM approval', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
+      localStorage.clear();
+      sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    }
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'maintenance');
+  await expect(page.getByText(/Интервалы ниже — справочные/)).toBeVisible();
+  await expect(page.getByText('Не подтверждено').first()).toBeVisible();
+  await expect(page.getByText('Регламент подтверждён')).toHaveCount(0);
+});
+
+
+test('journal and fuel records survive switching between two active vehicles', async ({ page }) => {
+  const firstVehicle = { id: 'test-car-one', brandId: 'mitsubishi', modelId: 'outlander-1', year: 2006, mileage: 120000, engine: '4G69', transmission: 'АКПП', drivetrain: '4WD', currency: 'RUB' };
+  const secondVehicle = { ...firstVehicle, id: 'test-car-two', mileage: 90000 };
+  const firstLog = [{ id: 'log-one', vehicleId: firstVehicle.id, currency: 'RUB', date: '2026-01-01', mileage: 120000, category: 'ТО', title: 'Запись первого автомобиля', costTotal: 1000 }];
+  const secondLog = [{ id: 'log-two', vehicleId: secondVehicle.id, currency: 'RUB', date: '2026-02-01', mileage: 90000, category: 'ТО', title: 'Запись второго автомобиля', costTotal: 2000 }];
+  const firstFuel = [{ id: 'fuel-one', vehicleId: firstVehicle.id, currency: 'RUB', date: '2026-01-02', odometer: 120100, distance: 400, liters: 40, pricePerLiter: 60, totalCost: 2400, consumption: 10, fuelType: 'АИ-95', station: 'АЗС первого авто' }];
+  const secondFuel = [{ id: 'fuel-two', vehicleId: secondVehicle.id, currency: 'RUB', date: '2026-02-02', odometer: 90100, distance: 300, liters: 30, pricePerLiter: 61, totalCost: 1830, consumption: 10, fuelType: 'АИ-95', station: 'АЗС второго авто' }];
+  await page.addInitScript(({ firstVehicle, secondVehicle, firstLog, secondLog, firstFuel, secondFuel }) => {
+    localStorage.clear();
+    sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    localStorage.setItem('car-brother-profile-selected-v1', 'yes');
+    localStorage.setItem('car-brother-garage', JSON.stringify({ vehicles: [firstVehicle, secondVehicle], activeVehicleId: firstVehicle.id }));
+    localStorage.setItem('outlander1_garage_logbook_v1', JSON.stringify(firstLog));
+    localStorage.setItem('car-brother-logbook-' + secondVehicle.id, JSON.stringify(secondLog));
+    localStorage.setItem('outlander1_fuel_logs_v2', JSON.stringify(firstFuel));
+    localStorage.setItem('car-brother-fuel-logs-' + secondVehicle.id, JSON.stringify(secondFuel));
+  }, { firstVehicle, secondVehicle, firstLog, secondLog, firstFuel, secondFuel });
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+
+  await openNavItem(page, 'logbook');
+  await expect(page.getByText('Запись первого автомобиля')).toBeVisible();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('outlander1_garage_logbook_v1') || '[]').length)).toBe(1);
+
+  await openNavItem(page, 'garage');
+  await page.getByRole('button', { name: 'Сделать активной' }).nth(1).click();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-garage') || '{"activeVehicleId":""}').activeVehicleId)).toBe(secondVehicle.id);
+  await openNavItem(page, 'logbook');
+  await expect(page.getByText('Запись второго автомобиля')).toBeVisible();
+  await expect(page.getByText('Запись первого автомобиля')).toHaveCount(0);
+
+  await openNavItem(page, 'fuel');
+  await expect(page.getByText('АЗС второго авто')).toBeVisible();
+  await expect(page.getByText('АЗС первого авто')).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-logbook-test-car-two') || '[]')[0]?.title)).toBe('Запись второго автомобиля');
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('car-brother-fuel-logs-test-car-two') || '[]')[0]?.station)).toBe('АЗС второго авто');
 });
