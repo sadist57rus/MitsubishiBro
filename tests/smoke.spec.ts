@@ -182,6 +182,27 @@ test('model-specific sections never reuse Outlander data for another active vehi
   }
 });
 
+test('axe accessibility audit in dark theme: home, garage and settings', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await chooseToyota(page);
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await page.addScriptTag({ path: 'node_modules/axe-core/axe.min.js' });
+  const audit = async (screen: string) => {
+    const results = await page.evaluate(async () => {
+      const axe = (window as unknown as { axe: { run: (context: Document, options: object) => Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } }).axe;
+      return axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } });
+    });
+    expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }))).toEqual([]);
+  };
+  await audit('home');
+  await openNavItem(page, 'garage');
+  await audit('garage');
+  await page.reload();
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await openNavItem(page, 'settings');
+  await audit('settings');
+});
+
 for (const viewport of viewports) {
   for (const theme of themes) {
     const suffix = viewport.width + 'x' + viewport.height + ', ' + theme;
