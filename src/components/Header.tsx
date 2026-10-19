@@ -277,7 +277,7 @@ export default function Header({
                 }}
                 className={`flex items-center gap-1.5 p-1.5 sm:px-2 sm:py-1 rounded-lg border transition cursor-pointer group shadow-2xs ${
                   isBrandDropdownOpen
-                    ? 'bg-red-600 text-white border-red-600 ring-2 ring-red-500/20'
+                    ? 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 border-red-600 ring-2 ring-red-500/20'
                     : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-red-500/50'
                 }`}
                 title={`Выбор производителя: ${currentBrand.name} (${currentBrand.russianName}). Нажмите для меню брендов с логотипами`}
@@ -426,7 +426,7 @@ export default function Header({
                 <span className="tracking-tight whitespace-nowrap">
                   Разделы
                 </span>
-                <span className="text-xs font-normal text-slate-500 dark:text-slate-400 hidden lg:inline max-w-[120px] truncate">
+                <span className="text-xs font-normal text-slate-600 dark:text-slate-300 hidden lg:inline max-w-[120px] truncate">
                   ({currentSection.shortTitle})
                 </span>
                 <ChevronDown

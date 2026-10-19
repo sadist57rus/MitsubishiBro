@@ -461,7 +461,7 @@ function AppContent() {
             <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
               <button
                 onClick={() => setIsApkGuideOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition font-sans font-bold"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-700 dark:text-red-300 hover:bg-red-600 hover:text-white transition font-sans font-bold"
               >
                 <Smartphone className="w-3.5 h-3.5" />
                 <span>Сборка APK на GitHub</span>

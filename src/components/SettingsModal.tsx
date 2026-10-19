@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme, ThemeMode } from '../context/ThemeContext';
 import { EngineType, DrivetrainType } from '../types';
 import { X, Sun, Moon, Laptop, Settings, Fuel, Wrench, Shield, Check, Trash2, Info, Car } from 'lucide-react';
@@ -22,6 +22,36 @@ export default function SettingsModal({
 }: Props) {
   const { theme, setTheme } = useTheme();
   const [resetConfirmed, setResetConfirmed] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+  useEffect(() => {
+    if (!isOpen) return;
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusable = () => Array.from(dialog?.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+    ) || []).filter(element => element.getAttribute('aria-hidden') !== 'true' && element.getClientRects().length > 0);
+    (focusable()[0] || dialog)?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); onCloseRef.current(); return; }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      if (!items.length) { event.preventDefault(); dialog?.focus(); return; }
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !dialog?.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !dialog?.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previousFocusRef.current?.isConnected) previousFocusRef.current.focus();
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -36,8 +66,8 @@ export default function SettingsModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="settings-modal-title" tabIndex={-1}
         className="w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
@@ -48,7 +78,7 @@ export default function SettingsModal({
               <Settings className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              <h3 id="settings-modal-title" className="text-base font-bold text-slate-900 dark:text-white">
                 Настройки приложения
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -58,7 +88,9 @@ export default function SettingsModal({
           </div>
 
           <button
+            type="button"
             onClick={onClose}
+            aria-label="Закрыть настройки"
             className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
           >
             <X className="w-5 h-5" />

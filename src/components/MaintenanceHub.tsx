@@ -92,6 +92,14 @@ export default function MaintenanceHub() {
     t.notes.toLowerCase().includes(torqueSearch.toLowerCase())
   );
 
+  const dueMaintenanceItems = MAINTENANCE_SCHEDULE_TEMPLATE.filter((item) => {
+    const status = item.verificationStatus ?? 'unverified';
+    if (status !== 'verified') return false;
+    if (currentMileage <= 0 || item.frequencyKm <= 0) return false;
+    const remainder = currentMileage % item.frequencyKm;
+    return remainder === 0 || remainder >= item.frequencyKm - 2000;
+  });
+
   return (
     <div className="space-y-8">
       {/* Top Banner with Mileage Calculator */}
@@ -120,6 +128,20 @@ export default function MaintenanceHub() {
           </div>
         </div>
 
+        {dueMaintenanceItems.length > 0 && (
+          <div role="status" className="flex items-start gap-3 rounded-xl border border-amber-700/70 bg-amber-950/30 p-4">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
+            <div>
+              <h3 className="text-sm font-bold text-amber-200">Напоминание о техническом обслуживании</h3>
+              <p className="mt-1 text-xs text-amber-100/90">По подтверждённым или частично подтверждённым интервалам приближается обслуживание:</p>
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-amber-100">
+                {dueMaintenanceItems.map((item) => <li key={item.id}>{item.name}</li>)}
+              </ul>
+              <p className="mt-2 text-xs text-amber-200/80">Сверьте срок с руководством по эксплуатации именно вашего автомобиля.</p>
+            </div>
+          </div>
+        )}
+
         {/* Schedule Checklist Based on Current Mileage */}
         <div className="pt-2 border-t border-slate-800">
           <div className="flex items-center justify-between mb-3 text-xs">
@@ -135,9 +157,10 @@ export default function MaintenanceHub() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {MAINTENANCE_SCHEDULE_TEMPLATE.map((item) => {
               const isChecked = !!completedItems[item.id];
-              const isDueSoon = currentMileage % item.frequencyKm < 2000;
-              const nextDueKm = Math.ceil(currentMileage / item.frequencyKm) * item.frequencyKm;
               const verificationStatus = item.verificationStatus ?? 'unverified';
+              const remainder = item.frequencyKm > 0 ? currentMileage % item.frequencyKm : 0;
+              const isDueSoon = currentMileage > 0 && (verificationStatus === 'verified') && item.frequencyKm > 0 && (remainder === 0 || remainder >= item.frequencyKm - 2000);
+              const nextDueKm = remainder === 0 ? currentMileage : currentMileage + item.frequencyKm - remainder;
               const verificationLabel = verificationStatus === 'verified' ? 'Регламент подтверждён' : verificationStatus === 'partially-verified' ? 'Подтверждён частично' : 'Не подтверждено';
               const verificationClass = verificationStatus === 'verified' ? 'text-emerald-300 bg-emerald-950/40 border-emerald-800/60' : verificationStatus === 'partially-verified' ? 'text-amber-300 bg-amber-950/40 border-amber-800/60' : 'text-slate-300 bg-slate-900 border-slate-700';
 
