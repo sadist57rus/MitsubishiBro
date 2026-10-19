@@ -150,7 +150,7 @@ test('model-specific sections never reuse Outlander data for another active vehi
     for (const sectionId of allSections) {
       await openNavItem(page, sectionId);
       const content = await page.locator('main').innerText();
-      expect(content, brandId + ' must not show Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+      expect(content, brandId + ' must not show Mitsubishi-specific copy in ' + sectionId).not.toMatch(/(?:Outlander|Mitsubishi|Мицубиси|4G6\d|MIVEC)/i);
       if (technicalSections.includes(sectionId)) {
         await expect(page.getByTestId('vehicle-data-empty-state'), brandId + ' must show an explicit empty state in ' + sectionId).toBeVisible();
       }
@@ -174,7 +174,7 @@ test('model-specific sections never reuse Outlander data for another active vehi
     await openNavItem(page, sectionId);
     const content = await page.locator('main').innerText();
     if (sectionId !== 'brands') {
-      expect(content, 'Mitsubishi Lancer must not inherit Outlander/4G6x data in ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+      expect(content, 'Mitsubishi Lancer must not inherit Outlander/engine-specific copy in ' + sectionId).not.toMatch(/Outlander|4G6\\d|MIVEC/i);
     }
     if (technicalSections.includes(sectionId)) {
       await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
@@ -214,7 +214,7 @@ for (const viewport of viewports) {
         const consoleErrors = await prepare(page, viewport, theme);
         for (const sectionId of group.sections) {
           await openNavItem(page, sectionId);
-          expect(await page.locator('main').innerText(), 'selected Toyota must not inherit Outlander/4G6x copy in section ' + sectionId).not.toMatch(/Outlander|4G6x/i);
+          expect(await page.locator('main').innerText(), 'selected Toyota must not inherit Mitsubishi-specific copy in section ' + sectionId).not.toMatch(/(?:Outlander|Mitsubishi|Мицубиси|4G6\d|MIVEC)/i);
           if (['specs', 'bulbs', 'parts', 'fuses', 'tuning', 'guides', 'issues', 'wheels', 'maintenance', 'obd', 'logbook'].includes(sectionId)) {
             await expect(page.getByTestId('vehicle-data-empty-state')).toBeVisible();
             await expect(page.getByRole('heading', { name: 'Данные для этой модели ещё не проверены' })).toBeVisible();
@@ -267,9 +267,9 @@ for (const viewport of viewports) {
         await page.getByTestId('brand-option-' + brandId).click();
         await page.getByTestId('section-menu-trigger').click();
         const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
-        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander/i);
+        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander|Mitsubishi|Мицубиси|4G6\\d|MIVEC/i);
         await page.getByTestId('nav-item-fuel').click();
-        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
+        expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Mitsubishi-specific copy').not.toMatch(/Outlander|Mitsubishi|Мицубиси|4G6\\d|MIVEC/i);
       }
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
