@@ -58,8 +58,7 @@ async function openLogbook(page: Page) {
   await page.getByRole('button', { name: /Открыть разделы приложения/i }).click();
   const item = page.getByTestId('section-menu-list').locator('[role="button"]').filter({ hasText: /^Бортжурнал/ }).first();
   await expect(item).toBeVisible();
-  await item.focus();
-  await item.press('Enter');
+  await item.click();
   await expect(page.getByRole('heading', { name: /Бортжурнал владельца/i })).toBeVisible();
 }
 
