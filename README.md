@@ -46,7 +46,7 @@
 
 ## Быстрый старт
 
-Требуется Node.js 22 LTS и npm.
+Требуется Node.js 24 и npm (та же версия, что используется в CI).
 
 ```bash
 git clone https://github.com/sadist57rus/MitsubishiBro.git
