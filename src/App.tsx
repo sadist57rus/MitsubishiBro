@@ -35,10 +35,9 @@ import { useTheme } from './context/ThemeContext';
 import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
-import { EngineType, DrivetrainType } from './types';
+import { EngineType } from './types';
 import { readStored } from './lib/storage';
 import {
-  ChevronLeft,
   Home,
   Fuel,
   Car,
@@ -169,7 +168,7 @@ function AppContent() {
     };
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
-  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
+  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
   const [setupBrandId, setSetupBrandId] = useState('nissan');
   const setupBrand = JAPANESE_BRANDS.find(brand => brand.id === setupBrandId) || JAPANESE_BRANDS[0];
   const [setupModelId, setSetupModelId] = useState(setupBrand.models[0]?.id || '');
@@ -215,7 +214,9 @@ function AppContent() {
     more: { title: 'Ещё', icon: MoreHorizontal },
   };
 
-  const primaryNavigation: TabId[] = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
+  const phonePrimaryNavigation: TabId[] = ['overview', 'garage', 'maintenance', 'obd'];
+  const widePrimaryNavigation: TabId[] = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
+  const primaryNavigation = uiMode === 'wide' ? widePrimaryNavigation : phonePrimaryNavigation;
   const shortTabTitles: Record<TabId, string> = {
     overview: 'Главная', garage: 'Авто', settings: 'Настройки', brands: 'Марки',
     fuel: 'Топливо', specs: 'Характеристики', bulbs: 'Лампы', parts: 'Запчасти',
@@ -279,7 +280,7 @@ function AppContent() {
 
       {uiMode === 'wide' && (
         <nav aria-label="Основная навигация" className="car-brother-rail" data-testid="wide-navigation-rail">
-          {primaryNavigation.map(id => {
+          {widePrimaryNavigation.map(id => {
             const item = tabTitles[id];
             const Icon = item.icon;
             return (
@@ -353,7 +354,7 @@ function AppContent() {
           <section className="mx-auto w-full max-w-6xl space-y-5" aria-labelledby="more-screen-title">
             {favoriteSections.length > 0 && <FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} />}
             <div>
-              <h1 id="more-screen-title" className="text-2xl font-black text-slate-900 dark:text-white">Ещё</h1>
+              <h2 id="more-screen-title" className="text-xl font-black text-slate-900 dark:text-white">Дополнительные разделы</h2>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Справочные разделы и настройки</p>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4" data-testid="more-screen-grid">
