@@ -418,9 +418,7 @@ function AppContent() {
           <VehicleDataGate requiredModelId="outlander-1" onOpenJapaneseCars={() => setActiveTab('brands')}><ObdDiagnostics /></VehicleDataGate>
         )}
 
-        {activeTab === 'logbook' && (
-          <VehicleDataGate onOpenJapaneseCars={() => setActiveTab('brands')}><GarageLogbook key={activeVehicleId} /></VehicleDataGate>
-        )}
+        {activeTab === 'logbook' && <GarageLogbook key={activeVehicleId} />}
         </Suspense></SectionErrorBoundary>
       </main>
 
