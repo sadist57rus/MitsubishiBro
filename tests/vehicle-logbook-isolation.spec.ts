@@ -24,7 +24,12 @@ async function openSection(page: Page, id: string) {
   await page.getByTestId('section-menu-trigger').click();
   const item = page.getByTestId('nav-item-' + id);
   await expect(item).toBeVisible();
-  await item.locator('span').first().click();
+  await item.click();
+  if (id === 'logbook') {
+    await expect(page.getByRole('heading', { name: /Бортжурнал владельца/i })).toBeVisible();
+  } else if (id === 'garage') {
+    await expect(page.getByRole('heading', { name: /Гараж/i })).toBeVisible();
+  }
 }
 
 async function addLogbookEntry(page: Page, title: string) {
