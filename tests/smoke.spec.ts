@@ -94,7 +94,20 @@ async function assertReadableAndTouchSafe(
       const rect = el.getBoundingClientRect();
       return rect.width > 0 && (rect.left < 0 || rect.right > window.innerWidth);
     }).map(el => ({ text: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 70), left: Math.round(el.getBoundingClientRect().left), right: Math.round(el.getBoundingClientRect().right) }));
-    return { smallTargets, smallText, headerOverflow };
+    const horizontalOverflow = [...document.querySelectorAll<HTMLElement>('body *')].filter(el => {
+      const rect = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || rect.width === 0 || rect.height === 0) return false;
+      if (style.position === 'fixed' && (rect.right <= 0 || rect.left >= window.innerWidth)) return false;
+      return (rect.left < -1 || rect.right > window.innerWidth + 1) && !el.closest('.overflow-x-auto, [data-horizontal-scroll]');
+    }).map(el => ({
+      tag: el.tagName,
+      className: typeof el.className === 'string' ? el.className.slice(0, 100) : '',
+      left: Math.round(el.getBoundingClientRect().left),
+      right: Math.round(el.getBoundingClientRect().right),
+      width: Math.round(el.getBoundingClientRect().width),
+    })).slice(0, 20);
+    return { smallTargets, smallText, headerOverflow, horizontalOverflow };
   });
   const viewportKey = viewport.width + 'x' + viewport.height;
   const threshold = auditThresholds[screen + ':' + viewportKey] ?? { smallText: 0, smallTargets: 0 };
@@ -102,6 +115,7 @@ async function assertReadableAndTouchSafe(
   expect(violations.smallTargets.length, label + ': interactive targets below 44x44: ' + JSON.stringify(violations.smallTargets)).toBeLessThanOrEqual(threshold.smallTargets);
   expect(violations.smallText.length, label + ': visible text below 12px: ' + JSON.stringify(violations.smallText)).toBeLessThanOrEqual(threshold.smallText);
   expect(violations.headerOverflow, label + ': header controls outside viewport: ' + JSON.stringify(violations.headerOverflow)).toEqual([]);
+  expect(violations.horizontalOverflow, label + ': elements outside viewport: ' + JSON.stringify(violations.horizontalOverflow)).toEqual([]);
 }
 
 async function openNavItem(page: Page, sectionId: string) {
@@ -208,6 +222,15 @@ for (const viewport of viewports) {
         expect(consoleErrors, 'browser console/page errors').toEqual([]);
       });
     }
+
+    test('brand selector menu and page overflow: ' + suffix, async ({ page }) => {
+      await prepare(page, viewport, theme);
+      await page.getByTestId('brand-selector-trigger').click();
+      const brandMenu = page.getByRole('region', { name: 'Выбор марки автомобиля' });
+      await expect(brandMenu).toBeVisible();
+      await expect(brandMenu.getByTestId('brand-option-toyota')).toBeVisible();
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    });
 
     test('dialogs and brand-specific copy: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
