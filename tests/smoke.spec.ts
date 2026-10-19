@@ -188,7 +188,7 @@ for (const viewport of viewports) {
       await expect(apkTrigger).toBeFocused();
 
       const brandTrigger = page.getByRole('button', { name: /Выбрать или изменить автомобиль/i });
-      for (const brand of [{ id: 'nissan', label: /Выбрать Nissan/i }, { id: 'honda', label: /Выбрать Honda/i }]) {
+      for (const brand of [{ id: 'nissan', label: /Выбрать (Nissan|Ниссан)/i }, { id: 'honda', label: /Выбрать (Honda|Хонда)/i }]) {
         await brandTrigger.click();
         await expect(page.getByRole('dialog', { name: /Выбор японского производителя/i })).toBeVisible();
         await page.getByRole('button', { name: brand.label }).click();
