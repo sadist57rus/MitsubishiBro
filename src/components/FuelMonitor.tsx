@@ -496,9 +496,9 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
                   onChange={(e) => setFuelType(e.target.value)}
                   className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-red-500 transition"
                 >
-                  <option value="АИ-92">АИ-92 (допустим для 4G63/4G64)</option>
-                  <option value="АИ-95">АИ-95 (рекомендованный оптимум)</option>
-                  <option value="АИ-98">АИ-98 (для 4G63T Turbo и MIVEC)</option>
+                  <option value="АИ-92">АИ-92</option>
+                  <option value="АИ-95">АИ-95</option>
+                  <option value="АИ-98">АИ-98</option>
                   <option value="АИ-100">АИ-100</option>
                   <option value="Газ (ГБО)">Газ Пропан-Бутан (ГБО)</option>
                 </select>
@@ -874,7 +874,7 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
               2. Подклинивание тормозных суппортов
             </span>
             <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              Главная болезнь тормозов Outlander 1 — закисание направляющих пальцев суппортов. Колодка постоянно трет о диск, увеличивая сопротивление качению (до <strong>+1.5...2 л</strong>).
+              Закисание направляющих пальцев суппортов может вызывать постоянное трение колодки о диск и повышать сопротивление качению.
             </p>
             <div className="text-xs font-mono text-red-600 dark:text-red-400 font-semibold pt-1">
               Решение: Проверка наката, ремкомплект Seinsa D4554 и смазка TRW PFG110.
