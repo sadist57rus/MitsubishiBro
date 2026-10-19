@@ -192,7 +192,8 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
       const axe = (window as unknown as { axe: { run: (context: Document, options: object) => Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } }).axe;
       return axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } });
     });
-    expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }))).toEqual([]);
+    const summary = results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }));
+    expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(summary)).toEqual([]);
   };
   await audit('home');
   await openNavItem(page, 'garage');
