@@ -103,15 +103,22 @@ async function assertReadableAndTouchSafe(
 }
 
 async function openNavItem(page: Page, sectionId: string) {
-  const menu = page.getByTestId('section-menu-trigger');
-  await expect(menu).toBeVisible();
-  await menu.click();
-  const panel = page.getByTestId('section-menu-list');
-  const item = page.getByTestId('nav-item-' + sectionId);
-  await expect(item).toBeVisible({ timeout: 5_000 });
-  // Click the section title, not nested brand-switch buttons inside the Brands row.
-  await item.locator('span').first().click();
-  await expect(panel).toBeHidden();
+  const primary = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
+  const phoneNav = page.getByTestId('phone-bottom-navigation');
+  if (await phoneNav.isVisible().catch(() => false)) {
+    if (primary.includes(sectionId)) {
+      await page.getByTestId('phone-nav-item-' + sectionId).click();
+      return;
+    }
+    await page.getByTestId('phone-more-trigger').click();
+  } else {
+    if (primary.includes(sectionId)) {
+      await page.getByTestId('wide-nav-item-' + sectionId).click();
+      return;
+    }
+    await page.getByTestId('wide-more-trigger').click();
+  }
+  await page.getByTestId('more-nav-item-' + sectionId).click();
 }
 
 for (const viewport of viewports) {
@@ -153,22 +160,23 @@ for (const viewport of viewports) {
       });
     }
 
-    test('dialogs and brand-specific copy: ' + suffix, async ({ page }) => {
+    test('more screen keyboard navigation and existing APK guide: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
-
-      const sectionMenu = page.getByTestId('section-menu-trigger');
-      await sectionMenu.focus();
-      await sectionMenu.press('Enter');
-      const settingsItem = page.getByTestId('nav-item-settings');
+      const phoneNav = page.getByTestId('phone-bottom-navigation');
+      const moreTrigger = await phoneNav.isVisible().catch(() => false)
+        ? page.getByTestId('phone-more-trigger')
+        : page.getByTestId('wide-more-trigger');
+      await moreTrigger.focus();
+      await moreTrigger.press('Enter');
+      const settingsItem = page.getByTestId('more-nav-item-settings');
       await expect(settingsItem).toBeVisible();
       await settingsItem.focus();
       await settingsItem.press('Enter');
       await expect(page.getByRole('heading', { name: /Настройки/i })).toBeVisible();
-      await sectionMenu.press('Enter');
-      await expect(page.getByTestId('section-menu-list')).toBeVisible();
-      await page.keyboard.press('Escape');
-      await expect(page.getByTestId('section-menu-list')).toBeHidden();
-      await expect(sectionMenu).toBeFocused();
+      await expect(page.getByTestId('header-back')).toBeVisible();
+      await page.getByTestId('header-back').focus();
+      await page.getByTestId('header-back').press('Enter');
+      await expect(page.getByRole('heading', { name: /Мой автомобиль/i })).toBeVisible();
 
       const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
       await apkTrigger.click();
@@ -178,16 +186,14 @@ for (const viewport of viewports) {
       await expect(apkDialog).toBeHidden();
       await expect(apkTrigger).toBeFocused();
 
-      const brandTrigger = page.getByTestId('brand-selector-trigger');
+      const brandTrigger = page.getByRole('button', { name: /Выбрать или изменить автомобиль/i });
       for (const brandId of ['nissan', 'honda']) {
         await brandTrigger.click();
         await expect(page.getByRole('region', { name: 'Выбор марки автомобиля' })).toBeVisible();
         await page.getByTestId('brand-option-' + brandId).click();
-        await page.getByTestId('section-menu-trigger').click();
-        const sectionMenuText = await page.getByTestId('section-menu-list').innerText();
-        expect(sectionMenuText, brandId + ' section menu must be vehicle-neutral').not.toMatch(/Outlander/i);
-        await page.getByTestId('nav-item-fuel').click();
+        await openNavItem(page, 'fuel');
         expect(await page.locator('body').innerText(), brandId + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
+        await page.getByTestId('header-back').click();
       }
       expect(consoleErrors, 'browser console/page errors').toEqual([]);
     });
@@ -208,51 +214,33 @@ test('настройки применяют цветовую палитру и �
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-color-palette'))).toBe('black-yellow');
   await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent').trim())).toBe('#facc15');
 
-  const brandTrigger = page.getByRole('button', { name: /Выбрать марку автомобиля/i });
-  await expect(brandTrigger).toBeVisible();
-  await expect(brandTrigger).toHaveClass(/dark:bg-slate-800/);
-  await expect(brandTrigger).toHaveClass(/dark:text-slate-100/);
-  await expect(brandTrigger.locator('span').filter({ hasText: /Все бренды/ })).toHaveClass(/dark:text-slate-300/);
-  await brandTrigger.click();
-  const brandPanel = page.getByRole('region', { name: 'Выбор марки автомобиля' });
-  await expect(brandPanel).toBeVisible();
-  await expect(brandPanel.getByText(/Оригинальные логотипы/)).toHaveClass(/dark:text-red-400/);
+  await expect(page.getByTestId('header-section-title')).toHaveText('Настройки');
+  const moreTrigger = page.getByTestId('phone-more-trigger');
+  await expect(moreTrigger).toBeVisible();
+  await moreTrigger.click();
+  await expect(page.getByTestId('more-screen-grid')).toBeVisible();
+  await expect(page.getByTestId('more-nav-item-brands')).toBeVisible();
 
 });
 
 
-test('мобильные меню полностью помещаются на экране, логотипы марок не обрезаются', async ({ page }) => {
+test('экран «Ещё» помещается на телефоне и содержит справочные разделы', async ({ page }) => {
   await prepare(page, { width: 360, height: 800 }, 'light');
-  await page.getByRole('button', { name: /Открыть разделы приложения/i }).click();
-  const panel = page.locator('#section-menu-panel');
-  await expect(panel).toBeVisible();
-  const panelBounds = await panel.evaluate(el => {
-    const rect = el.getBoundingClientRect();
-    return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
-  });
-  expect(panelBounds.left).toBeGreaterThanOrEqual(0);
-  expect(panelBounds.right).toBeLessThanOrEqual(360);
-  expect(panelBounds.top).toBeGreaterThanOrEqual(0);
-  expect(panelBounds.bottom).toBeLessThanOrEqual(800);
-  await panel.getByText('Логотипы всех марок:').scrollIntoViewIfNeeded();
-  const brandButtons = await panel.locator('button[title]').evaluateAll(elements => elements.map(el => {
-    const rect = el.getBoundingClientRect();
-    return { title: el.getAttribute('title'), left: rect.left, right: rect.right };
-  }));
-  expect(brandButtons.length).toBeGreaterThan(0);
-  expect(brandButtons.filter(button => button.left < 0 || button.right > 360), 'brand logo buttons must stay inside the phone viewport: ' + JSON.stringify(brandButtons)).toEqual([]);
-  await page.keyboard.press('Escape');
-  await page.getByRole('button', { name: /Выбрать марку автомобиля/i }).click();
-  const brandPanel = page.locator('#brand-dropdown-panel');
-  await expect(brandPanel).toBeVisible();
-  const brandPanelBounds = await brandPanel.evaluate(el => {
+  await page.getByTestId('phone-more-trigger').click();
+  const grid = page.getByTestId('more-screen-grid');
+  await expect(grid).toBeVisible();
+  const bounds = await grid.evaluate(el => {
     const rect = el.getBoundingClientRect();
     return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
   });
-  expect(brandPanelBounds.left).toBeGreaterThanOrEqual(0);
-  expect(brandPanelBounds.right).toBeLessThanOrEqual(360);
-  expect(brandPanelBounds.top).toBeGreaterThanOrEqual(0);
-  expect(brandPanelBounds.bottom).toBeLessThanOrEqual(800);
+  expect(bounds.left).toBeGreaterThanOrEqual(0);
+  expect(bounds.right).toBeLessThanOrEqual(360);
+  expect(bounds.top).toBeGreaterThanOrEqual(0);
+  expect(bounds.bottom).toBeLessThanOrEqual(800);
+  for (const id of ['settings', 'brands', 'specs', 'bulbs', 'parts', 'fuses', 'tuning', 'guides', 'issues', 'wheels']) {
+    await expect(page.getByTestId('more-nav-item-' + id)).toBeVisible();
+  }
+  await expect(page.getByRole('button', { name: /Открыть разделы приложения/i })).toHaveCount(0);
 });
 
 
