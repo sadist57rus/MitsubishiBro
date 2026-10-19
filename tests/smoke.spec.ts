@@ -53,8 +53,11 @@ async function chooseToyota(page: Page) {
   }
   const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
   if (await setupHeading.isVisible().catch(() => false)) {
-    const brand = page.locator('select').first();
+    const brand = page.locator('main select').nth(0);
     await brand.selectOption({ value: 'toyota' });
+    await page.locator('main select').nth(1).selectOption({ index: 1 });
+    const year = page.locator('main input[type="number"]').first();
+    await year.fill((await year.getAttribute('min')) || '2000');
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
   }
@@ -221,6 +224,40 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
   await page.evaluate(() => document.documentElement.classList.add('dark'));
   await openNavItem(page, 'settings');
   await audit('settings');
+});
+
+
+test('onboarding requires a chosen make and model and constrains the year', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.addInitScript(() => { localStorage.clear(); sessionStorage.clear(); });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  await expect(page.getByRole('heading', { name: /Добавим вашу машину/i })).toBeVisible();
+  const selects = page.locator('main select');
+  const brand = selects.nth(0);
+  const model = selects.nth(1);
+  const year = page.locator('main input[type="number"]').first();
+  const save = page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i });
+  await expect(brand).toHaveValue('');
+  await expect(model).toHaveValue('');
+  await expect(model).toBeDisabled();
+  await expect(year).toHaveValue('');
+  await expect(year).toBeDisabled();
+  await expect(save).toBeDisabled();
+  await expect(selects.nth(2).locator('option').first()).toHaveText('Выберите…');
+  await expect(selects.nth(3).locator('option').first()).toHaveText('Выберите…');
+  await brand.selectOption({ value: 'toyota' });
+  await model.selectOption({ index: 1 });
+  const min = Number(await year.getAttribute('min'));
+  const max = Number(await year.getAttribute('max'));
+  expect(Number.isFinite(min)).toBe(true);
+  expect(Number.isFinite(max)).toBe(true);
+  expect(max).toBeGreaterThanOrEqual(min);
+  await year.fill(String(min));
+  await expect(save).toBeEnabled();
+  await year.fill(String(min - 1));
+  await expect(save).toBeDisabled();
 });
 
 test('populated OBD, parts, specs, bulbs and tire screens meet touch/text thresholds', async ({ page }) => {
