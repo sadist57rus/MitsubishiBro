@@ -210,3 +210,38 @@ test('настройки применяют цветовую палитру и �
   await expect(brandPanel.getByText(/Оригинальные логотипы/)).toHaveClass(/dark:text-red-400/);
 
 });
+
+
+test('мобильные меню полностью помещаются на экране, логотипы марок не обрезаются', async ({ page }) => {
+  await prepare(page, { width: 360, height: 800 }, 'light');
+  await page.getByTestId('section-menu-trigger').click();
+  const panel = page.locator('#section-menu-panel');
+  await expect(panel).toBeVisible();
+  const panelBounds = await panel.evaluate(el => {
+    const rect = el.getBoundingClientRect();
+    return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+  });
+  expect(panelBounds.left).toBeGreaterThanOrEqual(0);
+  expect(panelBounds.right).toBeLessThanOrEqual(360);
+  expect(panelBounds.top).toBeGreaterThanOrEqual(0);
+  expect(panelBounds.bottom).toBeLessThanOrEqual(800);
+  await panel.getByText('Логотипы всех марок:').scrollIntoViewIfNeeded();
+  const brandButtons = await panel.locator('button[title]').evaluateAll(elements => elements.map(el => {
+    const rect = el.getBoundingClientRect();
+    return { title: el.getAttribute('title'), left: rect.left, right: rect.right };
+  }));
+  expect(brandButtons.length).toBeGreaterThan(0);
+  expect(brandButtons.filter(button => button.left < 0 || button.right > 360), 'brand logo buttons must stay inside the phone viewport: ' + JSON.stringify(brandButtons)).toEqual([]);
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: /Выбрать марку автомобиля/i }).click();
+  const brandPanel = page.locator('#brand-dropdown-panel');
+  await expect(brandPanel).toBeVisible();
+  const brandPanelBounds = await brandPanel.evaluate(el => {
+    const rect = el.getBoundingClientRect();
+    return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+  });
+  expect(brandPanelBounds.left).toBeGreaterThanOrEqual(0);
+  expect(brandPanelBounds.right).toBeLessThanOrEqual(360);
+  expect(brandPanelBounds.top).toBeGreaterThanOrEqual(0);
+  expect(brandPanelBounds.bottom).toBeLessThanOrEqual(800);
+});
