@@ -236,11 +236,13 @@ for (const viewport of viewports) {
         expect(bounds, 'section menu must have a visible bounding box').not.toBeNull();
         expect(bounds!.x, 'section menu left edge must stay inside viewport').toBeGreaterThanOrEqual(0);
         expect(bounds!.x + bounds!.width, 'section menu right edge must stay inside viewport').toBeLessThanOrEqual(viewport.width);
+        expect(bounds!.y, 'section menu top edge must stay inside viewport').toBeGreaterThanOrEqual(0);
+        expect(bounds!.y + bounds!.height, 'section menu bottom edge must stay inside viewport').toBeLessThanOrEqual(viewport.height);
         const buttons = await sectionPanel.locator('button, a[href]').evaluateAll(elements => elements.map(element => {
           const rect = element.getBoundingClientRect();
-          return { text: (element.textContent || '').trim(), left: rect.left, right: rect.right };
+          return { text: (element.textContent || '').trim(), left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
         }));
-        expect(buttons.filter(button => button.left < 0 || button.right > viewport.width), 'all section menu buttons must fit in viewport: ' + JSON.stringify(buttons)).toEqual([]);
+        expect(buttons.filter(button => button.left < 0 || button.right > viewport.width || button.top < 0 || button.bottom > viewport.height), 'all section menu buttons must fit in viewport: ' + JSON.stringify(buttons)).toEqual([]);
       }
       await page.keyboard.press('Escape');
       await expect(sectionPanel).toBeHidden();
