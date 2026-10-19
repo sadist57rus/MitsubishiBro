@@ -41,7 +41,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
     <div className="mx-auto w-full max-w-6xl space-y-5 md:space-y-7">
       <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-7">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-950 md:h-20 md:w-20">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-white md:h-20 md:w-20">
             {hasVehicle && brand ? <BrandLogo brandId={brand.id} className="h-full w-full" /> : <Car className="h-10 w-10 text-slate-500" />}
           </div>
           <div className="min-w-0 flex-1">
@@ -68,9 +68,9 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {QUICK_ACTIONS.map(action => {
             const Icon = action.icon;
-            return <button key={action.id} type="button" onClick={() => onNavigate(action.id)} className="group flex min-h-24 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:border-red-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800 md:min-h-28 md:gap-4 md:p-5">
+            return <button key={action.id} type="button" onClick={() => onNavigate(action.id)} className="group flex min-h-24 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:border-red-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800 md:min-h-28 md:gap-4 md:p-5">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400 md:h-14 md:w-14"><Icon className="h-7 w-7" /></span>
-              <span className="min-w-0"><span className="block text-base font-bold leading-tight text-slate-900 dark:text-white md:text-lg">{action.label}</span><span className="mt-1 block text-sm text-slate-500 dark:text-slate-400">{action.hint}</span></span>
+              <span className="min-w-0"><span className="block text-sm font-bold leading-tight text-slate-900 dark:text-white md:text-base line-clamp-2 break-normal [overflow-wrap:normal] hyphens-auto">{action.label}</span><span className="mt-1 block text-xs text-slate-500 dark:text-slate-400 md:text-sm line-clamp-2 break-normal [overflow-wrap:normal] hyphens-auto">{action.hint}</span></span>
             </button>;
           })}
         </div>
