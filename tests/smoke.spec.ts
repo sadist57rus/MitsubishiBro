@@ -1,4 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const AxeBuilder = require('@axe-core/playwright').default as new (options: { page: Page }) => { withTags(tags: string[]): { analyze(): Promise<{ violations: Array<{ id: string; impact: string | null; nodes: Array<{ target: string[]; failureSummary?: string }> }> }> } };
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import { getFuelStorageKey, getLogbookStorageKey, LEGACY_FUEL_STORAGE_KEY, LEGACY_LOGBOOK_STORAGE_KEY } from '../src/lib/vehicleStorageKeys';
 import { APP_STORAGE_SCHEMA_VERSION, BACKUP_SCHEMA_VERSION, migrateBackup } from '../src/lib/backupSchema';
@@ -180,6 +183,25 @@ test('model-specific sections never reuse Outlander data for another active vehi
       await expect(page.getByTestId('vehicle-data-empty-state'), 'Mitsubishi Lancer must show an explicit empty state in ' + sectionId).toBeVisible();
     }
   }
+});
+
+test('axe accessibility audit in dark theme: home, garage and settings', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await chooseToyota(page);
+  await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
+    const audit = async (screen: string) => {
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    const summary = results.violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.map(n => ({ target: n.target, failureSummary: n.failureSummary })) }));
+    expect(results.violations, 'axe violations on dark-theme ' + screen + ': ' + JSON.stringify(summary)).toEqual([]);
+  };
+  await audit('home');
+  await openNavItem(page, 'garage');
+  await audit('garage');
+  await page.reload();
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await openNavItem(page, 'settings');
+  await audit('settings');
 });
 
 for (const viewport of viewports) {
