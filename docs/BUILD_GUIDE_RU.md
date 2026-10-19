@@ -2,7 +2,7 @@
 
 ## Требования
 
-- Node.js 22 LTS и npm.
+- Node.js 24 и npm (та же основная версия, что используется в GitHub Actions).
 - Git.
 - Для локальной Android-сборки: Android SDK/Android Studio и Java 21.
 
@@ -34,14 +34,14 @@ npm run preview
 
 ## 4. Собрать APK автоматически на GitHub
 
-Основной репозиторий теперь содержит workflow Android-сборки. Он запускается при изменениях в `main` (кроме одних только документационных файлов) или вручную.
+Workflow Android-сборки запускается при каждом push в `main`, при push тега `v*` и вручную через GitHub Actions. Перед сборкой зависимости устанавливаются строго по закоммиченному `package-lock.json`; при изменении `package.json` обновите lockfile и закоммитьте его вместе с изменениями.
 
 1. Откройте [Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml).
 2. Выберите последний запуск на нужном коммите и дождитесь статуса **Success**.
-3. Откройте страницу запуска, в разделе **Artifacts** скачайте `MitsubishiBro-APK-debug`.
+3. Откройте страницу запуска, в разделе **Artifacts** скачайте `Car-Brother-APK-debug`.
 4. Распакуйте ZIP и установите `app-debug.apk` на Android. Если Android блокирует установку, разрешите установку приложений из выбранного источника в настройках устройства.
 
-Артефакт хранится 14 дней. Это **debug APK для тестирования**, не подписанный production-релиз для публикации в магазине приложений. Для production-релиза нужна защищённая подпись и отдельная конфигурация release.
+Артефакт хранится 14 дней. Workflow также публикует этот debug APK в GitHub как prerelease `test-build-N`. Это **тестовая debug-сборка**, не production-релиз для магазина приложений. Для production-релиза нужна защищённая подпись и настроенные GitHub Actions Secrets.
 
 ## 5. Собрать APK локально
 
