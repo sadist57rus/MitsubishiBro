@@ -259,7 +259,7 @@ export default function Header({
   const isLight = resolvedTheme === 'light';
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="min-h-12 flex items-center justify-between gap-1.5 sm:gap-3 py-1">
           
@@ -438,7 +438,7 @@ export default function Header({
 
               {/* DROPDOWN POPUP MENU - Generous width, full text visibility, NO TRUNCATION! */}
               {isDropdownOpen && (
-                <div id="section-menu-panel" role="region" aria-label="Разделы приложения" className="absolute left-0 top-full mt-2 w-[min(360px,calc(100vw-1rem))] sm:w-[380px] max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto">
+                <div id="section-menu-panel" role="region" aria-label="Разделы приложения" className="fixed inset-x-2 bottom-2 top-auto w-auto max-w-none bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in duration-100 max-h-[82vh] overflow-y-auto sm:absolute sm:inset-x-auto sm:bottom-auto sm:left-0 sm:top-full sm:mt-2 sm:w-[min(22rem,calc(100vw-16px))] sm:max-w-[calc(100vw-16px)]">
                   <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <span>Все разделы приложения ({sections.length})</span>
                     <span className="text-xs font-mono text-slate-500">Нажмите для перехода</span>
