@@ -452,7 +452,9 @@ test('decimal input parser accepts comma and dot separators', () => {
 
 test('maintenance fuel calculator accepts decimal comma on text inputs', async ({ page }) => {
   await prepare(page, { width: 1280, height: 720 }, 'light');
-  await openNavItem(page, 'maintenance');
+  await page.getByTestId('section-menu-trigger').click();
+  await page.getByTestId('nav-item-maintenance').click();
+  await expect(page.getByRole('heading', { name: /Калькулятор расхода топлива/ })).toBeVisible();
 
   await page.getByPlaceholder('Например: 420').fill('420,5');
   await page.getByPlaceholder('Например: 48').fill('48,5');
