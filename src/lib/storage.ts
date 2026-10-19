@@ -15,8 +15,8 @@ export function parseDecimalInput(value:string):number|null {const normalized=va
 
 /** Parse localized decimal input while rejecting partial or malformed numbers. */
 export function parseDecimalInput(value: string): number | null {
-  const normalized = value.trim().replace(/\\s/g, '').replace(',', '.');
-  if (!normalized || !/^[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)$/.test(normalized)) return null;
+  const normalized = value.trim().replace(/\s/g, '').replace(',', '.');
+  if (!normalized || !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)) return null;
   const number = Number(normalized);
   return Number.isFinite(number) ? number : null;
 }
