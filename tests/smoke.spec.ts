@@ -451,9 +451,24 @@ test('decimal input parser accepts comma and dot separators', () => {
 });
 
 test('maintenance fuel calculator accepts decimal comma on text inputs', async ({ page }) => {
-  await prepare(page, { width: 1280, height: 720 }, 'light');
-  await page.getByTestId('section-menu-trigger').click();
-  await page.getByTestId('nav-item-maintenance').click();
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('__car_brother_smoke_initialized')) {
+      localStorage.clear();
+      sessionStorage.setItem('__car_brother_smoke_initialized', 'yes');
+    }
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('select').first().selectOption({ value: 'mitsubishi' });
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await openNavItem(page, 'maintenance');
   await expect(page.getByRole('heading', { name: /Калькулятор расхода топлива/ })).toBeVisible();
 
   await page.getByPlaceholder('Например: 420').fill('420,5');
