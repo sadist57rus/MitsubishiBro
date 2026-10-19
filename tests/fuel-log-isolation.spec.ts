@@ -30,10 +30,10 @@ async function openSection(page: Page, id: string) {
 async function addFuelRecord(page: Page, station: string, odometer: string) {
   await page.getByRole('button', { name: /Записать заправку/i }).click();
   const form = page.locator('form').filter({ has: page.getByPlaceholder('Лукойл, Роснефть...') });
-  await form.getByPlaceholder('246250').fill(odometer);
-  await form.getByPlaceholder('450').fill('420');
-  await form.getByPlaceholder('50').fill('45');
-  await form.getByPlaceholder('62.50').fill('60');
+  await form.getByPlaceholder(/^246250$/).fill(odometer);
+  await form.getByPlaceholder(/^450$/).fill('420');
+  await form.getByPlaceholder(/^50$/).fill('45');
+  await form.getByPlaceholder(/^62\.50$/).fill('60');
   await form.getByPlaceholder('Лукойл, Роснефть...').fill(station);
   await form.getByRole('button', { name: /^Сохранить$/i }).click();
   await expect(page.getByText(station, { exact: false })).toBeVisible();
