@@ -35,10 +35,8 @@ import { useTheme } from './context/ThemeContext';
 import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
-import { EngineType, DrivetrainType } from './types';
 import { readStored } from './lib/storage';
 import {
-  ChevronLeft,
   Home,
   Fuel,
   Car,
@@ -169,7 +167,7 @@ function AppContent() {
     };
   }, [isBrandSelectorOpen, isApkGuideOpen]);
 
-  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, drivetrain: selectedDrivetrain, setDrivetrain: setSelectedDrivetrain, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
+  const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
   const [setupBrandId, setSetupBrandId] = useState('nissan');
   const setupBrand = JAPANESE_BRANDS.find(brand => brand.id === setupBrandId) || JAPANESE_BRANDS[0];
   const [setupModelId, setSetupModelId] = useState(setupBrand.models[0]?.id || '');
@@ -212,10 +210,20 @@ function AppContent() {
     maintenance: { title: 'Регламент ТО и жидкости', icon: Calendar },
     obd: { title: 'Коды ошибок OBD-II', icon: Stethoscope },
     logbook: { title: 'Бортжурнал владельца', icon: BookOpen },
+    more: { title: 'Ещё', icon: MoreHorizontal },
   };
 
+  const phonePrimaryNavigation: TabId[] = ['overview', 'garage', 'maintenance', 'obd'];
+  const widePrimaryNavigation: TabId[] = ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook'];
+  const primaryNavigation = uiMode === 'wide' ? widePrimaryNavigation : phonePrimaryNavigation;
+  const shortTabTitles: Record<TabId, string> = {
+    overview: 'Главная', garage: 'Авто', settings: 'Настройки', brands: 'Марки',
+    fuel: 'Топливо', specs: 'Характеристики', bulbs: 'Лампы', parts: 'Запчасти',
+    fuses: 'Предохранители', tuning: 'Тюнинг', guides: 'Ремонт',
+    issues: 'Частые поломки', wheels: 'Шины и диски', maintenance: 'ТО',
+    obd: 'Ошибки OBD', logbook: 'Журнал', more: 'Ещё',
+  };
   const currentTabInfo = tabTitles[activeTab] || tabTitles.overview;
-  const TabIcon = currentTabInfo.icon;
 
   if (!orientationChosen) {
     return (
@@ -261,75 +269,47 @@ function AppContent() {
 
   return (
     <div className={`min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white ${uiMode === "wide" ? "car-brother-wide" : ""}`}>
-      {/* Top Header with prominent "Разделы" dropdown */}
       <Header
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        selectedEngine={selectedEngine}
-        setSelectedEngine={setSelectedEngine}
-        selectedDrivetrain={selectedDrivetrain}
-        setSelectedDrivetrain={setSelectedDrivetrain}
-        selectedBrandId={selectedBrandId}
-        selectedModelId={selectedModelId}
-        onSelectBrand={setSelectedBrandId}
-        onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
+        title={currentTabInfo.title}
+        showBack={activeTab !== 'overview'}
+        onBack={() => setActiveTab('overview')}
         onOpenApkGuide={() => setIsApkGuideOpen(true)}
         onRegisterBackHandler={(handler) => { headerBackHandlerRef.current = handler; }}
-        uiMode={uiMode}
-        onChangeUiMode={(mode) => { void applyUiMode(mode); }}
       />
 
       {uiMode === 'wide' && (
         <nav aria-label="Основная навигация" className="car-brother-rail" data-testid="wide-navigation-rail">
-          {Object.entries(tabTitles).map(([id, item]) => {
+          {widePrimaryNavigation.map(id => {
+            const item = tabTitles[id];
             const Icon = item.icon;
             return (
               <button
                 key={id}
                 type="button"
-                aria-label={item.title}
+                data-testid={`wide-nav-item-${id}`}
+                aria-label={shortTabTitles[id]}
                 aria-current={activeTab === id ? 'page' : undefined}
-                title={item.title}
-                onClick={() => setActiveTab(id as TabId)}
+                title={shortTabTitles[id]}
+                onClick={() => setActiveTab(id)}
                 className={`car-brother-rail-item ${activeTab === id ? 'is-active' : ''}`}
               >
-                <Icon aria-hidden="true" size={24} />
-                <span>{(({overview:'Домой',garage:'Гараж',settings:'Настройки',brands:'Марки',fuel:'Топливо',specs:'Характеристики',bulbs:'Лампы',parts:'Запчасти',fuses:'Предохранители',tuning:'Тюнинг',guides:'Ремонт',issues:'Неисправности',wheels:'Колёса',maintenance:'ТО',obd:'OBD',logbook:'Журнал'} as Record<string,string>)[id] || item.title)}</span>
+                <Icon aria-hidden="true" size={28} />
+                <span>{shortTabTitles[id]}</span>
               </button>
             );
           })}
+          <button type="button" data-testid="wide-more-trigger" aria-label="Ещё" aria-current={activeTab === 'more' ? 'page' : undefined} onClick={() => setActiveTab('more')} className={`car-brother-rail-item ${activeTab === 'more' ? 'is-active' : ''}`}>
+            <MoreHorizontal aria-hidden="true" size={28} /><span>Ещё</span>
+          </button>
         </nav>
       )}
 
-      {/* Breadcrumb Navigation when inside a sub-module */}
-      {activeTab !== 'overview' && (
-        <div className="bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 backdrop-blur-xs transition-colors">
-          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2 text-sm">
-            <div className="flex items-center gap-2 min-w-0">
-              <button
-                onClick={() => setActiveTab('overview')}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition font-medium shrink-0"
-                title="Вернуться на предыдущий экран" aria-label="Назад"
-              >
-                <ChevronLeft className="w-5 h-5 text-slate-600 dark:text-slate-300" />
-                <span>Назад</span>
-              </button>
-
-              <span className="text-slate-300 dark:text-slate-700">/</span>
-
-              <div className="flex items-center gap-1.5 min-w-0 font-bold text-slate-900 dark:text-white truncate">
-                <TabIcon className="w-5 h-5 text-red-600 shrink-0" />
-                <span className="truncate">{currentTabInfo.title}</span>
-              </div>
-            </div>
-
-            <button onClick={() => toggleFavorite(activeTab)} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 font-bold transition ${favoriteSections.some(item => item.id === activeTab) ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200' : 'bg-slate-100 text-slate-700 hover:bg-amber-50 dark:bg-slate-800 dark:text-slate-300'}`}><Star className={`w-4 h-4 ${favoriteSections.some(item => item.id === activeTab) ? 'fill-current' : ''}`} />{favoriteSections.some(item => item.id === activeTab) ? 'В избранном' : 'В избранное'}</button>
-            <div className="hidden lg:flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 font-mono">
-              <span>ДВС: <strong className="text-red-600 dark:text-red-400">{selectedEngine}</strong></span>
-              <span>·</span>
-              <span>Привод: <strong className="text-slate-800 dark:text-slate-200">{selectedDrivetrain}</strong></span>
-            </div>
-          </div>
+      {activeTab !== 'overview' && activeTab !== 'more' && (
+        <div className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 flex justify-end">
+          <button data-testid="section-favorite-toggle" type="button" aria-pressed={favoriteSections.some(item => item.id === activeTab)} onClick={() => toggleFavorite(activeTab)} className={`flex min-h-12 items-center gap-2 rounded-xl border px-3 py-2 font-semibold transition ${favoriteSections.some(item => item.id === activeTab) ? 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-900/40 dark:text-amber-200 dark:border-amber-800' : 'bg-white text-slate-700 border-slate-200 hover:border-amber-400 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'}`}>
+            <Star className={`w-4 h-4 ${favoriteSections.some(item => item.id === activeTab) ? 'fill-current' : ''}`} />
+            {favoriteSections.some(item => item.id === activeTab) ? 'В избранном' : 'В избранное'}
+          </button>
         </div>
       )}
 
@@ -359,7 +339,7 @@ function AppContent() {
       >
         <SectionErrorBoundary key={activeTab} sectionKey={activeTab}><Suspense fallback={<div className="rounded-xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">Загрузка раздела…</div>}>
         {activeTab === 'overview' && (
-          <div className="space-y-5"><FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} /><OverviewDashboard
+          <div className="space-y-5"><OverviewDashboard
             onNavigate={setActiveTab}
             selectedEngine={selectedEngine}
             onSelectEngine={setSelectedEngine}
@@ -367,6 +347,26 @@ function AppContent() {
             onSelectBrand={setSelectedBrandId}
             onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
           /></div>
+        )}
+
+        {activeTab === 'more' && (
+          <section className="mx-auto w-full max-w-6xl space-y-5" aria-labelledby="more-screen-title">
+            {favoriteSections.length > 0 && <FavoriteSectionsPanel favorites={favoriteSections} onNavigate={setActiveTab} onRemove={removeFavorite} />}
+            <div>
+              <h2 id="more-screen-title" className="text-xl font-black text-slate-900 dark:text-white">Дополнительные разделы</h2>
+              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Справочные разделы и настройки</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4" data-testid="more-screen-grid">
+              {Object.entries(tabTitles).filter(([id]) => !primaryNavigation.includes(id as TabId) && id !== 'more').map(([id, item]) => {
+                const sectionId = id as TabId;
+                const Icon = item.icon;
+                return <button key={id} type="button" data-testid={`more-nav-item-${id}`} onClick={() => setActiveTab(sectionId)} className="flex min-h-20 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left font-semibold text-slate-900 transition hover:border-red-400 dark:border-slate-800 dark:bg-slate-900 dark:text-white">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-red-600 dark:bg-slate-800 dark:text-red-400"><Icon aria-hidden="true" size={24} /></span>
+                  <span>{shortTabTitles[sectionId]}</span>
+                </button>;
+              })}
+            </div>
+          </section>
         )}
 
         {activeTab === 'garage' && <Garage />}
@@ -439,11 +439,11 @@ function AppContent() {
             { id: 'obd', label: 'Диагностика', icon: Stethoscope },
           ] as const).map(item => {
             const Icon = item.icon;
-            return <button key={item.id} type="button" aria-current={activeTab === item.id ? 'page' : undefined} onClick={() => setActiveTab(item.id)} className={`car-brother-bottom-nav-item ${activeTab === item.id ? 'is-active' : ''}`}>
+            return <button key={item.id} type="button" data-testid={`phone-nav-item-${item.id}`} aria-current={activeTab === item.id ? 'page' : undefined} onClick={() => setActiveTab(item.id)} className={`car-brother-bottom-nav-item ${activeTab === item.id ? 'is-active' : ''}`}>
               <Icon aria-hidden="true" size={21} /><span>{item.label}</span>
             </button>;
           })}
-          <button type="button" className="car-brother-bottom-nav-item" aria-label="Ещё" onClick={() => document.querySelector<HTMLButtonElement>('header button[aria-label="Открыть разделы приложения"]')?.click()}>
+          <button type="button" data-testid="phone-more-trigger" className={`car-brother-bottom-nav-item ${activeTab === 'more' ? 'is-active' : ''}`} aria-current={activeTab === 'more' ? 'page' : undefined} aria-label="Ещё" onClick={() => setActiveTab('more')}>
             <MoreHorizontal aria-hidden="true" size={21} /><span>Ещё</span>
           </button>
         </nav>
