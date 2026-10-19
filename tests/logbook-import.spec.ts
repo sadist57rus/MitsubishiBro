@@ -55,8 +55,8 @@ async function seedLogbook(page: Page, records: LogRecord[]) {
 }
 
 async function openLogbook(page: Page) {
-  await page.getByRole('button', { name: /Открыть разделы приложения/i }).click();
-  const item = page.getByTestId('section-menu-list').getByRole('button', { name: /Бортжурнал/i }).first();
+  await page.getByTestId('phone-more-trigger').click();
+  const item = page.getByTestId('more-nav-item-logbook');
   await expect(item).toBeVisible({ timeout: 5_000 });
   await item.click();
   await expect(page.getByRole('heading', { name: /Бортжурнал владельца/ })).toBeVisible();
