@@ -48,6 +48,7 @@ export default function JapaneseBrandsHub({
 }: Props) {
   const [activeBrandId, setActiveBrandId] = useState<string>(initialBrandId);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showOtherBrands, setShowOtherBrands] = useState(false);
   const [filterBodyType, setFilterBodyType] = useState<string>('ALL');
   const [activeTabSubSection, setActiveTabSubSection] = useState<
     'overview' | 'engines' | 'fluids' | 'bulbs' | 'obd' | 'issues' | 'compare'
@@ -194,9 +195,9 @@ export default function JapaneseBrandsHub({
           </span>
         </div>
 
-        {/* Scrollable / Wrap Grid of 11 Japanese Brands */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2">
-          {JAPANESE_BRANDS.map(brand => {
+        {/* Keep the five most-used brands visible; the rest are available on demand. */}
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+          {JAPANESE_BRANDS.filter(brand => showOtherBrands || ['toyota', 'mitsubishi', 'nissan', 'mazda', 'honda'].includes(brand.id)).map(brand => {
             const isSelected = brand.id === activeBrandId;
             return (
               <button
@@ -242,6 +243,14 @@ export default function JapaneseBrandsHub({
             );
           })}
         </div>
+        <button
+          type="button"
+          aria-expanded={showOtherBrands}
+          onClick={() => setShowOtherBrands(value => !value)}
+          className="min-h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-red-400 hover:text-red-600 dark:hover:text-red-400 transition"
+        >
+          {showOtherBrands ? 'Скрыть' : 'Другие'}
+        </button>
       </div>
 
       {/* Brand Hero Card & AWD Philosophy */}
