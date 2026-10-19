@@ -61,6 +61,25 @@ async function chooseToyota(page: Page) {
   await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
 }
 
+async function chooseOutlander(page: Page) {
+  await page.addInitScript(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+  await page.goto('/');
+  const orientationHeading = page.getByRole('heading', { name: /Выберите ориентацию экрана/i });
+  if (await orientationHeading.isVisible().catch(() => false)) await page.getByRole('button', { name: /Телефон/i }).click();
+  const setupHeading = page.getByRole('heading', { name: /Добавим вашу машину/i });
+  if (await setupHeading.isVisible().catch(() => false)) {
+    await page.locator('main select').nth(0).selectOption({ value: 'mitsubishi' });
+    await page.locator('main select').nth(1).selectOption({ value: 'outlander-1' });
+    const year = page.locator('main input[type="number"]').first();
+    await year.fill((await year.getAttribute('min')) || '2003');
+    await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
+  }
+  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+}
+
 async function prepare(page: Page, viewport: Viewport, theme: Theme) {
   await page.setViewportSize(viewport);
   const consoleErrors: string[] = [];
@@ -202,6 +221,26 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
   await page.evaluate(() => document.documentElement.classList.add('dark'));
   await openNavItem(page, 'settings');
   await audit('settings');
+});
+
+test('populated OBD, parts, specs, bulbs and tire screens meet touch/text thresholds', async ({ page }) => {
+  test.setTimeout(120_000);
+  const targetViewports: Viewport[] = [{ width: 360, height: 800 }, { width: 800, height: 480 }];
+  const sections = ['obd', 'parts', 'specs', 'bulbs', 'wheels'];
+  for (const viewport of targetViewports) {
+    for (const theme of themes) {
+      await page.setViewportSize(viewport);
+      await chooseOutlander(page);
+      await page.evaluate(mode => {
+        document.documentElement.classList.toggle('dark', mode === 'dark');
+        document.documentElement.dataset.theme = mode;
+      }, theme);
+      for (const sectionId of sections) {
+        await openNavItem(page, sectionId);
+        await assertReadableAndTouchSafe(page, 'populated ' + sectionId + ' ' + viewport.width + 'x' + viewport.height + ' ' + theme, 'section', viewport);
+      }
+    }
+  }
 });
 
 for (const viewport of viewports) {
