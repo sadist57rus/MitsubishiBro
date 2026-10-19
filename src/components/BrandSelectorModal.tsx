@@ -19,6 +19,7 @@ export default function BrandSelectorModal({
   onSelectModel
 }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showOtherBrands, setShowOtherBrands] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const onCloseRef = useRef(onClose);
@@ -60,6 +61,11 @@ export default function BrandSelectorModal({
     );
   });
 
+  const primaryBrandIds = ['toyota', 'mitsubishi', 'nissan', 'mazda', 'honda'];
+  const visibleBrands = searchQuery.trim()
+    ? filteredBrands
+    : filteredBrands.filter(brand => showOtherBrands || primaryBrandIds.includes(brand.id));
+
   const handleChooseBrand = (brand: JapaneseBrand) => {
     onSelectBrand(brand.id);
     if (onSelectModel && brand.models.length > 0) {
@@ -90,7 +96,7 @@ export default function BrandSelectorModal({
                 Выбор японского производителя
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                11 легендарных брендов Японии и все поколения моделей
+                Toyota, Mitsubishi, Nissan, Mazda, Honda и другие марки
               </p>
             </div>
           </div>
@@ -122,7 +128,7 @@ export default function BrandSelectorModal({
         {/* Brands Grid */}
         <div className="p-4 overflow-y-auto space-y-2 flex-1 scrollbar-thin">
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
-            {filteredBrands.map(brand => {
+            {visibleBrands.map(brand => {
               const isSelected = brand.id === selectedBrandId;
               return (
                 <div
@@ -180,6 +186,16 @@ export default function BrandSelectorModal({
               );
             })}
           </div>
+          {!searchQuery.trim() && (
+            <button
+              type="button"
+              aria-expanded={showOtherBrands}
+              onClick={() => setShowOtherBrands(value => !value)}
+              className="mt-3 min-h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:border-red-400 hover:text-red-600 dark:hover:text-red-400 transition"
+            >
+              {showOtherBrands ? 'Скрыть' : 'Другие'}
+            </button>
+          )}
         </div>
 
         {/* Modal Footer */}
