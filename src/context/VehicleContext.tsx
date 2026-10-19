@@ -43,6 +43,21 @@ function initialGarage(): GarageState {
 export function VehicleProvider({children}:{children:ReactNode}) {
  const [garage,setGarage]=useState<GarageState>(initialGarage);
  useEffect(()=>{writeStored(GARAGE_KEY,garage,(v):v is GarageState=>!!v&&typeof v==='object'&&Array.isArray((v as GarageState).vehicles)&&(v as GarageState).vehicles.every(validVehicle)&&typeof (v as GarageState).activeVehicleId==='string');},[garage]);
+ // Keep the legacy single-vehicle key synchronized for older app builds and external tools.
+ // Never write the fallback vehicle when the garage is empty.
+ useEffect(() => {
+  const active = garage.vehicles.find(vehicle => vehicle.id === garage.activeVehicleId);
+  if (!active) return;
+  try {
+   localStorage.setItem(OLD_KEY, JSON.stringify({
+    brandId: active.brandId,
+    modelId: active.modelId,
+    engine: active.engine,
+    drivetrain: active.drivetrain,
+   }));
+  } catch { /* storage may be unavailable */ }
+ }, [garage]);
+
  const activeVehicle=garage.vehicles.find(v=>v.id===garage.activeVehicleId)||garage.vehicles[0]||DEFAULT_VEHICLE;
  const value=useMemo<VehicleContextValue>(()=>({
   vehicleId:activeVehicle.id,activeVehicle,vehicles:garage.vehicles,brandId:activeVehicle.brandId,modelId:activeVehicle.modelId,
