@@ -208,6 +208,8 @@ test('axe accessibility audit in dark theme: home, garage and settings', async (
   await page.setViewportSize({ width: 360, height: 800 });
   await page.emulateMedia({ colorScheme: 'dark' });
   await chooseToyota(page);
+  // Avoid auditing transient interpolated colors while theme/brand transitions are still running.
+  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; animation: none !important; }' });
   await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
     const audit = async (screen: string) => {
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
