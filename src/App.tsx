@@ -35,7 +35,6 @@ import { useTheme } from './context/ThemeContext';
 import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
 import VehicleDataGate from './components/VehicleDataGate';
-import { EngineType } from './types';
 import { readStored } from './lib/storage';
 import {
   Home,
