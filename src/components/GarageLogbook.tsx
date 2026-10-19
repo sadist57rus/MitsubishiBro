@@ -44,7 +44,7 @@ const INITIAL_RECORDS: LogEntry[] = [
 
 export default function GarageLogbook() {
   const { vehicleId, vehicles, activeVehicle } = useVehicle();
-  const activeStorageKey = getLogbookStorageKey(vehicleId, vehicleId === vehicles[0]?.id);
+  const activeStorageKey = getLogbookStorageKey(vehicleId, vehicleId === vehicles[0]?.id, activeVehicle.modelId === 'outlander-1');
   const { preferences } = usePreferences();
   const currencySymbols: Record<string, string> = { RUB: '₽', USD: '$', EUR: '€', CNY: '¥' };
   const currencySymbol = currencySymbols[activeVehicle.currency || preferences.currency] || '₽';
