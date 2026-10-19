@@ -259,7 +259,7 @@ export default function Header({
   const isLight = resolvedTheme === 'light';
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 transition-colors shadow-xs">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="min-h-12 flex items-center justify-between gap-1.5 sm:gap-3 py-1">
           
