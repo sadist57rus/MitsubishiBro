@@ -587,7 +587,7 @@ html[data-ui-mode="phone"] {
 }
 html[data-ui-mode="wide"] {
   --font-primary-min: 1rem;
-  --font-secondary-min: 1rem;
+  --font-secondary-min: 0.875rem;
   --tap-size: var(--tap-size-wide);
 }
 body {
@@ -601,7 +601,7 @@ html[data-ui-mode="wide"] main .text-xs,
 html[data-ui-mode="wide"] header .text-xs,
 html[data-ui-mode="wide"] main small,
 html[data-ui-mode="wide"] header small {
-  font-size: 1rem !important;
+  font-size: 0.875rem !important;
 }
 main p, main label, main input, main select, main textarea,
 main table, main th, main td, header button, header select {
@@ -634,4 +634,11 @@ html[data-ui-mode="wide"] textarea {
 }
 html[data-ui-mode="wide"] .car-brother-bottom-nav-item {
   min-height: 56px;
+}
+
+html[data-ui-mode="phone"] main button,
+html[data-ui-mode="phone"] main a,
+html[data-ui-mode="phone"] main [role="button"],
+html[data-ui-mode="phone"] header button {
+  min-height: 48px;
 }
