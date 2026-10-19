@@ -314,7 +314,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
               <div className="flex items-center gap-2 text-xs">
                 <span className="text-xs text-slate-500">Найти в:</span>
                 <a
-                  href={`https://www.autodoc.ru/price/579/${part.oemNumber}`}
+                  href={`https://www.autodoc.ru/price/579/${encodeURIComponent(part.oemNumber)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-slate-300 hover:text-white hover:underline flex items-center gap-0.5"
@@ -324,7 +324,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
                 </a>
                 <span className="text-slate-700">·</span>
                 <a
-                  href={`https://exist.ru/Price/?pcode=${part.oemNumber}`}
+                  href={`https://exist.ru/Price/?pcode=${encodeURIComponent(part.oemNumber)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-slate-300 hover:text-white hover:underline flex items-center gap-0.5"
@@ -334,7 +334,7 @@ export default function PartsCatalog({ selectedEngine, onSelectEngine }: Props) 
                 </a>
                 <span className="text-slate-700">·</span>
                 <a
-                  href={`https://emex.ru/products/${part.oemNumber}`}
+                  href={`https://emex.ru/products/${encodeURIComponent(part.oemNumber)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-slate-300 hover:text-white hover:underline flex items-center gap-0.5"
