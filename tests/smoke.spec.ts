@@ -517,11 +517,13 @@ test('failed backup restore rolls back all previously stored data', async ({ pag
 });
 
 test('fuel and logbook storage keys stay isolated per vehicle and preserve legacy keys', () => {
-  const firstLogbook = getLogbookStorageKey('vehicle-one', true);
-  const secondLogbook = getLogbookStorageKey('vehicle-two', false);
-  const thirdLogbook = getLogbookStorageKey('vehicle-three', false);
-  expect(firstLogbook).toBe(LEGACY_LOGBOOK_STORAGE_KEY);
-  expect(new Set([firstLogbook, secondLogbook, thirdLogbook]).size).toBe(3);
+  const firstOutlanderLogbook = getLogbookStorageKey('vehicle-one', true, true);
+  const firstOtherMakeLogbook = getLogbookStorageKey('vehicle-toyota', true, false);
+  const secondLogbook = getLogbookStorageKey('vehicle-two', false, false);
+  const thirdLogbook = getLogbookStorageKey('vehicle-three', false, true);
+  expect(firstOutlanderLogbook).toBe(LEGACY_LOGBOOK_STORAGE_KEY);
+  expect(firstOtherMakeLogbook).toBe('car-brother-logbook-vehicle-toyota');
+  expect(new Set([firstOutlanderLogbook, firstOtherMakeLogbook, secondLogbook, thirdLogbook]).size).toBe(4);
 
   const firstOutlanderFuel = getFuelStorageKey('vehicle-one', true, true);
   const secondVehicleFuel = getFuelStorageKey('vehicle-two', false, false);
