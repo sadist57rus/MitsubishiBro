@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { EngineType } from '../types';
 import { parseDecimalInput, readStored, writeStored } from '../lib/storage';
 import { useVehicle } from '../context/VehicleContext';
@@ -73,7 +73,21 @@ export default function FuelMonitor({ selectedEngine = 'ALL' }: { selectedEngine
   const [newStation, setNewStation] = useState<string>('Лукойл');
   const [newFuelType, setNewFuelType] = useState<string>('АИ-95');
 
-  useEffect(() => { writeStored(activeStorageKey, logs, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string')); }, [logs, activeStorageKey]);
+  const skipNextFuelWrite = useRef(false);
+
+  useEffect(() => {
+    skipNextFuelWrite.current = true;
+    setLogs(readStored(activeStorageKey, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string'), []).map(item => ({ ...item, vehicleId: item.vehicleId || vehicleId, currency: item.currency || activeVehicle.currency || preferences.currency })));
+    setIsAddingLog(false);
+  }, [activeStorageKey, vehicleId, activeVehicle.currency, preferences.currency]);
+
+  useEffect(() => {
+    if (skipNextFuelWrite.current) {
+      skipNextFuelWrite.current = false;
+      return;
+    }
+    writeStored(activeStorageKey, logs, (value: unknown): value is FuelLog[] => Array.isArray(value) && value.every((item): item is FuelLog => typeof item === 'object' && item !== null && typeof item.id === 'string' && (item.vehicleId === undefined || typeof item.vehicleId === 'string') && (item.currency === undefined || typeof item.currency === 'string') && typeof item.date === 'string' && typeof item.odometer === 'number' && typeof item.distance === 'number' && typeof item.liters === 'number' && typeof item.pricePerLiter === 'number' && typeof item.totalCost === 'number' && typeof item.consumption === 'number' && typeof item.fuelType === 'string' && typeof item.station === 'string'));
+  }, [logs, activeStorageKey]);
 
   // Main Calculator Computation
   const stats = useMemo(() => {
