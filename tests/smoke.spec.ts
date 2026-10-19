@@ -294,6 +294,25 @@ test('maintenance fuel calculator accepts decimal comma on text inputs', async (
 });
 
 
+test('показывает пять основных марок, остальные раскрываются кнопкой «Другие»', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'brands');
+
+  const otherToggle = page.getByRole('button', { name: 'Другие', exact: true });
+  await expect(otherToggle).toBeVisible();
+  for (const brand of [/Toyota/i, /Mitsubishi/i, /Nissan/i, /Mazda/i, /Honda/i]) {
+    await expect(page.getByRole('button', { name: brand }).first()).toBeVisible();
+  }
+  await expect(page.getByRole('button', { name: /Suzuki/i })).toHaveCount(0);
+
+  await otherToggle.click();
+  await expect(page.getByRole('button', { name: /Suzuki/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Скрыть', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Скрыть', exact: true }).click();
+  await expect(page.getByRole('button', { name: /Suzuki/i })).toHaveCount(0);
+});
+
 test('theme mode and color palette selections update the active document styles', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await chooseToyota(page);
