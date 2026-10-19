@@ -184,8 +184,9 @@ test('model-specific sections never reuse Outlander data for another active vehi
 
 test('axe accessibility audit in dark theme: home, garage and settings', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
+  await page.emulateMedia({ colorScheme: 'dark' });
   await chooseToyota(page);
-  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await page.evaluate(() => { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; });
   await page.addScriptTag({ path: 'node_modules/axe-core/axe.min.js' });
   const audit = async (screen: string) => {
     const results = await page.evaluate(async () => {
