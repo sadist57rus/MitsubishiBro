@@ -355,3 +355,35 @@ test('active accent controls keep readable contrast across all color palettes', 
     await page.keyboard.press('Escape');
   }
 });
+
+test('driver mode tokens enforce readable text and minimum touch targets', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await chooseToyota(page);
+
+  for (const mode of ['phone', 'wide'] as const) {
+    await page.evaluate(value => { document.documentElement.dataset.uiMode = value; }, mode);
+    const metrics = await page.evaluate(() => {
+      const root = getComputedStyle(document.documentElement);
+      const minHeight = [...document.querySelectorAll<HTMLElement>('button, [role="button"], input, select, textarea')]
+        .filter(el => {
+          const rect = el.getBoundingClientRect();
+          const style = getComputedStyle(el);
+          return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+        })
+        .map(el => ({ label: (el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 50), height: el.getBoundingClientRect().height }));
+      const smallText = [...document.querySelectorAll<HTMLElement>('main .text-xs, header .text-xs, main small, header small')]
+        .filter(el => {
+          const rect = el.getBoundingClientRect();
+          const style = getComputedStyle(el);
+          return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden' && (el.textContent || '').trim().length > 0;
+        })
+        .map(el => ({ text: (el.textContent || '').trim().slice(0, 50), size: Number.parseFloat(getComputedStyle(el).fontSize) }));
+      return { tapSize: Number.parseFloat(root.getPropertyValue('--tap-size')) * 16, minHeight, smallText };
+    });
+    const target = mode === 'wide' ? 56 : 48;
+    const fontFloor = mode === 'wide' ? 16 : 14;
+    expect(metrics.tapSize, mode + ' token').toBeGreaterThanOrEqual(target);
+    expect(metrics.minHeight.filter(item => item.height + 0.5 < target), mode + ' undersized controls: ' + JSON.stringify(metrics.minHeight.filter(item => item.height + 0.5 < target))).toEqual([]);
+    expect(metrics.smallText.filter(item => item.size + 0.1 < fontFloor), mode + ' undersized secondary text: ' + JSON.stringify(metrics.smallText.filter(item => item.size + 0.1 < fontFloor))).toEqual([]);
+  }
+});
