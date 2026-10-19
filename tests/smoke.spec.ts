@@ -400,3 +400,19 @@ test('wide navigation exposes six primary destinations and a dedicated More scre
   await expect(page.getByTestId('more-nav-item-fuel')).toHaveCount(0);
   await expect(page.getByTestId('more-nav-item-logbook')).toHaveCount(0);
 });
+
+test('главная показывает шесть быстрых действий без повторных ссылок', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await chooseToyota(page);
+
+  await expect(page.getByText('Мой автомобиль', { exact: true })).toBeVisible();
+  await expect(page.getByText('Пробег:', { exact: false })).toBeVisible();
+  const quickActions = page.locator('section[aria-labelledby="quick-actions-title"]');
+  await expect(quickActions.locator('button')).toHaveCount(6);
+  for (const label of ['ТО', 'Предохранители', 'Лампы', 'Ошибки OBD', 'Топливо', 'Журнал']) {
+    await expect(quickActions.getByRole('button', { name: label, exact: true })).toBeVisible();
+  }
+  await expect(page.getByText(/Каталог автомобилей и разделов/)).toHaveCount(0);
+  await expect(quickActions.getByRole('button', { name: 'Гараж', exact: true })).toHaveCount(0);
+  await expect(quickActions.getByText(/Обслуживание|Электрика|Автосвет|Диагностика|Расходы|Записи и расходы/)).toHaveCount(0);
+});
