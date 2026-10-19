@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { parseDecimalInput } from '../lib/storage';
 import { FLUIDS_DATA, TORQUE_SPECS_DATA, MAINTENANCE_SCHEDULE_TEMPLATE } from '../data/maintenanceData';
 import { Droplet, Gauge, Calendar, CheckCircle2, AlertTriangle, Search, Info, Fuel, Calculator, RotateCcw, Sparkles } from 'lucide-react';
 
@@ -13,16 +14,16 @@ export default function MaintenanceHub() {
   const [fuelPricePerLiter, setFuelPricePerLiter] = useState<string>('58.5');
 
   const fuelCalc = useMemo(() => {
-    const dist = parseFloat(distanceKm);
-    const liters = parseFloat(fuelLiters);
-    const price = parseFloat(fuelPricePerLiter);
+    const dist = parseDecimalInput(distanceKm);
+    const liters = parseDecimalInput(fuelLiters);
+    const price = parseDecimalInput(fuelPricePerLiter);
 
-    if (isNaN(dist) || isNaN(liters) || dist <= 0 || liters <= 0) {
+    if (dist === null || liters === null || dist <= 0 || liters <= 0) {
       return null;
     }
 
     const consumptionPer100Km = (liters / dist) * 100;
-    const costTotal = !isNaN(price) && price > 0 ? liters * price : null;
+    const costTotal = price !== null && price > 0 ? liters * price : null;
     const costPerKm = costTotal !== null ? costTotal / dist : null;
     // Outlander 1 fuel tank capacity is 60 liters
     const estimatedFullTankRangeKm = (60 / consumptionPer100Km) * 100;
@@ -215,7 +216,7 @@ export default function MaintenanceHub() {
               </div>
               <div className="relative">
                 <input
-                  type="number"
+                  type="text" inputMode="decimal"
                   value={distanceKm}
                   onChange={(e) => setDistanceKm(e.target.value)}
                   placeholder="Например: 420"
@@ -249,7 +250,7 @@ export default function MaintenanceHub() {
               </div>
               <div className="relative">
                 <input
-                  type="number"
+                  type="text" inputMode="decimal"
                   value={fuelLiters}
                   onChange={(e) => setFuelLiters(e.target.value)}
                   placeholder="Например: 48"
@@ -272,7 +273,7 @@ export default function MaintenanceHub() {
               </label>
               <div className="relative">
                 <input
-                  type="number"
+                  type="text" inputMode="decimal"
                   value={fuelPricePerLiter}
                   onChange={(e) => setFuelPricePerLiter(e.target.value)}
                   placeholder="58.5"
