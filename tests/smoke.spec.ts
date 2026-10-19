@@ -374,3 +374,28 @@ test('driver mode tokens enforce readable text and minimum touch targets', async
     expect(metrics.smallText.filter(item => item.size + 0.1 < fontFloor), mode + ' undersized secondary text: ' + JSON.stringify(metrics.smallText.filter(item => item.size + 0.1 < fontFloor))).toEqual([]);
   }
 });
+
+test('wide navigation exposes six primary destinations and a dedicated More screen', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'settings');
+  await page.getByRole('button', { name: /Планшет \/ магнитола/i }).click();
+
+  const rail = page.getByTestId('wide-navigation-rail');
+  await expect(rail).toBeVisible();
+  await expect(rail.locator('button')).toHaveCount(7);
+  for (const id of ['overview', 'garage', 'maintenance', 'obd', 'fuel', 'logbook']) {
+    await expect(page.getByTestId('wide-nav-item-' + id)).toBeVisible();
+  }
+  await expect(page.getByTestId('wide-nav-item-settings')).toHaveCount(0);
+  await expect(page.locator('header [data-testid="brand-selector-trigger"]')).toHaveCount(0);
+  await expect(page.locator('header [aria-label="Выбрать двигатель"]')).toHaveCount(0);
+  await expect(page.locator('header button').filter({ hasText: /^4WD$|^FWD$/ })).toHaveCount(0);
+
+  await page.getByTestId('wide-more-trigger').click();
+  await expect(page.getByTestId('more-screen-grid')).toBeVisible();
+  await expect(page.getByTestId('more-nav-item-settings')).toBeVisible();
+  await expect(page.getByTestId('more-nav-item-brands')).toBeVisible();
+  await expect(page.getByTestId('more-nav-item-fuel')).toHaveCount(0);
+  await expect(page.getByTestId('more-nav-item-logbook')).toHaveCount(0);
+});
