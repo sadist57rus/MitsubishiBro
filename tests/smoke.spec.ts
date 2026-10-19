@@ -228,6 +228,22 @@ for (const viewport of viewports) {
 
     test('brand selector menu and page overflow: ' + suffix, async ({ page }) => {
       await prepare(page, viewport, theme);
+      await page.getByTestId('section-menu-trigger').click();
+      const sectionPanel = page.locator('#section-menu-panel');
+      await expect(sectionPanel).toBeVisible();
+      if (viewport.width === 360) {
+        const bounds = await sectionPanel.boundingBox();
+        expect(bounds, 'section menu must have a visible bounding box').not.toBeNull();
+        expect(bounds!.x, 'section menu left edge must stay inside viewport').toBeGreaterThanOrEqual(0);
+        expect(bounds!.x + bounds!.width, 'section menu right edge must stay inside viewport').toBeLessThanOrEqual(viewport.width);
+        const buttons = await sectionPanel.locator('button, a[href]').evaluateAll(elements => elements.map(element => {
+          const rect = element.getBoundingClientRect();
+          return { text: (element.textContent || '').trim(), left: rect.left, right: rect.right };
+        }));
+        expect(buttons.filter(button => button.left < 0 || button.right > viewport.width), 'all section menu buttons must fit in viewport: ' + JSON.stringify(buttons)).toEqual([]);
+      }
+      await page.keyboard.press('Escape');
+      await expect(sectionPanel).toBeHidden();
       await page.getByTestId('brand-selector-trigger').click();
       const brandMenu = page.getByRole('region', { name: 'Выбор марки автомобиля' });
       await expect(brandMenu).toBeVisible();
