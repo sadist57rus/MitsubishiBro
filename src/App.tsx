@@ -273,6 +273,7 @@ function AppContent() {
         title={currentTabInfo.title}
         showBack={activeTab !== 'overview'}
         onBack={() => setActiveTab('overview')}
+        onOpenApkGuide={() => setIsApkGuideOpen(true)}
         onRegisterBackHandler={(handler) => { headerBackHandlerRef.current = handler; }}
       />
 
@@ -472,6 +473,8 @@ function AppContent() {
                 <span>Сборка APK на GitHub</span>
               </button>
               <span>Car Brother</span>
+              <span>·</span>
+              <span>Japan · Auto</span>
             </div>
           </div>
         </div>
