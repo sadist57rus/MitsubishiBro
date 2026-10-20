@@ -273,7 +273,6 @@ function AppContent() {
         title={currentTabInfo.title}
         showBack={activeTab !== 'overview'}
         onBack={() => setActiveTab('overview')}
-        onOpenApkGuide={() => setIsApkGuideOpen(true)}
         onRegisterBackHandler={(handler) => { headerBackHandlerRef.current = handler; }}
       />
 
