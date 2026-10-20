@@ -214,6 +214,8 @@ test('настройки применяют цветовую палитру и �
 
   const paletteButton = page.getByRole('button', { name: /Чёрный \/ жёлтый/ });
   await paletteButton.click();
+  await expect(page.getByRole('button', { name: 'Применить', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'Применить', exact: true }).click();
   await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe('black-yellow');
   await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-color-palette'))).toBe('black-yellow');
   await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent').trim())).toBe('#facc15');
@@ -315,6 +317,7 @@ test('theme mode and color palette selections update the active document styles'
   await expect.poll(() => page.evaluate(() => document.documentElement.classList.contains('dark'))).toBe(true);
 
   await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
+  await page.getByRole('button', { name: 'Применить', exact: true }).click();
   await expect.poll(() => page.evaluate(() => document.documentElement.dataset.palette)).toBe('black-yellow');
   await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent').trim())).toBe('#facc15');
 
@@ -340,6 +343,7 @@ test('palette selection persists and the section header remains visible', async 
   for (const palette of palettes) {
     const paletteButton = page.getByRole('button', { name: new RegExp(palette.name) });
     await paletteButton.click();
+    await page.getByRole('button', { name: 'Применить', exact: true }).click();
     await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
     await expect(paletteButton).toHaveAttribute('aria-pressed', 'true');
     await expect(page.getByTestId('header-section-title')).toHaveText('Настройки');
