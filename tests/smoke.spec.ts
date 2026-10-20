@@ -163,6 +163,8 @@ for (const viewport of viewports) {
 
     test('more screen keyboard navigation and existing APK guide: ' + suffix, async ({ page }) => {
       const consoleErrors = await prepare(page, viewport, theme);
+      await expect(page.locator('header').getByRole('button', { name: /APK/i })).toHaveCount(0);
+      await expect(page.getByText('Japan · Auto')).toHaveCount(0);
       const phoneNav = page.getByTestId('phone-bottom-navigation');
       const moreTrigger = await phoneNav.isVisible().catch(() => false)
         ? page.getByTestId('phone-more-trigger')
