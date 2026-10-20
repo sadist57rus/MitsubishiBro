@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Smartphone } from 'lucide-react';
 
 export type TabId = 'overview' | 'garage' | 'settings' | 'brands' | 'fuel' | 'specs' | 'bulbs' | 'parts' | 'fuses' | 'tuning' | 'guides' | 'issues' | 'wheels' | 'maintenance' | 'obd' | 'logbook' | 'more';
 
@@ -7,10 +7,11 @@ interface Props {
   title: string;
   showBack: boolean;
   onBack: () => void;
+  onOpenApkGuide?: () => void;
   onRegisterBackHandler?: (handler: () => boolean) => void;
 }
 
-export default function Header({ title, showBack, onBack, onRegisterBackHandler }: Props) {
+export default function Header({ title, showBack, onBack, onOpenApkGuide, onRegisterBackHandler }: Props) {
   useEffect(() => {
     onRegisterBackHandler?.(() => false);
     return () => onRegisterBackHandler?.(() => false);
@@ -33,6 +34,18 @@ export default function Header({ title, showBack, onBack, onRegisterBackHandler 
             </button>
           )}
           <h1 className="min-w-0 flex-1 truncate text-lg font-bold text-slate-900 dark:text-white" data-testid="header-section-title">{title}</h1>
+          {onOpenApkGuide && (
+            <button
+              type="button"
+              onClick={onOpenApkGuide}
+              aria-label="Инструкция по сборке APK"
+              title="Инструкция по сборке APK"
+              className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 font-semibold text-slate-700 transition hover:border-red-400 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+            >
+              <Smartphone aria-hidden="true" size={20} />
+              <span className="hidden sm:inline">APK</span>
+            </button>
+          )}
         </div>
       </div>
     </header>
