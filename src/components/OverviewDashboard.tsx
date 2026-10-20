@@ -68,7 +68,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
         )}
         {hasVehicle && <div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
           <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-950"><p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">Кузов</p><p className="mt-0.5 text-sm font-bold leading-snug text-slate-900 dark:text-white sm:text-base md:text-lg">{model?.bodyType || '—'}</p></div>
-          <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-950"><p className="text-sm text-slate-500 dark:text-slate-400">Поколение</p><p className="mt-1 text-xl font-bold text-slate-900 dark:text-white md:text-2xl">{model?.generation || '—'}</p></div>
+          <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-950"><p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">Поколение</p><p className="mt-0.5 text-sm font-bold leading-snug text-slate-900 dark:text-white sm:text-base md:text-lg">{model?.generation || '—'}</p></div>
         </div>}
       </section>
 
