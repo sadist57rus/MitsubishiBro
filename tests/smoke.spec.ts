@@ -179,7 +179,7 @@ for (const viewport of viewports) {
       await expect(page.getByTestId('header-back')).toBeVisible();
       await page.getByTestId('header-back').focus();
       await page.getByTestId('header-back').press('Enter');
-      await expect(page.getByTestId('header-section-title')).toHaveText('Главная (Обзор)');
+      await expect(page.getByTestId('header-section-title')).toHaveText('Главная');
       await expect(page.getByRole('button', { name: /Выбрать или изменить автомобиль/i })).toBeVisible();
 
       const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
