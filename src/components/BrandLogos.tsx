@@ -31,7 +31,7 @@ export function BrandLogo({
       alt={KNOWN_BRANDS.has(id) ? `${id[0].toUpperCase() + id.slice(1)} logo` : 'Generic car symbol'}
       loading="eager"
       decoding="async"
-      style={{ objectFit: 'contain', flexShrink: 0 }}
+      style={{ objectFit: 'contain', flexShrink: 0, backgroundColor: '#fff', borderRadius: '0.375rem', padding: '2px', boxSizing: 'border-box' }}
       onError={(event) => {
         const image = event.currentTarget;
         if (!image.src.endsWith('/brand-logos/generic-car.svg')) {
