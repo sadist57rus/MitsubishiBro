@@ -30,7 +30,6 @@ const FuelMonitor = lazy(async () => { return import('./components/FuelMonitor')
 const BulbsCatalog = lazy(async () => { await import('./data/bulbsData'); return import('./components/BulbsCatalog'); });
 import ApkGuideModal from './components/ApkGuideModal';
 const JapaneseBrandsHub = lazy(async () => { await import('./data/vehicleCatalog'); return import('./components/JapaneseBrandsHub'); });
-import BrandSelectorModal from './components/BrandSelectorModal';
 import { useTheme } from './context/ThemeContext';
 import { JAPANESE_BRANDS } from './data/vehicleCatalog';
 import { VehicleProvider, useVehicle } from './context/VehicleContext';
@@ -77,7 +76,6 @@ function AppContent() {
   const lastBackPressRef = useRef(0);
   const [backHint, setBackHint] = useState('');
   const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
-  const [isBrandSelectorOpen, setIsBrandSelectorOpen] = useState(false);
   const [isApkGuideOpen, setIsApkGuideOpen] = useState(false);
   const setActiveTab = (tab: TabId) => {
     if (tab === activeTabRef.current) return;
@@ -144,7 +142,6 @@ function AppContent() {
     let active = true;
     const listener = CapacitorApp.addListener('backButton', () => {
       if (!active) return;
-      if (isBrandSelectorOpen) { setIsBrandSelectorOpen(false); return; }
       if (isApkGuideOpen) { setIsApkGuideOpen(false); return; }
       if (headerBackHandlerRef.current()) return;
       if (activeTabRef.current !== 'overview') {
@@ -165,7 +162,7 @@ function AppContent() {
       active = false;
       void listener.then(handle => handle.remove());
     };
-  }, [isBrandSelectorOpen, isApkGuideOpen]);
+  }, [isApkGuideOpen]);
 
   const { vehicleId: activeVehicleId, engine: selectedEngine, setEngine: setSelectedEngine, brandId: selectedBrandId, setBrandId: setSelectedBrandId, modelId: selectedModelId, setModelId: setSelectedModelId, vehicles, activeVehicle, addVehicle, updateVehicle } = useVehicle();
   const [setupBrandId, setSetupBrandId] = useState('nissan');
@@ -327,7 +324,6 @@ function AppContent() {
           const dx = touch.clientX - start.x;
           const dy = touch.clientY - start.y;
           if (dx < 90 || Math.abs(dy) > 70 || dx < Math.abs(dy) * 1.25) return;
-          if (isBrandSelectorOpen) { setIsBrandSelectorOpen(false); return; }
           if (isApkGuideOpen) { setIsApkGuideOpen(false); return; }
           if (headerBackHandlerRef.current()) return;
           if (activeTabRef.current !== 'overview') {
@@ -338,14 +334,7 @@ function AppContent() {
       >
         <SectionErrorBoundary key={activeTab} sectionKey={activeTab}><Suspense fallback={<div className="rounded-xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">Загрузка раздела…</div>}>
         {activeTab === 'overview' && (
-          <div className="space-y-5"><OverviewDashboard
-            onNavigate={setActiveTab}
-            selectedEngine={selectedEngine}
-            onSelectEngine={setSelectedEngine}
-            selectedBrandId={selectedBrandId}
-            onSelectBrand={setSelectedBrandId}
-            onOpenBrandSelector={() => setIsBrandSelectorOpen(true)}
-          /></div>
+          <div className="space-y-5"><OverviewDashboard onNavigate={setActiveTab} /></div>
         )}
 
         {activeTab === 'more' && (
@@ -483,19 +472,6 @@ function AppContent() {
         onClose={() => setIsApkGuideOpen(false)}
       />
 
-      {/* Brand Selector Modal */}
-      <BrandSelectorModal
-        isOpen={isBrandSelectorOpen}
-        onClose={() => {
-          setIsBrandSelectorOpen(false);
-          window.requestAnimationFrame(() => {
-            document.querySelector<HTMLButtonElement>('[aria-label^="Выбрать марку автомобиля"]')?.focus();
-          });
-        }}
-        selectedBrandId={selectedBrandId}
-        onSelectBrand={setSelectedBrandId}
-        onSelectModel={setSelectedModelId}
-      />
     </div>
   );
 }
