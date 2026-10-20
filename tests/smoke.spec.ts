@@ -378,6 +378,16 @@ test('driver mode tokens enforce readable text and minimum touch targets', async
   }
 });
 
+
+test('section favorite action stays inside the main content area', async ({ page }) => {
+  await chooseToyota(page);
+  await page.getByTestId('phone-more-trigger').click();
+  await page.getByTestId('more-nav-item-settings').click();
+  const main = page.locator('main');
+  await expect(main.getByTestId('section-favorite-toggle')).toBeVisible();
+  await expect(page.locator('header').getByTestId('section-favorite-toggle')).toHaveCount(0);
+});
+
 test('wide navigation exposes six primary destinations and a dedicated More screen', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await chooseToyota(page);
