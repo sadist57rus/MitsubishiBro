@@ -1073,8 +1073,7 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['Уточнить по коду коробки и рынку'],
     drivetrain: 'Зависит от версии; сверять по VIN/табличке.',
     sourceNotes: 'Индекс семейства добавлен для покрытия каталога. Не использовать как руководство для ремонта: характеристики агрегатов, жидкости, лампы и предохранители требуют точной идентификации и OEM-источника.'
-  })
-
+  }),
   makeSupplementalModel({
     id: 'toyota-land-cruiser-prado-90-j90-suv',
     brandId: 'toyota',
