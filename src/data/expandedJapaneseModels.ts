@@ -1153,6 +1153,221 @@ const supplementalModels: JapaneseCarModel[] = [
     ]
   })
 
+,
+  makeSupplementalModel({
+    id: 'nissan-pathfinder-r50-suv', brandId: 'nissan',
+    name: 'Pathfinder R50', generation: 'II поколение (R50)', years: '1995–2004', bodyType: 'Внедорожник',
+    overview: 'Pathfinder R50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VG33E / QD32', name: 'Бензиновый V6 или дизель; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/prairie_terrano.html', scope: 'Заводской архив Nissan содержит Pathfinder/Terrano; сверять рынок и кузовной код.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-pathfinder-r51-suv', brandId: 'nissan',
+    name: 'Pathfinder R51', generation: 'III поколение (R51)', years: '2004–2012', bodyType: 'Внедорожник',
+    overview: 'Pathfinder R51: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VQ40DE / YD25DDTi', name: 'Бензиновый V6 или турбодизель; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/prairie_terrano.html', scope: 'Исторический портал Nissan; параметры для ремонта требуют документации конкретной версии.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-pathfinder-r52-suv', brandId: 'nissan',
+    name: 'Pathfinder R52', generation: 'IV поколение (R52)', years: '2012–2021', bodyType: 'Внедорожник',
+    overview: 'Pathfinder R52: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VQ35DE / QR25DER', name: 'Бензиновый V6 или гибрид — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/COMPANY/PROFILE/HERITAGE/2000/', scope: 'История модельного ряда Nissan; не заменяет заводской мануал.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-pathfinder-r53-suv', brandId: 'nissan',
+    name: 'Pathfinder R53', generation: 'V поколение (R53)', years: '2021–наст. время', bodyType: 'Внедорожник',
+    overview: 'Pathfinder R53: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VQ35DD', name: 'Бензиновый V6 для отдельных рынков', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/COMPANY/PROFILE/HERITAGE/2000/', scope: 'Обзор модельного ряда Nissan; спецификацию проверять по рынку и году.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-murano-z50-crossover', brandId: 'nissan',
+    name: 'Murano Z50', generation: 'I поколение (Z50)', years: '2002–2007', bodyType: 'Кроссовер',
+    overview: 'Murano Z50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 4770, widthMm: 1880, heightMm: 1685, wheelbaseMm: 2825,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: '1720 кг — заводская спецификация японской версии 2WD 350XV 2004 года',
+    engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 DOHC', displacement: '3498 см³', powerHp: '231 PS при 5600 об/мин для японской версии 2WD 350XV 2004 года', torqueNm: '333 Н·м при 2800 об/мин для указанной версии', valves: '24V DOHC V6', fuelSystem: 'EFI; исполнение зависит от рынка', timingDrive: 'Цепь ГРМ; точный регламент обслуживания сверять с руководством', strengths: ['Высокая плавность и тяга V6'], weaknesses: ['Параметры японской 2WD-версии нельзя автоматически переносить на AWD и экспортные исполнения'] }],
+    transmissions: ['Вариатор CVT на ряде версий; точный код и спецификацию жидкости сверить по VIN/табличке агрегата'],
+    drivetrain: 'Выпускались переднеприводные и полноприводные версии; привод и трансмиссию не определять только по названию Z50.',
+    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Дорожный просвет, бак, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
+    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-murano-z51-crossover', brandId: 'nissan',
+    name: 'Murano Z51', generation: 'II поколение (Z51)', years: '2008–2014', bodyType: 'Кроссовер',
+    overview: 'Murano Z51: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VQ35DE / YD25', name: 'Бензиновый V6 или дизель — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/COMPANY/PROFILE/HERITAGE/2000/', scope: 'История Nissan; данные разных рынков не взаимозаменяемы.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-murano-z52-crossover', brandId: 'nissan',
+    name: 'Murano Z52', generation: 'III поколение (Z52)', years: '2014–2024', bodyType: 'Кроссовер',
+    overview: 'Murano Z52: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 для отдельных рынков', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/COMPANY/PROFILE/HERITAGE/2000/', scope: 'Обзор модельного ряда Nissan; нужна региональная спецификация.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-murano-z53-crossover', brandId: 'nissan',
+    name: 'Murano Z53', generation: 'IV поколение (Z53)', years: '2024–наст. время', bodyType: 'Кроссовер',
+    overview: 'Murano Z53: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'VC-Turbo', name: 'Бензиновый турбодвигатель; зависит от рынка', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/IR/FINANCIAL_RESULTS/ASSETS/DATA/2024/20243rd_presentation_169_e.pdf', scope: 'Материалы Nissan подтверждают новое поколение Murano; параметры конкретной комплектации требуют проверки.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-xtrail-t30-crossover', brandId: 'nissan',
+    name: 'X-Trail T30', generation: 'I поколение (T30)', years: '2000–2007', bodyType: 'Кроссовер',
+    overview: 'X-Trail T30: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 4455, widthMm: 1765, heightMm: 1750, wheelbaseMm: 2625,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: '1400 кг — заводская спецификация NT30 4WD X 2003 года',
+    engines: [{ code: 'QR20DE', name: '2.0 л бензин, рядный 4-цилиндровый DOHC', displacement: '1998 см³', powerHp: '150 PS при 6000 об/мин для NT30 4WD X 2003 года', torqueNm: '200 Н·м при 4000 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ; регламент сверять с заводским руководством', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Точные параметры зависят от года, рынка и версии'] }],
+    transmissions: ['МКПП или автоматическая трансмиссия — зависит от рынка; точный тип/код сверить по VIN'],
+    drivetrain: 'В источнике приведена версия NT30 4WD X; у поколения существовали и другие комплектации, поэтому привод уточнять по табличке/VIN.',
+    sourceNotes: 'Заводская карточка Nissan описывает X-TRAIL 4WD X NT30 2003 года: 4455×1765×1750 мм, база 2625 мм, масса 1400 кг, QR20DE 1998 см³, 150 PS при 6000 об/мин и 200 Н·м при 4000 об/мин. Эти параметры относятся к конкретной японской версии. Дорожный просвет, объём бака, багажника и сервисные жидкости здесь не подтверждены универсально.',
+    sourceReferences: [{ label: 'Nissan Heritage — X-TRAIL 4WD X (2003, NT30)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/469_x_trail_x_4wd.html', scope: 'Официальные размеры, масса, двигатель, мощность и момент для конкретной NT30 4WD X.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-xtrail-t31-crossover', brandId: 'nissan',
+    name: 'X-Trail T31', generation: 'II поколение (T31)', years: '2007–2013', bodyType: 'Кроссовер',
+    overview: 'X-Trail T31: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 4635, widthMm: 1790, heightMm: 1785, wheelbaseMm: 2630,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от комплектации и положения сидений', fuelTankLiters: 65,
+    curbWeightKg: 'Зависит от двигателя, коробки и привода',
+    engines: [
+      { code: 'MR20DE', name: '2.0 л бензин', displacement: '1997 см³', powerHp: '137 PS при 5200 об/мин для японской версии 2013 года', torqueNm: '200 Н·м при 4400 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Широко применялся в линейке'], weaknesses: ['Характеристики различаются по рынкам и годам'] },
+      { code: 'QR25DE', name: '2.5 л бензин', displacement: '2488 см³', powerHp: '170 PS при 6000 об/мин для японской версии 2013 года', torqueNm: '230 Н·м при 4400 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Больший запас тяги'], weaknesses: ['Параметры и доступность зависят от рынка'] },
+      { code: 'M9R', name: '2.0 л турбодизель dCi', displacement: '1995 см³', powerHp: '173 PS при 3750 об/мин для японской 20GT', torqueNm: '360 Н·м при 2000 об/мин для указанной версии', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Цепь; сверять сервисную процедуру по руководству', strengths: ['Высокий момент на низких оборотах'], weaknesses: ['Система очистки выхлопа зависит от рынка'] }
+    ],
+    transmissions: ['МКПП, автоматическая коробка или Xtronic CVT — по рынку и двигателю; для дизеля M9R встречаются отдельные трансмиссионные сочетания. Проверять по VIN.'],
+    drivetrain: 'Передний привод или ALL MODE 4x4-i. На японском рынке существовали бензиновые MR20DE/QR25DE и дизельные 20GT с M9R.',
+    sourceNotes: 'Заводская страница Nissan Japan для T31 2013 года указывает MR20DE 2.0 л — 137 PS/200 Н·м, QR25DE 2.5 л — 170 PS/230 Н·м и дизель M9R 2.0 л — 173 PS/360 Н·м для отдельных японских исполнений. Размеры, масса, коробки и выбросные системы нужно сверять по конкретному рынку/модификации.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T31, ходовые качества и двигатели (2013)', url: 'https://history.nissan.co.jp/X-TRAIL/T31/1312/performance.html', scope: 'Заводские параметры двигателей MR20DE, QR25DE и M9R для конкретных японских версий.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История поколений и развитие ALL MODE 4x4-i.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-xtrail-t32-crossover', brandId: 'nissan',
+    name: 'X-Trail T32', generation: 'III поколение (T32)', years: '2013–2022', bodyType: 'Кроссовер',
+    overview: 'X-Trail T32: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 4640, widthMm: 1820, heightMm: 1715, wheelbaseMm: 2705,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: 0,
+    curbWeightKg: 'Зависит от двигателя, привода и комплектации',
+    engines: [
+      { code: 'MR20DD', name: '2.0 л бензин, непосредственный впрыск', displacement: '1997 см³', powerHp: '147 PS для японской версии 2013 года', torqueNm: '207 Н·м для указанной версии', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск', timingDrive: 'Цепь ГРМ; обслуживание по заводскому руководству', strengths: ['Доступны бензиновые и гибридные варианты'], weaknesses: ['Мощность и системные показатели гибрида различаются'] },
+      { code: 'QR25DE', name: '2.5 л бензин', displacement: '2488 см³ — для отдельных рынков', powerHp: 'Зависит от рынка и комплектации', torqueNm: 'Зависит от рынка и комплектации', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ; сверить по коду двигателя', strengths: ['Более высокий рабочий объём'], weaknesses: ['Не все рынки имели эту версию'] },
+      { code: 'R9M', name: '1.6 л турбодизель — отдельные европейские версии', displacement: '1598 см³', powerHp: 'Зависит от калибровки', torqueNm: 'Зависит от калибровки', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'По заводскому руководству конкретного исполнения', strengths: ['Экономичность на трассе'], weaknesses: ['Экология и комплектация выхлопа зависят от рынка'] }
+    ],
+    transmissions: ['Xtronic CVT на японских бензиновых версиях; код трансмиссии и спецификацию жидкости проверять по VIN. У других рынков состав линейки отличается.'],
+    drivetrain: 'Передний или ALL MODE 4x4-i полный привод — по комплектации. Для гибрида имеются отдельные параметры силовой установки.',
+    sourceNotes: 'Японские материалы Nissan для T32 указывают бензиновый MR20DD 1997 см³, 147 PS и 207 Н·м; гибридная система с мотором RM31 имеет суммарную мощность 182 PS для конкретной версии. Размеры и масса различаются по году, 5/7-местному кузову и приводу; не переносить параметры японского рынка на все машины СНГ.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T32, технические характеристики (2013)', url: 'https://history.nissan.co.jp/X-TRAIL/T32/1312/spec_specification.html', scope: 'Заводская таблица характеристик и передаточных чисел для японских версий T32 2013 года.' },
+      { label: 'Nissan Japan — X-TRAIL T32, двигатель и гибридная система', url: 'https://history.nissan.co.jp/X-TRAIL/T32/1312/performance_mechanism.html', scope: 'MR20DD: 147 PS/207 Н·м; гибридная версия с RM31 — системные 182 PS в указанном исполнении.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История T32, ALL MODE 4x4-i, бензиновых и гибридных вариантов.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-xtrail-t33-crossover', brandId: 'nissan',
+    name: 'X-Trail T33', generation: 'IV поколение (T33)', years: '2020–наст. время', bodyType: 'Кроссовер',
+    overview: 'X-Trail T33: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 4660, widthMm: 1840, heightMm: 1720, wheelbaseMm: 2705,
+    groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от 5/7-местной компоновки', fuelTankLiters: 55,
+    curbWeightKg: '1740–1880 кг в зависимости от 2WD/4WD и комплектации (японская спецификация 2022 года)',
+    engines: [{ code: 'KR15DDT', name: '1.5 л VC-TURBO — двигатель-генератор системы e-POWER', displacement: '1497 см³', powerHp: '144 PS при 4400–5000 об/мин для японской версии 2022 года', torqueNm: '250 Н·м при 2400–4000 об/мин для указанной версии', valves: 'DOHC, рядный 3-цилиндровый', fuelSystem: 'Nissan Di, непосредственный впрыск', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['В e-POWER колёса приводятся электромоторами; ДВС работает как генератор'], weaknesses: ['Нельзя описывать как обычную механическую связь двигателя с колёсами; спецификации различаются по году и рынку'] }],
+    transmissions: ['Электрический привод e-POWER; традиционной ступенчатой КПП нет. Двигатель KR15DDT вырабатывает электричество; e-4ORCE — электрический полный привод на соответствующих версиях.'],
+    drivetrain: 'Японская линейка включает 2WD и e-4ORCE 4WD. Компоновка и параметры зависят от года и комплектации.',
+    sourceNotes: 'Для японского X-Trail T33 по заводскому листу 2022 года: 4660×1840×1720 мм, база 2705 мм, дорожный просвет 200 мм для ряда 2WD/185 мм для ряда e-4ORCE, бак 55 л; KR15DDT 1497 см³, 144 PS и 250 Н·м. Это спецификация японского рынка, а не универсальная спецификация СНГ. Системная мощность тяговых электромоторов отличается от мощности двигателя-генератора.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T33, заводская таблица характеристик (2022)', url: 'https://history.nissan.co.jp/ARCHIVES/PDF/X-TRAIL/T33/20220720/x-trail_specsheet.pdf', scope: 'Размеры, база, дорожный просвет, масса, бак, двигатель-генератор и моторы для японских версий 2WD/4WD.' },
+      { label: 'Nissan Technical Review — e-POWER / VC-TURBO / e-4ORCE', url: 'https://www.nissan-global.com/EN/TECHNICALREVIEW/PDF/NISSAN_TECHINICAL_REVIEW_89_En_ALL.pdf', scope: 'Заводское техническое описание архитектуры e-POWER: двигатель вырабатывает электроэнергию, тягу создают электромоторы.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История поколений и основные технологические особенности T31/T32/T33.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-qashqai-j10-crossover', brandId: 'nissan',
+    name: 'Qashqai J10', generation: 'I поколение (J10)', years: '2006–2013', bodyType: 'Кроссовер',
+    overview: 'Qashqai J10: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'HR16DE / MR20DE / K9K', name: 'Бензиновые и дизельные семейства; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE/STORIES/', scope: 'Официальная история Nissan указывает Qashqai/Dualis J10 в линейке кроссоверов.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-qashqai-j11-crossover', brandId: 'nissan',
+    name: 'Qashqai J11', generation: 'II поколение (J11)', years: '2013–2021', bodyType: 'Кроссовер',
+    overview: 'Qashqai J11: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'HRA2DDT / MR20DD / K9K', name: 'Бензиновые и дизельные семейства; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE/STORIES/', scope: 'Исторический портал Nissan; параметры зависят от модификации.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-qashqai-j12-crossover', brandId: 'nissan',
+    name: 'Qashqai J12', generation: 'III поколение (J12)', years: '2021–наст. время', bodyType: 'Кроссовер',
+    overview: 'Qashqai J12: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
+    engines: [{ code: 'HR13DDT / e-POWER', name: 'Бензиновые и гибридные версии — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
+    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
+    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
+    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
+    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/IR/FINANCIAL_RESULTS/ASSETS/DATA/2024/20243rd_presentation_script_147_e.pdf', scope: 'Материалы Nissan описывают развитие e-POWER и его применение в Qashqai.' }]
+  })
 ];
 
 
