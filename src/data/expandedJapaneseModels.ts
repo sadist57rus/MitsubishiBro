@@ -1466,7 +1466,7 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'toyota-bb-qnc20', brandId: 'toyota', name: 'bB (QNC20/QNC21/QNC25)', generation: 'II поколение', years: '2005–2016', bodyType: 'Хэтчбек',
     overview: 'Второе поколение bB японского рынка. Двигатели, привод и трансмиссии зависят от комплектации.',
     lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
-    engines: [], transmissions: ['Нет подтверждённых данных для всего поколения; сверить по коду кузова'],
+    engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для всего поколения; сверить по коду кузова'],
     drivetrain: 'Зависит от кузовного кода и комплектации.',
     sourceNotes: 'Карточка поколения добавлена для навигации. Технические параметры оставлены незаполненными до проверки по конкретной заводской комплектации.',
     sourceReferences: [{ label: 'Toyota — официальный каталог bB', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-bB/', scope: 'Поиск заводских японских комплектаций.' }]
@@ -1485,7 +1485,7 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-cube-z11', brandId: 'nissan', name: 'Cube (Z11)', generation: 'II поколение', years: '2002–2008', bodyType: 'Минивэн',
     overview: 'Второе поколение Nissan Cube. Двигатель, трансмиссия и привод менялись по годам; сверять по кузовному коду и рынку.',
     lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
-    engines: [], transmissions: ['Нет подтверждённых данных для единого описания поколения; проверить код агрегата'],
+    engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для единого описания поколения; проверить код агрегата'],
     drivetrain: 'Зависит от комплектации и кода кузова.',
     sourceNotes: 'Карточка поколения добавлена для навигации. Размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
     sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }]
@@ -1494,7 +1494,7 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-cube-z12', brandId: 'nissan', name: 'Cube (Z12)', generation: 'III поколение', years: '2008–2020', bodyType: 'Минивэн',
     overview: 'Третье поколение Nissan Cube. Спецификации менялись по году и комплектации.',
     lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: 'Нет подтверждённых данных',
-    engines: [], transmissions: ['Нет подтверждённых данных для единого описания поколения; сверить по кузовному коду'],
+    engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для единого описания поколения; сверить по кузовному коду'],
     drivetrain: 'Зависит от комплектации и рынка.',
     sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
     sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
