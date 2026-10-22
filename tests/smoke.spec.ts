@@ -460,9 +460,10 @@ test('активный пункт нижней навигации использ
     return JSON.stringify({ actual: getComputedStyle(active).color, expected });
   })).toBe(await page.evaluate(() => {
     const active = document.querySelector('[data-testid="phone-nav-item-overview"]');
+    if (!active) return '';
     const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
     const probe = document.createElement('span');
-    probe.style.color = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+    probe.style.color = getComputedStyle(active).getPropertyValue(variable).trim();
     document.body.append(probe);
     const expected = getComputedStyle(probe).color;
     probe.remove();
@@ -503,9 +504,10 @@ test('нижняя навигация сохраняет контраст во �
       return JSON.stringify({ actual: getComputedStyle(element).color, expected });
     })).toBe(await page.evaluate(() => {
       const element = document.querySelector('[data-testid="phone-nav-item-settings"]');
+      if (!element) return '';
       const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
       const probe = document.createElement('span');
-      probe.style.color = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+      probe.style.color = getComputedStyle(element).getPropertyValue(variable).trim();
       document.body.append(probe);
       const expected = getComputedStyle(probe).color;
       probe.remove();
@@ -521,7 +523,9 @@ test('нижняя навигация сохраняет контраст во �
   await expect.poll(() => active.evaluate(element => getComputedStyle(element).color)).toBe(
     await page.evaluate(() => {
       const probe = document.createElement('span');
-      probe.style.color = getComputedStyle(document.querySelector('[data-testid="phone-nav-item-settings"]')).getPropertyValue('--palette-accent-content').trim();
+      const element = document.querySelector('[data-testid="phone-nav-item-settings"]');
+      if (!element) return '';
+      probe.style.color = getComputedStyle(element).getPropertyValue('--palette-accent-content').trim();
       document.body.append(probe);
       const color = getComputedStyle(probe).color;
       probe.remove();
