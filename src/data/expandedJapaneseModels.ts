@@ -25,6 +25,7 @@ const makeSupplementalModel = (data: {
   transmissions: string[];
   drivetrain?: string;
   sourceNotes: string;
+  sourceReferences?: JapaneseCarModel['sourceReferences'];
 }): JapaneseCarModel => {
   return {
     id: data.id,
@@ -92,8 +93,8 @@ const makeSupplementalModel = (data: {
     ],
     dataQualityNote: data.sourceNotes,
     verificationStatus: 'unverified',
-    sourceReferences: [],
-    lastReviewed: '2026-10-16'
+    sourceReferences: data.sourceReferences ?? [],
+    lastReviewed: '2026-10-21'
   };
 }
 
@@ -1072,7 +1073,86 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['Уточнить по коду коробки и рынку'],
     drivetrain: 'Зависит от версии; сверять по VIN/табличке.',
     sourceNotes: 'Индекс семейства добавлен для покрытия каталога. Не использовать как руководство для ремонта: характеристики агрегатов, жидкости, лампы и предохранители требуют точной идентификации и OEM-источника.'
+  }),
+  makeSupplementalModel({
+    id: 'toyota-land-cruiser-prado-90-j90-suv',
+    brandId: 'toyota',
+    name: 'Land Cruiser Prado 90 (J90)',
+    generation: 'II поколение Prado (J90)',
+    years: '1996–2002',
+    bodyType: 'Внедорожник',
+    overview: 'Prado серии J90 выпускался с короткой 3-дверной и длинной 5-дверной базой. В заводской линейке встречались бензиновые 2.7/3.4 л и дизельные 3.0 л; конкретная комбинация зависит от рынка и года.',
+    lengthMm: 4675, widthMm: 1820, heightMm: 1880, wheelbaseMm: 2675,
+    groundClearanceMm: 220, trunkVolumeLiters: 'Зависит от 3/5-дверного кузова', fuelTankLiters: 90,
+    curbWeightKg: 'Примерно 1740–1960 кг для отдельных заводских исполнений; проверить табличку',
+    engines: [
+      { code: '3RZ-FE', name: '2.7 л бензин, рядный 4-цилиндровый', displacement: '2693 см³', powerHp: '150 PS для отдельных японских исполнений', torqueNm: 'Зависит от года и рынка', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферная конструкция'], weaknesses: ['Мощность и калибровки различаются по рынкам'] },
+      { code: '5VZ-FE', name: '3.4 л бензин V6', displacement: '3378 см³', powerHp: '185 PS для отдельных японских исполнений', torqueNm: '294 Н·м для отдельных японских исполнений', valves: '24V DOHC V6', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ; регламент по руководству конкретной версии', strengths: ['Плавная работа V6'], weaknesses: ['Требует соблюдения регламента ременного привода'] },
+      { code: '1KZ-TE', name: '3.0 л турбодизель', displacement: '2982 см³', powerHp: '140 PS для отдельных исполнений с интеркулером', torqueNm: 'Зависит от года и рынка', valves: '8V SOHC турбодизель', fuelSystem: 'Электронно управляемый дизельный впрыск', timingDrive: 'Уточнять по руководству для конкретного рынка', strengths: ['Высокий крутящий момент'], weaknesses: ['Особенно важны исправность охлаждения и корректное обслуживание'] },
+      { code: '1KD-FTV', name: '3.0 л турбодизель D-4D — поздние версии', displacement: '2982 см³', powerHp: 'Зависит от рынка и калибровки', torqueNm: 'Зависит от рынка и калибровки', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Уточнять по заводскому руководству', strengths: ['Более современная система впрыска'], weaknesses: ['Не смешивать с характеристиками 1KZ-TE'] }
+    ],
+    transmissions: ['МКПП или АКПП — по двигателю и рынку; точный код определить по табличке/VIN'],
+    drivetrain: 'Для серии характерен полный привод; схема и блокировки зависят от исполнения.',
+    sourceNotes: 'Заводская история Toyota подтверждает поколения, представительные размеры и часть моторной гаммы J90. Короткая и длинная базы имеют разные габариты; карточка показывает ориентир для 5-дверного кузова, а параметры конкретной машины нужно проверять по коду кузова.',
+    sourceReferences: [
+      { label: 'Toyota Global — Land Cruiser Prado 90 series', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012615/index.html', scope: 'Заводская история J90, габариты отдельных 5-дверных и 3-дверных исполнений, коды и характеристики 3RZ-FE/5VZ-FE/1KZ-TE/1KD-FTV' },
+      { label: 'Toyota Japan — каталог Prado, архив комплектаций', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-LAND_CRUISER_PRADO/200007/1007926/', scope: 'Пример японского 5-дверного J90 с 5VZ-FE; спецификация относится только к указанной комплектации' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-land-cruiser-prado-120-j120-suv',
+    brandId: 'toyota',
+    name: 'Land Cruiser Prado 120 (J120)',
+    generation: 'III поколение Prado (J120)',
+    years: '2002–2009',
+    bodyType: 'Внедорожник',
+    overview: 'Prado J120 выпускался с короткой и длинной базой. На разных рынках встречались бензиновые 2.7/3.4/4.0 л и дизельные 3.0 л; двигатель, коробка и оснащение нельзя назначать только по названию модели.',
+    lengthMm: 4715, widthMm: 1875, heightMm: 1870, wheelbaseMm: 2790,
+    groundClearanceMm: 220, trunkVolumeLiters: 'Зависит от кузова, сидений и рынка', fuelTankLiters: 87,
+    curbWeightKg: 'Примерно 1880–1990 кг для отдельных 5-дверных исполнений',
+    engines: [
+      { code: '3RZ-FE', name: '2.7 л бензин', displacement: '2693 см³', powerHp: '150 PS для отдельных японских исполнений', torqueNm: '235 Н·м для указанного исполнения', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферный бензиновый двигатель'], weaknesses: ['Параметры отличаются по рынку'] },
+      { code: '5VZ-FE', name: '3.4 л бензин V6', displacement: '3378 см³', powerHp: '185 PS для отдельных японских исполнений', torqueNm: '294 Н·м для отдельных японских исполнений', valves: '24V DOHC V6', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ; интервал по руководству конкретной версии', strengths: ['Плавная тяга V6'], weaknesses: ['Нужен подтверждённый регламент ремня'] },
+      { code: '1GR-FE', name: '4.0 л бензин V6', displacement: '3955 см³', powerHp: 'Зависит от года и рынка; около 249 PS для отдельных поздних японских версий', torqueNm: 'Зависит от калибровки и рынка', valves: '24V DOHC V6 Dual VVT-i на отдельных версиях', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Хороший запас тяги'], weaknesses: ['Расход топлива и параметры зависят от исполнения'] },
+      { code: '1KD-FTV', name: '3.0 л турбодизель D-4D', displacement: '2982 см³', powerHp: '127 кВт / 173 PS для отдельных исполнений', torqueNm: 'До 410 Н·м для отдельных исполнений', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Ремень ГРМ; регламент зависит от года и рынка', strengths: ['Высокая тяга на низких оборотах'], weaknesses: ['Требует правильной диагностики топливной системы и наддува'] }
+    ],
+    transmissions: ['5-ступенчатая МКПП и 4-/5-ступенчатые АКПП встречаются в зависимости от двигателя и рынка; точный код проверять по VIN'],
+    drivetrain: 'Полный привод; межосевой дифференциал и блокировки зависят от комплектации.',
+    sourceNotes: 'Размеры, масса и двигатели подтверждены для представительных заводских японских исполнений J120, а не для каждой машины СНГ. Не использовать объёмы жидкостей, номера деталей, моменты затяжки или интервалы без руководства для конкретного VIN.',
+    sourceReferences: [
+      { label: 'Toyota Global — Land Cruiser Prado 120 series', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60014203/index.html', scope: 'Заводская история J120 и представительные характеристики 5VZ-FE/3RZ-FE' },
+      { label: 'Toyota Japan — каталог Prado 120 TX', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-LAND_CRUISER_PRADO/200210/1011687/', scope: 'Пример 5-дверной версии с 3RZ-FE, габаритами 4715×1875×1870 мм, базой 2790 мм и баком 87 л' },
+      { label: 'Toyota Japan — каталог Prado 120 1GR-FE', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-LAND_CRUISER_PRADO/200508/10028727/', scope: 'Пример исполнения 2005 года с 1GR-FE; характеристики относятся к указанной комплектации' },
+      { label: 'Toyota technical manuals — Land Cruiser Prado 120/125', url: 'https://toyotamanuals.gitlab.io/PZ471-Z00W0-CA/htmlweb/contents/pdf.html', scope: 'Заводская ремонтная документация для серий TRJ120/125, GRJ120/125, KDJ120/125 и других перечисленных серий' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-land-cruiser-prado-150-j150-suv',
+    brandId: 'toyota',
+    name: 'Land Cruiser Prado 150 (J150)',
+    generation: 'IV поколение Prado (J150)',
+    years: '2009–2023',
+    bodyType: 'Внедорожник',
+    overview: 'Prado J150 — рамный внедорожник, выпускавшийся с несколькими бензиновыми и дизельными двигателями в зависимости от рынка и обновления. В этой записи собраны основные семейства моторов; точную модификацию необходимо выбирать по VIN, коду кузова и табличке агрегатов.',
+    lengthMm: 4760, widthMm: 1885, heightMm: 1850, wheelbaseMm: 2790,
+    groundClearanceMm: 215, trunkVolumeLiters: 'Зависит от 5/7-местной компоновки и рынка', fuelTankLiters: 87,
+    curbWeightKg: 'Примерно 2090–2180 кг для отдельных японских бензиновых исполнений',
+    engines: [
+      { code: '2TR-FE', name: '2.7 л бензин', displacement: '2693 см³', powerHp: 'Зависит от года и рынка; 163 PS для ряда японских исполнений', torqueNm: '246 Н·м для указанного исполнения', valves: '16V DOHC Dual VVT-i на поздних версиях', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Простая атмосферная конфигурация'], weaknesses: ['Динамика зависит от массы и комплектации'] },
+      { code: '1GR-FE', name: '4.0 л бензин V6', displacement: '3955 см³', powerHp: '276 PS для указанной японской версии 2009 года; другие рынки/годы отличаются', torqueNm: 'Зависит от калибровки и года', valves: '24V DOHC V6 Dual VVT-i', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Высокий запас мощности'], weaknesses: ['Расход топлива существенно зависит от условий и версии'] },
+      { code: '1KD-FTV', name: '3.0 л турбодизель D-4D — ранние версии', displacement: '2982 см³', powerHp: 'Зависит от рынка и калибровки', torqueNm: 'Зависит от рынка и калибровки', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Ремень ГРМ; интервал по руководству конкретной версии', strengths: ['Высокая тяга на низких оборотах'], weaknesses: ['Необходимо проверять состояние топливной системы и наддува'] },
+      { code: '1GD-FTV', name: '2.8 л турбодизель — поздние версии', displacement: '2755 см³', powerHp: 'Зависит от года и рынка', torqueNm: 'Зависит от калибровки и экологического исполнения', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Цепь ГРМ', strengths: ['Более современное дизельное семейство'], weaknesses: ['Системы очистки выхлопа зависят от рынка и года'] }
+    ],
+    transmissions: ['МКПП или АКПП; число передач и код агрегата зависят от двигателя, года и рынка. Проверять по VIN/табличке'],
+    drivetrain: 'Полный привод; раздаточная коробка, межосевой дифференциал и блокировки зависят от комплектации.',
+    sourceNotes: 'Заводские источники подтверждают габариты, базу и представительные двигатели J150, но рынок СНГ объединяет разные поставки. Значения дорожного просвета, массы, баков и моторных характеристик могут отличаться; перед ремонтом сверять точный кузовной код и руководство.',
+    sourceReferences: [
+      { label: 'Toyota Global — Land Cruiser Prado 150 series', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60001931/index.html', scope: 'Заводская история J150, габариты, база и представительная версия 1GR-FE' },
+      { label: 'Toyota Japan — каталог Prado 150 TX L package', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-LAND_CRUISER_PRADO/200909/10057803/', scope: 'Пример ранней версии J150 с 2TR-FE, габаритами 4760×1885×1850 мм, базой 2790 мм и баком 87 л' },
+      { label: 'Toyota Japan — официальные руководства Prado', url: 'https://manual.toyota.jp/landcruiserprado/', scope: 'Руководства владельца J150 по датам выпуска и типу двигателя; выбирать соответствующее производство/версию' }
+    ]
   })
+
 ];
 
 

@@ -831,6 +831,13 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           ],
           protocol: 'Toyota OBD-II / ISO 9141-2 / K-Line + M-OBD'
         },
+        sourceReferences: [
+          { label: 'Toyota Global — Land Cruiser 100 series', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012613/index.html', scope: 'Заводские данные по представительным японским версиям J100: размеры, база, масса и коды двигателей; не подтверждает каждое значение текущей карточки' },
+          { label: 'Toyota technical manuals — Land Cruiser 100 major technical specifications', url: 'https://toyotamanuals.gitlab.io/pz471-z0020-ca/htmlweb/ncf/ncf229e/m_06_0268.pdf', scope: 'Заводская таблица характеристик для отдельных исполнений с 2UZ-FE и 1HD-FTE' },
+          { label: 'Toyota Sverige — архив руководств владельца', url: 'https://www.toyota.se/broschyrer', scope: 'Официальные руководства Land Cruiser 100 по годам; выбрать документ по году и рынку автомобиля' }
+        ],
+        verificationStatus: 'unverified',
+        dataQualityNote: 'У серии есть заводские источники, но карточка включает рыночные варианты. Мощность, жидкости, коробка, лампы и сервисные объёмы проверяются по VIN, коду агрегата и руководству конкретного рынка.',
         knownIssues: [
           {
             title: 'Трещины выпускных коллекторов на моторе 2UZ-FE',
