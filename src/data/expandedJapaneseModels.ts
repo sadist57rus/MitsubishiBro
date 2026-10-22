@@ -1397,17 +1397,6 @@ const supplementalModels: JapaneseCarModel[] = [
     drivetrain: 'Передний или полный привод в зависимости от комплектации.',
     sourceNotes: 'Период поколения подтверждается официальным архивом Honda. Размеры — ориентир для японской версии; массу, бак, коробку и жидкости сверять с конкретной модификацией.',
     sourceReferences: [{ label: 'Honda — официальный архив Stepwgn', url: 'https://www.honda.co.jp/auto-archive/stepwgn/', scope: 'Поколения и периоды выпуска.' }, { label: 'Honda — официальный архив Stepwgn Spada', url: 'https://www.honda.co.jp/auto-archive/stepwgn/spada/', scope: 'Отдельная линейка Spada; характеристики могут отличаться.' }]
-  }),,
-  makeSupplementalModel({
-    id: 'toyota-prius-xw30', brandId: 'toyota', name: 'Prius (XW30)', generation: 'III поколение', years: '2009–2015', bodyType: 'Хэтчбек',
-    overview: 'Третье поколение Prius. Каталожная карточка поколения; численные параметры не добавляются без заводской спецификации точной версии.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
-    engines: [{ code: '2ZR-FXE', name: '1.8 л гибридный бензиновый двигатель — семейство', displacement: '1798 см³ для соответствующих версий; сверить по рынку', powerHp: 'Нет подтверждённых данных для конкретной комплектации', torqueNm: 'Нет подтверждённых данных для конкретной комплектации', valves: 'DOHC; уточнить по исполнению', fuelSystem: 'Toyota Hybrid System; вариант зависит от рынка', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Гибридная силовая установка'], weaknesses: ['Код двигателя и характеристики проверить по VIN'] }],
-    transmissions: ['Гибридная трансмиссия; точную спецификацию сверять по рынку и VIN'],
-    drivetrain: 'Уточнить по модификации.',
-    sourceNotes: 'Добавлен индекс поколения по заводской хронологии Toyota. В карточке намеренно не проставлены размеры, масса, бак и мощность: они требуют привязки к конкретной рыночной комплектации и заводскому каталогу.',
-    sourceReferences: [{ label: 'Toyota Global — хронология Prius', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/pdf/vehiclelineage.pdf', scope: 'Подтверждает поколение Prius III с 2009 года; не является источником численных спецификаций конкретной комплектации.' }]
   }),
 ];
 
