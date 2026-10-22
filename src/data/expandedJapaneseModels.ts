@@ -1400,6 +1400,109 @@ const supplementalModels: JapaneseCarModel[] = [
 
 
 
+
+  makeSupplementalModel({
+    id: 'toyota-corolla-levin-ae86', brandId: 'toyota', name: 'Corolla Levin (AE85/AE86)', generation: 'V поколение', years: '1983–1987', bodyType: 'Купе/Спорт',
+    overview: 'Заднеприводное купе японского рынка. AE85 и AE86 различаются двигателями и комплектациями; не переносить характеристики одной версии на другую.',
+    lengthMm: 4200, widthMm: 1625, heightMm: 1335, wheelbaseMm: 2400, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '880–960 кг для отдельных заводских комплектаций',
+    engines: [
+      { code: '4A-GEU', name: '1.6 л DOHC — отдельные AE86', displacement: '1587 см³', powerHp: '130 л.с. gross для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисной документации', strengths: ['Заводской высокооборотный двигатель'], weaknesses: ['Возраст и свапы требуют проверки'] },
+      { code: '3A-U', name: '1.5 л — отдельные AE85', displacement: '1452 см³', powerHp: '85 л.с. gross для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'OHC', fuelSystem: 'Зависит от исполнения', timingDrive: 'Уточнить по сервисной документации', strengths: ['Простая заводская версия'], weaknesses: ['Не относится к спортивной спецификации AE86'] }
+    ],
+    transmissions: ['5-ступенчатая МКПП; 4-ступенчатая АКПП для отдельных версий — проверить код агрегата'],
+    drivetrain: 'Задний привод для японских AE85/AE86.',
+    sourceNotes: 'Заводская историческая карточка Toyota для представительных японских комплектаций. Мощность AE86 указана как gross и не сопоставима напрямую с современными net-значениями.',
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE85/AE86', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003763/index.html', scope: 'Заводские данные отдельных японских версий.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-corolla-levin-ae92', brandId: 'toyota', name: 'Corolla Levin (AE91/AE92)', generation: 'VI поколение', years: '1987–1991', bodyType: 'Купе/Спорт',
+    overview: 'Переднеприводное купе шестого поколения; атмосферные и компрессорные двигатели относятся к разным комплектациям.',
+    lengthMm: 4245, widthMm: 1680, heightMm: 1300, wheelbaseMm: 2430, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '980–1070 кг для отдельных комплектаций',
+    engines: [
+      { code: '4A-GE', name: '1.6 л DOHC — отдельные AE92', displacement: '1587 см³', powerHp: '120 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Атмосферная версия'], weaknesses: ['Характеристики зависят от года и рынка'] },
+      { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '145 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить данные GT-Z на атмосферные версии'] }
+    ],
+    transmissions: ['МКПП/АКПП по комплектации; точный код проверить по табличке'],
+    drivetrain: 'Передний привод.',
+    sourceNotes: 'Размеры и характеристики относятся к отдельным японским версиям; кузовная ширина зависит от комплектации.',
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE91/AE92', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003784/', scope: 'Заводские данные отдельных японских комплектаций.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-corolla-levin-ae101', brandId: 'toyota', name: 'Corolla Levin (AE100/AE101)', generation: 'VII поколение', years: '1991–1995', bodyType: 'Купе/Спорт',
+    overview: 'Переднеприводное купе японского рынка с несколькими версиями двигателей 1.5 и 1.6 л.',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1020–1150 кг для отдельных комплектаций',
+    engines: [
+      { code: '4A-GE', name: '1.6 л DOHC 20V — GT APEX', displacement: '1587 см³', powerHp: '160 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Высокооборотная 20-клапанная версия'], weaknesses: ['Не является характеристикой всех AE101'] },
+      { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '170 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить характеристики GT-Z на атмосферные исполнения'] }
+    ],
+    transmissions: ['МКПП/АКПП по комплектации; код требует проверки'],
+    drivetrain: 'Передний привод.',
+    sourceNotes: 'Заводская карточка Toyota описывает представительные японские версии AE101; мощность не универсальна для поколения.',
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE100/AE101', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003913/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-corolla-levin-ae111', brandId: 'toyota', name: 'Corolla Levin (AE110/AE111)', generation: 'VIII поколение', years: '1995–2000', bodyType: 'Купе/Спорт',
+    overview: 'Последнее поколение Corolla Levin для японского рынка; производство завершилось в 2000 году.',
+    lengthMm: 4285, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '950–1020 кг для отдельных комплектаций',
+    engines: [
+      { code: '4A-GE', name: '1.6 л DOHC 20V — BZ-G', displacement: '1587 см³', powerHp: '165 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская спортивная версия'], weaknesses: ['Не относится ко всем AE111'] },
+      { code: '4A-FE', name: '1.6 л DOHC — отдельные версии', displacement: '1587 см³', powerHp: '115 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Менее форсированная заводская версия'], weaknesses: ['Требуется проверка кода кузова'] }
+    ],
+    transmissions: ['5-ступенчатая МКПП или 4-ступенчатая АКПП для отдельных версий; проверить код'],
+    drivetrain: 'Передний привод.',
+    sourceNotes: 'Заводская карточка Toyota для отдельных японских AE110/AE111. Мощность зависит от конкретного двигателя и комплектации.',
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE110/AE111', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60004085B/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-bb-ncp30', brandId: 'toyota', name: 'bB (NCP30/NCP31/NCP35)', generation: 'I поколение', years: '2000–2005', bodyType: 'Хэтчбек',
+    overview: 'Компактный высокий универсал на платформе Vitz. Двигатели 1.3 и 1.5 л, привод зависят от кода кузова и комплектации.',
+    lengthMm: 3845, widthMm: 1690, heightMm: 1640, wheelbaseMm: 2500, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1030–1040 кг для отдельных японских версий 2WD',
+    engines: [
+      { code: '2NZ-FE', name: '1.3 л бензин', displacement: '1298 см³', powerHp: '88 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Проверить кузовной код'] },
+      { code: '1NZ-FE', name: '1.5 л бензин', displacement: '1496 см³', powerHp: '110 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство Toyota'], weaknesses: ['Мощность и привод зависят от версии'] }
+    ],
+    transmissions: ['4-ступенчатая АКПП для представительных японских версий; проверить код коробки'],
+    drivetrain: 'Передний привод или full-time 4WD в зависимости от кузовного кода.',
+    sourceNotes: 'Официальная история Toyota приводит данные для отдельных NCP30/NCP31. Бак и клиренс здесь не подтверждены; параметры не универсальны для всех версий.',
+    sourceReferences: [{ label: 'Toyota — bB первого поколения', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012257/index.html', scope: 'Заводские характеристики представительных японских NCP30/NCP31.' }, { label: 'Toyota — каталог bB', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-bB/', scope: 'Заводские комплектации и различия по кузовному коду.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-bb-qnc20', brandId: 'toyota', name: 'bB (QNC20/QNC21/QNC25)', generation: 'II поколение', years: '2005–2016', bodyType: 'Хэтчбек',
+    overview: 'Второе поколение bB японского рынка. Двигатели, привод и трансмиссии зависят от комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
+    engines: [], transmissions: ['Нет подтверждённых данных для всего поколения; сверить по коду кузова'],
+    drivetrain: 'Зависит от кузовного кода и комплектации.',
+    sourceNotes: 'Карточка поколения добавлена для навигации. Технические параметры оставлены незаполненными до проверки по конкретной заводской комплектации.',
+    sourceReferences: [{ label: 'Toyota — официальный каталог bB', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-bB/', scope: 'Поиск заводских японских комплектаций.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-cube-z10', brandId: 'nissan', name: 'Cube (Z10)', generation: 'I поколение', years: '1998–2002', bodyType: 'Минивэн',
+    overview: 'Первое поколение Nissan Cube, компактный высокий кузов японского рынка. Двигатель и трансмиссию нужно уточнять по табличке.',
+    lengthMm: 3750, widthMm: 1610, heightMm: 1625, wheelbaseMm: 2360, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Зависит от комплектации',
+    engines: [{ code: 'CG13DE', name: '1.3 л бензин — отдельные версии Z10', displacement: '1274 см³', powerHp: '82 л.с. для представительной версии', torqueNm: '106 Н·м для представительной версии', valves: 'DOHC 16V', fuelSystem: 'Nissan ECCS/EGI', timingDrive: 'Уточнить по сервисной документации', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Не все Z10 имеют одинаковые агрегаты'] }],
+    transmissions: ['4-ступенчатая АКПП; вариатор встречается в отдельных версиях — проверить код коробки'],
+    drivetrain: 'Передний привод для указанной заводской версии; другие варианты требуют проверки.',
+    sourceNotes: 'Размеры и двигатель относятся к отдельным опубликованным спецификациям Z10, не ко всем комплектациям поколения.',
+    sourceReferences: [{ label: 'Nissan — официальный релиз Cube 1998', url: 'https://global.nissannews.com/en/releases/19980220-02-e', scope: 'Подтверждает запуск модели.' }, { label: 'Nissan — официальный FAQ Cube Z10', url: 'https://faq2.nissan.co.jp/faq/show/1127?category_id=66&site_domain=default', scope: 'Модельная страница Nissan по периоду Z10.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-cube-z11', brandId: 'nissan', name: 'Cube (Z11)', generation: 'II поколение', years: '2002–2008', bodyType: 'Минивэн',
+    overview: 'Второе поколение Nissan Cube. Двигатель, трансмиссия и привод менялись по годам; сверять по кузовному коду и рынку.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
+    engines: [], transmissions: ['Нет подтверждённых данных для единого описания поколения; проверить код агрегата'],
+    drivetrain: 'Зависит от комплектации и кода кузова.',
+    sourceNotes: 'Карточка поколения добавлена для навигации. Размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
+    sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-cube-z12', brandId: 'nissan', name: 'Cube (Z12)', generation: 'III поколение', years: '2008–2020', bodyType: 'Минивэн',
+    overview: 'Третье поколение Nissan Cube. Спецификации менялись по году и комплектации.',
+    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: 'Нет подтверждённых данных',
+    engines: [], transmissions: ['Нет подтверждённых данных для единого описания поколения; сверить по кузовному коду'],
+    drivetrain: 'Зависит от комплектации и рынка.',
+    sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
+    sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
+  }),
 const historicalBrandSeeds = [
   { id: 'prince', name: 'Prince Motor Company', russianName: 'Принс', founded: 1952, headquarters: 'Токио, Япония', tagline: 'Историческая японская автомобильная марка', description: 'Исторический производитель, объединённый с Nissan в 1966 году; Skyline и Gloria имеют важную преемственность Prince/Nissan.', brandColor: '#475569', awdPhilosophy: 'Зависит от конкретной модели и эпохи.' },
   { id: 'datsun', name: 'Datsun', russianName: 'Датсун', founded: 1931, headquarters: 'Япония', tagline: 'Историческая экспортная марка Nissan', description: 'Марка, использовавшаяся Nissan для автомобилей на разных рынках и в разные периоды; нельзя смешивать поколения и региональные версии.', brandColor: '#1d4ed8', awdPhilosophy: 'Зависит от модели, поколения и рынка.' },
