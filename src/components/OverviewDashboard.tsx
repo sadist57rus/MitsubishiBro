@@ -1,5 +1,4 @@
 import { Car, Zap, Lightbulb, Stethoscope, Fuel, CalendarDays, BookOpen, Settings2 } from 'lucide-react';
-import type { EngineType } from '../types';
 import type { TabId } from './Header';
 import { BrandLogo } from './BrandLogos';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
@@ -7,11 +6,6 @@ import { useVehicle } from '../context/VehicleContext';
 
 interface Props {
   onNavigate: (tab: TabId) => void;
-  selectedEngine: EngineType;
-  onSelectEngine: (engine: EngineType) => void;
-  selectedBrandId?: string;
-  onSelectBrand?: (brandId: string) => void;
-  onOpenBrandSelector?: () => void;
 }
 
 const QUICK_ACTIONS = [
@@ -28,7 +22,7 @@ function valueOrUnknown(value: unknown, suffix = '') {
   return `${value}${suffix}`;
 }
 
-export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: Props) {
+export default function OverviewDashboard({ onNavigate }: Props) {
   const vehicle = useVehicle();
   const brand = JAPANESE_BRANDS.find(item => item.id === vehicle.brandId);
   const model = brand?.models.find(item => item.id === vehicle.modelId);
@@ -50,13 +44,13 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
             {hasVehicle && <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">Пробег: {valueOrUnknown(vehicle.activeVehicle.mileage, ' км')}</p>}
           </div>
           {hasVehicle && (
-            <button type="button" onClick={onOpenBrandSelector ?? (() => onNavigate('garage'))} aria-label="Выбрать или изменить автомобиль" className="flex min-h-12 min-w-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 text-sm font-bold text-white hover:bg-red-700 md:min-h-14">
-              <Settings2 className="h-5 w-5" /><span className="hidden sm:inline">Сменить авто</span>
+            <button type="button" onClick={() => onNavigate('garage')} aria-label="Изменить автомобиль" className="flex min-h-12 min-w-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 text-sm font-bold text-white hover:bg-red-700 md:min-h-14">
+              <Settings2 className="h-5 w-5" /><span>Сменить</span>
             </button>
           )}
         </div>
         {!hasVehicle && (
-          <button type="button" onClick={onOpenBrandSelector ?? (() => onNavigate('garage'))} aria-label="Выбрать автомобиль" className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 text-base font-bold text-white hover:bg-red-700 md:min-h-14">
+          <button type="button" onClick={() => onNavigate('garage')} aria-label="Выбрать автомобиль" className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 text-base font-bold text-white hover:bg-red-700 md:min-h-14">
             <Car aria-hidden="true" className="h-5 w-5" />Выбрать автомобиль
           </button>
         )}
@@ -82,7 +76,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {QUICK_ACTIONS.map(action => {
             const Icon = action.icon;
-            return <button key={action.id} type="button" onClick={() => onNavigate(action.id)} className="group flex min-h-24 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:border-red-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800 md:min-h-28 md:gap-4 md:p-5">
+            return <button key={action.id} type="button" onClick={() => onNavigate(action.id)} data-testid={`home-quick-action-${action.id}`} className="group flex min-h-24 items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:border-red-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800 md:min-h-28 md:gap-4 md:p-5">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400 md:h-14 md:w-14"><Icon className="h-7 w-7" /></span>
               <span className="min-w-0"><span className="block text-base font-bold leading-tight text-slate-900 dark:text-white md:text-lg">{action.label}</span></span>
             </button>;
