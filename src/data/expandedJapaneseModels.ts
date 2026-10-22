@@ -1501,6 +1501,47 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
     sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
   })
+,
+  makeSupplementalModel({
+    id: 'mazda-3-bm-bn-sedan',
+    brandId: 'mazda',
+    name: 'Mazda3 / Axela (BM / BN) седан',
+    generation: 'III поколение',
+    years: '2013–2019',
+    bodyType: 'Седан',
+    overview: 'Седан третьего поколения Mazda3 (японское имя Axela). Размеры взяты из официальной японской спецификации 2018 года; агрегаты и комплектации различаются по рынку.',
+    lengthMm: 4580, widthMm: 1795, heightMm: 1455, wheelbaseMm: 2700,
+    groundClearanceMm: 155, trunkVolumeLiters: 'Нет подтверждённых данных для всех рынков', fuelTankLiters: 51,
+    curbWeightKg: 'Зависит от двигателя, трансмиссии и привода',
+    engines: [
+      { code: 'P5-VPS', name: 'SKYACTIV-G 1.5 бензин', displacement: '1496 см³', powerHp: 'Зависит от рынка и года', torqueNm: 'Зависит от рынка и года', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферный бензиновый двигатель'], weaknesses: ['Параметры и требования к топливу сверять по рынку'] },
+      { code: 'PE-VPS', name: 'SKYACTIV-G 2.0 бензин', displacement: '1997 см³', powerHp: 'Зависит от рынка и года', torqueNm: 'Зависит от рынка и года', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Баланс тяги и расхода'], weaknesses: ['Не переносить мощность между рынками'] }
+    ],
+    transmissions: ['6-ступенчатая МКПП — отдельные версии', '6-ступенчатая АКПП — отдельные версии'],
+    drivetrain: 'Передний привод; отдельные версии японского рынка доступны с AWD.',
+    sourceNotes: 'Размеры 4580×1795×1455 мм, база 2700 мм и клиренс 155 мм соответствуют японской спецификации Axela от ноября 2018 года. Не распространять на хэтчбек и все рынки.',
+    sourceReferences: [{ label: 'Mazda — Axela official specifications (2018-11)', url: 'https://www.mazda.co.jp/globalassets/assets/cars/axela/common/pdf/axela_specification_201811.pdf', scope: 'Официальная японская спецификация; параметры зависят от версии.' }, { label: 'Mazda — Axela owner manuals / chassis ranges', url: 'https://www.mazda.co.jp/owner_support/manual/axela/', scope: 'Официальные диапазоны кузовных кодов и руководства по годам.' }]
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-sx4-ya-yb-hatchback',
+    brandId: 'suzuki',
+    name: 'SX4 (YA / YB) хэтчбек',
+    generation: 'I поколение',
+    years: '2006–2014',
+    bodyType: 'Хэтчбек',
+    overview: 'Компактный кроссовер-хэтчбек первого поколения. Японская заводская линейка включала M15A 1.5 и J20A 2.0; 4WD-версии оснащались электронно управляемой системой i-AWD.',
+    lengthMm: 4135, widthMm: 1730, heightMm: 1585, wheelbaseMm: 2500,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0,
+    curbWeightKg: '1190–1250 кг для отдельных японских версий; сверять комплектацию',
+    engines: [
+      { code: 'M15A', name: '1.5 л бензин VVT', displacement: '1490 см³', powerHp: '110 PS для японской версии', torqueNm: 'Нет подтверждённых данных для всех версий', valves: '16V DOHC VVT', fuelSystem: 'Электронный распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферный бензиновый двигатель'], weaknesses: ['Не переносить японские параметры на экспортные версии'] },
+      { code: 'J20A', name: '2.0 л бензин', displacement: '1995 см³', powerHp: '145 PS для японской версии', torqueNm: 'Нет подтверждённых данных для всех версий', valves: '16V DOHC', fuelSystem: 'Электронный распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Более высокий запас мощности'], weaknesses: ['Параметры зависят от рынка'] }
+    ],
+    transmissions: ['АКПП — отдельные версии', 'МКПП — отдельные версии'],
+    drivetrain: 'Передний привод или электронно управляемый i-AWD; зависит от комплектации.',
+    sourceNotes: 'Заводской архив подтверждает выпуск с 2006 года, двигатели M15A/J20A и i-AWD для 4WD. Неустановленные числовые параметры оставлены нулём/без данных и не должны трактоваться как техническое значение.',
+    sourceReferences: [{ label: 'Suzuki Digital Library — SX4 2006', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/sx4.html', scope: 'Официальная архивная спецификация: версии кузова, размеры, масса, двигатели и i-AWD.' }, { label: 'Suzuki — SX4 launch release (2006-07-04)', url: 'https://www.suzuki.co.jp/release/a/a060704.htm', scope: 'Официальное подтверждение запуска и i-AWD на 4WD-версиях.' }]
+  })
 ];
 
 const historicalBrandSeeds = [
