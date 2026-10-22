@@ -448,7 +448,19 @@ test('активный пункт нижней навигации использ
   await page.setViewportSize({ width: 390, height: 844 });
   const homeNav = page.getByTestId('phone-nav-item-overview');
   await homeNav.click();
-  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).color)).toBe('rgb(250, 204, 21)');
+  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).color)).toBe(
+    await page.evaluate(() => {
+      const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+      return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+    }).then(value => {
+      const probe = document.createElement('span');
+      probe.style.color = value;
+      document.body.append(probe);
+      const color = getComputedStyle(probe).color;
+      probe.remove();
+      return color;
+    }),
+  );
   await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
 });
 
@@ -472,7 +484,15 @@ test('нижняя навигация сохраняет контраст во �
     await page.setViewportSize({ width: 390, height: 844 });
     const active = page.getByTestId('phone-nav-item-settings');
     await expect.poll(() => active.evaluate(element => getComputedStyle(element).color)).toBe(
-      await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent-ink').trim()),
+      await page.evaluate(() => {
+        const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+        const probe = document.createElement('span');
+        probe.style.color = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        document.body.append(probe);
+        const color = getComputedStyle(probe).color;
+        probe.remove();
+        return color;
+      }),
     );
     await page.setViewportSize({ width: 1280, height: 720 });
     await expect(page.getByTestId('phone-bottom-navigation')).toBeHidden();
@@ -482,6 +502,13 @@ test('нижняя навигация сохраняет контраст во �
   await page.setViewportSize({ width: 390, height: 844 });
   const active = page.getByTestId('phone-nav-item-settings');
   await expect.poll(() => active.evaluate(element => getComputedStyle(element).color)).toBe(
-    await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--palette-accent-content').trim()),
+    await page.evaluate(() => {
+      const probe = document.createElement('span');
+      probe.style.color = getComputedStyle(document.documentElement).getPropertyValue('--palette-accent-content').trim();
+      document.body.append(probe);
+      const color = getComputedStyle(probe).color;
+      probe.remove();
+      return color;
+    }),
   );
 });
