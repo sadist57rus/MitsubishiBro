@@ -434,3 +434,20 @@ test('главная показывает шесть быстрых действ
   await expect(quickActions.getByRole('button', { name: 'Гараж', exact: true })).toHaveCount(0);
   await expect(quickActions.getByText(/Обслуживание|Электрика|Автосвет|Диагностика|Расходы|Записи и расходы/)).toHaveCount(0);
 });
+
+
+test('активный пункт нижней навигации использует выбранный акцент палитры', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'settings');
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
+  await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
+  await page.getByRole('button', { name: 'Применить', exact: true }).click();
+  await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe('black-yellow');
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const homeNav = page.getByTestId('phone-nav-item-overview');
+  await homeNav.click();
+  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).color)).toBe('rgb(250, 204, 21)');
+  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+});
