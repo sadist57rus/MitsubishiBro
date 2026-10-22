@@ -47,13 +47,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Мой автомобиль</p>
             <h1 className="mt-0.5 text-lg font-black leading-tight text-slate-900 dark:text-white sm:text-xl md:text-2xl">{title}</h1>
-            {hasVehicle && (
-              <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 text-sm font-semibold text-slate-700 dark:text-slate-200 sm:text-base">
-                <span>{vehicle.activeVehicle.year || 'Год не указан'}</span>
-                <span>Пробег: {valueOrUnknown(vehicle.activeVehicle.mileage, ' км')}</span>
-              </div>
-            )}
-            {hasVehicle && vehicle.activeVehicle.engine && vehicle.activeVehicle.engine !== 'не указан' && <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 sm:text-sm">{vehicle.activeVehicle.engine}</p>}
+            {hasVehicle && <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">Пробег: {valueOrUnknown(vehicle.activeVehicle.mileage, ' км')}</p>}
           </div>
           {hasVehicle && (
             <button type="button" onClick={onOpenBrandSelector ?? (() => onNavigate('garage'))} aria-label="Выбрать или изменить автомобиль" className="flex min-h-12 min-w-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 text-sm font-bold text-white hover:bg-red-700 md:min-h-14">
@@ -66,10 +60,19 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
             <Car aria-hidden="true" className="h-5 w-5" />Выбрать автомобиль
           </button>
         )}
-        {hasVehicle && <div className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
-          <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-950"><p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">Кузов</p><p className="mt-0.5 text-sm font-bold leading-snug text-slate-900 dark:text-white sm:text-base md:text-lg">{model?.bodyType || '—'}</p></div>
-          <div className="rounded-lg bg-slate-50 p-2.5 dark:bg-slate-950"><p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">Поколение</p><p className="mt-0.5 text-sm font-bold leading-snug text-slate-900 dark:text-white sm:text-base md:text-lg">{model?.generation || '—'}</p></div>
-        </div>}
+        {hasVehicle && <details className="mt-3 border-t border-slate-100 pt-3 text-sm dark:border-slate-800">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 rounded-xl px-2 font-semibold text-slate-600 outline-offset-2 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-600 dark:text-slate-300 dark:hover:bg-slate-800 [&::-webkit-details-marker]:hidden">
+            <span>Параметры автомобиля</span>
+            <span aria-hidden="true" className="text-lg">+</span>
+          </summary>
+          <dl className="mt-2 grid grid-cols-2 gap-3 px-2 pb-1">
+            <div><dt className="text-xs text-slate-500 dark:text-slate-400">Год</dt><dd className="mt-1 font-semibold text-slate-900 dark:text-white">{vehicle.activeVehicle.year || 'Не указан'}</dd></div>
+            <div><dt className="text-xs text-slate-500 dark:text-slate-400">Пробег</dt><dd className="mt-1 font-semibold text-slate-900 dark:text-white">{valueOrUnknown(vehicle.activeVehicle.mileage, ' км')}</dd></div>
+            <div><dt className="text-xs text-slate-500 dark:text-slate-400">Кузов</dt><dd className="mt-1 font-semibold text-slate-900 dark:text-white">{model?.bodyType || 'Нет данных'}</dd></div>
+            <div><dt className="text-xs text-slate-500 dark:text-slate-400">Поколение</dt><dd className="mt-1 font-semibold text-slate-900 dark:text-white">{model?.generation || 'Нет данных'}</dd></div>
+            <div className="col-span-2"><dt className="text-xs text-slate-500 dark:text-slate-400">Двигатель</dt><dd className="mt-1 font-semibold text-slate-900 dark:text-white">{vehicle.activeVehicle.engine && vehicle.activeVehicle.engine !== 'не указан' ? vehicle.activeVehicle.engine : 'Не указан'}</dd></div>
+          </dl>
+        </details>}
       </section>
 
       <section aria-labelledby="quick-actions-title">
