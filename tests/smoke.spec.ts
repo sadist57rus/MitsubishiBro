@@ -190,11 +190,12 @@ for (const viewport of viewports) {
       await expect(apkDialog).toBeHidden();
       await expect(apkTrigger).toBeFocused();
 
-      const brandTrigger = page.getByRole('button', { name: /Выбрать или изменить автомобиль/i });
-      for (const brand of [{ id: 'nissan', label: /Выбрать (Nissan|Ниссан)/i }, { id: 'honda', label: /Выбрать (Honda|Хонда)/i }]) {
-        await brandTrigger.click();
-        await expect(page.getByRole('dialog', { name: /Выбор японского производителя/i })).toBeVisible();
-        await page.getByRole('button', { name: brand.label }).click();
+      for (const brand of [{ id: 'nissan', value: 'nissan' }, { id: 'honda', value: 'honda' }]) {
+        await page.getByRole('button', { name: /Изменить автомобиль/i }).click();
+        await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
+        await page.getByRole('button', { name: 'Изменить' }).first().click();
+        await page.locator('form select').first().selectOption({ value: brand.value });
+        await page.getByRole('button', { name: 'Сохранить' }).click();
         await openNavItem(page, 'fuel');
         expect(await page.locator('body').innerText(), brand.id + ' fuel section must not show Outlander-specific copy').not.toMatch(/Outlander/i);
         await page.getByTestId('header-back').click();
@@ -204,6 +205,17 @@ for (const viewport of viewports) {
   }
 }
 
+
+test('главная показывает шесть быстрых действий и ведёт к гаражу для смены автомобиля', async ({ page }) => {
+  await prepare(page, { width: 390, height: 844 }, 'light');
+  const actions = ['maintenance', 'fuses', 'bulbs', 'obd', 'fuel', 'logbook'];
+  for (const id of actions) await expect(page.getByTestId('home-quick-action-' + id)).toBeVisible();
+  await expect(page.locator('[data-testid^="home-quick-action-"]')).toHaveCount(6);
+  await expect(page.getByText('Кузов', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Поколение', { exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: /Изменить автомобиль/i }).click();
+  await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
+});
 
 test('настройки применяют цветовую палитру и выбор марки читаем в ночной теме', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
