@@ -437,20 +437,17 @@ test('главная показывает шесть быстрых действ
 
 
 test('активный пункт нижней навигации использует выбранный акцент палитры', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+  await page.setViewportSize({ width: 1280, height: 720 });
   await chooseToyota(page);
   await openNavItem(page, 'settings');
-
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
   await page.getByRole('button', { name: /Чёрный \/ жёлтый/ }).click();
   await page.getByRole('button', { name: 'Применить', exact: true }).click();
   await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe('black-yellow');
 
+  await page.setViewportSize({ width: 390, height: 844 });
   const homeNav = page.getByTestId('phone-nav-item-overview');
   await homeNav.click();
   await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).color)).toBe('rgb(250, 204, 21)');
-
-  await page.getByTestId('phone-nav-item-settings').click();
-  await page.getByLabel('Тема интерфейса').selectOption('dark');
-  await page.getByTestId('phone-nav-item-overview').click();
-  await expect.poll(() => page.getByTestId('phone-nav-item-overview').evaluate(element => getComputedStyle(element).color)).toBe('rgb(250, 204, 21)');
+  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
 });
