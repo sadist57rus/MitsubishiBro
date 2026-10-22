@@ -144,16 +144,16 @@ const supplementalModels: JapaneseCarModel[] = [
     generation: 'VIII поколение',
     years: '2005–2011',
     bodyType: 'Седан',
-    overview: 'Седан Civic восьмого поколения. Для разных рынков предлагались разные двигатели, коробки и системы безопасности; не все агрегаты взаимозаменяемы.',
-    lengthMm: 4545, widthMm: 1750, heightMm: 1435, wheelbaseMm: 2700,
-    groundClearanceMm: 150, trunkVolumeLiters: 'Около 389 л, зависит от рынка', fuelTankLiters: 50,
-    curbWeightKg: 'Ориентировочно 1200–1350 кг',
+    overview: 'Восьмое поколение Civic. Представительная заводская спецификация для японского седана 1.8S/1.8GL/1.8G FD1 2005 года; другие рынки и комплектации отличаются.',
+    lengthMm: 4540, widthMm: 1750, heightMm: 1435, wheelbaseMm: 2700,
+    groundClearanceMm: 150, trunkVolumeLiters: 'Нет подтверждённых данных для указанной комплектации', fuelTankLiters: 50,
+    curbWeightKg: '1200–1240 кг для японских версий FD1 в зависимости от комплектации',
     engines: [
-      { code: 'R18A1', name: '1.8 л i-VTEC', displacement: '1799 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V SOHC i-VTEC', fuelSystem: 'Электронный впрыск PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Умеренный расход при исправной системе', 'Цепной привод ГРМ'], weaknesses: ['Проверять состояние опор двигателя и системы охлаждения'] },
-      { code: 'K20Z', name: '2.0 л i-VTEC — отдельные версии', displacement: '1998 см³', powerHp: 'Зависит от модификации', torqueNm: 'Зависит от модификации', valves: '16V DOHC i-VTEC', fuelSystem: 'Электронный впрыск PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Высокий потенциал двигателя'], weaknesses: ['Не устанавливался на все рынки и кузова'] }
+      { code: 'R18A', name: '1.8 л i-VTEC', displacement: '1799 см³', powerHp: '140 PS для японской версии FD1', torqueNm: '174 Н·м для японской версии FD1', valves: 'SOHC, 16 клапанов, цепной привод', fuelSystem: 'Honda PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Заводские параметры относятся к японскому FD1'], weaknesses: ['Не переносить спецификацию на гибрид FD3, Type R и другие рынки'] }
     ],
-    transmissions: ['5-ступенчатая МКПП — отдельные версии', 'Автоматическая трансмиссия — по рынку и комплектации'],
-    sourceNotes: 'Данные относятся к седану FD; двигатель K20 и трансмиссии зависят от рынка. Проверять по VIN.'
+    transmissions: ['5-ступенчатая автоматическая трансмиссия — отдельные версии', '5-ступенчатая МКПП — отдельные версии'],
+    sourceNotes: 'Данные ограничены японским Civic FD1 1.8 2005 года по заводскому FACT BOOK Honda: длина 4540 мм, ширина 1750 мм, высота 1435/1440 мм в зависимости от версии, база 2700 мм, клиренс 150 мм, бак 50 л, двигатель R18A 1799 см³. Перед ремонтом сверять точный код модели и комплектацию.',
+    sourceReferences: [{ label: 'Honda FACT BOOK — CIVIC/CIVIC HYBRID (2005)', url: 'https://www.honda.co.jp/factbook/auto/CIVIC/200509/26.html', scope: 'Заводская таблица японских FD1/FD3: габариты, масса, двигатель R18A, объём бака и типы трансмиссий.' }, { label: 'Honda — архив Civic 2006–2007', url: 'https://www.honda.co.jp/auto-archive/civic/4door/2007/', scope: 'Подтверждает японский период выпуска и каталог поколения; детали комплектации смотреть по выбранному типу.' }]
   }),
   makeSupplementalModel({
     id: 'honda-civic-fn-hatchback',
@@ -381,16 +381,16 @@ const supplementalModels: JapaneseCarModel[] = [
     generation: 'I поколение',
     years: '2005–2013',
     bodyType: 'Хэтчбек',
-    overview: 'Компактный пятидверный хэтчбек с высокой крышей и трансформируемым салоном. Двигатели и трансмиссии отличаются в зависимости от рынка поставки.',
-    lengthMm: 4020, widthMm: 1690, heightMm: 1535, wheelbaseMm: 2600,
-    groundClearanceMm: 145, trunkVolumeLiters: 'Зависит от положения заднего ряда', fuelTankLiters: 46,
-    curbWeightKg: 'Ориентировочно 1050–1250 кг',
+    overview: 'Компактный пятидверный хэтчбек. Ниже приведена спецификация конкретной японской Note 2WD 15S 2005 года с двигателем CR14DE; не переносить её на другие E11.',
+    lengthMm: 3730, widthMm: 1670, heightMm: 1640, wheelbaseMm: 2430,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных для конкретной комплектации', fuelTankLiters: 0,
+    curbWeightKg: '1070 кг — японская Note 2WD 15S (2005)',
     engines: [
-      { code: 'HR15DE', name: '1.5 л бензин', displacement: '1498 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от рынка', valves: '16V DOHC', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Проверять расход масла и историю обслуживания'] },
-      { code: 'HR16DE', name: '1.6 л бензин — отдельные рынки', displacement: '1598 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от рынка', valves: '16V DOHC', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство двигателей Nissan'], weaknesses: ['Не ставился на все версии E11'] }
+      { code: 'CR14DE', name: '1.4 л бензиновый', displacement: '1386 см³', powerHp: '98 PS при 5600 об/мин (японская 15S)', torqueNm: '137 Н·м при 3200 об/мин (японская 15S)', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'Электронный впрыск', timingDrive: 'Уточнить по сервисному руководству конкретного двигателя', strengths: ['Параметры подтверждены для японской 15S'], weaknesses: ['Не путать с HR15DE и экспортными версиями'] }
     ],
-    transmissions: ['МКПП', 'АКПП или вариатор — в зависимости от рынка'],
-    sourceNotes: 'Моторы и коробки не универсальны для всех E11. Объёмы жидкостей и лампы не указаны без точной модификации.'
+    transmissions: ['Не указана в выбранной архивной спецификации; уточнить по табличке автомобиля'],
+    sourceNotes: 'Заменены ранее смешанные ориентировочные параметры на характеристики одной заводской версии Nissan Note 2WD 15S 2005 года: 3730×1670×1640 мм, база 2430 мм, масса 1070 кг, CR14DE 1386 см³, 98 PS/137 Н·м. Ёмкость бака, клиренс, трансмиссия и сервисные параметры оставлены неподтверждёнными.',
+    sourceReferences: [{ label: 'Nissan Heritage — Note 2WD 15S (2005, E11)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/479_note_2wd_15s.html', scope: 'Официальная спецификация японской Note 2WD 15S 2005 года; не распространять на все E11.' }]
   }),
 
   makeSupplementalModel({
@@ -703,21 +703,23 @@ const supplementalModels: JapaneseCarModel[] = [
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw10', brandId: 'toyota', name: 'Prius (XW10)', generation: 'I поколение', years: '1997–2003', bodyType: 'Хэтчбек',
-    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
-    lengthMm: 4275, widthMm: 1695, heightMm: 1490, wheelbaseMm: 2550, groundClearanceMm: 140,
-    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 50, curbWeightKg: 'Зависит от версии',
-    engines: [{ code: 'УТОЧНИТЬ ПО ТАБЛИЧКЕ', name: 'Состав двигателей зависит от рынка и года', displacement: 'Не задано без кода двигателя', powerHp: 'Не задано без точной модификации', torqueNm: 'Не задано без точной модификации', valves: 'Уточнить по коду двигателя', fuelSystem: 'Уточнить по коду двигателя', timingDrive: 'Уточнить по коду двигателя', strengths: [], weaknesses: [] }], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
-    drivetrain: 'Зависит от модификации и рынка.',
-    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+    overview: 'Первое поколение Prius: представительская спецификация японской версии NHW10, выпущенной в декабре 1997 года. Экспортные версии и комплектации могли отличаться.',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1490, wheelbaseMm: 2550, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 0, curbWeightKg: '1240 кг — японская версия NHW10',
+    engines: [{ code: '1NZ-FXE', name: '1.5 л гибридный бензиновый двигатель', displacement: '1496 см³', powerHp: '58 PS при 4000 об/мин (ДВС, японская NHW10)', torqueNm: 'Нет подтверждённых данных для этой карточки', valves: 'Рядный 4-цилиндровый DOHC', fuelSystem: 'Заводская гибридная система Toyota', timingDrive: 'Сверить по сервисному руководству конкретного двигателя', strengths: ['Гибридная силовая установка'], weaknesses: ['Мощность ДВС не равна суммарной мощности гибридной системы'] }], transmissions: ['Гибридная трансмиссия с планетарным механизмом распределения мощности; уточнять по версии'],
+    drivetrain: 'Передний привод для указанной японской версии.',
+    sourceNotes: 'Размеры, масса и двигатель взяты из Toyota Global Vehicle Lineage для представительной японской NHW10. Мощность указана для ДВС, а не системы в целом. Бак, клиренс, сервисные жидкости и момент не заполнены без подтверждения для точной комплектации.',
+    sourceReferences: [{ label: 'Toyota Global — Prius NHW10 (1997)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012360/', scope: 'Заводские данные японской NHW10: 4275×1695×1490 мм, база 2550 мм, масса 1240 кг, двигатель 1NZ-FXE 1496 см³ и 58 PS.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw20', brandId: 'toyota', name: 'Prius (XW20)', generation: 'II поколение', years: '2003–2009', bodyType: 'Хэтчбек',
-    overview: 'Семейство японских автомобилей. Двигатели, коробки, оснащение и спецификации различаются по поколению, рынку и комплектации.',
-    lengthMm: 4450, widthMm: 1725, heightMm: 1490, wheelbaseMm: 2700, groundClearanceMm: 145,
-    trunkVolumeLiters: 'Зависит от кузова и методики измерения', fuelTankLiters: 45, curbWeightKg: 'Зависит от версии',
-    engines: [{ code: 'УТОЧНИТЬ ПО ТАБЛИЧКЕ', name: 'Состав двигателей зависит от рынка и года', displacement: 'Не задано без кода двигателя', powerHp: 'Не задано без точной модификации', torqueNm: 'Не задано без точной модификации', valves: 'Уточнить по коду двигателя', fuelSystem: 'Уточнить по коду двигателя', timingDrive: 'Уточнить по коду двигателя', strengths: [], weaknesses: [] }], transmissions: ['Зависит от года, рынка и комплектации; уточнять по коду агрегата'],
-    drivetrain: 'Зависит от модификации и рынка.',
-    sourceNotes: 'Запись семейства для расширения охвата. Размеры ориентировочные; двигатели, коробки, жидкости, лампы и заводские коды требуют проверки по VIN/коду кузова и первичному источнику.'
+    overview: 'Второе поколение Prius (NHW20), запущенное в Японии в сентябре 2003 года. Данные относятся к представительным японским комплектациям S/G, не ко всем рынкам.',
+    lengthMm: 4445, widthMm: 1725, heightMm: 1490, wheelbaseMm: 2700, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 0, curbWeightKg: '1250–1270 кг — японские версии S/G',
+    engines: [{ code: '1NZ-FXE', name: '1.5 л гибридный бензиновый двигатель', displacement: '1496 см³', powerHp: '77 PS при 5000 об/мин (ДВС, японская NHW20)', torqueNm: 'Нет подтверждённых данных для этой карточки', valves: 'Рядный 4-цилиндровый DOHC', fuelSystem: 'Toyota Hybrid System II (THS II)', timingDrive: 'Сверить по сервисному руководству конкретного двигателя', strengths: ['THS II; тяговый электромотор участвует в приводе'], weaknesses: ['77 PS — мощность ДВС, не суммарная мощность гибридной системы'] }], transmissions: ['Гибридная трансмиссия THS II с планетарным механизмом распределения мощности'],
+    drivetrain: 'Передний привод для указанных японских версий.',
+    sourceNotes: 'Toyota Global подтверждает для японских NHW20 S/G размеры 4445×1725×1490 мм, базу 2700 мм, массу 1250/1270 кг и двигатель 1NZ-FXE 1496 см³, 77 PS. Бак, клиренс, момент и сервисные объёмы не заявлены без подтверждения конкретной версии.',
+    sourceReferences: [{ label: 'Toyota Global — Prius NHW20 (2003)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012399/index.html', scope: 'Заводские данные японских NHW20 S/G; характеристики относятся к представительским комплектациям.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw50', brandId: 'toyota', name: 'Prius (XW50)', generation: 'IV поколение', years: '2015–2022', bodyType: 'Хэтчбек',
