@@ -1275,40 +1275,59 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-xtrail-t31-crossover', brandId: 'nissan',
     name: 'X-Trail T31', generation: 'II поколение (T31)', years: '2007–2013', bodyType: 'Кроссовер',
     overview: 'X-Trail T31: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
-    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
-    engines: [{ code: 'MR20DE / QR25DE / M9R', name: 'Бензиновые и дизельные семейства; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
-    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
-    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
-    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
-    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История Nissan подтверждает T31 и ALL MODE 4x4-i.' }]
+    lengthMm: 4635, widthMm: 1790, heightMm: 1785, wheelbaseMm: 2630,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от комплектации и положения сидений', fuelTankLiters: 65,
+    curbWeightKg: 'Зависит от двигателя, коробки и привода',
+    engines: [
+      { code: 'MR20DE', name: '2.0 л бензин', displacement: '1997 см³', powerHp: '137 PS при 5200 об/мин для японской версии 2013 года', torqueNm: '200 Н·м при 4400 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Широко применялся в линейке'], weaknesses: ['Характеристики различаются по рынкам и годам'] },
+      { code: 'QR25DE', name: '2.5 л бензин', displacement: '2488 см³', powerHp: '170 PS при 6000 об/мин для японской версии 2013 года', torqueNm: '230 Н·м при 4400 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Больший запас тяги'], weaknesses: ['Параметры и доступность зависят от рынка'] },
+      { code: 'M9R', name: '2.0 л турбодизель dCi', displacement: '1995 см³', powerHp: '173 PS при 3750 об/мин для японской 20GT', torqueNm: '360 Н·м при 2000 об/мин для указанной версии', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'Цепь; сверять сервисную процедуру по руководству', strengths: ['Высокий момент на низких оборотах'], weaknesses: ['Система очистки выхлопа зависит от рынка'] }
+    ],
+    transmissions: ['МКПП, автоматическая коробка или Xtronic CVT — по рынку и двигателю; для дизеля M9R встречаются отдельные трансмиссионные сочетания. Проверять по VIN.'],
+    drivetrain: 'Передний привод или ALL MODE 4x4-i. На японском рынке существовали бензиновые MR20DE/QR25DE и дизельные 20GT с M9R.',
+    sourceNotes: 'Заводская страница Nissan Japan для T31 2013 года указывает MR20DE 2.0 л — 137 PS/200 Н·м, QR25DE 2.5 л — 170 PS/230 Н·м и дизель M9R 2.0 л — 173 PS/360 Н·м для отдельных японских исполнений. Размеры, масса, коробки и выбросные системы нужно сверять по конкретному рынку/модификации.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T31, ходовые качества и двигатели (2013)', url: 'https://history.nissan.co.jp/X-TRAIL/T31/1312/performance.html', scope: 'Заводские параметры двигателей MR20DE, QR25DE и M9R для конкретных японских версий.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История поколений и развитие ALL MODE 4x4-i.' }
+    ]
   }),
   makeSupplementalModel({
     id: 'nissan-xtrail-t32-crossover', brandId: 'nissan',
     name: 'X-Trail T32', generation: 'III поколение (T32)', years: '2013–2022', bodyType: 'Кроссовер',
     overview: 'X-Trail T32: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
-    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
-    engines: [{ code: 'MR20DD / QR25DE / R9M', name: 'Бензиновые, дизельные и гибридные версии — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
-    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
-    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
-    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
-    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История Nissan подтверждает T32 и разные силовые установки.' }]
+    lengthMm: 4640, widthMm: 1820, heightMm: 1715, wheelbaseMm: 2705,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: 60,
+    curbWeightKg: 'Зависит от двигателя, привода и комплектации',
+    engines: [
+      { code: 'MR20DD', name: '2.0 л бензин, непосредственный впрыск', displacement: '1997 см³', powerHp: '147 PS для японской версии 2013 года', torqueNm: '207 Н·м для указанной версии', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск', timingDrive: 'Цепь ГРМ; обслуживание по заводскому руководству', strengths: ['Доступны бензиновые и гибридные варианты'], weaknesses: ['Мощность и системные показатели гибрида различаются'] },
+      { code: 'QR25DE', name: '2.5 л бензин', displacement: '2488 см³ — для отдельных рынков', powerHp: 'Зависит от рынка и комплектации', torqueNm: 'Зависит от рынка и комплектации', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ; сверить по коду двигателя', strengths: ['Более высокий рабочий объём'], weaknesses: ['Не все рынки имели эту версию'] },
+      { code: 'R9M', name: '1.6 л турбодизель — отдельные европейские версии', displacement: '1598 см³', powerHp: 'Зависит от калибровки', torqueNm: 'Зависит от калибровки', valves: '16V DOHC турбодизель', fuelSystem: 'Common Rail', timingDrive: 'По заводскому руководству конкретного исполнения', strengths: ['Экономичность на трассе'], weaknesses: ['Экология и комплектация выхлопа зависят от рынка'] }
+    ],
+    transmissions: ['Xtronic CVT на японских бензиновых версиях; код трансмиссии и спецификацию жидкости проверять по VIN. У других рынков состав линейки отличается.'],
+    drivetrain: 'Передний или ALL MODE 4x4-i полный привод — по комплектации. Для гибрида имеются отдельные параметры силовой установки.',
+    sourceNotes: 'Японские материалы Nissan для T32 указывают бензиновый MR20DD 1997 см³, 147 PS и 207 Н·м; гибридная система с мотором RM31 имеет суммарную мощность 182 PS для конкретной версии. Размеры и масса различаются по году, 5/7-местному кузову и приводу; не переносить параметры японского рынка на все машины СНГ.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T32, технические характеристики (2013)', url: 'https://history.nissan.co.jp/X-TRAIL/T32/1312/spec_specification.html', scope: 'Заводская таблица характеристик и передаточных чисел для японских версий T32 2013 года.' },
+      { label: 'Nissan Japan — X-TRAIL T32, двигатель и гибридная система', url: 'https://history.nissan.co.jp/X-TRAIL/T32/1312/performance_mechanism.html', scope: 'MR20DD: 147 PS/207 Н·м; гибридная версия с RM31 — системные 182 PS в указанном исполнении.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История T32, ALL MODE 4x4-i, бензиновых и гибридных вариантов.' }
+    ]
   }),
   makeSupplementalModel({
     id: 'nissan-xtrail-t33-crossover', brandId: 'nissan',
     name: 'X-Trail T33', generation: 'IV поколение (T33)', years: '2020–наст. время', bodyType: 'Кроссовер',
     overview: 'X-Trail T33: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
-    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
-    engines: [{ code: 'KR15DDT / e-POWER', name: 'VC-Turbo/e-POWER/e-4ORCE — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
-    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
-    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
-    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
-    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История Nissan описывает T33, e-POWER, VC-Turbo и e-4ORCE.' }]
+    lengthMm: 4660, widthMm: 1840, heightMm: 1720, wheelbaseMm: 2705,
+    groundClearanceMm: 200, trunkVolumeLiters: 'Зависит от 5/7-местной компоновки', fuelTankLiters: 55,
+    curbWeightKg: '1740–1880 кг в зависимости от 2WD/4WD и комплектации (японская спецификация 2022 года)',
+    engines: [{ code: 'KR15DDT', name: '1.5 л VC-TURBO — двигатель-генератор системы e-POWER', displacement: '1497 см³', powerHp: '144 PS при 4400–5000 об/мин для японской версии 2022 года', torqueNm: '250 Н·м при 2400–4000 об/мин для указанной версии', valves: 'DOHC, рядный 3-цилиндровый', fuelSystem: 'Nissan Di, непосредственный впрыск', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['В e-POWER колёса приводятся электромоторами; ДВС работает как генератор'], weaknesses: ['Нельзя описывать как обычную механическую связь двигателя с колёсами; спецификации различаются по году и рынку'] }],
+    transmissions: ['Электрический привод e-POWER; традиционной ступенчатой КПП нет. Двигатель KR15DDT вырабатывает электричество; e-4ORCE — электрический полный привод на соответствующих версиях.'],
+    drivetrain: 'Японская линейка включает 2WD и e-4ORCE 4WD. Компоновка и параметры зависят от года и комплектации.',
+    sourceNotes: 'Для японского X-Trail T33 по заводскому листу 2022 года: 4660×1840×1720 мм, база 2705 мм, дорожный просвет 200 мм для ряда 2WD/185 мм для ряда e-4ORCE, бак 55 л; KR15DDT 1497 см³, 144 PS и 250 Н·м. Это спецификация японского рынка, а не универсальная спецификация СНГ. Системная мощность тяговых электромоторов отличается от мощности двигателя-генератора.',
+    sourceReferences: [
+      { label: 'Nissan Japan — X-TRAIL T33, заводская таблица характеристик (2022)', url: 'https://history.nissan.co.jp/ARCHIVES/PDF/X-TRAIL/T33/20220720/x-trail_specsheet.pdf', scope: 'Размеры, база, дорожный просвет, масса, бак, двигатель-генератор и моторы для японских версий 2WD/4WD.' },
+      { label: 'Nissan Technical Review — e-POWER / VC-TURBO / e-4ORCE', url: 'https://www.nissan-global.com/EN/TECHNICALREVIEW/PDF/NISSAN_TECHINICAL_REVIEW_89_En_ALL.pdf', scope: 'Заводское техническое описание архитектуры e-POWER: двигатель вырабатывает электроэнергию, тягу создают электромоторы.' },
+      { label: 'Nissan — 25 лет X-TRAIL', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/the-x-trail-25-year-journey/', scope: 'История поколений и основные технологические особенности T31/T32/T33.' }
+    ]
   }),
   makeSupplementalModel({
     id: 'nissan-qashqai-j10-crossover', brandId: 'nissan',
