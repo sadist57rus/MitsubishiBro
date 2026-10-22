@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useState, type FormEvent, type SetStateAction } from 'react';
 import { CalendarClock, Check, Circle, Gauge, Plus, Trash2, Wrench } from 'lucide-react';
 import { useVehicle } from '../context/VehicleContext';
 
@@ -40,7 +40,12 @@ export default function ServicePlanner() {
   const { vehicleId, activeVehicle } = useVehicle();
   const storageKey = `car-brother-service-plan-v1-${vehicleId || 'default'}`;
   const currentMileage = Number.isFinite(activeVehicle?.mileage) ? activeVehicle.mileage : 0;
-  const [tasks, setTasks] = useState<ServiceTask[]>(() => readTasks(storageKey));
+  const [taskState, setTaskState] = useState<{ key: string; tasks: ServiceTask[] }>(() => ({ key: storageKey, tasks: readTasks(storageKey) }));
+  const tasks = taskState.key === storageKey ? taskState.tasks : readTasks(storageKey);
+  const setTasks = (action: SetStateAction<ServiceTask[]>) => setTaskState(previous => {
+    const current = previous.key === storageKey ? previous.tasks : readTasks(storageKey);
+    return { key: storageKey, tasks: typeof action === 'function' ? action(current) : action };
+  });
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Плановое обслуживание');
@@ -48,12 +53,13 @@ export default function ServicePlanner() {
   const [dueDate, setDueDate] = useState('');
 
   useEffect(() => {
-    setTasks(readTasks(storageKey));
-  }, [storageKey]);
+    if (taskState.key !== storageKey) setTaskState({ key: storageKey, tasks: readTasks(storageKey) });
+  }, [storageKey, taskState.key]);
 
   useEffect(() => {
-    try { localStorage.setItem(storageKey, JSON.stringify(tasks)); } catch { /* Storage can be unavailable in private mode. */ }
-  }, [storageKey, tasks]);
+    if (taskState.key !== storageKey) return;
+    try { localStorage.setItem(storageKey, JSON.stringify(taskState.tasks)); } catch { /* Storage can be unavailable in private mode. */ }
+  }, [storageKey, taskState]);
 
   const sortedTasks = useMemo(() => [...tasks].sort((a, b) => {
     if (a.completed !== b.completed) return a.completed ? 1 : -1;
