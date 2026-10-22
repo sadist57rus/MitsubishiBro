@@ -1500,6 +1500,72 @@ const supplementalModels: JapaneseCarModel[] = [
     drivetrain: 'Зависит от комплектации и рынка.',
     sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
     sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
+  }),
+  makeSupplementalModel({
+    id: 'mazda3-bp-fastback', brandId: 'mazda', name: 'Mazda3 (BP, Fastback)',
+    generation: 'IV поколение, японская спецификация', years: '2019–н.в.', bodyType: 'Хэтчбек',
+    overview: 'Пятидверный Mazda3 Fastback поколения BP. Двигатели и трансмиссии различаются по году и рынку; сверять точную комплектацию по VIN.',
+    lengthMm: 4460, widthMm: 1795, heightMm: 1440, wheelbaseMm: 2725, groundClearanceMm: 135,
+    trunkVolumeLiters: 'Нет подтверждённых данных для всех рынков и комплектаций', fuelTankLiters: 51, curbWeightKg: 'Зависит от двигателя, привода и комплектации',
+    engines: [
+      { code: 'P5-VPS', name: 'SKYACTIV-G 1.5, отдельные версии', displacement: '1496 см³', powerHp: 'Зависит от года и рынка', torqueNm: 'Зависит от года и рынка', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферный бензиновый двигатель в соответствующих версиях'], weaknesses: ['Параметры зависят от рынка и года'] },
+      { code: 'PE-VPS', name: 'SKYACTIV-G 2.0, отдельные версии', displacement: '1997 см³', powerHp: 'Зависит от года и рынка', torqueNm: 'Зависит от года и рынка', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферная бензиновая версия'], weaknesses: ['Не переносить спецификацию между рынками'] }
+    ],
+    transmissions: ['6-ступенчатая АКПП SKYACTIV-DRIVE — по версии', '6-ступенчатая МКПП — по версии'],
+    drivetrain: 'Передний привод; AWD доступен на отдельных японских версиях.',
+    sourceNotes: 'Габариты приведены для японской Mazda3 Fastback. Масса, бак, клиренс и силовая установка требуют проверки по конкретной комплектации; справочная запись не подтверждает совместимость деталей.',
+    sourceReferences: [
+      { label: 'Mazda Japan — MAZDA3 Fastback', url: 'https://www.mazda.co.jp/cars/passenger/mazda3/', scope: 'Официальная страница модели: габариты и доступные типы силовых установок японской линейки.' },
+      { label: 'Mazda Japan — заводская таблица MAZDA3 2022', url: 'https://www.mazda.co.jp/globalassets/assets/cars/mazda3/common/pdf/mazda3_specification_202202.pdf', scope: 'Заводские данные для конкретных комплектаций поколения BP.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'mazda3-bp-sedan', brandId: 'mazda', name: 'Mazda3 (BP, Sedan)',
+    generation: 'IV поколение, японская спецификация', years: '2019–н.в.', bodyType: 'Седан',
+    overview: 'Четырёхдверный седан Mazda3 поколения BP. Кузовные детали и размеры не следует объединять с Fastback.',
+    lengthMm: 4660, widthMm: 1795, heightMm: 1445, wheelbaseMm: 2725, groundClearanceMm: 135,
+    trunkVolumeLiters: 'Нет подтверждённых данных для всех рынков и комплектаций', fuelTankLiters: 51, curbWeightKg: 'Зависит от двигателя и комплектации',
+    engines: [
+      { code: 'PE-VPS', name: 'SKYACTIV-G 2.0, отдельные версии', displacement: '1997 см³', powerHp: 'Зависит от года и рынка', torqueNm: 'Зависит от года и рынка', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферная бензиновая версия'], weaknesses: ['Мощность отличается между рынками'] },
+      { code: 'PY-VPS', name: 'SKYACTIV-G 2.5, отдельные версии', displacement: '2488 см³', powerHp: 'Зависит от года и рынка', torqueNm: 'Зависит от года и рынка', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск SKYACTIV-G', timingDrive: 'Цепь ГРМ', strengths: ['Доступен на отдельных рынках'], weaknesses: ['Не является универсальным двигателем Mazda3'] }
+    ],
+    transmissions: ['6-ступенчатая АКПП SKYACTIV-DRIVE — по версии', 'МКПП — по версии и рынку'],
+    drivetrain: 'Передний привод для указанной японской спецификации; уточнять по коду модели.',
+    sourceNotes: 'Габариты относятся к японской Mazda3 Sedan. Не переносить их на Fastback или экспортные автомобили без проверки.',
+    sourceReferences: [
+      { label: 'Mazda Japan — MAZDA3 Sedan', url: 'https://www.mazda.co.jp/cars/passenger/mazda3-sedan/', scope: 'Официальные габариты седана и варианты силовых установок японского рынка.' },
+      { label: 'Mazda Japan — заводская таблица MAZDA3 2022', url: 'https://www.mazda.co.jp/globalassets/assets/cars/mazda3/common/pdf/mazda3_specification_202202.pdf', scope: 'Заводская таблица спецификаций поколения BP для конкретных комплектаций.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-swift-zc-zd-2023', brandId: 'suzuki', name: 'Swift (ZC/ZD, 2023–)',
+    generation: 'VI поколение, японская спецификация', years: '2023–н.в.', bodyType: 'Хэтчбек',
+    overview: 'Компактный пятидверный Swift нового поколения. Передний/полный привод и коробка зависят от комплектации.',
+    lengthMm: 3860, widthMm: 1695, heightMm: 1500, wheelbaseMm: 2450, groundClearanceMm: 120,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 37, curbWeightKg: '910–1020 кг по японским комплектациям',
+    engines: [{ code: 'Z12E', name: '1.2 л, 3 цилиндра, VVT', displacement: '1197 см³', powerHp: '82 PS для японской спецификации', torqueNm: '108 Н·м для японской спецификации', valves: 'DOHC, 12 клапанов, VVT', fuelSystem: 'EPI, электронный впрыск', timingDrive: 'Нет подтверждённых данных в используемой спецификации', strengths: ['Параметры подтверждены для японской версии Z12E'], weaknesses: ['Не переносить на предыдущие поколения и экспортные моторы'] }],
+    transmissions: ['CVT — по комплектации', '5-ступенчатая МКПП — отдельные комплектации'],
+    drivetrain: '2WD (передний привод) или full-time 4WD — по японской комплектации.',
+    sourceNotes: 'Габариты, двигатель, бак и диапазон массы взяты из официальной японской спецификации Swift 2023 года. Для иных рынков сверить VIN и код модели.',
+    sourceReferences: [
+      { label: 'Suzuki Digital Library — Swift (2023)', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html', scope: 'Официальные размеры, масса, двигатель Z12E, мощность, момент, коробки и бак.' },
+      { label: 'Suzuki Japan — Swift комплектации', url: 'https://www.suzuki.co.jp/car/swift/detail/', scope: 'Коды моделей и различия 2WD/4WD и CVT/MT.' }
+    ]
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-jimny-sierra-jb74', brandId: 'suzuki', name: 'Jimny Sierra (JB74)',
+    generation: 'IV поколение, широкая версия', years: '2018–н.в.', bodyType: 'Внедорожник',
+    overview: 'Компактный рамный внедорожник с жёсткими мостами и подключаемым полным приводом с понижающей передачей. Отличается от kei Jimny широкой колеёй и двигателем 1.5 л.',
+    lengthMm: 3550, widthMm: 1645, heightMm: 1730, wheelbaseMm: 2250, groundClearanceMm: 210,
+    trunkVolumeLiters: 'Нет подтверждённых данных для единой методики измерения', fuelTankLiters: 40, curbWeightKg: '1100–1110 кг для японских версий 5MT/4AT',
+    engines: [{ code: 'K15B', name: '1.5 л бензиновый, рядный 4-цилиндровый', displacement: '1460 см³', powerHp: '101 PS для японской JB74', torqueNm: '130 Н·м для японской JB74', valves: '16V DOHC', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Атмосферный двигатель и классическая внедорожная конструкция'], weaknesses: ['Экспортные настройки могут отличаться'] }],
+    transmissions: ['5-ступенчатая МКПП', '4-ступенчатая АКПП'],
+    drivetrain: 'Part-Time 4WD: подключаемый передний мост и понижающая передача; режим 4H/4L использовать согласно руководству.',
+    sourceNotes: 'Японская спецификация JB74: 3550×1645×1730 мм, база 2250 мм, клиренс 210 мм, K15B 1460 см³, 101 PS/130 Н·м. Экспортные версии сверять по VIN.',
+    sourceReferences: [
+      { label: 'Suzuki Japan — история Jimny Sierra JB74', url: 'https://www.suzuki.co.jp/car/jimny/special/history/jb74.html', scope: 'Официальные характеристики JB74: двигатель, мощность, момент, размеры, масса и трансмиссии.' },
+      { label: 'Suzuki Japan — заводской PDF Jimny Sierra', url: 'https://www.suzuki.co.jp/car/jimny_sierra/asset/pdf/detail/detail.pdf', scope: 'Заводские размеры и оборудование текущей японской модели.' }
+    ]
   })
 ];
 
