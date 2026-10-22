@@ -180,7 +180,7 @@ export default function BrandSelectorModal({
                       Модели: {brand.models.map(m => m.name.split(' ')[0]).join(', ')}
                     </p>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
