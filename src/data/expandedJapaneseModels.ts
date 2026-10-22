@@ -1210,14 +1210,14 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-murano-z50-crossover', brandId: 'nissan',
     name: 'Murano Z50', generation: 'I поколение (Z50)', years: '2002–2007', bodyType: 'Кроссовер',
     overview: 'Murano Z50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    lengthMm: 4770, widthMm: 1880, heightMm: 1685, wheelbaseMm: 2825,
     groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
-    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
-    engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 для отдельной версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
-    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
-    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
-    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
-    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Nissan Heritage: версия 2004 года, 4770×1880×1685 мм, база 2825 мм, VQ35DE 3498 см³.' }]
+    curbWeightKg: '1720 кг — заводская спецификация японской версии 2WD 350XV 2004 года',
+    engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 DOHC', displacement: '3498 см³', powerHp: '231 PS при 5600 об/мин для японской версии 2WD 350XV 2004 года', torqueNm: '333 Н·м при 2800 об/мин для указанной версии', valves: '24V DOHC V6', fuelSystem: 'EFI; исполнение зависит от рынка', timingDrive: 'Цепь ГРМ; точный регламент обслуживания сверять с руководством', strengths: ['Высокая плавность и тяга V6'], weaknesses: ['Параметры японской 2WD-версии нельзя автоматически переносить на AWD и экспортные исполнения'] }],
+    transmissions: ['Вариатор CVT на ряде версий; точный код и спецификацию жидкости сверить по VIN/табличке агрегата'],
+    drivetrain: 'Выпускались переднеприводные и полноприводные версии; привод и трансмиссию не определять только по названию Z50.',
+    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Дорожный просвет, бак, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
+    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-murano-z51-crossover', brandId: 'nissan',
@@ -1262,14 +1262,14 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-xtrail-t30-crossover', brandId: 'nissan',
     name: 'X-Trail T30', generation: 'I поколение (T30)', years: '2000–2007', bodyType: 'Кроссовер',
     overview: 'X-Trail T30: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
+    lengthMm: 4455, widthMm: 1765, heightMm: 1750, wheelbaseMm: 2625,
     groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
-    curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
-    engines: [{ code: 'QR20DE', name: '2.0 л бензин для версии NT30 2003 года', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
-    transmissions: ['МКПП/АКПП/CVT — по конкретной модификации; код проверить по VIN'],
-    drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
-    sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
-    sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/469_x_trail_x_4wd.html', scope: 'Nissan Heritage: 4455×1765×1750 мм, база 2625 мм, QR20DE 1998 см³, 150 PS/200 Н·м для указанной версии.' }]
+    curbWeightKg: '1400 кг — заводская спецификация NT30 4WD X 2003 года',
+    engines: [{ code: 'QR20DE', name: '2.0 л бензин, рядный 4-цилиндровый DOHC', displacement: '1998 см³', powerHp: '150 PS при 6000 об/мин для NT30 4WD X 2003 года', torqueNm: '200 Н·м при 4000 об/мин для указанной версии', valves: '16V DOHC', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ; регламент сверять с заводским руководством', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Точные параметры зависят от года, рынка и версии'] }],
+    transmissions: ['МКПП или автоматическая трансмиссия — зависит от рынка; точный тип/код сверить по VIN'],
+    drivetrain: 'В источнике приведена версия NT30 4WD X; у поколения существовали и другие комплектации, поэтому привод уточнять по табличке/VIN.',
+    sourceNotes: 'Заводская карточка Nissan описывает X-TRAIL 4WD X NT30 2003 года: 4455×1765×1750 мм, база 2625 мм, масса 1400 кг, QR20DE 1998 см³, 150 PS при 6000 об/мин и 200 Н·м при 4000 об/мин. Эти параметры относятся к конкретной японской версии. Дорожный просвет, объём бака, багажника и сервисные жидкости здесь не подтверждены универсально.',
+    sourceReferences: [{ label: 'Nissan Heritage — X-TRAIL 4WD X (2003, NT30)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/469_x_trail_x_4wd.html', scope: 'Официальные размеры, масса, двигатель, мощность и момент для конкретной NT30 4WD X.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-xtrail-t31-crossover', brandId: 'nissan',
