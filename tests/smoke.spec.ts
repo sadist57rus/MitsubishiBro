@@ -211,8 +211,8 @@ test('главная показывает шесть быстрых действ
   const actions = ['maintenance', 'fuses', 'bulbs', 'obd', 'fuel', 'logbook'];
   for (const id of actions) await expect(page.getByTestId('home-quick-action-' + id)).toBeVisible();
   await expect(page.locator('[data-testid^="home-quick-action-"]')).toHaveCount(6);
-  await expect(page.getByText('Кузов', { exact: true })).toBeHidden();
-  await expect(page.getByText('Поколение', { exact: true })).toBeHidden();
+  await expect(page.locator('section details')).toHaveCount(1);
+  await expect(page.locator('section details')).not.toHaveAttribute('open', '');
   await page.getByRole('button', { name: /Изменить автомобиль/i }).click();
   await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
 });
