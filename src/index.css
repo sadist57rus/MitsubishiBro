@@ -49,7 +49,7 @@
   --tap-size: 2.75rem;
   --ui-content-width: 100%;
 }
-:root { color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; }
+:root { font-size: calc(100% * var(--user-font-scale, 1)); color-scheme: light; --ui-surface:#ffffff; --ui-surface-muted:#f8fafc; --ui-content:#0f172a; --ui-content-muted:#475569; --ui-border:#cbd5e1; }
 .dark { color-scheme: dark; --ui-surface:#0f172a; --ui-surface-muted:#020617; --ui-content:#f8fafc; --ui-content-muted:#cbd5e1; --ui-border:#475569; }
 .ui-card { background:var(--ui-surface); color:var(--ui-content); border:1px solid var(--ui-border); border-radius:var(--radius-card); padding:1rem; }
 .ui-card-interactive { transition:border-color .15s,box-shadow .15s; }
