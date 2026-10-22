@@ -1296,7 +1296,7 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'X-Trail T32', generation: 'III поколение (T32)', years: '2013–2022', bodyType: 'Кроссовер',
     overview: 'X-Trail T32: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4640, widthMm: 1820, heightMm: 1715, wheelbaseMm: 2705,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: 60,
+    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: 0,
     curbWeightKg: 'Зависит от двигателя, привода и комплектации',
     engines: [
       { code: 'MR20DD', name: '2.0 л бензин, непосредственный впрыск', displacement: '1997 см³', powerHp: '147 PS для японской версии 2013 года', torqueNm: '207 Н·м для указанной версии', valves: '16V DOHC', fuelSystem: 'Непосредственный впрыск', timingDrive: 'Цепь ГРМ; обслуживание по заводскому руководству', strengths: ['Доступны бензиновые и гибридные варианты'], weaknesses: ['Мощность и системные показатели гибрида различаются'] },
