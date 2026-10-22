@@ -1396,10 +1396,6 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'Период поколения подтверждается официальным архивом Honda. Размеры — ориентир для японской версии; массу, бак, коробку и жидкости сверять с конкретной модификацией.',
     sourceReferences: [{ label: 'Honda — официальный архив Stepwgn', url: 'https://www.honda.co.jp/auto-archive/stepwgn/', scope: 'Поколения и периоды выпуска.' }, { label: 'Honda — официальный архив Stepwgn Spada', url: 'https://www.honda.co.jp/auto-archive/stepwgn/spada/', scope: 'Отдельная линейка Spada; характеристики могут отличаться.' }]
   }),
-];
-
-
-
 
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae86', brandId: 'toyota', name: 'Corolla Levin (AE85/AE86)', generation: 'V поколение', years: '1983–1987', bodyType: 'Купе/Спорт',
