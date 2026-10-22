@@ -47,7 +47,7 @@ export default function OverviewDashboard({ onNavigate, onOpenBrandSelector }: P
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">Мой автомобиль</p>
             <h1 className="mt-0.5 text-lg font-black leading-tight text-slate-900 dark:text-white sm:text-xl md:text-2xl">{title}</h1>
-
+            {hasVehicle && <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">Пробег: {valueOrUnknown(vehicle.activeVehicle.mileage, ' км')}</p>}
           </div>
           {hasVehicle && (
             <button type="button" onClick={onOpenBrandSelector ?? (() => onNavigate('garage'))} aria-label="Выбрать или изменить автомобиль" className="flex min-h-12 min-w-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 text-sm font-bold text-white hover:bg-red-700 md:min-h-14">
