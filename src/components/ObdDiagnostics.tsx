@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 
 
-type SoftwareCard = { name: string; purpose: string; compatibility: string; hardware: string; url: string; sourceLabel: string; level: 'Специализированная' | 'Заводская' | 'Базовая' };
+type SoftwareCard = { name: string; purpose: string; compatibility: string; hardware: string; url: string; sourceLabel: string; level: 'Специализированная' | 'Заводская' | 'Базовая' | 'Неофициальная' };
 
 function DiagnosticSoftwareRecommendations({ brandId, brandName, modelName, transmissions }: {
   brandId: string;
@@ -81,13 +81,32 @@ function DiagnosticSoftwareRecommendations({ brandId, brandName, modelName, tran
     sourceLabel: 'Сайт производителя Mitsubishi Motors',
     level: 'Заводская'
   });
-  programs.push({
+  programs.push(
+    {
+      name: 'Car Scanner ELM OBD2',
+      purpose: 'Популярное стороннее приложение для чтения стандартных OBD-II кодов, просмотра live-data и записи параметров; набор датчиков зависит от автомобиля.',
+      compatibility: 'Неофициальное универсальное ПО. Профили и расширенные параметры для конкретной модели могут отсутствовать или работать частично; фирменные блоки не гарантированы.',
+      hardware: 'Android/iOS и совместимый ELM327 Bluetooth/Wi-Fi; качество адаптера и поддерживаемые протоколы критичны.',
+      url: 'https://www.carscanner.info/',
+      sourceLabel: 'Сайт разработчика Car Scanner',
+      level: 'Неофициальная'
+    },
+    {
+      name: 'Torque Pro / Torque Lite',
+      purpose: 'Стороннее Android-приложение для стандартных OBD-II кодов, live-data, приборной панели и логов.',
+      compatibility: 'Подходит прежде всего для поддерживаемых стандартных параметров двигателя. Не считать гарантией диагностики CVT/АКПП, ABS, SRS, AWD или фирменных блоков конкретной модели.',
+      hardware: 'Android и совместимый ELM327 Bluetooth; поддержка зависит от автомобиля, адаптера и протокола.',
+      url: 'https://torque-bhp.com/',
+      sourceLabel: 'Сайт разработчика Torque',
+      level: 'Неофициальная'
+    },
+    {
     name: 'Универсальный OBD-II сканер',
     purpose: 'Базовое чтение кодов двигателя и стандартных параметров OBD-II.',
     compatibility: 'Не считать гарантией доступа к CVT/АКПП, ABS, SRS, AWD или фирменным параметрам. Для этих систем нужна подтверждённая поддержка.',
     hardware: 'Качественный совместимый адаптер; перед покупкой сверить протокол и поддержку приложения.',
-    url: 'https://www.nissan-techinfo.com/',
-    sourceLabel: 'Справочная информация о диагностике производителя',
+    url: 'https://www.carscanner.info/',
+    sourceLabel: 'Пример стороннего приложения: Car Scanner',
     level: 'Базовая'
   });
 
@@ -111,7 +130,7 @@ function DiagnosticSoftwareRecommendations({ brandId, brandName, modelName, tran
           </article>
         ))}
       </div>
-      <p className="text-xs text-slate-500 dark:text-slate-400">Важно: рекомендации по марке — отправная точка. Функции, поддержка конкретного блока и адаптера должны быть подтверждены для выбранной модификации. Не запускайте кодирование или адаптации без сервисной процедуры.</p>
+      <p className="text-xs text-slate-500 dark:text-slate-400">Неофициальные приложения (Car Scanner, Torque) — отдельный универсальный уровень, а не заводская диагностика. Перед использованием проверьте протокол, адаптер и поддержку года/модификации: стандартный OBD-II обычно покрывает двигатель и не гарантирует доступ к CVT/АКПП, ABS, SRS или AWD. Не запускайте кодирование и адаптации без сервисной процедуры.</p>
     </section>
   );
 }
