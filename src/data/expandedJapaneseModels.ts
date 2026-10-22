@@ -144,16 +144,16 @@ const supplementalModels: JapaneseCarModel[] = [
     generation: 'VIII поколение',
     years: '2005–2011',
     bodyType: 'Седан',
-    overview: 'Седан Civic восьмого поколения. Для разных рынков предлагались разные двигатели, коробки и системы безопасности; не все агрегаты взаимозаменяемы.',
-    lengthMm: 4545, widthMm: 1750, heightMm: 1435, wheelbaseMm: 2700,
-    groundClearanceMm: 150, trunkVolumeLiters: 'Около 389 л, зависит от рынка', fuelTankLiters: 50,
-    curbWeightKg: 'Ориентировочно 1200–1350 кг',
+    overview: 'Восьмое поколение Civic. Представительная заводская спецификация для японского седана 1.8S/1.8GL/1.8G FD1 2005 года; другие рынки и комплектации отличаются.',
+    lengthMm: 4540, widthMm: 1750, heightMm: 1435, wheelbaseMm: 2700,
+    groundClearanceMm: 150, trunkVolumeLiters: 'Нет подтверждённых данных для указанной комплектации', fuelTankLiters: 50,
+    curbWeightKg: '1200–1240 кг для японских версий FD1 в зависимости от комплектации',
     engines: [
-      { code: 'R18A1', name: '1.8 л i-VTEC', displacement: '1799 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V SOHC i-VTEC', fuelSystem: 'Электронный впрыск PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Умеренный расход при исправной системе', 'Цепной привод ГРМ'], weaknesses: ['Проверять состояние опор двигателя и системы охлаждения'] },
-      { code: 'K20Z', name: '2.0 л i-VTEC — отдельные версии', displacement: '1998 см³', powerHp: 'Зависит от модификации', torqueNm: 'Зависит от модификации', valves: '16V DOHC i-VTEC', fuelSystem: 'Электронный впрыск PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Высокий потенциал двигателя'], weaknesses: ['Не устанавливался на все рынки и кузова'] }
+      { code: 'R18A', name: '1.8 л i-VTEC', displacement: '1799 см³', powerHp: '140 PS для японской версии FD1', torqueNm: '174 Н·м для японской версии FD1', valves: 'SOHC, 16 клапанов, цепной привод', fuelSystem: 'Honda PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Заводские параметры относятся к японскому FD1'], weaknesses: ['Не переносить спецификацию на гибрид FD3, Type R и другие рынки'] }
     ],
-    transmissions: ['5-ступенчатая МКПП — отдельные версии', 'Автоматическая трансмиссия — по рынку и комплектации'],
-    sourceNotes: 'Данные относятся к седану FD; двигатель K20 и трансмиссии зависят от рынка. Проверять по VIN.'
+    transmissions: ['5-ступенчатая автоматическая трансмиссия — отдельные версии', '5-ступенчатая МКПП — отдельные версии'],
+    sourceNotes: 'Данные ограничены японским Civic FD1 1.8 2005 года по заводскому FACT BOOK Honda: длина 4540 мм, ширина 1750 мм, высота 1435/1440 мм в зависимости от версии, база 2700 мм, клиренс 150 мм, бак 50 л, двигатель R18A 1799 см³. Перед ремонтом сверять точный код модели и комплектацию.',
+    sourceReferences: [{ label: 'Honda FACT BOOK — CIVIC/CIVIC HYBRID (2005)', url: 'https://www.honda.co.jp/factbook/auto/CIVIC/200509/26.html', scope: 'Заводская таблица японских FD1/FD3: габариты, масса, двигатель R18A, объём бака и типы трансмиссий.' }, { label: 'Honda — архив Civic 2006–2007', url: 'https://www.honda.co.jp/auto-archive/civic/4door/2007/', scope: 'Подтверждает японский период выпуска и каталог поколения; детали комплектации смотреть по выбранному типу.' }]
   }),
   makeSupplementalModel({
     id: 'honda-civic-fn-hatchback',
