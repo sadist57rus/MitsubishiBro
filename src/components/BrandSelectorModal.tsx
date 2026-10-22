@@ -131,12 +131,10 @@ export default function BrandSelectorModal({
             {visibleBrands.map(brand => {
               const isSelected = brand.id === selectedBrandId;
               return (
-                <div
+                <button
+                  type="button"
                   key={brand.id}
                   onClick={() => handleChooseBrand(brand)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); handleChooseBrand(brand); } }}
                   aria-label={`Выбрать ${brand.russianName || brand.name}`}
                   className={`group flex min-w-0 min-h-11 flex-col items-center gap-2 p-2 sm:p-3 rounded-xl border transition cursor-pointer text-center ${
                     isSelected
@@ -202,8 +200,9 @@ export default function BrandSelectorModal({
         <div className="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
           <span className="min-w-0 flex-1">Нажмите на любую марку, чтобы открыть её спецификации</span>
           <button
+            type="button"
             onClick={onClose}
-            className="px-3.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium transition"
+            className="min-h-11 px-3.5 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium transition"
           >
             Закрыть
           </button>
