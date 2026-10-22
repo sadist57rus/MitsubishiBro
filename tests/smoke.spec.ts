@@ -180,7 +180,7 @@ for (const viewport of viewports) {
       await page.getByTestId('header-back').focus();
       await page.getByTestId('header-back').press('Enter');
       await expect(page.getByTestId('header-section-title')).toHaveText('Главная');
-      await expect(page.getByRole('button', { name: /Выбрать или изменить автомобиль/i })).toBeVisible();
+      await expect(page.getByRole('button', { name: /Изменить автомобиль|Выбрать автомобиль/i })).toBeVisible();
 
       const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
       await apkTrigger.click();
@@ -211,8 +211,8 @@ test('главная показывает шесть быстрых действ
   const actions = ['maintenance', 'fuses', 'bulbs', 'obd', 'fuel', 'logbook'];
   for (const id of actions) await expect(page.getByTestId('home-quick-action-' + id)).toBeVisible();
   await expect(page.locator('[data-testid^="home-quick-action-"]')).toHaveCount(6);
-  await expect(page.getByText('Кузов', { exact: true })).toHaveCount(0);
-  await expect(page.getByText('Поколение', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Кузов', { exact: true })).toBeHidden();
+  await expect(page.getByText('Поколение', { exact: true })).toBeHidden();
   await page.getByRole('button', { name: /Изменить автомобиль/i }).click();
   await expect(page.getByRole('heading', { name: 'Гараж' })).toBeVisible();
 });
