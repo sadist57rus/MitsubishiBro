@@ -20,6 +20,102 @@ import {
   Info
 } from 'lucide-react';
 
+
+type SoftwareCard = { name: string; purpose: string; compatibility: string; hardware: string; url: string; sourceLabel: string; level: 'Специализированная' | 'Заводская' | 'Базовая' };
+
+function DiagnosticSoftwareRecommendations({ brandId, brandName, modelName, transmissions }: {
+  brandId: string;
+  brandName: string;
+  modelName: string;
+  transmissions: string;
+}) {
+  const isNissan = /nissan/i.test(brandId + ' ' + brandName);
+  const isToyota = /toyota/i.test(brandId + ' ' + brandName);
+  const isHonda = /honda/i.test(brandId + ' ' + brandName);
+  const isMitsubishi = /mitsubishi/i.test(brandId + ' ' + brandName);
+  const hasCvt = /cvt|вариатор/i.test(transmissions);
+  const programs: SoftwareCard[] = [];
+
+  if (isNissan && hasCvt) programs.push({
+    name: 'CVTz50',
+    purpose: 'Чтение и сброс кодов двигателя и CVT, мониторинг параметров вариатора и оценки старения жидкости.',
+    compatibility: 'Разработчик заявляет поддержку Murano Z50/Z51 и частичную поддержку ряда Nissan с Jatco CVT. Для конкретной модификации требуется проверка совместимости.',
+    hardware: 'Android и адаптер ELM327; разработчик предупреждает, что адаптеры ревизии 2.0+ могут работать ограниченно. Сначала проверьте бесплатную DEMO-версию.',
+    url: 'https://play.google.com/store/apps/details?id=com.cvtz50.cvtz50',
+    sourceLabel: 'Google Play / описание разработчика',
+    level: 'Специализированная'
+  });
+  if (isNissan) programs.push({
+    name: 'Nissan CONSULT-III plus / CONSULT R2R',
+    purpose: 'Заводская диагностика электронных блоков; доступные функции зависят от версии ПО, автомобиля и интерфейса.',
+    compatibility: 'Официальная система Nissan. Перед покупкой проверьте охват конкретного года выпуска и рынка.',
+    hardware: 'Поддерживаемый Nissan Vehicle Interface или совместимый J2534-интерфейс согласно требованиям выбранной версии.',
+    url: 'https://www.nissan-techinfo.com/',
+    sourceLabel: 'Официальный портал Nissan TechInfo',
+    level: 'Заводская'
+  });
+  if (isToyota) programs.push({
+    name: 'Toyota Techstream',
+    purpose: 'Заводская диагностика блоков Toyota; расширенные функции зависят от поколения, блока и интерфейса.',
+    compatibility: 'Использовать только с подтверждённой поддержкой выбранного автомобиля и версии программного обеспечения.',
+    hardware: 'Совместимый диагностический интерфейс и лицензированное ПО; обычный ELM327 не гарантирует доступ ко всем блокам.',
+    url: 'https://techinfo.toyota.com/',
+    sourceLabel: 'Toyota Technical Information System',
+    level: 'Заводская'
+  });
+  if (isHonda) programs.push({
+    name: 'Honda Diagnostic System (HDS)',
+    purpose: 'Заводская диагностика и просмотр данных электронных блоков Honda; набор функций зависит от комплектации.',
+    compatibility: 'Проверяйте совместимость по году, рынку и модификации автомобиля.',
+    hardware: 'Совместимый Honda VCI/интерфейс согласно требованиям HDS.',
+    url: 'https://techinfo.honda.com/',
+    sourceLabel: 'Официальный портал Honda TechInfo',
+    level: 'Заводская'
+  });
+  if (isMitsubishi) programs.push({
+    name: 'MUT-III / MUT-III SE',
+    purpose: 'Заводская диагностика систем Mitsubishi; охват блоков зависит от автомобиля и интерфейса.',
+    compatibility: 'Подбирать версию по поколению, рынку и установленным электронным блокам.',
+    hardware: 'Совместимый интерфейс Mitsubishi; универсальный ELM327 обычно не заменяет диагностику всех блоков.',
+    url: 'https://www.mitsubishi-motors.com/',
+    sourceLabel: 'Сайт производителя Mitsubishi Motors',
+    level: 'Заводская'
+  });
+  programs.push({
+    name: 'Универсальный OBD-II сканер',
+    purpose: 'Базовое чтение кодов двигателя и стандартных параметров OBD-II.',
+    compatibility: 'Не считать гарантией доступа к CVT/АКПП, ABS, SRS, AWD или фирменным параметрам. Для этих систем нужна подтверждённая поддержка.',
+    hardware: 'Качественный совместимый адаптер; перед покупкой сверить протокол и поддержку приложения.',
+    url: 'https://www.nissan-techinfo.com/',
+    sourceLabel: 'Справочная информация о диагностике производителя',
+    level: 'Базовая'
+  });
+
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 dark:border-slate-800 dark:bg-slate-900 space-y-3" aria-labelledby="diagnostic-software-title">
+      <div>
+        <h2 id="diagnostic-software-title" className="text-lg font-bold text-slate-900 dark:text-white">Программы диагностики для этой модели</h2>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{brandName} {modelName}: рекомендации учитывают марку и известный тип трансмиссии, но не заменяют проверку по VIN и блоку управления.</p>
+      </div>
+      <div className="grid grid-cols-1 gap-3">
+        {programs.map((program) => (
+          <article key={program.name} className="rounded-xl border border-slate-200 p-3 dark:border-slate-700">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="font-bold text-slate-900 dark:text-white">{program.name}</h3>
+              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-200">{program.level}</span>
+            </div>
+            <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">{program.purpose}</p>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400"><strong>Совместимость:</strong> {program.compatibility}</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400"><strong>Оборудование:</strong> {program.hardware}</p>
+            <a className="mt-3 inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold text-blue-700 underline dark:border-slate-600 dark:text-blue-300" href={program.url} target="_blank" rel="noreferrer">{program.sourceLabel}</a>
+          </article>
+        ))}
+      </div>
+      <p className="text-xs text-slate-500 dark:text-slate-400">Важно: рекомендации по марке — отправная точка. Функции, поддержка конкретного блока и адаптера должны быть подтверждены для выбранной модификации. Не запускайте кодирование или адаптации без сервисной процедуры.</p>
+    </section>
+  );
+}
+
 export default function ObdDiagnostics() {
   const { brandId, modelId } = useVehicle();
   const activeBrand = JAPANESE_BRANDS.find(brand => brand.id === brandId);
@@ -83,10 +179,25 @@ export default function ObdDiagnostics() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
-  if (!isOutlanderSourceModel) return <section className="rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900"><h2 className="text-base font-bold">Диагностика для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Эта база кодов и пояснений подготовлена для одной исходной модификации справочника. Чтобы не показывать неподтверждённые сведения для другой машины, откройте карточку выбранной модели в «Авто Японии» или запросите данные.</p><a className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white" href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=OBD%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные для модели</a></section>;
+  if (!isOutlanderSourceModel) return (
+    <div className="space-y-4">
+      <DiagnosticSoftwareRecommendations
+        brandId={brandId}
+        brandName={activeBrand?.russianName || activeBrand?.name || brandId}
+        modelName={activeModel ? `${activeModel.name} ${activeModel.generation}` : modelId}
+        transmissions={activeModel?.transmissions.join(' ') || ''}
+      />
+      <section className="rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900">
+        <h2 className="text-base font-bold">Коды ошибок для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Подтверждённая база кодов и пояснений для этой модификации пока не добавлена. Не переносим коды, распиновки и ремонтные процедуры с другой модели без источников.</p>
+        <a className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white" href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=OBD%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные для модели</a>
+      </section>
+    </div>
+  );
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
+      <DiagnosticSoftwareRecommendations brandId={brandId} brandName={activeBrand?.russianName || activeBrand?.name || brandId} modelName={activeModel ? `${activeModel.name} ${activeModel.generation}` : modelId} transmissions={activeModel?.transmissions.join(' ') || ''} />
       {/* Top Header Card */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
