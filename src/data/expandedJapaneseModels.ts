@@ -1500,8 +1500,7 @@ const supplementalModels: JapaneseCarModel[] = [
     drivetrain: 'Зависит от комплектации и рынка.',
     sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
     sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
-  })
-
+  }),
   makeSupplementalModel({
     id: 'mazda3-bp-fastback', brandId: 'mazda', name: 'Mazda3 (BP, Fastback)',
     generation: 'IV поколение, японская спецификация', years: '2019–н.в.', bodyType: 'Хэтчбек',
