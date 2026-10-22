@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import ServicePlanner from './ServicePlanner';
 import { parseDecimalInput } from '../lib/storage';
 import { FLUIDS_DATA, TORQUE_SPECS_DATA, MAINTENANCE_SCHEDULE_TEMPLATE } from '../data/maintenanceData';
 import { Droplet, Gauge, Calendar, CheckCircle2, AlertTriangle, Search, Info, Fuel, Calculator, RotateCcw, Sparkles } from 'lucide-react';
@@ -82,6 +83,7 @@ export default function MaintenanceHub() {
 
   return (
     <div className="space-y-8">
+      <ServicePlanner />
       {/* Top Banner with Mileage Calculator */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-lg space-y-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
