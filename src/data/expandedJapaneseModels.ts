@@ -1367,8 +1367,7 @@ const supplementalModels: JapaneseCarModel[] = [
     drivetrain: 'Передний или полный привод в зависимости от поколения и комплектации.',
     sourceNotes: 'Карточка поколения для навигации по каталогу. Неподтверждённые размеры, ёмкости и сервисные параметры намеренно не заполнены; перед ремонтом сверить VIN, код кузова, двигатель, трансмиссию и руководство рынка.',
     sourceReferences: [{ label: 'Nissan — официальный исторический/модельный источник', url: 'https://www.nissan-global.com/EN/IR/FINANCIAL_RESULTS/ASSETS/DATA/2024/20243rd_presentation_script_147_e.pdf', scope: 'Материалы Nissan описывают развитие e-POWER и его применение в Qashqai.' }]
-  })
-
+  }),
   makeSupplementalModel({
     id: 'honda-crv-re-suv', brandId: 'honda', name: 'CR-V (RE)', generation: 'III поколение', years: '2006–2011', bodyType: 'Кроссовер',
     overview: 'CR-V третьего поколения; двигатели и оснащение различаются по рынку.',
