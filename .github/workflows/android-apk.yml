@@ -1,9 +1,11 @@
-name: Car Brother Android APK
+name: Nippon Drive Android APK
 
 on:
   push:
     branches: [main]
     tags: ['v*']
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -115,7 +117,7 @@ jobs:
   debug-apk:
     name: Build debug APK (artifact only)
     needs: prepare
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') }}
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') || github.event_name == 'pull_request' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
@@ -169,12 +171,13 @@ jobs:
       - name: Upload debug APK artifact
         uses: actions/upload-artifact@v5
         with:
-          name: Car-Brother-APK-debug
+          name: Nippon-Drive-APK-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
 
       - name: Publish unsigned test release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
@@ -263,7 +266,7 @@ jobs:
       - name: Upload signed release APK artifact
         uses: actions/upload-artifact@v5
         with:
-          name: Car-Brother-APK-release-${{ github.ref_name }}
+          name: Nippon-Drive-APK-release-${{ github.ref_name }}
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 30
