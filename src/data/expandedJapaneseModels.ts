@@ -1520,6 +1520,57 @@ const supplementalModels: JapaneseCarModel[] = [
     ]
   }),
   makeSupplementalModel({
+    id: 'mazda-mpv-ly3p-23c-2wd',
+    brandId: 'mazda',
+    name: 'MPV (LY3P, 23C 2WD)',
+    generation: 'III поколение (LY), японская спецификация',
+    years: '2006–2016',
+    bodyType: 'Минивэн',
+    overview: 'Трёхрядный минивэн японского рынка. Запись содержит заводскую реперную спецификацию MPV 23C с передним приводом на старте поколения в 2006 году; параметры не переносить на 4WD, 23T turbo или поздние комплектации без сверки.',
+    lengthMm: 4860,
+    widthMm: 1850,
+    heightMm: 1685,
+    wheelbaseMm: 2950,
+    groundClearanceMm: 155,
+    trunkVolumeLiters: 'Нет подтверждённых данных для единой конфигурации сидений',
+    fuelTankLiters: 68,
+    curbWeightKg: '1720 кг для японской версии 23C 2WD (2006)',
+    engines: [
+      {
+        code: 'L3-VE',
+        name: '2.3 л бензиновый атмосферный',
+        displacement: '2260 см³',
+        powerHp: '163 PS при 6500 об/мин для японской версии 23C 2WD (2006)',
+        torqueNm: '210 Н·м при 4000 об/мин для японской версии 23C 2WD (2006)',
+        valves: 'DOHC, 16 клапанов',
+        fuelSystem: 'EGI, электронный впрыск',
+        timingDrive: 'Нет подтверждённых данных в использованном заводском источнике',
+        strengths: ['Параметры привязаны к заводской японской версии 23C 2WD'],
+        weaknesses: ['Не переносить на L3-VDT turbo и версии 4WD']
+      }
+    ],
+    transmissions: ['4-ступенчатая АКПП для японской версии 23C 2WD (2006)'],
+    drivetrain: 'Передний привод (FF) для указанной реперной комплектации; 4WD имеет другие параметры.',
+    sourceNotes: 'Реперная спецификация из релиза Mazda Japan от февраля 2006 года: MPV 23C FF, 4860×1850×1685 мм, база 2950 мм, клиренс 155 мм, масса 1720 кг, L3-VE 2260 см³, 163 PS/210 Н·м. Официальное руководство Mazda указывает бак 68 л для 2WD и 76 л для 4WD. Это не универсальная спецификация всего поколения LY: размеры, масса, бак, двигатель и коробка зависят от комплектации и года. Сверять VIN/код модели.',
+    sourceReferences: [
+      {
+        label: 'Mazda Japan — пресс-релиз о новом MPV (2006)',
+        url: 'https://newsroom.mazda.com/ja/publicity/release/2006/200602/060202.html',
+        scope: 'Заводская таблица основных характеристик японского MPV 2006: габариты, база, клиренс, масса, L3-VE/L3-VDT, мощность и момент.'
+      },
+      {
+        label: 'Mazda — официальное руководство MPV, сервисные данные',
+        url: 'https://www2.mazda.co.jp/service/ownersmanual/mpv/lsi/70214.html',
+        scope: 'Официально подтверждает топливо и ёмкость бака: 68 л для 2WD, 76 л для 4WD.'
+      },
+      {
+        label: 'Mazda — официальное руководство MPV, заправка',
+        url: 'https://www2.mazda.co.jp/service/ownersmanual/mpv/lsi/30111.html',
+        scope: 'Указывает применимость топлива L3-VE/L3-VDT и различие ёмкости бака по приводу.'
+      }
+    ]
+  }),
+  makeSupplementalModel({
     id: 'mazda3-bp-sedan', brandId: 'mazda', name: 'Mazda3 (BP, Sedan)',
     generation: 'IV поколение, японская спецификация', years: '2019–н.в.', bodyType: 'Седан',
     overview: 'Четырёхдверный седан Mazda3 поколения BP. Кузовные детали и размеры не следует объединять с Fastback.',
