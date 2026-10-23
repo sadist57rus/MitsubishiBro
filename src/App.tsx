@@ -268,7 +268,7 @@ function AppContent() {
   }
 
   return (
-    <div className={`min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white ${uiMode === "wide" ? "car-brother-wide" : ""}`}>
+    <div className={`min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 selection:bg-red-500 selection:text-white ${uiMode === "wide" ? "nippon-drive-wide" : ""}`}>
       <Header
         title={currentTabInfo.title}
         showBack={activeTab !== 'overview'}
@@ -277,7 +277,7 @@ function AppContent() {
       />
 
       {uiMode === 'wide' && (
-        <nav aria-label="Основная навигация" className="car-brother-rail" data-testid="wide-navigation-rail">
+        <nav aria-label="Основная навигация" className="nippon-drive-rail" data-testid="wide-navigation-rail">
           {widePrimaryNavigation.map(id => {
             const item = tabTitles[id];
             const Icon = item.icon;
@@ -290,14 +290,14 @@ function AppContent() {
                 aria-current={activeTab === id ? 'page' : undefined}
                 title={shortTabTitles[id]}
                 onClick={() => setActiveTab(id)}
-                className={`car-brother-rail-item ${activeTab === id ? 'is-active' : ''}`}
+                className={`nippon-drive-rail-item ${activeTab === id ? 'is-active' : ''}`}
               >
                 <Icon aria-hidden="true" size={28} />
                 <span>{shortTabTitles[id]}</span>
               </button>
             );
           })}
-          <button type="button" data-testid="wide-more-trigger" aria-label="Ещё" aria-current={activeTab === 'more' ? 'page' : undefined} onClick={() => setActiveTab('more')} className={`car-brother-rail-item ${activeTab === 'more' ? 'is-active' : ''}`}>
+          <button type="button" data-testid="wide-more-trigger" aria-label="Ещё" aria-current={activeTab === 'more' ? 'page' : undefined} onClick={() => setActiveTab('more')} className={`nippon-drive-rail-item ${activeTab === 'more' ? 'is-active' : ''}`}>
             <MoreHorizontal aria-hidden="true" size={28} /><span>Ещё</span>
           </button>
         </nav>
@@ -423,7 +423,7 @@ function AppContent() {
       </main>
 
       {uiMode === 'phone' && (
-        <nav aria-label="Основная навигация" className="car-brother-bottom-nav" data-testid="phone-bottom-navigation">
+        <nav aria-label="Основная навигация" className="nippon-drive-bottom-nav" data-testid="phone-bottom-navigation">
           {([
             { id: 'overview', label: 'Главная', icon: Home },
             { id: 'garage', label: 'Авто', icon: Car },
@@ -431,11 +431,11 @@ function AppContent() {
             { id: 'obd', label: 'Диагностика', icon: Stethoscope },
           ] as const).map(item => {
             const Icon = item.icon;
-            return <button key={item.id} type="button" data-testid={`phone-nav-item-${item.id}`} aria-current={activeTab === item.id ? 'page' : undefined} onClick={() => setActiveTab(item.id)} className={`car-brother-bottom-nav-item ${activeTab === item.id ? 'is-active' : ''}`}>
+            return <button key={item.id} type="button" data-testid={`phone-nav-item-${item.id}`} aria-current={activeTab === item.id ? 'page' : undefined} onClick={() => setActiveTab(item.id)} className={`nippon-drive-bottom-nav-item ${activeTab === item.id ? 'is-active' : ''}`}>
               <Icon aria-hidden="true" size={21} /><span>{item.label}</span>
             </button>;
           })}
-          <button type="button" data-testid="phone-more-trigger" className={`car-brother-bottom-nav-item ${activeTab === 'more' ? 'is-active' : ''}`} aria-current={activeTab === 'more' ? 'page' : undefined} aria-label="Ещё" onClick={() => setActiveTab('more')}>
+          <button type="button" data-testid="phone-more-trigger" className={`nippon-drive-bottom-nav-item ${activeTab === 'more' ? 'is-active' : ''}`} aria-current={activeTab === 'more' ? 'page' : undefined} aria-label="Ещё" onClick={() => setActiveTab('more')}>
             <MoreHorizontal aria-hidden="true" size={21} /><span>Ещё</span>
           </button>
         </nav>
