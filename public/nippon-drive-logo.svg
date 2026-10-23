@@ -1,26 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 512" role="img" aria-labelledby="title">
 <title id="title">Nippon Drive</title>
-<rect width="1600" height="480" fill="#fff"/>
-<g transform="translate(48 38)">
-  <circle cx="202" cy="202" r="190" fill="#252525"/>
-  <circle cx="202" cy="202" r="157" fill="#bd0c35"/>
-  <circle cx="202" cy="202" r="139" fill="#fff"/>
-  <circle cx="202" cy="202" r="65" fill="#bd0c35" stroke="#fff" stroke-width="10"/>
-  <g fill="#bd0c35">
-    <path d="M186 63h32l-7 74h-18z"/>
-    <path d="M132 73l28-14 27 72-18 9z"/>
-    <path d="M87 105l23-23 48 61-16 15z"/>
-    <path d="M57 151l13-28 68 39-9 19z"/>
-    <path d="M46 192l4-31 76 13-3 21z"/>
-    <path d="M218 63h-32l7 74h18z" transform="rotate(180 202 202)"/>
-    <path d="M272 73l-28-14-27 72 18 9z"/>
-    <path d="M317 105l-23-23-48 61 16 15z"/>
-    <path d="M347 151l-13-28-68 39 9 19z"/>
-    <path d="M358 192l-4-31-76 13 3 21z"/>
-  </g>
-  <path d="M55 244Q93 228 127 235L151 259 148 306Q145 326 126 326H91Q71 326 67 307Z" fill="#fff"/>
-  <path d="M349 244Q311 228 277 235L253 259 256 306Q259 326 278 326H313Q333 326 337 307Z" fill="#fff"/>
-  <path d="M55 267l61-17 23 17-8 17-67 12zM349 267l-61-17-23 17 8 17 67 12z" fill="#bd0c35"/>
-</g>
-<text x="470" y="287" fill="#171717" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="-5">Nippon Drive</text>
+<svg x="0" y="0" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15120d"/><stop offset=".55" stop-color="#030609"/><stop offset="1" stop-color="#201306"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff2a6"/><stop offset=".28" stop-color="#ffd45b"/><stop offset=".55" stop-color="#b87513"/><stop offset=".78" stop-color="#ffe58a"/><stop offset="1" stop-color="#8c4b05"/></linearGradient>
+ <linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#353b40"/><stop offset=".4" stop-color="#11171c"/><stop offset="1" stop-color="#020304"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#b87513" stop-opacity=".75"/><stop offset="1" stop-color="#b87513" stop-opacity="0"/></radialGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+<rect width="512" height="512" rx="92" fill="url(#bg)"/>
+<ellipse cx="256" cy="260" rx="220" ry="150" fill="url(#glow)" opacity=".75"/>
+<rect x="12" y="12" width="488" height="488" rx="82" fill="none" stroke="url(#gold)" stroke-width="7"/>
+<path d="M64 246 Q256 86 448 246" fill="none" stroke="url(#gold)" stroke-width="5" opacity=".9"/>
+<path d="M74 270 Q105 238 150 225 L198 177 Q212 164 235 164 L302 164 Q326 166 344 190 L382 225 Q414 231 438 264 L429 294 L82 294Z" fill="#000" opacity=".8" filter="url(#shadow)"/>
+<path d="M73 267 Q106 238 151 226 L197 181 Q211 168 235 168 L302 168 Q326 170 344 194 L381 226 Q415 232 438 264 L430 292 L82 292Z" fill="url(#car)" stroke="url(#gold)" stroke-width="2.5"/>
+<path d="M173 222 L207 184 Q216 177 236 177 L299 177 Q317 179 331 198 L352 223Z" fill="#0a141b" stroke="#a9b3bb" stroke-width="2"/>
+<path d="M253 179 L253 222 M172 222 L352 222" stroke="#5b6267" stroke-width="2"/>
+<path d="M87 261 L137 247 L163 253 L151 264 L89 274Z" fill="#ffc94d"/>
+<path d="M355 253 L382 247 L424 262 L423 274 L361 264Z" fill="#ffc94d"/>
+<path d="M100 281 Q256 296 411 281 L394 301 L119 301Z" fill="#050607" stroke="#8d5a18" stroke-width="2"/>
+<circle cx="147" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/><circle cx="365" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/>
+<path d="M55 335 H148 L135 343 H68Z M364 335 H457 L444 343 H377Z" fill="url(#gold)"/>
+<text x="256" y="388" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="65" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1.5" paint-order="stroke">CAR</text>
+<text x="256" y="435" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1" paint-order="stroke">BROTHER</text>
+<path d="M108 454 Q256 484 404 454" fill="none" stroke="url(#gold)" stroke-width="4"/>
+
+</svg>
+<text x="570" y="300" fill="#ffd45b" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="-4">Nippon Drive</text>
+<path d="M575 342H1430" stroke="#b87513" stroke-width="7" stroke-linecap="round"/>
+<text x="580" y="410" fill="#d7d0c2" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="3">JAPANESE CAR REFERENCE</text>
 </svg>
