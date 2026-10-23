@@ -100,24 +100,164 @@ const makeSupplementalModel = (data: {
 
 const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
-    id: 'toyota-corolla-axio-e140-sedan',
-    brandId: 'toyota',
-    name: 'Corolla Axio (E140)',
-    generation: 'X поколение, японская версия',
-    years: '2006–2012',
-    bodyType: 'Седан',
-    overview: 'Компактный седан японского рынка. Линейка включала бензиновые двигатели 1.5 и 1.8 л; мощность и привод различаются по модификации.',
-    lengthMm: 4410, widthMm: 1695, heightMm: 1460, wheelbaseMm: 2600,
-    groundClearanceMm: 155, trunkVolumeLiters: 'Зависит от комплектации', fuelTankLiters: 50,
-    curbWeightKg: 'Ориентировочно 1100–1300 кг',
-    engines: [
-      { code: '1NZ-FE', name: '1.5 л бензин, VVT-i', displacement: '1496 см³', powerHp: 'Зависит от версии и привода', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый двигатель семейства Toyota'], weaknesses: ['Состояние зависит от обслуживания и пробега'] },
-      { code: '2ZR-FE', name: '1.8 л бензин, Dual VVT-i', displacement: '1797 см³', powerHp: 'Зависит от рынка и года', torqueNm: 'Зависит от версии', valves: '16V DOHC Dual VVT-i', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Более высокий запас мощности'], weaknesses: ['Требует проверки конкретной модификации'] }
-    ],
-    transmissions: ['МКПП или автоматическая трансмиссия — по комплектации', 'Вариатор на отдельных версиях'],
-    drivetrain: 'Передний привод; встречаются версии 4WD для японского рынка.',
-    sourceNotes: 'Проверенная реперная версия: японская Corolla Axio X, DBA-NZE141, октябрь 2008–октябрь 2009: 4410×1695×1460 мм, база 2600 мм, масса 1130 кг, 1NZ-FE 1496 см³, 110 PS/140 Н·м, бак 50 л, FF. У 4WD (NZE144) высота, масса и выходные параметры отличаются; эти данные не универсальны для E140.', sourceReferences: [{ label: 'Toyota Japan — Corolla Axio X NZE141 (2008.10)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA_AXIO/200810/10051731/', scope: 'Официальные данные японской версии NZE141 1.5 FF; не распространять на 4WD и 1.8.' }, { label: 'Toyota Japan — каталог Corolla Axio', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA_AXIO/', scope: 'Двигатели, приводы и коробки семейства; параметры зависят от года и комплектации.' }]
+    id: 'toyota-mr2-sw20-gt-s-1997',
+    brandId: 'toyota', name: 'MR2 GT-S (SW20)', generation: 'II поколение, японская спецификация', years: '1997–1999',
+    bodyType: 'Купе/Спорт',
+    overview: 'Среднемоторное заднеприводное купе с турбированным 3S-GTE. Данные относятся к японскому GT-S выпуска 1997.12, а не ко всем SW20.',
+    lengthMm: 4170, widthMm: 1695, heightMm: 1235, wheelbaseMm: 2400, groundClearanceMm: 130,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 54, curbWeightKg: '1270 кг для E-SW20 GT-S 1997.12',
+    engines: [{ code: '3S-GTE', name: '2.0 л turbo', displacement: '1998 см³', powerHp: '245 PS при 6000 об/мин', torqueNm: '304 Н·м при 4000 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI-D', timingDrive: 'Ремень ГРМ', strengths: ['Параметры относятся к GT-S поздней серии SW20'], weaknesses: ['Не переносить на ранний GT-S с 225 PS'] }],
+    transmissions: ['5-ступенчатая МКПП для GT-S'],
+    drivetrain: 'Среднемоторная компоновка, задний привод; LSD зависит от исполнения.',
+    sourceNotes: 'Toyota GT-S E-SW20 (1997.12): 4170×1695×1235 мм, база 2400 мм, колея 1470/1450 мм, масса 1270 кг, 3S-GTE 1998 см³, 245 PS/304 Н·м, бак 54 л, 5MT. Заводская карточка также указывает компрессию 8.5 и турбонаддув с интеркулером. Точные размеры шин/дисков, передаточные числа и дворники требуют отдельной проверки по комплектации; не подставлять универсальные значения.',
+    sourceReferences: [{ label: 'Toyota Japan — MR2 GT-S E-SW20 (1997.12)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-MR2/199712/1002263/', scope: 'Заводские габариты, масса, 3S-GTE, мощность, момент, коробка и бак конкретной версии.' }]
   }),
+  makeSupplementalModel({
+    id: 'toyota-starlet-ep91-glanza-v',
+    brandId: 'toyota', name: 'Starlet Glanza V (EP91)', generation: 'V поколение, японская спецификация', years: '1997–1999',
+    bodyType: 'Хэтчбек',
+    overview: 'Лёгкий трёхдверный переднеприводный хэтчбек с 4E-FTE turbo. Указана базовая Glanza V E-EP91, не motorsport package и не Glanza S.',
+    lengthMm: 3790, widthMm: 1625, heightMm: 1400, wheelbaseMm: 2300, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: '920 кг для E-EP91 Glanza V (1997.04)',
+    engines: [{ code: '4E-FTE', name: '1.3 л turbo с интеркулером', displacement: '1331 см³', powerHp: '135 PS при 6400 об/мин', torqueNm: '156.9 Н·м при 4800 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI-D', timingDrive: 'Ремень ГРМ', strengths: ['Заводские параметры указаны для японской Glanza V'], weaknesses: ['Не переносить на атмосферную Glanza S с 4E-FE'] }],
+    transmissions: ['5-ступенчатая МКПП — Glanza V', '4-ступенчатая АКПП — отдельные исполнения'],
+    drivetrain: 'Передний привод (FF); передаточные числа и дифференциал уточнять по коробке.',
+    sourceNotes: 'Toyota E-EP91 Glanza V (1997.04): 3790×1625×1400 мм, база 2300 мм, колея 1400/1395 мм, масса 920 кг, 4E-FTE 1331 см³, 135 PS/156.9 Н·м. Источник перечисляет 5MT и FF для Glanza V. Бак требует проверки карточки конкретной комплектации; штатные шины/диски, финальная пара и дворники в этой записи не утверждаются.',
+    sourceReferences: [{ label: 'Toyota Japan — Starlet Glanza V E-EP91 (1997.04)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-STARLET/199704/1007056/', scope: 'Заводские размеры, масса, двигатель 4E-FTE, мощность и момент; комплектации Glanza отличаются.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-caldina-st215w-gt-t',
+    brandId: 'toyota', name: 'Caldina GT-T (ST215W)', generation: 'II поколение, японская спецификация', years: '1997–2002',
+    bodyType: 'Универсал',
+    overview: 'Высокопроизводительный универсал с 3S-GTE и постоянным полным приводом. Версия GT-T отличается от GT-Four и более поздних Caldina.',
+    lengthMm: 4580, widthMm: 1720, heightMm: 1495, wheelbaseMm: 2580, groundClearanceMm: 155,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 60, curbWeightKg: '1480 кг для E-ST215W GT-T (1997.09)',
+    engines: [{ code: '3S-GTE', name: '2.0 л turbo', displacement: '1998 см³', powerHp: '260 PS при 6000 об/мин', torqueNm: '323.6 Н·м при 4400 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Заводские параметры для GT-T ST215W'], weaknesses: ['Не переносить на атмосферные 3S-FE версии Caldina'] }],
+    transmissions: ['4-ступенчатая АКПП для E-ST215W GT-T'],
+    drivetrain: 'Постоянный полный привод (full-time 4WD); передаточные числа и коды дифференциалов сверять по шильдику агрегатов.',
+    sourceNotes: 'Toyota E-ST215W GT-T (1997.09): 4580×1720×1495 мм, база 2580 мм, колея 1480/1450 мм, масса 1480 кг, 3S-GTE 1998 см³, 260 PS/323.6 Н·м, бак 60 л, full-time 4WD, 4AT. Не переносить эти значения на GT-T S-version 2000.01 (другая масса/период). Размеры шин/дисков, финальные пары и дворники требуют проверки для точной комплектации.',
+    sourceReferences: [{ label: 'Toyota Japan — Caldina Active Sports GT-T E-ST215W (1997.09)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CALDINA/199709/1000351/', scope: 'Заводские размеры, масса, двигатель, мощность, момент, коробка и бак для GT-T 1997.09.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-crown-jzs171-athlete-v',
+    brandId: 'toyota', name: 'Crown Athlete V (JZS171)', generation: 'XI поколение Crown, японская спецификация', years: '2001–2003',
+    bodyType: 'Седан',
+    overview: 'Заднеприводный седан с турбированным 1JZ-GTE. Запись относится к Crown Athlete V GH-JZS171, а не к атмосферному Athlete с 1JZ-GE.',
+    lengthMm: 4820, widthMm: 1765, heightMm: 1455, wheelbaseMm: 2780, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1600 кг для GH-JZS171 (2001.08)',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '378 Н·м при 2400 об/мин', valves: 'Рядный 6-цилиндровый DOHC, 24 клапана', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Паспортные параметры соответствуют Athlete V GH-JZS171'], weaknesses: ['Не смешивать с атмосферным JZS171 Athlete'] }],
+    transmissions: ['4-ступенчатая АКПП — конкретную модель коробки проверить по коду комплектации'],
+    drivetrain: 'Задний привод (FR); передаточное число главной пары и тип LSD требуют проверки по комплектации.',
+    sourceNotes: 'Toyota GH-JZS171 Athlete V (2001.08): 4820×1765×1455 мм, база 2780 мм, колея 1495/1470 мм, масса 1600 кг, 1JZ-GTE 2491 см³, 280 PS/378 Н·м, бак 70 л. Это данные Athlete V, не обычного Athlete 1JZ-GE. Шины/диски, точная коробка, передаточные числа и дворники требуют отдельной сверки по заводскому коду.',
+    sourceReferences: [{ label: 'Toyota Japan — Crown Athlete V GH-JZS171 (2001.08)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN/200108/1010188/', scope: 'Заводские габариты, масса, 1JZ-GTE, мощность, момент, бак и коробка.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-crown-estate-jzs171w-athlete-v',
+    brandId: 'toyota', name: 'Crown Estate Athlete V (JZS171W)', generation: 'XI поколение Crown Estate, японская спецификация', years: '2001–2003',
+    bodyType: 'Универсал',
+    overview: 'Спортивный универсал с 1JZ-GTE turbo и задним приводом. Его кузовные размеры и масса отличаются от седана Crown Athlete V.',
+    lengthMm: 4835, widthMm: 1765, heightMm: 1510, wheelbaseMm: 2780, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1680 кг для GH-JZS171W (2001.08)',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '378 Н·м при 2400 об/мин', valves: 'Рядный 6-цилиндровый DOHC, 24 клапана', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Заводские данные отдельного кузова JZS171W'], weaknesses: ['Не переносить массу и кузовные параметры с седана JZS171'] }],
+    transmissions: ['4-ступенчатая АКПП — по японской версии Athlete V'],
+    drivetrain: 'Задний привод (FR); точная главная пара и дифференциал зависят от комплектации.',
+    sourceNotes: 'Toyota GH-JZS171W Crown Estate Athlete V (2001.08): 4835×1765×1510 мм, база 2780 мм, колея 1495/1470 мм, масса 1680 кг, 1JZ-GTE 2491 см³, 280 PS/378 Н·м, бак 70 л. Это отдельная запись универсала, не седана. Штатные шины/диски, финальная пара и длины дворников не подтверждены в используемой карточке.',
+    sourceReferences: [{ label: 'Toyota Japan — Crown Estate Athlete V GH-JZS171W (2001.08)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN_ESTATE/200108/1010173/', scope: 'Заводские размеры, масса, двигатель, мощность, момент и бак для кузова JZS171W.' }]
+  }),
+
+  // Batch 2: drift and JDM performance icons. Exact trim data is scoped in each source note.
+  makeSupplementalModel({
+    id: 'toyota-altezza-sxe10-rs200',
+    brandId: 'toyota',
+    name: 'Altezza RS200 (SXE10)',
+    generation: 'I поколение, японская спецификация',
+    years: '1998–2005',
+    bodyType: 'Седан',
+    overview: 'Компактный заднеприводный спортивный седан; RS200 оснащался атмосферным 3S-GE BEAMS. Не смешивать с Altezza AS200 и экспортным Lexus IS200.',
+    lengthMm: 4400, widthMm: 1720, heightMm: 1410, wheelbaseMm: 2670,
+    groundClearanceMm: 130, trunkVolumeLiters: 'Нет подтверждённых данных для указанной комплектации', fuelTankLiters: 60,
+    curbWeightKg: '1330 кг для RS200 5AT; 1340 кг для RS200 6MT',
+    engines: [{ code: '3S-GE', name: '2.0 л BEAMS, атмосферный', displacement: '1998 см³', powerHp: '200 PS при 7000 об/мин (5AT); 210 PS при 7600 об/мин (6MT)', torqueNm: '216 Н·м при 4800 об/мин (5AT); 216 Н·м при 6400 об/мин (6MT)', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Заводские параметры различаются у 5AT и 6MT'], weaknesses: ['Нельзя переносить мощность версии 6MT на 5AT'] }],
+    transmissions: ['6-ступенчатая МКПП — RS200', '5-ступенчатая АКПП Super ECT — RS200'],
+    drivetrain: 'Задний привод (FR); передаточное число главной пары зависит от коробки и версии.',
+    sourceNotes: 'Заводской Toyota GAZOO RS200 GF-SXE10 (1998.10): 4400×1720×1410 мм, база 2670 мм, колея 1495/1485 мм, масса 1330 кг для 5AT, 3S-GE 200 PS/216 Н·м, бак 60 л, FR, 5AT; главная пара 4.100. У 6MT и Z Edition другие мощность/масса. Шины, диски и длины дворников не включены без отдельного подтверждения для конкретной комплектации.',
+    sourceReferences: [{ label: 'Toyota GAZOO — Altezza RS200 GF-SXE10 (1998.10)', url: 'https://gazoo.com/catalog/maker/TOYOTA/ALTEZZA/199810/1003926/', scope: 'Заводская карточка RS200: габариты, масса, двигатель, мощность, момент, бак, привод, 5AT и главная пара; не универсально для 6MT.' }, { label: 'Toyota — история Altezza', url: 'https://www.toyota.co.jp/jpn/company/history/75years/vehicle_lineage/car/id60000174/index.html', scope: 'Сопоставление комплектаций RS200 6MT/5AT и двигателя 3S-GE.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-aristo-jzs161-v300',
+    brandId: 'toyota',
+    name: 'Aristo V300 (JZS161)',
+    generation: 'II поколение, японская спецификация',
+    years: '1997–2005',
+    bodyType: 'Седан',
+    overview: 'Большой заднеприводный седан с 2JZ-GTE twin-turbo; известен также под экспортным именем Lexus GS 300, но комплектации и рынок различаются.',
+    lengthMm: 4805, widthMm: 1800, heightMm: 1435, wheelbaseMm: 2800,
+    groundClearanceMm: 150, trunkVolumeLiters: 'Нет подтверждённых данных для указанной комплектации', fuelTankLiters: 75,
+    curbWeightKg: '1680 кг для V300 (JZS161, 1998.08)',
+    engines: [{ code: '2JZ-GTE', name: '3.0 л twin-turbo', displacement: '2997 см³', powerHp: '280 PS при 5600 об/мин', torqueNm: '451 Н·м при 3600 об/мин', valves: 'Рядный 6-цилиндровый DOHC, 24 клапана', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Заводские параметры японской V300 подтверждены каталогом Toyota'], weaknesses: ['Не переносить спецификацию на Aristo S300 с 2JZ-GE'] }],
+    transmissions: ['4-ступенчатая АКПП для японской V300'],
+    drivetrain: 'Задний привод (FR); главная пара и дифференциал уточняются по коду комплектации.',
+    sourceNotes: 'Toyota V300 E-JZS161 (1998.08): 4805×1800×1435 мм, база 2800 мм, колея 1535/1515 мм, масса 1680 кг, 2JZ-GTE 2997 см³, 280 PS/451 Н·м, бак 75 л, 4AT, FR. Размеры шин/дисков и дворников не установлены этой карточкой; не подбирать по одному лишь названию кузова.',
+    sourceReferences: [{ label: 'Toyota Japan — Aristo V300 (1998.08)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-ARISTO/199808/1000838/', scope: 'Заводская карточка E-JZS161: размеры, масса, 2JZ-GTE, мощность, момент, бак и коробка.' }, { label: 'Toyota Japan — каталог Aristo', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-ARISTO/', scope: 'Сравнение V300/JZS161 и S300/JZS160; не смешивать моторы.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-corolla-levin-ae101-gt-apex',
+    brandId: 'toyota',
+    name: 'Corolla Levin GT APEX (AE101)',
+    generation: 'VII поколение, японская спецификация',
+    years: '1991–1995',
+    bodyType: 'Купе/Спорт',
+    overview: 'Лёгкое переднеприводное купе поколения AE101 с атмосферным 4A-GE 20V. Это отдельная модель от заднеприводных AE86.',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465,
+    groundClearanceMm: 140, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50,
+    curbWeightKg: '1090 кг для GT APEX E-AE101 (1992.05)',
+    engines: [{ code: '4A-GE', name: '1.6 л DOHC 20V', displacement: '1587 см³', powerHp: '160 PS при 7400 об/мин', torqueNm: '161.8 Н·м при 5200 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 20 клапанов', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Точная спецификация для японского GT APEX E-AE101'], weaknesses: ['Не путать с 4A-GE 16V AE86 и версиями AE111'] }],
+    transmissions: ['5-ступенчатая МКПП — по версии', '4-ступенчатая АКПП — по версии'],
+    drivetrain: 'Передний привод (FF); данные редуктора и передаточных чисел требуют выбора точной коробки.',
+    sourceNotes: 'Toyota GT APEX E-AE101 (1992.05): 4275×1695×1305 мм, база 2465 мм, масса 1090 кг, 4A-GE 1587 см³, 160 PS/161.8 Н·м, бак 50 л. Не выдавать эти данные за характеристики AE86. Точные штатные шины/диски, передаточные числа и дворники требуют отдельной сверки по коду модели.',
+    sourceReferences: [{ label: 'Toyota Japan — Corolla Levin GT APEX E-AE101 (1992.05)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA_LEVIN/199205/10047148/', scope: 'Заводские данные японской AE101: габариты, масса, двигатель, мощность, момент, бак.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-skyline-gt-r-bnr34-v-spec-ii',
+    brandId: 'nissan',
+    name: 'Skyline GT-R V·spec II (BNR34)',
+    generation: 'X поколение Skyline, японская спецификация',
+    years: '2000–2002',
+    bodyType: 'Купе/Спорт',
+    overview: 'Высокопроизводительная версия BNR34 с RB26DETT и полным приводом ATTESA E-TS. Не смешивать с гоночными R34 GT500, которые имеют другие двигатель, массу, шины и привод.',
+    lengthMm: 4600, widthMm: 1780, heightMm: 1360, wheelbaseMm: 2665,
+    groundClearanceMm: 140, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 65,
+    curbWeightKg: '1560 кг для V·spec II (заводская карточка Nissan)',
+    engines: [{ code: 'RB26DETT', name: '2.6 л рядный 6-цилиндровый twin-turbo', displacement: '2568 см³', powerHp: '280 PS при 6800 об/мин', torqueNm: '392 Н·м при 4400 об/мин', valves: 'DOHC, 24 клапана', fuelSystem: 'Электронный впрыск, twin-turbo', timingDrive: 'Ремень ГРМ', strengths: ['Спецификация дорожной V·spec II отделена от гоночных машин'], weaknesses: ['Проверять фактический код кузова и агрегатов'] }],
+    transmissions: ['6-ступенчатая МКПП Getrag — дорожная версия'],
+    drivetrain: 'Полный привод ATTESA E-TS; задний активный дифференциал и передаточные числа уточнять по комплектации.',
+    sourceNotes: 'Заводская дорожная V·spec II BNR34: 4600×1780×1360 мм, база 2665 мм, масса 1560 кг, RB26DETT 2568 см³, 280 PS/392 Н·м, шины 245/40ZR18. Источник Nissan указывает активный LSD для V·spec; конкретные диски и длины дворников не подтверждены в этой записи.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Skyline GT-R V·spec II (2000, BNR34)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/280_skyline_gt-r_v-spec_ii.html', scope: 'Заводские данные дорожной V·spec II: размеры, масса, RB26DETT, мощность, момент и размер шин; не использовать спецификации гоночных машин.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-skyline-gt-r-bnr34-m-spec-nur',
+    brandId: 'nissan',
+    name: 'Skyline GT-R M·spec Nür (BNR34)',
+    generation: 'X поколение Skyline, ограниченная серия',
+    years: '2002',
+    bodyType: 'Купе/Спорт',
+    overview: 'Ограниченная дорожная серия BNR34 с двигателем RB26DETT на базе N1. Характеристики относятся к M·spec Nür и не должны переноситься на обычный GT-R.',
+    lengthMm: 4600, widthMm: 1780, heightMm: 1360, wheelbaseMm: 2665,
+    groundClearanceMm: 140, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 65,
+    curbWeightKg: '1580 кг по карточке Nissan Heritage Collection',
+    engines: [{ code: 'RB26DETT', name: '2.6 л рядный 6-цилиндровый twin-turbo, база N1', displacement: '2568 см³', powerHp: '280 PS при 6800 об/мин', torqueNm: '392 Н·м при 4400 об/мин', valves: 'DOHC, 24 клапана', fuelSystem: 'Электронный впрыск, twin-turbo', timingDrive: 'Ремень ГРМ', strengths: ['Ограниченная дорожная спецификация подтверждена Nissan'], weaknesses: ['Не путать с гоночными машинами и не считать заводскую паспортную мощность гарантией состояния старого мотора'] }],
+    transmissions: ['6-ступенчатая МКПП — дорожный BNR34'],
+    drivetrain: 'Полный привод ATTESA E-TS; дифференциалы и передаточные числа сверять по заводской документации конкретного кузова.',
+    sourceNotes: 'Nissan указывает для M·spec Nür: 4600×1780×1360 мм, база 2665 мм, масса 1580 кг, RB26DETT 2568 см³, 280 PS/392 Н·м, шины 245/40ZR18. Точные диски, передаточные числа и дворники не подтверждены этой карточкой.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Skyline GT-R M·spec Nür (2000, BNR34)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/306_skyline_gt-r_m-spec_nur.html', scope: 'Данные ограниченной дорожной серии BNR34: размеры, масса, двигатель, мощность, момент и шины.' }]
+  }),
+
+
+
+
+
+
+
   makeSupplementalModel({
     id: 'toyota-corolla-fielder-e140-wagon',
     brandId: 'toyota',
