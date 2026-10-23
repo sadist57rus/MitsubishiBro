@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
-<title id="title">Nippon Drive — иконка приложения</title>
+<title id="title">Nippon-Drive — иконка приложения</title>
 <defs>
  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151a20"/><stop offset="1" stop-color="#030609"/></linearGradient>
  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b0"/><stop offset=".35" stop-color="#e8b64d"/><stop offset=".72" stop-color="#b87513"/><stop offset="1" stop-color="#ffe18a"/></linearGradient>
