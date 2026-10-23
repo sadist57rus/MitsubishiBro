@@ -52,7 +52,7 @@ for (const brand of JAPANESE_BRANDS) {
       warnings.push(`No tire options recorded: ${model.id}`);
     } else {
       for (const tire of model.tires) {
-        const sizeMatch = /^(\\d{3})\\/(\\d{2,3})R(\\d{2}(?:\\.\\d)?)$/i.exec(tire.size.trim());
+        const sizeMatch = /^(\d{3})\/(\d{2,3})R(\d{2}(?:\.\d)?)$/i.exec(tire.size.trim());
         if (!sizeMatch) {
           warnings.push(`Unrecognized tire size format: ${model.id} ${tire.size}`);
           continue;
