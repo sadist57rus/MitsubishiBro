@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Nippon Drive",
-  "short_name": "Nippon Drive",
+  "name": "Nippon-Drive",
+  "short_name": "Nippon-Drive",
   "description": "Оффлайн-справочник японских автомобилей, обслуживания и диагностики",
   "start_url": "/",
   "scope": "/",
