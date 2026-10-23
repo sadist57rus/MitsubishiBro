@@ -176,6 +176,24 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      # Upload assets while the release is still a draft; this repository enforces immutable published releases.
+      - name: Create test release draft with APK
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: test-build-${{ github.run_number }}
+          name: Nippon Drive test build ${{ github.run_number }}
+          generate_release_notes: true
+          draft: true
+          prerelease: true
+          files: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish test release with APK attached
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "test-build-${GITHUB_RUN_NUMBER}" --draft=false
+
 
 
   release-apk:
