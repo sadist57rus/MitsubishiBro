@@ -1566,7 +1566,7 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Japan — история Jimny Sierra JB74', url: 'https://www.suzuki.co.jp/car/jimny/special/history/jb74.html', scope: 'Официальные характеристики JB74: двигатель, мощность, момент, размеры, масса и трансмиссии.' },
       { label: 'Suzuki Japan — заводской PDF Jimny Sierra', url: 'https://www.suzuki.co.jp/car/jimny_sierra/asset/pdf/detail/detail.pdf', scope: 'Заводские размеры и оборудование текущей японской модели.' }
     ]
-  })
+  }),
   makeSupplementalModel({
     id: 'suzuki-sx4-ya11s-hatchback',
     brandId: 'suzuki',
