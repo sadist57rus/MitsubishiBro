@@ -45,7 +45,15 @@ const makeSupplementalModel = (data: {
       groundClearanceMm: data.groundClearanceMm,
       trunkVolumeLiters: data.trunkVolumeLiters,
       fuelTankLiters: data.fuelTankLiters,
-      curbWeightKg: data.curbWeightKg
+      curbWeightKg: data.curbWeightKg,
+      length: data.lengthMm,
+      width: data.widthMm,
+      height: data.heightMm,
+      wheelbase: data.wheelbaseMm,
+      groundClearance: data.groundClearanceMm,
+      ...( /^\\s*\\d+(?:[.,]\\d+)?\\s*(?:кг)?\\s*$/i.test(data.curbWeightKg)
+        ? { weight: Number(data.curbWeightKg.match(/\\d+(?:[.,]\\d+)?/)?.[0].replace(',', '.')) }
+        : {})
     },
     engines: data.engines,
     transmissions: data.transmissions,
@@ -1867,6 +1875,136 @@ for (const seed of commercialBrandSeeds) {
   if (!JAPANESE_BRANDS.some((brand) => brand.id === seed.id)) {
     JAPANESE_BRANDS.push({ ...seed, country: 'Япония', models: [] });
   }
+}
+
+const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wiperBladeSize'>> = {
+  'honda-civic-fd-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: 'Справочная применимость зависит от рынка и года; перед заказом сверить маркировку старых щёток и тип крепления.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Размер встречается у отдельных Civic FD комплектаций; сверить с табличкой конкретного рынка и комплектации.' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Размер для отдельных колёсных пакетов; не считать универсальной заводской установкой.' }
+    ]
+  },
+  'subaru-impreza-ge-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: 'Каталоги ANCO/PIAA для Impreza GE/GH 2008–2011 указывают 24"/16"; задняя щётка зависит от кузова и года.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Встречается у отдельных Impreza GE комплектаций; сверить рынок, привод и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Вариант для отдельных комплектаций; требуется сверка с заводской табличкой.' }
+    ]
+  },
+  'mazda3-bk-sedan': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '475 mm (19")', notes: 'Каталоги fitment для Mazda3 BK 2003–2009 указывают 530/475 мм; крепление и региональная версия могут отличаться.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Распространённый размер Mazda3 BK; проверить точную комплектацию и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Встречается на отдельных комплектациях; проверить разрешённый размер для рынка.' }
+    ]
+  },
+  'mazda3-bk-hatchback': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '475 mm (19")', notes: 'Каталоги fitment для Mazda3 BK 2003–2009 указывают 530/475 мм; задняя щётка для хэтчбека около 350 мм. Проверить крепление.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Распространённый размер Mazda3 BK; проверить точную комплектацию и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Встречается на отдельных комплектациях; проверить разрешённый размер для рынка.' }
+    ]
+  },
+  'mitsubishi-lancer-x-cy-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '450 mm (18")', notes: 'Вторичные таблицы для Lancer X/CY указывают 24"/18"; проверить год, рынок и крепление. Не относится автоматически к Lancer IX.' }],
+    tires: [
+      { size: '205/60R16', diameter: 652.4, width: 205, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '92', speedRating: 'H', notes: 'Размер встречается на обычных Lancer X комплектациях; не переносить на Evolution/Ralliart, проверить табличку.' },
+      { size: '215/45R18', diameter: 650.7, width: 215, aspectRatio: 45, rimDiameter: 457.2, loadIndex: '93', speedRating: 'W', notes: 'Вариант отдельных комплектаций/колёсных пакетов; подтвердить по рынку и заводской табличке.' }
+    ]
+  },
+  'honda-civic-fn-hatchback': {
+    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '575 mm', notes: 'OXIMO catalogue lists 650/575 mm for Civic VIII FN/FK hatchback (2006–2011); other fitment tables differ by production date and market. Verify exact arm/connector. https://www.oximo.pl/en/wiper/honda-civic-viii-fn-fk-hatchback-2006-01-01-wgp350425-0/' }],
+    tires: [
+      { size: '225/45R17', diameter: 634.3, width: 225, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '91', speedRating: 'W', notes: 'Listed for selected Civic VIII hatchback grades; confirm market and exact grade before treating as approved fitment.' }
+    ]
+  },
+  'suzuki-swift-zc11-hatchback': {
+    wiperBladeSize: [{ driverSide: '525 mm', passengerSide: '450 mm', notes: 'Japanese wiper chart lists ZC11S/ZD11S Swift: 525/450 mm front, 250 mm rear. https://wiper.jp/SUZUKI/SWIFT.html' }],
+    tires: [
+      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'T', notes: 'Cars Japan fitment table for Swift ZC11S 1.3 XE; trim-specific. https://cars-japan.net/tire/mdl0080017.html' },
+      { size: '185/60R15', diameter: 603, width: 185, aspectRatio: 60, rimDiameter: 381, loadIndex: '84', speedRating: 'H', notes: 'Cars Japan fitment table for selected ZC11S/XG and 4WD grades; confirm exact grade. https://cars-japan.net/tire/mdl0080017.html' }
+    ]
+  },
+  'toyota-prius-xw30-liftback': {
+    tires: [
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Listed for selected 2010–2011 Prius ZVW30 L grades; not universal across grades. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'S', notes: 'Toyota ZVW30 owner-manual fitment for selected 15-inch grades; verify production period and grade. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Listed as an option for selected ZVW30 grades; not universal. https://cars-japan.net/tire/mdl0010041.html' }
+    ]
+  },
+  'mazda-cx5-ke-crossover': {
+    tires: [
+      { size: '225/65R17', diameter: 724.3, width: 225, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '102', speedRating: 'V', notes: 'Mazda owner manual lists this standard size for CX-5 KE; market/grade can change load-speed marking. https://www2.mazda.co.jp/carlife/owner/manual/cx-5/ke/ekshi/contents/07020200.html' },
+      { size: '225/55R19', diameter: 730.1, width: 225, aspectRatio: 55, rimDiameter: 482.6, loadIndex: '99', speedRating: 'V', notes: 'Mazda owner manual lists this size for selected CX-5 KE grades. https://www2.mazda.co.jp/carlife/owner/manual/cx-5/ke/ekshi/contents/07020200.html' }
+    ]
+  },
+  'mazda-6-gg-sedan': {
+    tires: [
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'V', notes: 'Listed for selected Mazda6 GG 1.8/2.0 sedan grades; engine and market affect approved set. https://club.autodoc.se/tyres/mazda/6/6-gg' },
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Listed for selected Mazda6 GG grades; verify exact engine, year and placard. https://club.autodoc.se/tyres/mazda/6/6-gg' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Listed for selected Mazda6 GG grades; verify exact engine, year and placard. https://club.autodoc.se/tyres/mazda/6/6-gg' }
+    ]
+  },
+  'nissan-tiida-c11-hatchback': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для Tiida C11 (2004/09–2012/08): водительская 550 мм, пассажирская 400 мм; задняя 305 мм (стандарт) / 300 мм (холодный климат). Источник: https://faq2.nissan.co.jp/faq/show/7949' }],
+    tires: [
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Официальный FAQ Nissan: штатный размер для ряда комплектаций Tiida C11 2010/08–2012/08, включая 15S/15M/15G; другие годы и версии требуют отдельной сверки. Источник: https://faq2.nissan.co.jp/faq/show/9916' }
+    ]
+  },
+  'nissan-note-e11-hatchback': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '350 mm', notes: 'Официальный FAQ Nissan для Note E11 (2005/01–2012/08): передние 600/350 мм, задняя 305 мм (стандарт) / 300 мм (холодный климат). Источник: https://faq2.nissan.co.jp/faq/show/7953' }],
+    tires: [
+      { size: '175/65R14', diameter: 583.1, width: 175, aspectRatio: 65, rimDiameter: 355.6, loadIndex: '82', speedRating: 'S', notes: 'Официальный FAQ Nissan для Note E11 HR15DE: штатный размер на базовых 14-дюймовых комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10039' },
+      { size: '175/60R15', diameter: 591, width: 175, aspectRatio: 60, rimDiameter: 381, loadIndex: '81', speedRating: 'H', notes: 'Официальный FAQ Nissan: опциональный размер для отдельных комплектаций E11; не универсальная установка. Источник: https://faq2.nissan.co.jp/faq/show/10039' }
+    ]
+  },
+  'nissan-xtrail-t31-suv': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для X-Trail T31 (2007/08–2015/02): передние 600/400 мм, задняя 350 мм. Источник: https://faq2.nissan.co.jp/faq/show/7939' }],
+    tires: [
+      { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'S', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 215/65R16 98S; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' },
+      { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 225/60R17 99H; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' },
+      { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 225/55R18 98H; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' }
+    ]
+  },
+  'nissan-qashqai-j10-crossover': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '380 mm', notes: 'Официальный FAQ Nissan для Dualis/Qashqai J10 (2007/05–2013/06): передние 600/380 мм, задняя 300 мм. Источник: https://faq2.nissan.co.jp/faq/show/7952' }],
+    tires: [
+      { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'H', notes: 'Официальный FAQ Nissan для Dualis J10: размер на комплектациях 20S/20S FOUR. Источник: https://faq2.nissan.co.jp/faq/show/8833' },
+      { size: '215/60R17', diameter: 689.8, width: 215, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '96', speedRating: 'H', notes: 'Официальный FAQ Nissan для Dualis J10: размер на комплектациях 20G/20G FOUR. Источник: https://faq2.nissan.co.jp/faq/show/8833' },
+      { size: '215/55R18', diameter: 693.7, width: 215, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '99', speedRating: 'V', notes: 'Официальный FAQ Nissan для отдельных J10 grades; для отдельных европейских 18-дюймовых шин Nissan отмечает особый индекс нагрузки/скорости. Источник: https://faq2.nissan.co.jp/faq/show/8833' }
+    ]
+  },
+  'nissan-march-k12': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для March K12 (2002/02–2010/07): передние 550/400 мм, задняя 300 мм. Источник: https://faq2.nissan.co.jp/faq/show/7959' }],
+    tires: [
+      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'S', notes: 'Официальный FAQ Nissan для March K12: штатный размер на ряде 14-дюймовых комплектаций. Источник: https://faq2.nissan.co.jp/faq/show/10729' },
+      { size: '175/60R15', diameter: 591, width: 175, aspectRatio: 60, rimDiameter: 381, loadIndex: '81', speedRating: 'H', notes: 'Официальный FAQ Nissan для March K12: размер опциональных 15-дюймовых колёс на отдельных комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10729' },
+      { size: '185/55R15', diameter: 584.5, width: 185, aspectRatio: 55, rimDiameter: 381, loadIndex: '81', speedRating: 'V', notes: 'Официальный FAQ Nissan для March K12: размер на отдельных спортивных/старших комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10729' }
+    ]
+  },
+  'nissan-serena-c25': {
+    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '300 mm', notes: 'Официальный FAQ Nissan для Serena C25 (2005/05–2010/11): передние 650/300 мм, задняя 400 мм. Источник: https://faq2.nissan.co.jp/faq/show/7947' }]
+  },
+  'lexus-is-xe20-sedan': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '500 mm', notes: 'WIPERS.EE указывает 550/500 мм для Lexus IS XE20 sedan 2005–2013; проверять год и кузов.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Встречается на отдельных XE20 комплектациях; сверить табличку и тормозной пакет.' },
+      { size: '225/45R17', diameter: 634.3, width: 225, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '91', speedRating: 'W', notes: 'Вариант отдельных XE20 комплектаций; подтвердить по точной версии и рынку.' }
+    ]
+  },
+  'isuzu-mux-uc-suv': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '480 mm (19")', notes: 'Вторичная таблица Isuzu MU-X указывает эти размеры для ряда машин 2017–2021; не распространять автоматически на весь период UC 2013–2021.' }],
+    tires: [
+      { size: '255/65R17', diameter: 762.3, width: 255, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '110', speedRating: 'S', notes: 'Встречается на отдельных MU-X комплектациях; подтвердить рынок, год и табличку.' },
+      { size: '255/60R18', diameter: 763.2, width: 255, aspectRatio: 60, rimDiameter: 457.2, loadIndex: '108', speedRating: 'H', notes: 'Вариант отдельных комплектаций; подтвердить точную модификацию и индекс нагрузки.' }
+    ]
+  }
+};
+
+for (const model of supplementalModels) {
+  const fitment = supplementalFitments[model.id];
+  if (fitment) Object.assign(model, fitment);
 }
 
 for (const model of supplementalModels) {
