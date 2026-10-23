@@ -209,7 +209,7 @@ export default function ObdDiagnostics() {
       <section className="rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900/60 dark:bg-slate-900">
         <h2 className="text-base font-bold">Коды ошибок для {activeBrand?.russianName || activeBrand?.name} {activeModel?.name}</h2>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Подтверждённая база кодов и пояснений для этой модификации пока не добавлена. Не переносим коды, распиновки и ремонтные процедуры с другой модели без источников.</p>
-        <a className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white" href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=OBD%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные для модели</a>
+        <a className="mt-3 inline-flex min-h-11 items-center rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white" href={`https://github.com/sadist57rus/Nippon-Drive/issues/new?title=OBD%20data%20request%3A%20${encodeURIComponent(activeBrand?.name || brandId)}%20${encodeURIComponent(activeModel?.name || modelId)}`} target="_blank" rel="noreferrer">Запросить данные для модели</a>
       </section>
     </div>
   );
