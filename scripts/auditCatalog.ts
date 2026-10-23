@@ -39,6 +39,47 @@ for (const brand of JAPANESE_BRANDS) {
     }
     if (model.transmissions.some((transmission) => vague.test(transmission))) warnings.push(`Transmission data is placeholder/vague: ${model.id}`);
     if (model.dimensions && [model.dimensions.lengthMm, model.dimensions.widthMm, model.dimensions.heightMm, model.dimensions.wheelbaseMm].some((n) => !Number.isFinite(n) || n <= 0)) warnings.push(`Missing/non-positive dimensions: ${model.id}`);
+    const normalizedDimensions = model.dimensions;
+    const normalizedDimensionFields = ['length', 'width', 'height', 'wheelbase', 'groundClearance', 'weight'] as const;
+    const missingNormalizedDimensions = normalizedDimensionFields.filter((field) => {
+      const value = normalizedDimensions?.[field];
+      return !Number.isFinite(value) || (value ?? 0) <= 0;
+    });
+    if (missingNormalizedDimensions.length) {
+      warnings.push(`Normalized dimensions missing for ${model.id}: ${missingNormalizedDimensions.join(', ')}`);
+    }
+    if (!Array.isArray(model.tires) || model.tires.length === 0) {
+      warnings.push(`No tire options recorded: ${model.id}`);
+    } else {
+      for (const tire of model.tires) {
+        const sizeMatch = /^(\d{3})\/(\d{2,3})R(\d{2}(?:\.\d)?)$/i.exec(tire.size.trim());
+        if (!sizeMatch) {
+          warnings.push(`Unrecognized tire size format: ${model.id} ${tire.size}`);
+          continue;
+        }
+        const [, widthText, aspectText, rimText] = sizeMatch;
+        const expectedWidth = Number(widthText);
+        const expectedAspect = Number(aspectText);
+        const expectedRimDiameter = Number(rimText) * 25.4;
+        const expectedDiameter = expectedRimDiameter + 2 * expectedWidth * expectedAspect / 100;
+        if (Math.abs(tire.width - expectedWidth) > 1 || Math.abs(tire.aspectRatio - expectedAspect) > 0.1 ||
+            Math.abs(tire.rimDiameter - expectedRimDiameter) > 1 || Math.abs(tire.diameter - expectedDiameter) > 4) {
+          errors.push(`Tire dimensions conflict with size notation: ${model.id} ${tire.size}`);
+        }
+        if (!tire.loadIndex.trim() || !tire.speedRating.trim() || !tire.notes.trim()) {
+          errors.push(`Incomplete tire option: ${model.id} ${tire.size}`);
+        }
+      }
+    }
+    if (!Array.isArray(model.wiperBladeSize) || model.wiperBladeSize.length === 0) {
+      warnings.push(`No wiper blade sizes recorded: ${model.id}`);
+    } else {
+      for (const wiper of model.wiperBladeSize) {
+        if (!wiper.driverSide.trim() || !wiper.passengerSide.trim() || !wiper.notes.trim()) {
+          errors.push(`Incomplete wiper blade entry: ${model.id}`);
+        }
+      }
+    }
     if (!model.dataQualityNote) warnings.push(`Missing data-quality note: ${model.id}`);
     if (!model.verificationStatus || model.verificationStatus === 'unverified') warnings.push(`Not verified against exact variant sources: ${model.id}`);
     check(Boolean(model.fluidsAndCapacities?.engineOil && model.fluidsAndCapacities?.transmissionFluid), `Missing fluid guidance: ${model.id}`);

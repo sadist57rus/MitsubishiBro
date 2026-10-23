@@ -1,3 +1,5 @@
+import type { CarDimensions, LegacyCarDimensions, TireOption, WiperBladeSize } from './types/carDimensions';
+
 export interface JapaneseCarEngine {
   code: string;
   name: string;
@@ -21,16 +23,12 @@ export interface JapaneseCarModel {
   drivetrain: string; // e.g. "Постоянный полный 4WD с вискомуфтой (50:50)"
   awdSystemName: string;
   overview: string;
-  dimensions: {
-    lengthMm: number;
-    widthMm: number;
-    heightMm: number;
-    wheelbaseMm: number;
-    groundClearanceMm: number;
-    trunkVolumeLiters: string;
-    fuelTankLiters: number;
-    curbWeightKg: string;
-  };
+  /** Existing legacy measurements plus optional normalized dimensions during migration. */
+  dimensions: LegacyCarDimensions & Partial<CarDimensions>;
+  /** Alternative tire fitments; must be tied to market/body/trim before marked official. */
+  tires?: TireOption[];
+  /** Wiper lengths vary by body and steering/market specification. */
+  wiperBladeSize?: WiperBladeSize[];
   engines: JapaneseCarEngine[];
   transmissions: string[];
   fuelEconomy: {
