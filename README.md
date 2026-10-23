@@ -1,7 +1,7 @@
 # Nippon Drive
 
 <p align="center">
-  <img src="public/nippon-drive-logo.svg" alt="Nippon Drive — справочник японских автомобилей" width="820" />
+  <img src="public/nippon-drive-logo.png" alt="Nippon Drive — справочник японских автомобилей" width="820" />
 </p>
 
 **Nippon Drive — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
