@@ -1,4 +1,4 @@
-name: Nippon Drive Android APK
+name: Nippon-Drive Android APK
 
 on:
   push:
@@ -106,7 +106,7 @@ jobs:
       - name: Upload prepared native project
         uses: actions/upload-artifact@v5
         with:
-          name: car-brother-native-project
+          name: nippon-drive-native-project
           path: |
             android/
             package-lock.json
@@ -127,7 +127,7 @@ jobs:
       - name: Download prepared native project
         uses: actions/download-artifact@v5
         with:
-          name: car-brother-native-project
+          name: nippon-drive-native-project
           path: .
 
       - name: Setup Node.js
@@ -181,7 +181,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
-          name: Car Brother test build ${{ github.run_number }}
+          name: Nippon-Drive test build ${{ github.run_number }}
           generate_release_notes: true
           draft: false
           prerelease: true
@@ -201,7 +201,7 @@ jobs:
       - name: Download prepared native project
         uses: actions/download-artifact@v5
         with:
-          name: car-brother-native-project
+          name: nippon-drive-native-project
           path: .
 
       - name: Setup Node.js
@@ -238,8 +238,8 @@ jobs:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: |
           test -n "$ANDROID_KEYSTORE_BASE64" || { echo "::error::Missing ANDROID_KEYSTORE_BASE64 secret"; exit 1; }
-          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/car-brother-release.jks"
-          test -s "$RUNNER_TEMP/car-brother-release.jks"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/nippon-drive-release.jks"
+          test -s "$RUNNER_TEMP/nippon-drive-release.jks"
 
       - name: Sync web assets into Android
         run: npx cap sync android
@@ -258,7 +258,7 @@ jobs:
           test -n "$ANDROID_KEY_PASSWORD" || { echo "::error::Missing ANDROID_KEY_PASSWORD secret"; exit 1; }
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon \
-            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/car-brother-release.jks" \
+            -Pandroid.injected.signing.store.file="$RUNNER_TEMP/nippon-drive-release.jks" \
             -Pandroid.injected.signing.store.password="$ANDROID_KEYSTORE_PASSWORD" \
             -Pandroid.injected.signing.key.alias="$ANDROID_KEY_ALIAS" \
             -Pandroid.injected.signing.key.password="$ANDROID_KEY_PASSWORD"
@@ -275,7 +275,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: Car Brother ${{ github.ref_name }}
+          name: Nippon-Drive ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
           prerelease: false
