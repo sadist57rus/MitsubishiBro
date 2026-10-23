@@ -514,7 +514,11 @@ test('нижняя навигация сохраняет контраст во �
       return JSON.stringify({ actual: getComputedStyle(element).color, expected });
     }));
     await page.setViewportSize({ width: 1280, height: 720 });
+    await page.getByRole('button', { name: /Планшет \/ магнитола/ }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'wide');
     await expect(page.getByTestId('phone-bottom-navigation')).toBeHidden();
+    await page.getByRole('button', { name: /Телефон · вертикально/ }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'phone');
   }
 
   await page.getByLabel('Тема интерфейса').selectOption('dark');
