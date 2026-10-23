@@ -103,7 +103,7 @@ export default function GarageLogbook() {
     if (Capacitor.isNativePlatform()) {
       try {
         const saved = await Filesystem.writeFile({ path: fileName, data, directory: Directory.Cache, encoding: Encoding.UTF8 });
-        await Share.share({ title: 'Бортжурнал Nippon Drive', text: 'Экспорт бортжурнала', url: saved.uri, dialogTitle: 'Поделиться бортжурналом' });
+        await Share.share({ title: 'Бортжурнал Nippon-Drive', text: 'Экспорт бортжурнала', url: saved.uri, dialogTitle: 'Поделиться бортжурналом' });
       } catch (error) {
         console.error('Native logbook export failed:', error);
         setDialogMessage('Не удалось подготовить файл для отправки. Попробуйте ещё раз.');
@@ -144,7 +144,7 @@ export default function GarageLogbook() {
         setImportMode('add');
         setPendingImport({ fileName: file.name, records: parsed, foreignVehicleIds, duplicateIdsInFile });
       } catch {
-        setDialogMessage('Ошибка чтения JSON-файла. Проверьте, что это корректный экспорт бортжурнала Nippon Drive.');
+        setDialogMessage('Ошибка чтения JSON-файла. Проверьте, что это корректный экспорт бортжурнала Nippon-Drive.');
       }
     };
     fileReader.readAsText(file, 'UTF-8');

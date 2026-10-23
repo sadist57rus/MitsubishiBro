@@ -1,5 +1,5 @@
 const CACHE_NAME = 'nippon-drive-offline-v5';
-const APP_SHELL = ['/', '/index.html', '/nippon-drive-icon.png', '/nippon-drive-logo.png', '/manifest.webmanifest', '/icons/car-brother-192.png', '/icons/car-brother-512.png', '/icons/car-brother-maskable-512.png', '/fonts/roboto-latin-400-normal.woff2', '/fonts/roboto-cyrillic-400-normal.woff2', '/fonts/roboto-cyrillic-ext-400-normal.woff2'];
+const APP_SHELL = ['/', '/index.html', '/nippon-drive-icon.png', '/nippon-drive-logo.png', '/manifest.webmanifest', '/app-icon.svg', '/app-icon.svg', '/app-icon.svg', '/fonts/roboto-latin-400-normal.woff2', '/fonts/roboto-cyrillic-400-normal.woff2', '/fonts/roboto-cyrillic-ext-400-normal.woff2'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {

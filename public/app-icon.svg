@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
-<title id="title">Nippon Drive — иконка приложения</title>
+<title id="title">Nippon-Drive — иконка приложения</title>
 <defs>
  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151a20"/><stop offset="1" stop-color="#030609"/></linearGradient>
  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b0"/><stop offset=".35" stop-color="#e8b64d"/><stop offset=".72" stop-color="#b87513"/><stop offset="1" stop-color="#ffe18a"/></linearGradient>
@@ -18,5 +18,5 @@
 <path d="M114 304Q256 320 398 304L384 326H128Z" fill="#050607" stroke="#b87513" stroke-width="2"/>
 <circle cx="153" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/><circle cx="359" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/>
 <path d="M110 374H402" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
-<text x="256" y="422" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="39" font-weight="800" letter-spacing="2" fill="url(#gold)">NIPPON DRIVE</text>
+<text x="256" y="422" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="39" font-weight="800" letter-spacing="2" fill="url(#gold)">NIPPON-DRIVE</text>
 </svg>

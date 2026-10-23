@@ -1,4 +1,4 @@
-# Сборка MitsubishiBro
+# Сборка Nippon-Drive
 
 ## Требования
 
@@ -9,8 +9,8 @@
 ## 1. Получить проект
 
 ```bash
-git clone https://github.com/sadist57rus/MitsubishiBro.git
-cd MitsubishiBro
+git clone https://github.com/sadist57rus/Nippon-Drive.git
+cd Nippon-Drive
 git checkout main
 ```
 
@@ -36,9 +36,9 @@ npm run preview
 
 Основной репозиторий теперь содержит workflow Android-сборки. Он запускается при изменениях в `main` (кроме одних только документационных файлов) или вручную.
 
-1. Откройте [Build Android APK](https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml).
+1. Откройте [Build Android APK](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml).
 2. Выберите последний запуск на нужном коммите и дождитесь статуса **Success**.
-3. Откройте страницу запуска, в разделе **Artifacts** скачайте `MitsubishiBro-APK-debug`.
+3. Откройте страницу запуска, в разделе **Artifacts** скачайте `Nippon-Drive-APK-debug`.
 4. Распакуйте ZIP и установите `app-debug.apk` на Android. Если Android блокирует установку, разрешите установку приложений из выбранного источника в настройках устройства.
 
 Артефакт хранится 14 дней. Это **debug APK для тестирования**, не подписанный production-релиз для публикации в магазине приложений. Для production-релиза нужна защищённая подпись и отдельная конфигурация release.
@@ -63,8 +63,8 @@ APK будет здесь: `android/app/build/outputs/apk/debug/app-debug.apk`. 
 
 ## Ссылки
 
-- Репозиторий: https://github.com/sadist57rus/MitsubishiBro
-- Веб-проверки: https://github.com/sadist57rus/MitsubishiBro/actions/workflows/verify.yml
-- Сборка APK: https://github.com/sadist57rus/MitsubishiBro/actions/workflows/android-apk.yml
+- Репозиторий: https://github.com/sadist57rus/Nippon-Drive
+- Веб-проверки: https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml
+- Сборка APK: https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml
 - Политика проверки технических данных: [DATA_VERIFICATION_POLICY.md](DATA_VERIFICATION_POLICY.md)
 - План покрытия каталога: [CATALOG_COVERAGE_ROADMAP.md](CATALOG_COVERAGE_ROADMAP.md)

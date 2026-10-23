@@ -1,4 +1,4 @@
-name: Nippon Drive Android APK
+name: Nippon-Drive Android APK
 
 on:
   push:
@@ -181,7 +181,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
-          name: Nippon Drive test build ${{ github.run_number }}
+          name: Nippon-Drive test build ${{ github.run_number }}
           generate_release_notes: true
           draft: false
           prerelease: true
@@ -275,7 +275,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: Nippon Drive ${{ github.ref_name }}
+          name: Nippon-Drive ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
           prerelease: false

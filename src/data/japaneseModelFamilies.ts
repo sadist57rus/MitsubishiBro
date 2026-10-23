@@ -1,5 +1,5 @@
 /**
- * Broad Japanese model-family directory for Car Brother.
+ * Broad Japanese model-family directory for Nippon-Drive.
  * Names are imported as an inventory seed; generation/chassis/trim completeness is tracked separately.
  * This file deliberately avoids asserting that each family has already been exhaustively verified.
  */
