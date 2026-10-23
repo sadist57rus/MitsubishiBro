@@ -491,7 +491,7 @@ test('нижняя навигация сохраняет контраст во �
     await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
     await page.setViewportSize({ width: 390, height: 844 });
     const active = page.getByTestId('phone-nav-item-overview');
-    await active.click();
+    await expect(active).toBeVisible();
     await expect.poll(() => page.evaluate(() => {
       const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
       if (!element) return '';
