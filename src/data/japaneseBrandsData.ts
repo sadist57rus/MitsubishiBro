@@ -122,7 +122,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 195,
           trunkVolumeLiters: '402 – 1705 л (при сложенном втором ряде)',
           fuelTankLiters: 60,
-          curbWeightKg: '1535 – 1615 кг'
+          curbWeightKg: '1535 – 1615 кг',
+          length: 4545,
+          width: 1750,
+          height: 1620,
+          wheelbase: 2625,
+          groundClearance: 195
         },
         tires: [
           { size: '215/60R16', diameter: 664.4, width: 215, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '95', speedRating: 'H', notes: "Continental fitment table lists this size for Outlander 2003–2006; confirm the vehicle placard and market." },
@@ -253,7 +258,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 215,
           trunkVolumeLiters: '541 – 1691 л',
           fuelTankLiters: 60,
-          curbWeightKg: '1570 – 1720 кг'
+          curbWeightKg: '1570 – 1720 кг',
+          length: 4640,
+          width: 1800,
+          height: 1680,
+          wheelbase: 2670,
+          groundClearance: 215
         },
         tires: [
           { size: '215/70R16', diameter: 707.4, width: 215, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '100', speedRating: 'H', notes: "Common listed fitment for selected Outlander II trims; confirm placard, rim width and market." },
@@ -367,7 +377,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 215,
           trunkVolumeLiters: '591 – 1754 л',
           fuelTankLiters: 60,
-          curbWeightKg: '1480 – 1910 кг'
+          curbWeightKg: '1480 – 1910 кг',
+          length: 4695,
+          width: 1810,
+          height: 1710,
+          wheelbase: 2670,
+          groundClearance: 215
         },
         tires: [
           { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: "Common listed fitment for selected Outlander III trims; verify the door placard and market." },
@@ -474,7 +489,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 225,
           trunkVolumeLiters: '663 – 1790 л',
           fuelTankLiters: 88,
-          curbWeightKg: '2110 – 2380 кг'
+          curbWeightKg: '2110 – 2380 кг',
+          length: 4900,
+          width: 1875,
+          height: 1870,
+          wheelbase: 2780,
+          groundClearance: 225
         },
         engines: [
           {
@@ -582,7 +602,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 165,
           trunkVolumeLiters: '430 л',
           fuelTankLiters: 50,
-          curbWeightKg: '1185 – 1250 кг'
+          curbWeightKg: '1185 – 1250 кг',
+          length: 4480,
+          width: 1695,
+          height: 1445,
+          wheelbase: 2600,
+          groundClearance: 165
         },
         engines: [
           {
@@ -677,7 +702,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 218,
           trunkVolumeLiters: '715 – 1813 л',
           fuelTankLiters: 68,
-          curbWeightKg: '2050 – 2160 кг'
+          curbWeightKg: '2050 – 2160 кг',
+          length: 4825,
+          width: 1815,
+          height: 1805,
+          wheelbase: 2800,
+          groundClearance: 218
         },
         engines: [
           {
@@ -782,7 +812,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 220,
           trunkVolumeLiters: '830 – 1370 л',
           fuelTankLiters: 96,
-          curbWeightKg: '2320 – 2580 кг'
+          curbWeightKg: '2320 – 2580 кг',
+          length: 4890,
+          width: 1940,
+          height: 1890,
+          wheelbase: 2850,
+          groundClearance: 220
         },
         tires: [
           { size: '275/70R16', diameter: 791.4, width: 275, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '114', speedRating: 'H', notes: "Common listed size on selected Land Cruiser 100 grades; market and wheel package vary." },
@@ -889,7 +924,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 190,
           trunkVolumeLiters: '506 – 1469 л',
           fuelTankLiters: 60,
-          curbWeightKg: '1500 – 1625 кг'
+          curbWeightKg: '1500 – 1625 кг',
+          length: 4395,
+          width: 1815,
+          height: 1685,
+          wheelbase: 2560,
+          groundClearance: 190
         },
         tires: [
           { size: '225/65R17', diameter: 724.3, width: 225, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '102', speedRating: 'H', notes: "Common XA30 fitment; exact OEM fitment depends on trim and market." },
@@ -990,7 +1030,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 160,
           trunkVolumeLiters: '535 л',
           fuelTankLiters: 70,
-          curbWeightKg: '1520 – 1610 кг'
+          curbWeightKg: '1520 – 1610 кг',
+          length: 4815,
+          width: 1820,
+          height: 1480,
+          wheelbase: 2775,
+          groundClearance: 160
         },
         tires: [
           { size: '215/60R16', diameter: 664.4, width: 215, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '95', speedRating: 'V', notes: "Common XV40 fitment on selected trims; confirm market and door placard." },
@@ -1101,7 +1146,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 210,
           trunkVolumeLiters: '603 – 1773 л (с выдвижным органайзером)',
           fuelTankLiters: 65,
-          curbWeightKg: '1515 – 1675 кг'
+          curbWeightKg: '1515 – 1675 кг',
+          length: 4630,
+          width: 1785,
+          height: 1770,
+          wheelbase: 2630,
+          groundClearance: 210
         },
         tires: [
           { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'H', notes: "Common T31 fitment on selected trims; confirm market, trim and placard." },
@@ -1214,7 +1264,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 220,
           trunkVolumeLiters: '600 – 2226 л',
           fuelTankLiters: 95,
-          curbWeightKg: '2470 – 2620 кг'
+          curbWeightKg: '2470 – 2620 кг',
+          length: 5080,
+          width: 1940,
+          height: 1855,
+          wheelbase: 2970,
+          groundClearance: 220
         },
         tires: [
           { size: '265/70R16', diameter: 777.4, width: 265, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '112', speedRating: 'S', notes: "Common Y61 fitment on selected grades; market and wheel/axle load requirements vary." },
@@ -1324,7 +1379,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 200,
           trunkVolumeLiters: '398 – 1386 л',
           fuelTankLiters: 66,
-          curbWeightKg: '1580 – 1695 кг'
+          curbWeightKg: '1580 – 1695 кг',
+          length: 4470,
+          width: 1810,
+          height: 1695,
+          wheelbase: 2640,
+          groundClearance: 200
         },
         engines: [
           {
@@ -1420,7 +1480,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 210,
           trunkVolumeLiters: '113 – 830 л',
           fuelTankLiters: 40,
-          curbWeightKg: '1060 – 1110 кг'
+          curbWeightKg: '1060 – 1110 кг',
+          length: 3675,
+          width: 1600,
+          height: 1705,
+          wheelbase: 2250,
+          groundClearance: 210
         },
         engines: [
           {
@@ -1525,7 +1590,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 215,
           trunkVolumeLiters: '450 – 1660 л',
           fuelTankLiters: 60,
-          curbWeightKg: '1430 – 1540 кг'
+          curbWeightKg: '1430 – 1540 кг',
+          length: 4560,
+          width: 1780,
+          height: 1700,
+          wheelbase: 2615,
+          groundClearance: 215
         },
         engines: [
           {
@@ -1631,7 +1701,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 185,
           trunkVolumeLiters: '524 – 1532 л',
           fuelTankLiters: 58,
-          curbWeightKg: '1530 – 1610 кг'
+          curbWeightKg: '1530 – 1610 кг',
+          length: 4570,
+          width: 1820,
+          height: 1675,
+          wheelbase: 2620,
+          groundClearance: 185
         },
         engines: [
           {
@@ -1742,7 +1817,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 210,
           trunkVolumeLiters: '442 – 1560 л',
           fuelTankLiters: 58,
-          curbWeightKg: '1455 – 1620 кг'
+          curbWeightKg: '1455 – 1620 кг',
+          length: 4550,
+          width: 1840,
+          height: 1680,
+          wheelbase: 2700,
+          groundClearance: 210
         },
         engines: [
           {
@@ -1847,7 +1927,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 190,
           trunkVolumeLiters: '496 – 1570 л',
           fuelTankLiters: 72,
-          curbWeightKg: '1835 – 2020 кг'
+          curbWeightKg: '1835 – 2020 кг',
+          length: 4770,
+          width: 1885,
+          height: 1685,
+          wheelbase: 2740,
+          groundClearance: 190
         },
         tires: [
           { size: '235/55R18', diameter: 715.7, width: 235, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '100', speedRating: 'V', notes: "Common fitment on selected RX XU30/AL10 trims; confirm exact year, market and placard." },
@@ -1945,7 +2030,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 185,
           trunkVolumeLiters: '410 – 1305 л',
           fuelTankLiters: 90,
-          curbWeightKg: '1975 – 2120 кг'
+          curbWeightKg: '1975 – 2120 кг',
+          length: 4865,
+          width: 1925,
+          height: 1650,
+          wheelbase: 2885,
+          groundClearance: 185
         },
         engines: [
           {
@@ -2037,7 +2127,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 200,
           trunkVolumeLiters: '380 – 755 л',
           fuelTankLiters: 50,
-          curbWeightKg: '1170 – 1220 кг'
+          curbWeightKg: '1170 – 1220 кг',
+          length: 4055,
+          width: 1695,
+          height: 1690,
+          wheelbase: 2580,
+          groundClearance: 200
         },
         engines: [
           {
@@ -2129,7 +2224,12 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearanceMm: 235,
           trunkVolumeLiters: 'Кузов 1552×1530×465 мм (грузоподъемность 1000 кг)',
           fuelTankLiters: 76,
-          curbWeightKg: '1940 – 2050 кг'
+          curbWeightKg: '1940 – 2050 кг',
+          length: 5295,
+          width: 1860,
+          height: 1795,
+          wheelbase: 3125,
+          groundClearance: 235
         },
         engines: [
           {
