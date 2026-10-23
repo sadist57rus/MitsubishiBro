@@ -6,7 +6,7 @@
 
 **Nippon Drive — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
 
-[![Build and typecheck](https://github.com/sadist57rus/NipponDrive/actions/workflows/verify.yml/badge.svg)](https://github.com/sadist57rus/NipponDrive/actions/workflows/verify.yml) [![Build Android APK](https://github.com/sadist57rus/NipponDrive/actions/workflows/android-apk.yml/badge.svg)](https://github.com/sadist57rus/NipponDrive/actions/workflows/android-apk.yml)
+[![Build and typecheck](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml/badge.svg)](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml) [![Build Android APK](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml/badge.svg)](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml)
 
 ## Возможности
 
@@ -53,8 +53,8 @@
 Требуется Node.js 24 и npm (та же версия, что используется в CI).
 
 ```bash
-git clone https://github.com/sadist57rus/NipponDrive.git
-cd NipponDrive
+git clone https://github.com/sadist57rus/Nippon-Drive.git
+cd Nippon-Drive
 npm install
 npm run dev
 ```
@@ -72,7 +72,7 @@ npm run preview
 
 ## Сборка Android APK
 
-APK собирается в GitHub Actions из кода текущей ветки `main`. Откройте [Build Android APK](https://github.com/sadist57rus/NipponDrive/actions/workflows/android-apk.yml), выберите последний успешный запуск и скачайте артефакт `Nippon-Drive-APK-debug`. Артефакт — отладочный APK для установки и тестирования, не подписанный production-релиз.
+APK собирается в GitHub Actions из кода текущей ветки `main`. Откройте [Build Android APK](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml), выберите последний успешный запуск и скачайте артефакт `Nippon-Drive-APK-debug`. Артефакт — отладочный APK для установки и тестирования, не подписанный production-релиз.
 
 Сборка фиксирует альбомную ориентацию главного экрана. Для теста на магнитоле установите APK, откройте приложение, проверьте масштабирование, меню, клавиатуру/поиск, прокрутку и переходы между разделами. Также проверьте возврат из сна и работу без сети. Сообщайте модель магнитолы, версию Android, версию WebView и фактический объём ОЗУ, если обнаружится сбой.
 
@@ -110,7 +110,7 @@ cd android
 
 ## Ссылки
 
-- Репозиторий: https://github.com/sadist57rus/MitsubishiBro
-- Проверки и веб-сборка: https://github.com/sadist57rus/NipponDrive/actions/workflows/verify.yml
-- Android APK: https://github.com/sadist57rus/NipponDrive/actions/workflows/android-apk.yml
+- Репозиторий: https://github.com/sadist57rus/Nippon-Drive
+- Проверки и веб-сборка: https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml
+- Android APK: https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml
 - Capacitor: https://capacitorjs.com/docs/getting-started
