@@ -110,7 +110,7 @@ html[data-ui-mode="phone"] header button {
   min-height: 44px;
 }
 
-/* Car Brother accessibility baseline: readable type, large touch targets and keyboard focus. */
+/* Nippon-Drive accessibility baseline: readable type, large touch targets and keyboard focus. */
 :root {
   --font-secondary-min: 0.75rem;
   --font-primary-min: 0.875rem;
@@ -214,8 +214,8 @@ header.sticky {
 
 
 /* Landscape head-unit rail: fixed 88px navigation, content remains independently scrollable. */
-.car-brother-rail { display:none; }
-html[data-ui-mode="wide"] .car-brother-rail {
+.nippon-drive-rail { display:none; }
+html[data-ui-mode="wide"] .nippon-drive-rail {
   display:flex;
   position:fixed;
   z-index:40;
@@ -231,7 +231,7 @@ html[data-ui-mode="wide"] .car-brother-rail {
   background:var(--ui-surface);
   border-right:1px solid var(--ui-border);
 }
-html[data-ui-mode="wide"] .car-brother-rail-item {
+html[data-ui-mode="wide"] .nippon-drive-rail-item {
   display:flex;
   min-width:0;
   min-height:56px;
@@ -248,23 +248,23 @@ html[data-ui-mode="wide"] .car-brother-rail-item {
   text-align:center;
   overflow-wrap:anywhere;
 }
-html[data-ui-mode="wide"] .car-brother-rail-item.is-active {
+html[data-ui-mode="wide"] .nippon-drive-rail-item.is-active {
   background:#fee2e2;
   border-color:#dc2626;
   color:#991b1b;
   font-weight:800;
 }
-.dark .car-brother-rail-item.is-active {
+.dark .nippon-drive-rail-item.is-active {
   background:#450a0a;
   color:#fecaca;
 }
-html[data-ui-mode="wide"] .car-brother-wide main { margin-left:88px; width:calc(100% - 88px); }
+html[data-ui-mode="wide"] .nippon-drive-wide main { margin-left:88px; width:calc(100% - 88px); }
 @media (max-width: 799px) {
-  html[data-ui-mode="wide"] .car-brother-rail { display:none; }
-  html[data-ui-mode="wide"] .car-brother-wide main { margin-left:0; width:100%; }
+  html[data-ui-mode="wide"] .nippon-drive-rail { display:none; }
+  html[data-ui-mode="wide"] .nippon-drive-wide main { margin-left:0; width:100%; }
 }
 
-/* Car Brother: wide-layout profile for tablets and landscape head units. */
+/* Nippon-Drive: wide-layout profile for tablets and landscape head units. */
 html[data-ui-mode="wide"] .max-w-7xl {
   max-width: var(--ui-content-width, 96rem);
 }
@@ -333,8 +333,8 @@ html[data-ui-mode="phone"] header .max-w-7xl { width: 100%; min-width: 0; }
 html[data-ui-mode="wide"] header.sticky { padding-bottom: .25rem; }
 html[data-ui-mode="wide"] header.sticky button { min-height: 56px; font-size: 18px; }
 html[data-ui-mode="wide"] header.sticky button svg { width: 30px; height: 30px; }
-html[data-ui-mode="wide"] .car-brother-rail-item { min-height: 72px; font-size: 14px; }
-html[data-ui-mode="wide"] .car-brother-rail-item svg { width: 32px; height: 32px; }
+html[data-ui-mode="wide"] .nippon-drive-rail-item { min-height: 72px; font-size: 14px; }
+html[data-ui-mode="wide"] .nippon-drive-rail-item svg { width: 32px; height: 32px; }
 html[data-ui-mode="wide"] main button, html[data-ui-mode="wide"] main select,
 html[data-ui-mode="wide"] main input { min-height: 56px; font-size: 18px; }
 html[data-ui-mode="wide"] main h1 { font-size: clamp(2rem, 3vw, 3rem); }
@@ -351,22 +351,22 @@ html[data-ui-mode="wide"] .fuel-spend-panel svg { touch-action: manipulation; }
 
 /* Never split words on navigation buttons or icon labels. Use concise labels instead. */
 button, [role="button"], nav a, nav button,
-.car-brother-rail-item, header button {
+.nippon-drive-rail-item, header button {
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
 }
-.car-brother-rail-item > span,
+.nippon-drive-rail-item > span,
 header button .tracking-tight,
 header button .text-xs,
 [role="tab"] {
   white-space: nowrap;
 }
-html[data-ui-mode="wide"] .car-brother-rail-item {
+html[data-ui-mode="wide"] .nippon-drive-rail-item {
   overflow: hidden;
   padding-inline: .125rem;
 }
-html[data-ui-mode="wide"] .car-brother-rail-item > span {
+html[data-ui-mode="wide"] .nippon-drive-rail-item > span {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -452,12 +452,12 @@ main .ui-card, main [class*="rounded"][class*="border"][class*="bg-white"] {
 }
 
 /* Five thumb-reachable destinations on phone layouts. */
-.car-brother-bottom-nav { position: sticky; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: .25rem; padding: .4rem; border-top: 1px solid #cbd5e1; background: rgba(255,255,255,.97); }
-.dark .car-brother-bottom-nav { background: rgba(15,23,42,.97); border-color: #334155; }
-.car-brother-bottom-nav-item { display: flex; min-width: 0; min-height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: .125rem; border-radius: .75rem; padding: .25rem .1rem; font-size: 12px; line-height: 1.15; font-weight: 600; }
-.car-brother-bottom-nav-item.is-active { color: var(--palette-accent-ink, #991b1b); background: var(--palette-accent-soft, #fee2e2); }
-.dark .car-brother-bottom-nav-item.is-active { background: var(--palette-accent-soft, #0f172a); color: var(--palette-accent-content, #fca5a5); }
-html[data-ui-mode="wide"] .car-brother-bottom-nav { display: none; }
+.nippon-drive-bottom-nav { position: sticky; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: .25rem; padding: .4rem; border-top: 1px solid #cbd5e1; background: rgba(255,255,255,.97); }
+.dark .nippon-drive-bottom-nav { background: rgba(15,23,42,.97); border-color: #334155; }
+.nippon-drive-bottom-nav-item { display: flex; min-width: 0; min-height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: .125rem; border-radius: .75rem; padding: .25rem .1rem; font-size: 12px; line-height: 1.15; font-weight: 600; }
+.nippon-drive-bottom-nav-item.is-active { color: var(--palette-accent-ink, #991b1b); background: var(--palette-accent-soft, #fee2e2); }
+.dark .nippon-drive-bottom-nav-item.is-active { background: var(--palette-accent-soft, #0f172a); color: var(--palette-accent-content, #fca5a5); }
+html[data-ui-mode="wide"] .nippon-drive-bottom-nav { display: none; }
 button, [role="button"], input, select, textarea { min-height: max(44px, var(--tap-size, 44px)); min-width: 44px; }
 html[data-ui-mode="wide"] body { font-size: max(16px, calc(1rem * var(--ui-scale, 1))); }
 
@@ -628,11 +628,11 @@ html[data-ui-mode="wide"] select,
 html[data-ui-mode="wide"] textarea {
   min-height: 56px;
 }
-.car-brother-bottom-nav-item {
+.nippon-drive-bottom-nav-item {
   min-height: var(--tap-size);
   font-size: 0.875rem;
 }
-html[data-ui-mode="wide"] .car-brother-bottom-nav-item {
+html[data-ui-mode="wide"] .nippon-drive-bottom-nav-item {
   min-height: 56px;
 }
 
@@ -653,12 +653,12 @@ html[data-ui-mode="phone"] header button {
 
 
 /* Stage 2: keep the wide rail compact, with readable labels and six primary destinations. */
-html[data-ui-mode="wide"] .car-brother-rail-item {
+html[data-ui-mode="wide"] .nippon-drive-rail-item {
   min-height: 56px;
   font-size: 14px;
   line-height: 1.2;
 }
-html[data-ui-mode="wide"] .car-brother-rail-item svg {
+html[data-ui-mode="wide"] .nippon-drive-rail-item svg {
   width: 28px;
   height: 28px;
 }
