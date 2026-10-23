@@ -110,7 +110,7 @@ cd android
 
 ## Ссылки
 
-- Репозиторий: https://github.com/sadist57rus/MitsubishiBro
+- Репозиторий: https://github.com/sadist57rus/Nippon-Drive
 - Проверки и веб-сборка: https://github.com/sadist57rus/NipponDrive/actions/workflows/verify.yml
 - Android APK: https://github.com/sadist57rus/NipponDrive/actions/workflows/android-apk.yml
 - Capacitor: https://capacitorjs.com/docs/getting-started
