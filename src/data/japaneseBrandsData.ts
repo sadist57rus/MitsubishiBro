@@ -131,6 +131,7 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
         },
         tires: [
           { size: '215/60R16', diameter: 664.4, width: 215, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '95', speedRating: 'H', notes: "Continental fitment table lists this size for Outlander 2003–2006; confirm the vehicle placard and market." },
+          { size: '215/55R17', diameter: 668.3, width: 215, aspectRatio: 55, rimDiameter: 431.8, loadIndex: '94', speedRating: 'H', notes: "Secondary fitment catalog lists this option for selected CU_W trims; not universal across markets. Verify vehicle placard and owner manual." },
           { size: '215/55R17', diameter: 668.3, width: 215, aspectRatio: 55, rimDiameter: 431.8, loadIndex: '94', speedRating: 'H', notes: "Secondary fitment catalogue lists this as an option for some CU_W versions; not universal OEM fitment." }
         ],
         wiperBladeSize: [{ driverSide: '550 mm (22")', passengerSide: '475 mm (19")', notes: "Secondary fitment table for Outlander CU, 2001–2006; rear approximately 350 mm. Verify market, connector and exact production version before purchase." }],
