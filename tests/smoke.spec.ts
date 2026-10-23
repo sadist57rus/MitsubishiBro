@@ -524,16 +524,23 @@ test('нижняя навигация сохраняет контраст во �
   await page.getByLabel('Тема интерфейса').selectOption('dark');
   await page.setViewportSize({ width: 390, height: 844 });
   const active = page.getByTestId('phone-nav-item-overview');
-  await expect.poll(() => active.evaluate(element => getComputedStyle(element).color)).toBe(
-    await page.evaluate(() => {
-      const probe = document.createElement('span');
-      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
-      if (!element) return '';
-      probe.style.color = getComputedStyle(element).getPropertyValue('--palette-accent-content').trim();
-      document.body.append(probe);
-      const color = getComputedStyle(probe).color;
-      probe.remove();
-      return color;
-    }),
-  );
+  await active.click();
+  await expect.poll(() => page.evaluate(() => {
+    const element = document.querySelector<HTMLElement>('[data-testid="phone-nav-item-overview"]');
+    if (!element) return false;
+    const actual = getComputedStyle(element).color;
+    const expected = getComputedStyle(element).getPropertyValue('--palette-accent-content').trim();
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    const context = canvas.getContext('2d');
+    if (!context) return false;
+    const toSrgb = (color: string) => {
+      context.clearRect(0, 0, 1, 1);
+      context.fillStyle = color;
+      context.fillRect(0, 0, 1, 1);
+      return [...context.getImageData(0, 0, 1, 1).data];
+    };
+    return JSON.stringify(toSrgb(actual)) === JSON.stringify(toSrgb(expected));
+  })).toBe(true);
 });
