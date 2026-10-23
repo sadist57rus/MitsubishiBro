@@ -124,6 +124,35 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 60,
           curbWeightKg: '1535 – 1615 кг'
         },
+        tires: [
+          {
+            size: '215/60R16',
+            diameter: 664.4,
+            width: 215,
+            aspectRatio: 60,
+            rimDiameter: 406.4,
+            loadIndex: '95',
+            speedRating: 'H',
+            notes: 'Размер указан для Outlander I 2.0/2.4 в таблице Continental (2003–2006); вторичный справочник, сверить с табличкой шин конкретного автомобиля и рынком.'
+          },
+          {
+            size: '215/55R17',
+            diameter: 668.3,
+            width: 215,
+            aspectRatio: 55,
+            rimDiameter: 431.8,
+            loadIndex: '94',
+            speedRating: 'H',
+            notes: 'Вариант для отдельных комплектаций CU_W по каталогам подбора; не считать универсально заводским для всех рынков, проверить табличку и руководство.'
+          }
+        ],
+        wiperBladeSize: [
+          {
+            driverSide: '560 mm (22")',
+            passengerSide: '480 mm (19")',
+            notes: 'Вторичные каталоги для Outlander CU_W 2002–2006 указывают 22"/19"; задний дворник около 14". Возможны отличия по рынку и рычагу крепления — сверить перед покупкой.'
+          }
+        ],
         engines: [
           {
             code: '4G63',
