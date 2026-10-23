@@ -28,6 +28,9 @@ function walk(directory: string): void {
     if (!entry.isFile()) continue;
     const extension = entry.name.includes('.') ? entry.name.slice(entry.name.lastIndexOf('.')) : '';
     if (!textExtensions.has(extension.toLowerCase())) continue;
+    // Do not scan the checker itself: its pattern definitions necessarily mention legacy names.
+    if (relative(root, absolutePath) === 'scripts/auditProjectBranding.ts') continue;
+
     let content: string;
     try {
       content = readFileSync(absolutePath, 'utf8');
@@ -36,10 +39,13 @@ function walk(directory: string): void {
     }
     const lines = content.split(/\r?\n/);
     lines.forEach((line, index) => {
-      // Legacy localStorage keys are retained for backward-compatible data migration.
-      if (/car-brother-[a-z0-9-]+/i.test(line) && /localStorage|readStored|removeStored|appKeys|VERSION_KEY|storage-schema/i.test(line)) {
-        const withoutLegacyKeys = line.replace(/car-brother-[a-z0-9-]+/gi, '');
-        if (!legacyTerms.some((term) => withoutLegacyKeys.toLowerCase().includes(term.toLowerCase()))) return;
+      // Preserve old localStorage identifiers and cache-prefix cleanup for upgrades.
+      // They are compatibility tokens, not current product branding.
+      if (/car-brother-[a-z0-9-]+/i.test(line)) {
+        const withoutCompatibilityTokens = line
+          .replace(/car-brother-[a-z0-9-]+/gi, '')
+          .replace(/mitsubishi-bro-offline-/gi, '');
+        if (!legacyTerms.some((term) => withoutCompatibilityTokens.toLowerCase().includes(term.toLowerCase()))) return;
       }
       for (const term of legacyTerms) {
         if (line.toLowerCase().includes(term.toLowerCase())) {
