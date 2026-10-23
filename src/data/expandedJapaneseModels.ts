@@ -1640,11 +1640,28 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
     ]
   },
   'nissan-tiida-c11-hatchback': {
-    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для Tiida C11 (2004-09—2012-08): водительская 550 мм, пассажирская 400 мм; задняя 305 мм стандарт / 300 мм для холодного климата.' }],
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для Tiida C11 (2004/09–2012/08): водительская 550 мм, пассажирская 400 мм; задняя 305 мм (стандарт) / 300 мм (холодный климат). Источник: https://faq2.nissan.co.jp/faq/show/7949' }],
     tires: [
-      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'H', notes: 'Типичный размер Tiida C11 в отдельных комплектациях; подтвердить по табличке и рынку.' },
-      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'H', notes: 'Встречается на отдельных версиях; не универсальный размер для всех рынков.' }
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Официальный FAQ Nissan: штатный размер для ряда комплектаций Tiida C11 2010/08–2012/08, включая 15S/15M/15G; другие годы и версии требуют отдельной сверки. Источник: https://faq2.nissan.co.jp/faq/show/9916' }
     ]
+  },
+  'nissan-note-e11-hatchback': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '350 mm', notes: 'Официальный FAQ Nissan для Note E11 (2005/01–2012/08): передние 600/350 мм, задняя 305 мм (стандарт) / 300 мм (холодный климат). Источник: https://faq2.nissan.co.jp/faq/show/7953' }],
+    tires: [
+      { size: '175/65R14', diameter: 583.1, width: 175, aspectRatio: 65, rimDiameter: 355.6, loadIndex: '82', speedRating: 'S', notes: 'Официальный FAQ Nissan для Note E11 HR15DE: штатный размер на базовых 14-дюймовых комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10039' },
+      { size: '175/60R15', diameter: 591, width: 175, aspectRatio: 60, rimDiameter: 381, loadIndex: '81', speedRating: 'H', notes: 'Официальный FAQ Nissan: опциональный размер для отдельных комплектаций E11; не универсальная установка. Источник: https://faq2.nissan.co.jp/faq/show/10039' }
+    ]
+  },
+  'nissan-xtrail-t31-suv': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для X-Trail T31 (2007/08–2015/02): передние 600/400 мм, задняя 350 мм. Источник: https://faq2.nissan.co.jp/faq/show/7939' }],
+    tires: [
+      { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'S', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 215/65R16 98S; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' },
+      { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 225/60R17 99H; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' },
+      { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 225/55R18 98H; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' }
+    ]
+  },
+  'nissan-serena-c25': {
+    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '300 mm', notes: 'Официальный FAQ Nissan для Serena C25 (2005/05–2010/11): передние 650/300 мм, задняя 400 мм. Источник: https://faq2.nissan.co.jp/faq/show/7947' }]
   },
   'lexus-is-xe20-sedan': {
     wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '500 mm', notes: 'WIPERS.EE указывает 550/500 мм для Lexus IS XE20 sedan 2005–2013; проверять год и кузов.' }],
