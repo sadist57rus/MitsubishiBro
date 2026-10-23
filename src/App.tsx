@@ -230,7 +230,7 @@ function AppContent() {
       <main className="min-h-screen bg-[#070b12] text-white flex items-center justify-center p-5">
         <section className="w-full max-w-xl rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-950 to-slate-900 p-6 sm:p-8 shadow-2xl">
           <div className="mx-auto mb-5 flex justify-center">
-            <img src="/nippon-drive-icon.png" alt="Nippon Drive" className="h-32 w-32 rounded-[1.6rem] border border-amber-300/50 shadow-[0_12px_45px_rgba(245,158,11,0.2)]" />
+            <img src="/nippon-drive-logo.png" alt="Nippon Drive" className="h-32 w-auto max-w-full object-contain rounded-[1.6rem] border border-amber-300/50 shadow-[0_12px_45px_rgba(245,158,11,0.2)]" />
           </div>
           <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-amber-300">GARAGE COMPANION</p>
           <h1 className="mt-2 text-center text-2xl sm:text-3xl font-black">Выберите ориентацию экрана</h1>
