@@ -1154,10 +1154,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           groundClearance: 210
         },
         tires: [
-          { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'H', notes: "Common T31 fitment on selected trims; confirm market, trim and placard." },
-          { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: "Common T31 fitment on selected trims; confirm market, trim and placard." }
+          { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'S', notes: "Nissan Japan official FAQ lists 215/65R16 98S for selected T31 grades; applicability varies by year, engine and drivetrain. https://faq2.nissan.co.jp/faq/show/24783" },
+          { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: "Nissan Japan official FAQ lists 225/60R17 99H for selected T31 grades; applicability varies by year, engine and drivetrain. https://faq2.nissan.co.jp/faq/show/24783" },
+          { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: "Nissan Japan official FAQ lists 225/55R18 98H for selected T31 grades; applicability varies by year, engine and drivetrain. https://faq2.nissan.co.jp/faq/show/24783" }
         ],
-        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: "Japanese Autobacs fitment chart lists X-Trail T31 (2007–2013) as 24/16 inches; other markets may differ." }],
+        wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '400 mm', notes: "Nissan Japan official FAQ for X-Trail T31 (2007/08–2015/02): front 600/400 mm, rear 350 mm. https://faq2.nissan.co.jp/faq/show/7939" }],
         engines: [
           {
             code: 'MR20DE',
