@@ -524,6 +524,7 @@ test('нижняя навигация сохраняет контраст во �
   await page.getByLabel('Тема интерфейса').selectOption('dark');
   await page.setViewportSize({ width: 390, height: 844 });
   const active = page.getByTestId('phone-nav-item-overview');
+  await active.click();
   await expect.poll(() => page.evaluate(() => {
     const element = document.querySelector<HTMLElement>('[data-testid="phone-nav-item-overview"]');
     if (!element) return false;
