@@ -97,7 +97,7 @@ export default function PartsAccessoriesHub({ selectedBrandId, selectedModelId }
       <div className="absolute -right-12 -top-16 w-64 h-64 rounded-full bg-red-500/15 blur-3xl pointer-events-none" />
       <div className="relative flex flex-col xl:flex-row xl:items-end justify-between gap-4">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-bold text-red-300"><CarFront className="w-4 h-4" /> Car Brother · parts intelligence</div>
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-bold text-red-300"><CarFront className="w-4 h-4" /> Nippon-Drive · parts intelligence</div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-2">Запчасти и аксессуары</h1>
           <p className="text-sm text-slate-300 mt-2 leading-relaxed">Три независимых каталога с подбором по марке и модели. Артикулы, официальность и применимость показываются только при наличии источника — неподтверждённые позиции помечены явно.</p>
         </div>
