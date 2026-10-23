@@ -1502,6 +1502,43 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceReferences: [{ label: 'Nissan — официальный архив Z12', url: 'https://history.nissan.co.jp/CUBE/Z12/0811/spec_specification.html', scope: 'Заводские спецификации японского рынка.' }, { label: 'Nissan — FAQ о топливе и баке Cube Z12', url: 'https://faq2.nissan.co.jp/faq/show/7399?category_id=645&site_domain=default', scope: 'Официально подтверждает бак около 45 л для Z12.' }]
   }),
   makeSupplementalModel({
+    id: 'mazda-premacy-cp-fpde-japan',
+    brandId: 'mazda',
+    name: 'Premacy (CP, FP-DE 2WD)',
+    generation: 'I поколение (CP), японская спецификация',
+    years: '1999–2005',
+    bodyType: 'Минивэн',
+    overview: 'Первое поколение Mazda Premacy для японского рынка. Эта запись ограничена реперной версией 2WD с двигателем FP-DE 1.8 и 4-ступенчатой АКПП из пресс-релиза Mazda 1999 года; отдельные комплектации и 4WD могут отличаться.',
+    lengthMm: 4295,
+    widthMm: 1695,
+    heightMm: 1570,
+    wheelbaseMm: 2670,
+    groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных',
+    fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных',
+    engines: [{
+      code: 'FP-DE',
+      name: '1.8 л бензиновый DOHC',
+      displacement: '1839 см³',
+      powerHp: '135 PS при 6200 об/мин для японской спецификации 1999 года',
+      torqueNm: 'Около 162 Н·м при 4500 об/мин (пересчёт заводских 16,5 кгс·м)',
+      valves: 'DOHC, 16 клапанов',
+      fuelSystem: 'Нет подтверждённых данных в использованном пресс-релизе',
+      timingDrive: 'Нет подтверждённых данных в использованном пресс-релизе',
+      strengths: ['Двигатель и мощность привязаны к официальному релизу Mazda Japan 1999 года'],
+      weaknesses: ['Не переносить характеристики на другие рынки и годы без проверки кода двигателя']
+    }],
+    transmissions: ['4-ступенчатая электронно-управляемая АКПП для японской версии 1999 года'],
+    drivetrain: 'Передний привод для указанной размерной спецификации; японские версии также выпускались с full-time 4WD.',
+    sourceNotes: 'Размеры указаны Mazda для 2WD: 4295×1695×1570 мм, колёсная база 2670 мм. Для 4WD в том же релизе длина 4320 мм и высота 1590 мм без рейлингов. Двигатель FP-DE 1839 см³, 135 PS/6200 об/мин и 16,5 кгс·м/4500 об/мин; 4-ступенчатая АКПП. Клиренс, бак и масса не заполнены: использованный первичный источник не подтверждает их.',
+    sourceReferences: [{
+      label: 'Mazda Japan — запуск Premacy, 26.04.1999',
+      url: 'https://newsroom.mazda.com/en/publicity/release/1999/9904/990426e.html',
+      scope: 'Заводской релиз: размеры 2WD/4WD, двигатель FP-DE, мощность, момент, АКПП и варианты привода.'
+    }]
+  }),
+  makeSupplementalModel({
     id: 'mazda3-bp-fastback', brandId: 'mazda', name: 'Mazda3 (BP, Fastback)',
     generation: 'IV поколение, японская спецификация', years: '2019–н.в.', bodyType: 'Хэтчбек',
     overview: 'Пятидверный Mazda3 Fastback поколения BP. Двигатели и трансмиссии различаются по году и рынку; сверять точную комплектацию по VIN.',
