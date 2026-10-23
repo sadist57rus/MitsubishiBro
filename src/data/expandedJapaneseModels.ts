@@ -1611,7 +1611,7 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceReferences: [{ label: 'Nissan Heritage Collection — 180SX Type II (1990, RS13)', url: 'https://www2.nissan.co.jp/HERITAGE/DETAIL/323.html', scope: 'Заводские данные японской Type II: размеры, база, масса, CA18DET 1809 см³, 175 PS и 225 Н·м.' }]
   }),
   makeSupplementalModel({
-    id: 'toyota-mark-ii-x100-tourer-v', brandId: 'toyota', name: 'Mark II (X100, Tourer V)', generation: 'VIII поколение, X100', years: '1996–2000', bodyType: 'Седан/Хардтоп',
+    id: 'toyota-mark-ii-x100-tourer-v', brandId: 'toyota', name: 'Mark II (X100, Tourer V)', generation: 'VIII поколение, X100', years: '1996–2000', bodyType: 'Седан',
     overview: 'Легендарный заднеприводный четырёхдверный Tourer V. Приведены характеристики японской версии E-JZX100 из каталога Toyota; параметры не следует автоматически переносить на другие комплектации Mark II X100.',
     lengthMm: 4760, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: 0,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1480 кг для японской версии Tourer V',
