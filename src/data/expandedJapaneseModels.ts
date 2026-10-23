@@ -1658,10 +1658,10 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
     ]
   },
   'suzuki-swift-zc11-hatchback': {
-    wiperBladeSize: [{ driverSide: '525 mm', passengerSide: '450 mm', notes: 'Japanese wiper chart lists ZC11S/ZD11S Swift: 525/450 mm front, 250 mm rear. https://wiper.jp/SUZUKI/SWIFT.html' }],
+    wiperBladeSize: [{ driverSide: '525 mm', passengerSide: '450 mm', notes: 'Japanese wiper chart lists ZC11S/ZD11S Swift: 525/450 mm front, 250 mm rear. Secondary reference; verify arm connector and exact vehicle. https://wiper.jp/SUZUKI/SWIFT.html' }],
     tires: [
-      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'T', notes: 'Cars Japan fitment table for Swift ZC11S 1.3 XE; trim-specific. https://cars-japan.net/tire/mdl0080017.html' },
-      { size: '185/60R15', diameter: 603, width: 185, aspectRatio: 60, rimDiameter: 381, loadIndex: '84', speedRating: 'H', notes: 'Cars Japan fitment table for selected ZC11S/XG and 4WD grades; confirm exact grade. https://cars-japan.net/tire/mdl0080017.html' }
+      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'T', notes: 'Cars Japan fitment table lists 165/70R14 81T for Swift ZC11S 1.3 XE; trim-specific secondary source. Verify against the vehicle placard. https://cars-japan.net/tire/mdl0080017.html' },
+      { size: '185/60R15', diameter: 603, width: 185, aspectRatio: 60, rimDiameter: 381, loadIndex: '84', speedRating: 'H', notes: 'Cars Japan fitment table for selected ZC11S/XG and 4WD grades; confirm exact grade and placard. https://cars-japan.net/tire/mdl0080017.html' }
     ]
   },
   'toyota-prius-xw30-liftback': {
