@@ -9,6 +9,6 @@
   "background_color": "#090909",
   "theme_color": "#090909",
   "icons": [
-    { "src": "/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "/nippon-drive-icon.png", "sizes": "any", "type": "image/png", "purpose": "any" }
   ]
 }
