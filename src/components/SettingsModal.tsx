@@ -227,7 +227,7 @@ export default function SettingsModal({
         {showResetConfirm && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4" role="dialog" aria-modal="true" aria-labelledby="clear-app-data-title">
             <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-5 text-slate-900 shadow-2xl dark:border-slate-700 dark:bg-slate-900 dark:text-white">
-              <h2 id="clear-app-data-title" className="text-lg font-bold">Очистить данные Nippon Drive?</h2>
+              <h2 id="clear-app-data-title" className="text-lg font-bold">Очистить данные Nippon-Drive?</h2>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Будут удалены сохранённые автомобили, записи бортжурнала и заправок, избранные разделы и настройки приложения. Другие данные сайта в браузере не затрагиваются.</p>
               <div className="mt-5 flex justify-end gap-2">
                 <button type="button" onClick={() => setShowResetConfirm(false)} className="rounded-xl border border-slate-300 px-4 py-2 font-semibold dark:border-slate-600">Отмена</button>
