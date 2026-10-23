@@ -24,7 +24,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: Car-Brother-web-build
+          name: Nippon-Drive-web-build
           path: dist/
           if-no-files-found: error
           retention-days: 14
