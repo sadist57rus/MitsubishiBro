@@ -1,10 +1,10 @@
-# Nippon Drive
+# Nippon-Drive
 
 <p align="center">
-  <img src="public/nippon-drive-logo.svg" alt="Nippon Drive — справочник японских автомобилей" width="820" />
+  <img src="public/nippon-drive-logo.svg" alt="Nippon-Drive — справочник японских автомобилей" width="820" />
 </p>
 
-**Nippon Drive — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
+**Nippon-Drive — развиваемый справочник японских автомобилей: от исторических марок до современных легковых и коммерческих моделей.**
 
 [![Build and typecheck](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml/badge.svg)](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/verify.yml) [![Build Android APK](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml/badge.svg)](https://github.com/sadist57rus/Nippon-Drive/actions/workflows/android-apk.yml)
 
