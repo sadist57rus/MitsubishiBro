@@ -50,7 +50,7 @@ async function chooseToyota(page: Page) {
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('toyota');
   }
-  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole('heading', { name: 'Главная', exact: true })).toBeVisible({ timeout: 15_000 });
 }
 
 async function prepare(page: Page, viewport: Viewport, theme: Theme) {
@@ -287,7 +287,7 @@ test('maintenance fuel calculator accepts decimal comma on text inputs', async (
     await page.getByRole('button', { name: /Сохранить автомобиль и открыть приложение/i }).click();
     await expect.poll(() => page.evaluate(() => localStorage.getItem('car-brother-garage') || '')).toContain('outlander-1');
   }
-  await expect(page.getByText(/Car Brother/i).first()).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole('heading', { name: 'Главная', exact: true })).toBeVisible({ timeout: 15_000 });
   await openNavItem(page, 'maintenance');
   await expect(page.getByRole('heading', { name: /Калькулятор расхода топлива/ })).toBeVisible();
 
