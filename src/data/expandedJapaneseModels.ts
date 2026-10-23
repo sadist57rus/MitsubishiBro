@@ -1603,6 +1603,70 @@ for (const seed of commercialBrandSeeds) {
   }
 }
 
+const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wiperBladeSize'>> = {
+  'honda-civic-fd-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: 'Справочная применимость зависит от рынка и года; перед заказом сверить маркировку старых щёток и тип крепления.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Размер встречается у отдельных Civic FD комплектаций; сверить с табличкой конкретного рынка и комплектации.' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Размер для отдельных колёсных пакетов; не считать универсальной заводской установкой.' }
+    ]
+  },
+  'subaru-impreza-ge-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: 'Каталоги ANCO/PIAA для Impreza GE/GH 2008–2011 указывают 24"/16"; задняя щётка зависит от кузова и года.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Встречается у отдельных Impreza GE комплектаций; сверить рынок, привод и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Вариант для отдельных комплектаций; требуется сверка с заводской табличкой.' }
+    ]
+  },
+  'mazda3-bk-sedan': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '475 mm (19")', notes: 'Каталоги fitment для Mazda3 BK 2003–2009 указывают 530/475 мм; крепление и региональная версия могут отличаться.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Распространённый размер Mazda3 BK; проверить точную комплектацию и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Встречается на отдельных комплектациях; проверить разрешённый размер для рынка.' }
+    ]
+  },
+  'mazda3-bk-hatchback': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '475 mm (19")', notes: 'Каталоги fitment для Mazda3 BK 2003–2009 указывают 530/475 мм; задняя щётка для хэтчбека около 350 мм. Проверить крепление.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Распространённый размер Mazda3 BK; проверить точную комплектацию и табличку.' },
+      { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Встречается на отдельных комплектациях; проверить разрешённый размер для рынка.' }
+    ]
+  },
+  'mitsubishi-lancer-x-cy-sedan': {
+    wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '450 mm (18")', notes: 'Вторичные таблицы для Lancer X/CY указывают 24"/18"; проверить год, рынок и крепление. Не относится автоматически к Lancer IX.' }],
+    tires: [
+      { size: '205/60R16', diameter: 652.4, width: 205, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '92', speedRating: 'H', notes: 'Размер встречается на обычных Lancer X комплектациях; не переносить на Evolution/Ralliart, проверить табличку.' },
+      { size: '215/45R18', diameter: 650.7, width: 215, aspectRatio: 45, rimDiameter: 457.2, loadIndex: '93', speedRating: 'W', notes: 'Вариант отдельных комплектаций/колёсных пакетов; подтвердить по рынку и заводской табличке.' }
+    ]
+  },
+  'nissan-tiida-c11-hatchback': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для Tiida C11 (2004-09—2012-08): водительская 550 мм, пассажирская 400 мм; задняя 305 мм стандарт / 300 мм для холодного климата.' }],
+    tires: [
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'H', notes: 'Типичный размер Tiida C11 в отдельных комплектациях; подтвердить по табличке и рынку.' },
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'H', notes: 'Встречается на отдельных версиях; не универсальный размер для всех рынков.' }
+    ]
+  },
+  'lexus-is-xe20-sedan': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '500 mm', notes: 'WIPERS.EE указывает 550/500 мм для Lexus IS XE20 sedan 2005–2013; проверять год и кузов.' }],
+    tires: [
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Встречается на отдельных XE20 комплектациях; сверить табличку и тормозной пакет.' },
+      { size: '225/45R17', diameter: 634.3, width: 225, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '91', speedRating: 'W', notes: 'Вариант отдельных XE20 комплектаций; подтвердить по точной версии и рынку.' }
+    ]
+  },
+  'isuzu-mux-uc-suv': {
+    wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '480 mm (19")', notes: 'Вторичная таблица Isuzu MU-X указывает эти размеры для ряда машин 2017–2021; не распространять автоматически на весь период UC 2013–2021.' }],
+    tires: [
+      { size: '255/65R17', diameter: 762.3, width: 255, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '110', speedRating: 'S', notes: 'Встречается на отдельных MU-X комплектациях; подтвердить рынок, год и табличку.' },
+      { size: '255/60R18', diameter: 763.2, width: 255, aspectRatio: 60, rimDiameter: 457.2, loadIndex: '108', speedRating: 'H', notes: 'Вариант отдельных комплектаций; подтвердить точную модификацию и индекс нагрузки.' }
+    ]
+  }
+};
+
+for (const model of supplementalModels) {
+  const fitment = supplementalFitments[model.id];
+  if (fitment) Object.assign(model, fitment);
+}
+
 for (const model of supplementalModels) {
   const brand = JAPANESE_BRANDS.find(item => item.id === model.brandId);
   if (!brand) continue;
