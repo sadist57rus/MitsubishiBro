@@ -177,6 +177,7 @@ jobs:
           retention-days: 14
 
       - name: Publish unsigned test release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
