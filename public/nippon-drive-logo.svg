@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" role="img" aria-labelledby="title">
+<title id="title">Nippon Drive</title>
+<rect width="1600" height="480" fill="#fff"/>
+<g transform="translate(48 38)">
+  <circle cx="202" cy="202" r="190" fill="#252525"/>
+  <circle cx="202" cy="202" r="157" fill="#bd0c35"/>
+  <circle cx="202" cy="202" r="139" fill="#fff"/>
+  <circle cx="202" cy="202" r="65" fill="#bd0c35" stroke="#fff" stroke-width="10"/>
+  <g fill="#bd0c35">
+    <path d="M186 63h32l-7 74h-18z"/>
+    <path d="M132 73l28-14 27 72-18 9z"/>
+    <path d="M87 105l23-23 48 61-16 15z"/>
+    <path d="M57 151l13-28 68 39-9 19z"/>
+    <path d="M46 192l4-31 76 13-3 21z"/>
+    <path d="M218 63h-32l7 74h18z" transform="rotate(180 202 202)"/>
+    <path d="M272 73l-28-14-27 72 18 9z"/>
+    <path d="M317 105l-23-23-48 61 16 15z"/>
+    <path d="M347 151l-13-28-68 39 9 19z"/>
+    <path d="M358 192l-4-31-76 13 3 21z"/>
+  </g>
+  <path d="M55 244Q93 228 127 235L151 259 148 306Q145 326 126 326H91Q71 326 67 307Z" fill="#fff"/>
+  <path d="M349 244Q311 228 277 235L253 259 256 306Q259 326 278 326H313Q333 326 337 307Z" fill="#fff"/>
+  <path d="M55 267l61-17 23 17-8 17-67 12zM349 267l-61-17-23 17 8 17 67 12z" fill="#bd0c35"/>
+</g>
+<text x="470" y="287" fill="#171717" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="-5">Nippon Drive</text>
+</svg>
