@@ -1,4 +1,4 @@
-const CACHE_NAME = 'car-brother-offline-v4';
+const CACHE_NAME = 'nippon-drive-offline-v5';
 const APP_SHELL = ['/', '/index.html', '/app-icon.svg', '/manifest.webmanifest', '/icons/car-brother-192.png', '/icons/car-brother-512.png', '/icons/car-brother-maskable-512.png', '/fonts/roboto-latin-400-normal.woff2', '/fonts/roboto-cyrillic-400-normal.woff2', '/fonts/roboto-cyrillic-ext-400-normal.woff2'];
 
 self.addEventListener('install', (event) => {
@@ -37,7 +37,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => (key.startsWith('mitsubishi-bro-offline-') || key.startsWith('car-brother-offline-')) && key !== CACHE_NAME).map((key) => caches.delete(key)));
+    await Promise.all(keys.filter((key) => (key.startsWith('mitsubishi-bro-offline-') || key.startsWith('car-brother-offline-') || key.startsWith('nippon-drive-offline-')) && key !== CACHE_NAME).map((key) => caches.delete(key)));
     await self.clients.claim();
   })());
 });
