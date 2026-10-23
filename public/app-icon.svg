@@ -19,7 +19,7 @@
 <path d="M100 281 Q256 296 411 281 L394 301 L119 301Z" fill="#050607" stroke="#8d5a18" stroke-width="2"/>
 <circle cx="147" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/><circle cx="365" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/>
 <path d="M55 335 H148 L135 343 H68Z M364 335 H457 L444 343 H377Z" fill="url(#gold)"/>
-<text x="256" y="388" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="65" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1.5" paint-order="stroke">CAR</text>
-<text x="256" y="435" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1" paint-order="stroke">BROTHER</text>
+<text x="256" y="388" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="65" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1.5" paint-order="stroke">NIPPON</text>
+<text x="256" y="435" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1" paint-order="stroke">DRIVE</text>
 <path d="M108 454 Q256 484 404 454" fill="none" stroke="url(#gold)" stroke-width="4"/>
 </svg>
