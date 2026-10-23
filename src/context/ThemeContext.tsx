@@ -4,7 +4,7 @@ export type ThemeMode = 'light' | 'dark' | 'system' | 'time';
 export type ColorPalette = 'black-yellow' | 'white-red' | 'black-orange' | 'midnight-blue' | 'forest-green';
 export const COLOR_PALETTES: { id: ColorPalette; name: string; description: string; colors: [string, string, string] }[] = [
   { id: 'black-yellow', name: 'Чёрный / жёлтый', description: 'Контрастный спорт', colors: ['#111111', '#facc15', '#ffffff'] },
-  { id: 'white-red', name: 'Белый / красный', description: 'Классика Car Brother', colors: ['#ffffff', '#dc2626', '#111827'] },
+  { id: 'white-red', name: 'Белый / красный', description: 'Фирменная классика Nippon-Drive', colors: ['#ffffff', '#dc2626', '#111827'] },
   { id: 'black-orange', name: 'Чёрный / оранжевый', description: 'Техно', colors: ['#111111', '#f97316', '#f8fafc'] },
   { id: 'midnight-blue', name: 'Ночной синий', description: 'Спокойный тёмный', colors: ['#0f172a', '#38bdf8', '#f8fafc'] },
   { id: 'forest-green', name: 'Графит / зелёный', description: 'Автомобильный', colors: ['#171717', '#22c55e', '#f5f5f4'] },
