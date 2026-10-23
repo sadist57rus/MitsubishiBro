@@ -1660,6 +1660,22 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
       { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: 'Официальный FAQ Nissan указывает для отдельных T31 комплектаций 225/55R18 98H; точная применимость зависит от года, двигателя и привода. Источник: https://faq2.nissan.co.jp/faq/show/24783' }
     ]
   },
+  'nissan-qashqai-j10-crossover': {
+    wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '380 mm', notes: 'Официальный FAQ Nissan для Dualis/Qashqai J10 (2007/05–2013/06): передние 600/380 мм, задняя 300 мм. Источник: https://faq2.nissan.co.jp/faq/show/7952' }],
+    tires: [
+      { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'H', notes: 'Официальный FAQ Nissan для Dualis J10: размер на комплектациях 20S/20S FOUR. Источник: https://faq2.nissan.co.jp/faq/show/8833' },
+      { size: '215/60R17', diameter: 689.8, width: 215, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '96', speedRating: 'H', notes: 'Официальный FAQ Nissan для Dualis J10: размер на комплектациях 20G/20G FOUR. Источник: https://faq2.nissan.co.jp/faq/show/8833' },
+      { size: '215/55R18', diameter: 693.7, width: 215, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '99', speedRating: 'V', notes: 'Официальный FAQ Nissan для отдельных J10 grades; для отдельных европейских 18-дюймовых шин Nissan отмечает особый индекс нагрузки/скорости. Источник: https://faq2.nissan.co.jp/faq/show/8833' }
+    ]
+  },
+  'nissan-march-k12': {
+    wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для March K12 (2002/02–2010/07): передние 550/400 мм, задняя 300 мм. Источник: https://faq2.nissan.co.jp/faq/show/7959' }],
+    tires: [
+      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'S', notes: 'Официальный FAQ Nissan для March K12: штатный размер на ряде 14-дюймовых комплектаций. Источник: https://faq2.nissan.co.jp/faq/show/10729' },
+      { size: '175/60R15', diameter: 591, width: 175, aspectRatio: 60, rimDiameter: 381, loadIndex: '81', speedRating: 'H', notes: 'Официальный FAQ Nissan для March K12: размер опциональных 15-дюймовых колёс на отдельных комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10729' },
+      { size: '185/55R15', diameter: 584.5, width: 185, aspectRatio: 55, rimDiameter: 381, loadIndex: '81', speedRating: 'V', notes: 'Официальный FAQ Nissan для March K12: размер на отдельных спортивных/старших комплектациях. Источник: https://faq2.nissan.co.jp/faq/show/10729' }
+    ]
+  },
   'nissan-serena-c25': {
     wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '300 mm', notes: 'Официальный FAQ Nissan для Serena C25 (2005/05–2010/11): передние 650/300 мм, задняя 400 мм. Источник: https://faq2.nissan.co.jp/faq/show/7947' }]
   },
