@@ -1654,7 +1654,53 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Japan — история Jimny Sierra JB74', url: 'https://www.suzuki.co.jp/car/jimny/special/history/jb74.html', scope: 'Официальные характеристики JB74: двигатель, мощность, момент, размеры, масса и трансмиссии.' },
       { label: 'Suzuki Japan — заводской PDF Jimny Sierra', url: 'https://www.suzuki.co.jp/car/jimny_sierra/asset/pdf/detail/detail.pdf', scope: 'Заводские размеры и оборудование текущей японской модели.' }
     ]
-  })
+  }),
+  makeSupplementalModel({
+    id: 'suzuki-sx4-ya11s-hatchback',
+    brandId: 'suzuki',
+    name: 'SX4 (YA11S/YA41S)',
+    generation: 'I поколение, японская спецификация',
+    years: '2006–2014',
+    bodyType: 'Кроссовер',
+    overview: 'Пятидверный SX4 первого поколения для японского рынка. Ниже приведена реперная спецификация SX4 1.5E с передним приводом; размеры, масса, двигатель и бак отличаются у 4WD и версий с двигателем 2.0.',
+    lengthMm: 4115,
+    widthMm: 1730,
+    heightMm: 1585,
+    wheelbaseMm: 2500,
+    groundClearanceMm: 175,
+    trunkVolumeLiters: 'Нет подтверждённых данных для указанной комплектации',
+    fuelTankLiters: 50,
+    curbWeightKg: '1180 кг для японской версии 1.5E 2WD',
+    engines: [
+      {
+        code: 'M15A',
+        name: '1.5 л бензин DOHC VVT',
+        displacement: '1490 см³',
+        powerHp: '110 PS при 6000 об/мин для японской версии',
+        torqueNm: '143 Н·м при 4000 об/мин для японской версии',
+        valves: 'DOHC, 16 клапанов, VVT',
+        fuelSystem: 'EPI, электронный впрыск',
+        timingDrive: 'Нет подтверждённых данных в использованной заводской спецификации',
+        strengths: ['Заводские параметры привязаны к японской версии SX4 1.5E 2WD'],
+        weaknesses: ['Не переносить характеристики на 4WD и двигатель J20A']
+      }
+    ],
+    transmissions: ['4-ступенчатая АКПП для реперной японской спецификации'],
+    drivetrain: 'Передний привод для указанной реперной версии; на семействе доступны варианты 4WD с системой i-AWD.',
+    sourceNotes: 'Реперные данные из официального заводского PDF Suzuki Japan для SX4 1.5E 2WD (DBA-YA11S), выпуск с июля 2006 года: 4115×1730×1585 мм, база 2500 мм, клиренс 175 мм, масса 1180 кг, двигатель M15A 1490 см³, 110 PS/143 Н·м, бак 50 л. Для SX4 4WD и 2.0 параметры отличаются; перед ремонтом сверить код модели и VIN.',
+    sourceReferences: [
+      {
+        label: 'Suzuki Digital Library — SX4, заводская таблица характеристик (2006)',
+        url: 'https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/sx4/182.pdf',
+        scope: 'Официальная таблица Suzuki Japan: кузов, коды YA11S/YB11S/YA41S/YB41S, размеры, клиренс, масса, двигатель M15A/J20A, выходные параметры, бак и трансмиссия.'
+      },
+      {
+        label: 'Suzuki Digital Library — SX4',
+        url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/sx4.html',
+        scope: 'Официальная история модели и разделение SX4 hatchback 2006 и SX4 Sedan 2007.'
+      }
+    ]
+  }),
 ];
 
 const historicalBrandSeeds = [
