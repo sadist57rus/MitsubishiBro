@@ -1639,6 +1639,39 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
       { size: '215/45R18', diameter: 650.7, width: 215, aspectRatio: 45, rimDiameter: 457.2, loadIndex: '93', speedRating: 'W', notes: 'Вариант отдельных комплектаций/колёсных пакетов; подтвердить по рынку и заводской табличке.' }
     ]
   },
+  'honda-civic-fn-hatchback': {
+    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '575 mm', notes: 'OXIMO catalogue lists 650/575 mm for Civic VIII FN/FK hatchback (2006–2011); other fitment tables differ by production date and market. Verify exact arm/connector. https://www.oximo.pl/en/wiper/honda-civic-viii-fn-fk-hatchback-2006-01-01-wgp350425-0/' }],
+    tires: [
+      { size: '225/45R17', diameter: 634.3, width: 225, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '91', speedRating: 'W', notes: 'Listed for selected Civic VIII hatchback grades; confirm market and exact grade before treating as approved fitment.' }
+    ]
+  },
+  'suzuki-swift-zc11-hatchback': {
+    wiperBladeSize: [{ driverSide: '525 mm', passengerSide: '450 mm', notes: 'Japanese wiper chart lists ZC11S/ZD11S Swift: 525/450 mm front, 250 mm rear. https://wiper.jp/SUZUKI/SWIFT.html' }],
+    tires: [
+      { size: '165/70R14', diameter: 586.6, width: 165, aspectRatio: 70, rimDiameter: 355.6, loadIndex: '81', speedRating: 'T', notes: 'Cars Japan fitment table for Swift ZC11S 1.3 XE; trim-specific. https://cars-japan.net/tire/mdl0080017.html' },
+      { size: '185/60R15', diameter: 603, width: 185, aspectRatio: 60, rimDiameter: 381, loadIndex: '84', speedRating: 'H', notes: 'Cars Japan fitment table for selected ZC11S/XG and 4WD grades; confirm exact grade. https://cars-japan.net/tire/mdl0080017.html' }
+    ]
+  },
+  'toyota-prius-xw30-liftback': {
+    tires: [
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Listed for selected 2010–2011 Prius ZVW30 L grades; not universal across grades. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'S', notes: 'Toyota ZVW30 owner-manual fitment for selected 15-inch grades; verify production period and grade. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Listed as an option for selected ZVW30 grades; not universal. https://cars-japan.net/tire/mdl0010041.html' }
+    ]
+  },
+  'mazda-cx5-ke-crossover': {
+    tires: [
+      { size: '225/65R17', diameter: 724.3, width: 225, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '102', speedRating: 'V', notes: 'Mazda owner manual lists this standard size for CX-5 KE; market/grade can change load-speed marking. https://www2.mazda.co.jp/carlife/owner/manual/cx-5/ke/ekshi/contents/07020200.html' },
+      { size: '225/55R19', diameter: 730.1, width: 225, aspectRatio: 55, rimDiameter: 482.6, loadIndex: '99', speedRating: 'V', notes: 'Mazda owner manual lists this size for selected CX-5 KE grades. https://www2.mazda.co.jp/carlife/owner/manual/cx-5/ke/ekshi/contents/07020200.html' }
+    ]
+  },
+  'mazda-6-gg-sedan': {
+    tires: [
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'V', notes: 'Listed for selected Mazda6 GG 1.8/2.0 sedan grades; engine and market affect approved set. https://club.autodoc.se/tyres/mazda/6/6-gg' },
+      { size: '205/55R16', diameter: 631.9, width: 205, aspectRatio: 55, rimDiameter: 406.4, loadIndex: '91', speedRating: 'V', notes: 'Listed for selected Mazda6 GG grades; verify exact engine, year and placard. https://club.autodoc.se/tyres/mazda/6/6-gg' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Listed for selected Mazda6 GG grades; verify exact engine, year and placard. https://club.autodoc.se/tyres/mazda/6/6-gg' }
+    ]
+  },
   'nissan-tiida-c11-hatchback': {
     wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для Tiida C11 (2004/09–2012/08): водительская 550 мм, пассажирская 400 мм; задняя 305 мм (стандарт) / 300 мм (холодный климат). Источник: https://faq2.nissan.co.jp/faq/show/7949' }],
     tires: [
