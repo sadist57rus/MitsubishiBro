@@ -1574,7 +1574,42 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Japan — история Jimny Sierra JB74', url: 'https://www.suzuki.co.jp/car/jimny/special/history/jb74.html', scope: 'Официальные характеристики JB74: двигатель, мощность, момент, размеры, масса и трансмиссии.' },
       { label: 'Suzuki Japan — заводской PDF Jimny Sierra', url: 'https://www.suzuki.co.jp/car/jimny_sierra/asset/pdf/detail/detail.pdf', scope: 'Заводские размеры и оборудование текущей японской модели.' }
     ]
-  })
+  }),
+
+  // Drift legends: representative Japanese-market variants backed by Nissan Heritage.
+  makeSupplementalModel({
+    id: 'nissan-silvia-s13-coupe', brandId: 'nissan', name: 'Silvia (S13, K’s)', generation: 'V поколение, S13', years: '1988–1993', bodyType: 'Купе/Спорт',
+    overview: 'Культовое заднеприводное купе Silvia S13. Запись описывает конкретную заводскую японскую версию K’s 1989 года с CA18DET; после обновления 1991 года линейка получила моторы SR20. Не переносить параметры одной комплектации на всё поколение.',
+    lengthMm: 4470, widthMm: 1690, heightMm: 1290, wheelbaseMm: 2475, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1120 кг для японской K’s 1989 года',
+    engines: [{ code: 'CA18DET', name: '1.8 л турбо, рядный 4-цилиндровый DOHC', displacement: '1809 см³', powerHp: '175 PS для K’s 1989 года', torqueNm: '225 Н·м для K’s 1989 года', valves: '16V DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной карточке', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и независимая многорычажная задняя подвеска'], weaknesses: ['Состояние старых турбодвигателей зависит от обслуживания и модификаций'] }],
+    transmissions: ['МКПП или АКПП — зависит от комплектации; точный код сверять по табличке'],
+    drivetrain: 'Задний привод (FR) для указанной заводской версии.',
+    sourceNotes: 'Габариты, база, масса, двигатель и мощность приведены для японской Silvia K’s 1989 года по Nissan Heritage Collection. Клиренс, бак, жидкости и другие параметры не подтверждены и намеренно не заполнены.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Silvia K’s (1989, S13)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/silvia_ks.html', scope: 'Заводские данные конкретной японской версии: габариты, база, масса, CA18DET 1809 см³, 175 PS и 225 Н·м.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-silvia-s14-coupe', brandId: 'nissan', name: 'Silvia (S14, K’s Type S)', generation: 'VI поколение, S14', years: '1993–1999', bodyType: 'Купе/Спорт',
+    overview: 'Шестое поколение Silvia, известное в дрифт-культуре заднеприводной компоновкой. Запись основана на японской K’s Type S 1994 года с SR20DET; комплектации и параметры менялись по году и рынку.',
+    lengthMm: 4500, widthMm: 1730, heightMm: 1295, wheelbaseMm: 2525, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1220 кг для японской K’s Type S 1994 года',
+    engines: [{ code: 'SR20DET', name: '2.0 л турбо, рядный 4-цилиндровый DOHC', displacement: '1998 см³', powerHp: '220 PS для K’s Type S 1994 года', torqueNm: '274 Н·м для K’s Type S 1994 года', valves: '16V DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной карточке', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод, независимая многорычажная задняя подвеска'], weaknesses: ['Проверять турбину, систему охлаждения и следы тюнинга конкретного автомобиля'] }],
+    transmissions: ['МКПП или АКПП — зависит от комплектации; точный код сверять по табличке'],
+    drivetrain: 'Задний привод (FR) для указанной заводской версии.',
+    sourceNotes: 'Параметры взяты из Nissan Heritage Collection для японской Silvia K’s Type S 1994 года. Не являются универсальными для всех S14 и экспортных 240SX.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Silvia K’s Type S (1994, S14)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/silvia_ks_s14.html', scope: 'Заводские данные конкретной японской версии: габариты, база, масса, SR20DET, мощность и момент.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-180sx-rs13-hatchback', brandId: 'nissan', name: '180SX (RS13, Type II)', generation: 'S-платформа, RS13', years: '1989–1998', bodyType: 'Купе/Спорт',
+    overview: 'Трёхдверное купе-хэтчбек на общей платформенной основе с Silvia S13, с подъёмными фарами. Запись описывает японскую 180SX Type II 1990 года с CA18DET; более поздние годы и комплектации отличаются.',
+    lengthMm: 4540, widthMm: 1690, heightMm: 1290, wheelbaseMm: 2475, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1170 кг для японской Type II 1990 года',
+    engines: [{ code: 'CA18DET', name: '1.8 л турбо, рядный 4-цилиндровый DOHC', displacement: '1809 см³', powerHp: '175 PS для Type II 1990 года', torqueNm: '225 Н·м для Type II 1990 года', valves: '16V DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной карточке', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод; независимая многорычажная задняя подвеска'], weaknesses: ['Проверять кузов на коррозию и автомобиль на следы аварийного ремонта/дрифт-перестроек'] }],
+    transmissions: ['МКПП или АКПП — зависит от комплектации; точный код сверять по табличке'],
+    drivetrain: 'Задний привод (FR) для указанной заводской версии.',
+    sourceNotes: 'Заводские параметры относятся к Nissan 180SX Type II 1990 года по Nissan Heritage Collection. В 1991 году Silvia получила SR20, а 180SX продолжала выпускаться до 1998 года; конкретный мотор нужно проверять по году и коду кузова.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — 180SX Type II (1990, RS13)', url: 'https://www2.nissan.co.jp/HERITAGE/DETAIL/323.html', scope: 'Заводские данные японской Type II: размеры, база, масса, CA18DET 1809 см³, 175 PS и 225 Н·м.' }]
+  }),
 ];
 
 const historicalBrandSeeds = [
