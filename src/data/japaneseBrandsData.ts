@@ -124,6 +124,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 60,
           curbWeightKg: '1535 – 1615 кг'
         },
+        tires: [
+          { size: '215/60R16', diameter: 664.4, width: 215, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '95', speedRating: 'H', notes: "Continental fitment table lists this size for Outlander 2003–2006; confirm the vehicle placard and market." },
+          { size: '215/55R17', diameter: 668.3, width: 215, aspectRatio: 55, rimDiameter: 431.8, loadIndex: '94', speedRating: 'H', notes: "Secondary fitment catalogue lists this as an option for some CU_W versions; not universal OEM fitment." }
+        ],
+        wiperBladeSize: [{ driverSide: '550 mm (22")', passengerSide: '475 mm (19")', notes: "Secondary fitment table for Outlander CU, 2001–2006; rear approximately 350 mm. Verify market, connector and exact production version before purchase." }],
         engines: [
           {
             code: '4G63',
@@ -250,6 +255,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 60,
           curbWeightKg: '1570 – 1720 кг'
         },
+        tires: [
+          { size: '215/70R16', diameter: 707.4, width: 215, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '100', speedRating: 'H', notes: "Common listed fitment for selected Outlander II trims; confirm placard, rim width and market." },
+          { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: "Common listed fitment for selected Outlander II trims; confirm placard, rim width and market." }
+        ],
+        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '530 mm (21")', notes: "Secondary model-specific fitment table for Outlander II/CW, 2006–2012; rear approximately 300 mm. Verify exact market and arm connector." }],
         engines: [
           {
             code: '4B11',
@@ -359,6 +369,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 60,
           curbWeightKg: '1480 – 1910 кг'
         },
+        tires: [
+          { size: '225/55R18', diameter: 704.7, width: 225, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '98', speedRating: 'H', notes: "Common listed fitment for selected Outlander III trims; verify the door placard and market." },
+          { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: "Common listed fitment for selected Outlander III trims; verify the door placard and market." }
+        ],
+        wiperBladeSize: [{ driverSide: '650 mm (26")', passengerSide: '450 mm (18")', notes: "Secondary fitment table for Outlander III/GF, 2012–2021; rear approximately 300 mm. Confirm year, market and connector." }],
         engines: [
           {
             code: '4J11',
@@ -769,6 +784,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 96,
           curbWeightKg: '2320 – 2580 кг'
         },
+        tires: [
+          { size: '275/70R16', diameter: 791.4, width: 275, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '114', speedRating: 'H', notes: "Common listed size on selected Land Cruiser 100 grades; market and wheel package vary." },
+          { size: '275/65R17', diameter: 789.3, width: 275, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '115', speedRating: 'H', notes: "Possible fitment on selected grades/wheel packages; verify exact tyre placard and load rating." }
+        ],
+        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '550 mm (22")', notes: "Japanese model/grade fitment table for Land Cruiser 100, 2001–2007; rear 400 mm. Earlier variants may differ." }],
         engines: [
           {
             code: '2UZ-FE',
@@ -871,6 +891,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 60,
           curbWeightKg: '1500 – 1625 кг'
         },
+        tires: [
+          { size: '225/65R17', diameter: 724.3, width: 225, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '102', speedRating: 'H', notes: "Common XA30 fitment; exact OEM fitment depends on trim and market." },
+          { size: '235/55R18', diameter: 715.7, width: 235, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '100', speedRating: 'H', notes: "Listed for selected XA30 grades; verify placard and original wheel specification." }
+        ],
+        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '425 mm (17")', notes: "Model-specific XA30 fitment guide for 2006–2012; rear 300 mm. Check market and connector." }],
         engines: [
           {
             code: '1AZ-FE',
@@ -967,6 +992,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 70,
           curbWeightKg: '1520 – 1610 кг'
         },
+        tires: [
+          { size: '215/60R16', diameter: 664.4, width: 215, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '95', speedRating: 'V', notes: "Common XV40 fitment on selected trims; confirm market and door placard." },
+          { size: '215/55R17', diameter: 668.3, width: 215, aspectRatio: 55, rimDiameter: 431.8, loadIndex: '94', speedRating: 'V', notes: "Common XV40 fitment on selected trims; confirm market and door placard." }
+        ],
+        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '500 mm (20")', notes: "Model-specific XV40 fitment guide, 2006–2011. Check market, year and connector." }],
         engines: [
           {
             code: '2AZ-FE',
@@ -1073,6 +1103,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 65,
           curbWeightKg: '1515 – 1675 кг'
         },
+        tires: [
+          { size: '215/65R16', diameter: 685.9, width: 215, aspectRatio: 65, rimDiameter: 406.4, loadIndex: '98', speedRating: 'H', notes: "Common T31 fitment on selected trims; confirm market, trim and placard." },
+          { size: '225/60R17', diameter: 701.8, width: 225, aspectRatio: 60, rimDiameter: 431.8, loadIndex: '99', speedRating: 'H', notes: "Common T31 fitment on selected trims; confirm market, trim and placard." }
+        ],
+        wiperBladeSize: [{ driverSide: '600 mm (24")', passengerSide: '400 mm (16")', notes: "Japanese Autobacs fitment chart lists X-Trail T31 (2007–2013) as 24/16 inches; other markets may differ." }],
         engines: [
           {
             code: 'MR20DE',
@@ -1181,6 +1216,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 95,
           curbWeightKg: '2470 – 2620 кг'
         },
+        tires: [
+          { size: '265/70R16', diameter: 777.4, width: 265, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '112', speedRating: 'S', notes: "Common Y61 fitment on selected grades; market and wheel/axle load requirements vary." },
+          { size: '275/70R16', diameter: 791.4, width: 275, aspectRatio: 70, rimDiameter: 406.4, loadIndex: '114', speedRating: 'S', notes: "Possible fitment on selected Y61 versions; verify OEM placard, clearance and load rating." }
+        ],
+        wiperBladeSize: [{ driverSide: '500 mm (20")', passengerSide: '500 mm (20")', notes: "WIPERS.EE fitment table for Patrol Y61, 1997–2010; rear 330 mm. Confirm body version and connector." }],
         engines: [
           {
             code: 'TB48DE',
@@ -1809,6 +1849,11 @@ export const JAPANESE_BRANDS: JapaneseBrand[] = [
           fuelTankLiters: 72,
           curbWeightKg: '1835 – 2020 кг'
         },
+        tires: [
+          { size: '235/55R18', diameter: 715.7, width: 235, aspectRatio: 55, rimDiameter: 457.2, loadIndex: '100', speedRating: 'V', notes: "Common fitment on selected RX XU30/AL10 trims; confirm exact year, market and placard." },
+          { size: '235/60R18', diameter: 739.2, width: 235, aspectRatio: 60, rimDiameter: 457.2, loadIndex: '103', speedRating: 'V', notes: "Listed on selected RX versions in some markets; not interchangeable without checking exact variant." }
+        ],
+        wiperBladeSize: [{ driverSide: '650 mm (26")', passengerSide: '550 mm (22")', notes: "Secondary fitment table for RX XU30 (2003–2009) and AL10 (2009–2015) reports 650/550 mm; check exact year and market." }],
         engines: [
           {
             code: '2GR-FE',
