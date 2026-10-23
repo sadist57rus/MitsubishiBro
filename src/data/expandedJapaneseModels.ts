@@ -99,6 +99,72 @@ const makeSupplementalModel = (data: {
 }
 
 const supplementalModels: JapaneseCarModel[] = [
+  makeSupplementalModel({
+    id: 'toyota-mr2-sw20-gt-s-1997',
+    brandId: 'toyota', name: 'MR2 GT-S (SW20)', generation: 'II поколение, японская спецификация', years: '1997–1999',
+    bodyType: 'Купе/Спорт',
+    overview: 'Среднемоторное заднеприводное купе с турбированным 3S-GTE. Данные относятся к японскому GT-S выпуска 1997.12, а не ко всем SW20.',
+    lengthMm: 4170, widthMm: 1695, heightMm: 1235, wheelbaseMm: 2400, groundClearanceMm: 130,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 54, curbWeightKg: '1270 кг для E-SW20 GT-S 1997.12',
+    engines: [{ code: '3S-GTE', name: '2.0 л turbo', displacement: '1998 см³', powerHp: '245 PS при 6000 об/мин', torqueNm: '304 Н·м при 4000 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI-D', timingDrive: 'Ремень ГРМ', strengths: ['Параметры относятся к GT-S поздней серии SW20'], weaknesses: ['Не переносить на ранний GT-S с 225 PS'] }],
+    transmissions: ['5-ступенчатая МКПП для GT-S'],
+    drivetrain: 'Среднемоторная компоновка, задний привод; LSD зависит от исполнения.',
+    sourceNotes: 'Toyota GT-S E-SW20 (1997.12): 4170×1695×1235 мм, база 2400 мм, колея 1470/1450 мм, масса 1270 кг, 3S-GTE 1998 см³, 245 PS/304 Н·м, бак 54 л, 5MT. Заводская карточка также указывает компрессию 8.5 и турбонаддув с интеркулером. Точные размеры шин/дисков, передаточные числа и дворники требуют отдельной проверки по комплектации; не подставлять универсальные значения.',
+    sourceReferences: [{ label: 'Toyota Japan — MR2 GT-S E-SW20 (1997.12)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-MR2/199712/1002263/', scope: 'Заводские габариты, масса, 3S-GTE, мощность, момент, коробка и бак конкретной версии.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-starlet-ep91-glanza-v',
+    brandId: 'toyota', name: 'Starlet Glanza V (EP91)', generation: 'V поколение, японская спецификация', years: '1997–1999',
+    bodyType: 'Хэтчбек',
+    overview: 'Лёгкий трёхдверный переднеприводный хэтчбек с 4E-FTE turbo. Указана базовая Glanza V E-EP91, не motorsport package и не Glanza S.',
+    lengthMm: 3790, widthMm: 1625, heightMm: 1400, wheelbaseMm: 2300, groundClearanceMm: 145,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: '920 кг для E-EP91 Glanza V (1997.04)',
+    engines: [{ code: '4E-FTE', name: '1.3 л turbo с интеркулером', displacement: '1331 см³', powerHp: '135 PS при 6400 об/мин', torqueNm: '156.9 Н·м при 4800 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI-D', timingDrive: 'Ремень ГРМ', strengths: ['Заводские параметры указаны для японской Glanza V'], weaknesses: ['Не переносить на атмосферную Glanza S с 4E-FE'] }],
+    transmissions: ['5-ступенчатая МКПП — Glanza V', '4-ступенчатая АКПП — отдельные исполнения'],
+    drivetrain: 'Передний привод (FF); передаточные числа и дифференциал уточнять по коробке.',
+    sourceNotes: 'Toyota E-EP91 Glanza V (1997.04): 3790×1625×1400 мм, база 2300 мм, колея 1400/1395 мм, масса 920 кг, 4E-FTE 1331 см³, 135 PS/156.9 Н·м. Источник перечисляет 5MT и FF для Glanza V. Бак требует проверки карточки конкретной комплектации; штатные шины/диски, финальная пара и дворники в этой записи не утверждаются.',
+    sourceReferences: [{ label: 'Toyota Japan — Starlet Glanza V E-EP91 (1997.04)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-STARLET/199704/1007056/', scope: 'Заводские размеры, масса, двигатель 4E-FTE, мощность и момент; комплектации Glanza отличаются.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-caldina-st215w-gt-t',
+    brandId: 'toyota', name: 'Caldina GT-T (ST215W)', generation: 'II поколение, японская спецификация', years: '1997–2002',
+    bodyType: 'Универсал',
+    overview: 'Высокопроизводительный универсал с 3S-GTE и постоянным полным приводом. Версия GT-T отличается от GT-Four и более поздних Caldina.',
+    lengthMm: 4580, widthMm: 1720, heightMm: 1495, wheelbaseMm: 2580, groundClearanceMm: 155,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 60, curbWeightKg: '1480 кг для E-ST215W GT-T (1997.09)',
+    engines: [{ code: '3S-GTE', name: '2.0 л turbo', displacement: '1998 см³', powerHp: '260 PS при 6000 об/мин', torqueNm: '323.6 Н·м при 4400 об/мин', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Заводские параметры для GT-T ST215W'], weaknesses: ['Не переносить на атмосферные 3S-FE версии Caldina'] }],
+    transmissions: ['4-ступенчатая АКПП для E-ST215W GT-T'],
+    drivetrain: 'Постоянный полный привод (full-time 4WD); передаточные числа и коды дифференциалов сверять по шильдику агрегатов.',
+    sourceNotes: 'Toyota E-ST215W GT-T (1997.09): 4580×1720×1495 мм, база 2580 мм, колея 1480/1450 мм, масса 1480 кг, 3S-GTE 1998 см³, 260 PS/323.6 Н·м, бак 60 л, full-time 4WD, 4AT. Не переносить эти значения на GT-T S-version 2000.01 (другая масса/период). Размеры шин/дисков, финальные пары и дворники требуют проверки для точной комплектации.',
+    sourceReferences: [{ label: 'Toyota Japan — Caldina Active Sports GT-T E-ST215W (1997.09)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CALDINA/199709/1000351/', scope: 'Заводские размеры, масса, двигатель, мощность, момент, коробка и бак для GT-T 1997.09.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-crown-jzs171-athlete-v',
+    brandId: 'toyota', name: 'Crown Athlete V (JZS171)', generation: 'XI поколение Crown, японская спецификация', years: '2001–2003',
+    bodyType: 'Седан',
+    overview: 'Заднеприводный седан с турбированным 1JZ-GTE. Запись относится к Crown Athlete V GH-JZS171, а не к атмосферному Athlete с 1JZ-GE.',
+    lengthMm: 4820, widthMm: 1765, heightMm: 1455, wheelbaseMm: 2780, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1600 кг для GH-JZS171 (2001.08)',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '378 Н·м при 2400 об/мин', valves: 'Рядный 6-цилиндровый DOHC, 24 клапана', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Паспортные параметры соответствуют Athlete V GH-JZS171'], weaknesses: ['Не смешивать с атмосферным JZS171 Athlete'] }],
+    transmissions: ['4-ступенчатая АКПП — конкретную модель коробки проверить по коду комплектации'],
+    drivetrain: 'Задний привод (FR); передаточное число главной пары и тип LSD требуют проверки по комплектации.',
+    sourceNotes: 'Toyota GH-JZS171 Athlete V (2001.08): 4820×1765×1455 мм, база 2780 мм, колея 1495/1470 мм, масса 1600 кг, 1JZ-GTE 2491 см³, 280 PS/378 Н·м, бак 70 л. Это данные Athlete V, не обычного Athlete 1JZ-GE. Шины/диски, точная коробка, передаточные числа и дворники требуют отдельной сверки по заводскому коду.',
+    sourceReferences: [{ label: 'Toyota Japan — Crown Athlete V GH-JZS171 (2001.08)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN/200108/1010188/', scope: 'Заводские габариты, масса, 1JZ-GTE, мощность, момент, бак и коробка.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-crown-estate-jzs171w-athlete-v',
+    brandId: 'toyota', name: 'Crown Estate Athlete V (JZS171W)', generation: 'XI поколение Crown Estate, японская спецификация', years: '2001–2003',
+    bodyType: 'Универсал',
+    overview: 'Спортивный универсал с 1JZ-GTE turbo и задним приводом. Его кузовные размеры и масса отличаются от седана Crown Athlete V.',
+    lengthMm: 4835, widthMm: 1765, heightMm: 1510, wheelbaseMm: 2780, groundClearanceMm: 150,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1680 кг для GH-JZS171W (2001.08)',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '378 Н·м при 2400 об/мин', valves: 'Рядный 6-цилиндровый DOHC, 24 клапана', fuelSystem: 'EFI', timingDrive: 'Ремень ГРМ', strengths: ['Заводские данные отдельного кузова JZS171W'], weaknesses: ['Не переносить массу и кузовные параметры с седана JZS171'] }],
+    transmissions: ['4-ступенчатая АКПП — по японской версии Athlete V'],
+    drivetrain: 'Задний привод (FR); точная главная пара и дифференциал зависят от комплектации.',
+    sourceNotes: 'Toyota GH-JZS171W Crown Estate Athlete V (2001.08): 4835×1765×1510 мм, база 2780 мм, колея 1495/1470 мм, масса 1680 кг, 1JZ-GTE 2491 см³, 280 PS/378 Н·м, бак 70 л. Это отдельная запись универсала, не седана. Штатные шины/диски, финальная пара и длины дворников не подтверждены в используемой карточке.',
+    sourceReferences: [{ label: 'Toyota Japan — Crown Estate Athlete V GH-JZS171W (2001.08)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN_ESTATE/200108/1010173/', scope: 'Заводские размеры, масса, двигатель, мощность, момент и бак для кузова JZS171W.' }]
+  }),
+
   // Batch 2: drift and JDM performance icons. Exact trim data is scoped in each source note.
   makeSupplementalModel({
     id: 'toyota-altezza-sxe10-rs200',
@@ -185,145 +251,13 @@ const supplementalModels: JapaneseCarModel[] = [
     sourceNotes: 'Nissan указывает для M·spec Nür: 4600×1780×1360 мм, база 2665 мм, масса 1580 кг, RB26DETT 2568 см³, 280 PS/392 Н·м, шины 245/40ZR18. Точные диски, передаточные числа и дворники не подтверждены этой карточкой.',
     sourceReferences: [{ label: 'Nissan Heritage Collection — Skyline GT-R M·spec Nür (2000, BNR34)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/306_skyline_gt-r_m-spec_nur.html', scope: 'Данные ограниченной дорожной серии BNR34: размеры, масса, двигатель, мощность, момент и шины.' }]
   }),
-  makeSupplementalModel({
-    id: 'nissan-fairlady-z-z33-version-st',
-    brandId: 'nissan',
-    name: 'Fairlady Z Version ST (Z33)',
-    generation: 'V поколение Z-car, японская спецификация',
-    years: '2002–2008',
-    bodyType: 'Купе/Спорт',
-    overview: 'Двухместное спортивное купе с VQ35DE и задним приводом. Мощность и коробка менялись по году и рынку; запись ограничена японской Version ST раннего выпуска.',
-    lengthMm: 4310, widthMm: 1815, heightMm: 1315, wheelbaseMm: 2650,
-    groundClearanceMm: 120, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 80,
-    curbWeightKg: 'Зависит от года и трансмиссии; точная масса не подтверждена в выбранном источнике',
-    engines: [{ code: 'VQ35DE', name: '3.5 л V6 атмосферный', displacement: '3498 см³', powerHp: '280 PS для японской версии при запуске', torqueNm: '363 Н·м для японской версии при запуске', valves: 'V6 DOHC, 24 клапана', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Nissan подтверждает двигатель и паспортные параметры запуска Z33'], weaknesses: ['Не переносить цифры на поздние VQ35HR и экспортные версии'] }],
-    transmissions: ['6-ступенчатая МКПП — по комплектации', '5-ступенчатая АКПП — по комплектации'],
-    drivetrain: 'Задний привод (FR); главная пара зависит от трансмиссии и года.',
-    sourceNotes: 'Nissan подтверждает для Z33 при запуске 3.5 VQ35DE, 280 PS и 363 Н·м. Габариты приведены как ориентир японской Version ST; перед применением для ремонта требуется сверка заводской карточки по точному году/комплектации. Размеры шин/дисков и дворников в этой записи не подтверждены; verificationStatus остаётся unverified.',
-    sourceReferences: [{ label: 'Nissan Global — Fairlady Z / 50 years of excitement', url: 'https://www.nissan-global.com/EN/STORIES/RELEASES/nissanz-50years-excitement/', scope: 'Официально подтверждает Z33 Version ST, двигатель VQ35DE, 280 PS, 363 Н·м и период выпуска; не является полным каталогом размеров/комплектаций.' }]
-  }),
-  makeSupplementalModel({
-    id: 'mazda-rx-7-fd3s',
-    brandId: 'mazda',
-    name: 'RX-7 (FD3S)',
-    generation: 'III поколение, японская спецификация',
-    years: '1991–2002',
-    bodyType: 'Купе/Спорт',
-    overview: 'Лёгкое заднеприводное спортивное купе с двухроторным двигателем 13B-REW и последовательным twin-turbo. Спецификация и мощность различаются по годам японского выпуска.',
-    lengthMm: 4285, widthMm: 1760, heightMm: 1230, wheelbaseMm: 2425,
-    groundClearanceMm: 135, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 76,
-    curbWeightKg: 'Зависит от серии и комплектации; точное значение не подтверждено в источнике этой записи',
-    engines: [{ code: '13B-REW', name: '1.3 л двухроторный Wankel, последовательный twin-turbo', displacement: '1308 см³ (номинальный объём роторов)', powerHp: '255 PS для ранней японской версии; поздние серии отличаются', torqueNm: '294 Н·м для ранней японской версии; зависит от серии', valves: 'Роторный двигатель; клапанный механизм отсутствует', fuelSystem: 'Электронный впрыск, последовательный twin-turbo', timingDrive: 'Не применимо: роторный двигатель', strengths: ['Mazda подтверждает 13B twin-turbo и 255 PS для запуска FD'], weaknesses: ['Мощность и турбосистема отличаются по году; для обслуживания нужен точный номер серии'] }],
-    transmissions: ['5-ступенчатая МКПП — по версии', '4-ступенчатая АКПП — отдельные версии'],
-    drivetrain: 'Задний привод (FR); главная пара и дифференциал зависят от серии и комплектации.',
-    sourceNotes: 'Mazda подтверждает для запуска FD двухроторный 13B с последовательным twin-turbo и 255 PS. Размеры в карточке требуют сверки с японской спецификацией выбранного года; не использовать для заказа деталей без VIN/номера серии. Шины, диски, передаточные числа и дворники не подтверждены этой записью.',
-    sourceReferences: [{ label: 'Mazda Global — история моделей 1990–1999', url: 'https://www.mazda.com/en/about/history/1990-1999/', scope: 'Официально подтверждает запуск RX-7 FD, двухроторный 13B twin-turbo, 255 PS и конструктивные особенности; не является полным каталогом деталей.' }]
-  }),
-  makeSupplementalModel({
-    id: 'honda-s2000-ap1',
-    brandId: 'honda',
-    name: 'S2000 (AP1)',
-    generation: 'I поколение, японская спецификация',
-    years: '1999–2005',
-    bodyType: 'Купе/Спорт',
-    overview: 'Двухместный родстер с передним расположением двигателя и задним приводом; ранний AP1 оснащён высокооборотным F20C и 6-ступенчатой МКПП.',
-    lengthMm: 4135, widthMm: 1750, heightMm: 1285, wheelbaseMm: 2400,
-    groundClearanceMm: 130, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50,
-    curbWeightKg: 'Зависит от года и рынка; точная масса не подтверждена в выбранном источнике',
-    engines: [{ code: 'F20C', name: '2.0 л DOHC VTEC атмосферный', displacement: '1997 см³', powerHp: '250 PS при 8300 об/мин для японской версии', torqueNm: '222 Н·м при 7500 об/мин', valves: 'Рядный 4-цилиндровый DOHC VTEC, 16 клапанов', fuelSystem: 'Honda PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Официальная история Honda подтверждает 250 PS/8300 об/мин и 9000 об/мин максимальных оборотов'], weaknesses: ['Не смешивать с AP2/F22C и экспортными калибровками'] }],
-    transmissions: ['6-ступенчатая МКПП'],
-    drivetrain: 'Задний привод (FR); дифференциал и главная пара требуют сверки по коду кузова и рынку.',
-    sourceNotes: 'Honda подтверждает японский AP1 при запуске в 1999 году: атмосферный 2.0 DOHC VTEC, 250 PS при 8300 об/мин, 222 Н·м при 7500 об/мин. Габариты/клиренс в этой карточке не считаются подтверждёнными без заводской таблицы для точного года. Шины, диски, передаточные числа и дворники не подтверждены этой записью.',
-    sourceReferences: [{ label: 'Honda Global — прекращение производства S2000 / история модели', url: 'https://global.honda/en/newsroom/news/2009/4090127eng.html', scope: 'Официально подтверждает японскую спецификацию AP1, даты, двигатель 2.0, 250 PS и крутящий момент; не является полным руководством по обслуживанию.' }]
-  }),
-  makeSupplementalModel({
-    id: 'subaru-impreza-wrx-sti-gc8-version-v',
-    brandId: 'subaru',
-    name: 'Impreza WRX STI Version V (GC8)',
-    generation: 'I поколение Impreza, японская спецификация',
-    years: '1998–1999',
-    bodyType: 'Седан',
-    overview: 'Раллийно-ориентированная версия WRX STI GC8 с EJ20 turbo и постоянным полным приводом. Тип кузова и агрегаты отличаются у RA, Type R и обычного WRX.',
-    lengthMm: 4350, widthMm: 1690, heightMm: 1405, wheelbaseMm: 2520,
-    groundClearanceMm: 155, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 60,
-    curbWeightKg: 'Зависит от кузова и версии; точная масса не подтверждена в выбранном источнике',
-    engines: [{ code: 'EJ20', name: '2.0 л горизонтально-оппозитный turbo', displacement: '1994 см³', powerHp: '280 PS для японских STI соответствующего периода; подтвердить по коду модели', torqueNm: 'Зависит от версии GC8', valves: 'Горизонтально-оппозитный 4-цилиндровый DOHC', fuelSystem: 'Электронный впрыск, турбонаддув', timingDrive: 'Ремень ГРМ', strengths: ['Subaru catalogue подтверждает GC8, 1994 см³ и 5MT AWD'], weaknesses: ['Мощность/момент отличаются между WRX, STI, RA и Type R'] }],
-    transmissions: ['5-ступенчатая МКПП для перечисленных GC8 японского рынка'],
-    drivetrain: 'Постоянный полный привод; тип межосевого дифференциала зависит от конкретной версии STI/RA.',
-    sourceNotes: 'Официальный каталог Subaru для 1998.09 перечисляет GC8 WRX Type RA STI и STI Version V: 1994 см³, 5MT, full-time 4WD. Размеры в этой записи даны как поколенческий ориентир, а не единая спецификация всех GC8; масса, шины/диски, передаточные числа и дворники требуют выбора точного кода GC8 и кузова. Статус остаётся unverified.',
-    sourceReferences: [{ label: 'Subaru SUGDAS — официальный каталог Impreza GC8 (1998.09)', url: 'https://ucar.subaru.jp/php/catalog/model.php?car_cd=10451005&getyear=199211', scope: 'Подтверждает версии GC8, 1994 см³, 5MT и full-time 4WD; список включает разные кузова и комплектации, поэтому параметры нельзя переносить без проверки кода.' }]
-  }),
-  makeSupplementalModel({
-    id: 'nissan-skyline-gt-r-bcnr33-v-spec',
-    brandId: 'nissan',
-    name: 'Skyline GT-R V·spec (BCNR33)',
-    generation: 'IX поколение Skyline, японская спецификация',
-    years: '1995–1998',
-    bodyType: 'Купе/Спорт',
-    overview: 'Дорожный GT-R поколения R33 с RB26DETT и полным приводом ATTESA E-TS. Гоночные R33 из Nissan Heritage имеют совершенно другие параметры и не используются как источник этой записи.',
-    lengthMm: 4675, widthMm: 1780, heightMm: 1360, wheelbaseMm: 2720,
-    groundClearanceMm: 140, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 65,
-    curbWeightKg: 'Зависит от версии; не подтверждено для единой комплектации этой записи',
-    engines: [{ code: 'RB26DETT', name: '2.6 л рядный 6-цилиндровый twin-turbo', displacement: '2568 см³', powerHp: '280 PS для дорожной японской версии', torqueNm: '368 Н·м для дорожной японской версии; проверить год и homologation', valves: 'DOHC, 24 клапана', fuelSystem: 'Электронный впрыск, twin-turbo', timingDrive: 'Ремень ГРМ', strengths: ['RB26DETT и полный привод — базовая дорожная конфигурация GT-R'], weaknesses: ['Не использовать спецификации гоночных машин как данные серийного автомобиля'] }],
-    transmissions: ['5-ступенчатая МКПП — дорожная версия'],
-    drivetrain: 'Полный привод ATTESA E-TS; V·spec имеет настройки шасси/дифференциала, зависящие от исполнения.',
-    sourceNotes: 'Эта запись ограничена дорожным BCNR33 V·spec. Публичная карточка Nissan Heritage, найденная для BCNR33, описывает прототип/гоночные версии и потому не используется для размеров, массы или шин серийной машины. До появления точного заводского дорожного каталога эти параметры не подтверждены; размеры шин/дисков, редуктор и дворники не указывать как установленные.',
-    sourceReferences: [{ label: 'Nissan Global — история Skyline GT-R', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/skyline.html', scope: 'Подтверждает существование дорожных BCNR33/V·spec; отдельные карточки коллекции включают гоночные версии и не подходят для переноса их размеров/шин на дорожный автомобиль.' }]
-  }),
-  makeSupplementalModel({
-    id: 'toyota-chaser-x80-gt-twin-turbo',
-    brandId: 'toyota',
-    name: 'Chaser X80 GT Twin Turbo',
-    generation: 'IV поколение Chaser, японская спецификация',
-    years: '1988–1992',
-    bodyType: 'Седан',
-    overview: 'Заднеприводный седан поколения X80; в верхних версиях применялся 1G-GTE twin-turbo. Не смешивать с поздними Tourer V на 1JZ-GTE.',
-    lengthMm: 4690, widthMm: 1695, heightMm: 1375, wheelbaseMm: 2680,
-    groundClearanceMm: 155, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70,
-    curbWeightKg: 'Зависит от комплектации; точное значение не подтверждено в выбранном источнике',
-    engines: [{ code: '1G-GTE', name: '2.0 л рядный 6-цилиндровый twin-turbo', displacement: '1988 см³', powerHp: 'Зависит от года и комплектации; не подтверждено в этой записи', torqueNm: 'Зависит от года и комплектации; не подтверждено в этой записи', valves: 'DOHC, 24 клапана', fuelSystem: 'Электронный впрыск, twin-turbo', timingDrive: 'Ремень ГРМ', strengths: ['Отличается от позднего 1JZ-GTE по конструкции и обслуживанию'], weaknesses: ['Не подбирать детали по названию Tourer V без проверки кода кузова'] }],
-    transmissions: ['МКПП/АКПП — точная комбинация зависит от исполнения'],
-    drivetrain: 'Задний привод (FR); код коробки и главная пара не подтверждены для одной универсальной версии X80.',
-    sourceNotes: 'Поколение и двигатель 1G-GTE указаны как модельная область, но в этой карточке нет достаточной первичной спецификации для фиксации всех габаритов, массы, мощности, шин/дисков, передаточных чисел и дворников. Поля размеров отражают поколенческий ориентир и не должны использоваться для заказа деталей; требуется заводская карточка точного кода кузова.',
-    sourceReferences: [{ label: 'Toyota GAZOO — каталог Chaser', url: 'https://gazoo.com/catalog/maker/TOYOTA/CHASER/', scope: 'Каталог поколений Chaser; для ремонта необходимо открыть точный год и комплектацию X80.' }]
-  }),
-  makeSupplementalModel({
-    id: 'mazda-rx-7-fc3s',
-    brandId: 'mazda',
-    name: 'RX-7 (FC3S)',
-    generation: 'II поколение, японская спецификация',
-    years: '1985–1992',
-    bodyType: 'Купе/Спорт',
-    overview: 'Спортивное купе с роторным двигателем семейства 13B; атмосферные и turbo-версии различаются по серии и году.',
-    lengthMm: 4310, widthMm: 1690, heightMm: 1270, wheelbaseMm: 2430,
-    groundClearanceMm: 150, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 63,
-    curbWeightKg: 'Зависит от серии и комплектации; точная масса не подтверждена в выбранном источнике',
-    engines: [{ code: '13B-T', name: '1.3 л двухроторный turbo — отдельные версии', displacement: '1308 см³ (номинальный объём роторов)', powerHp: 'Зависит от года и версии', torqueNm: 'Зависит от года и версии', valves: 'Роторный двигатель; клапанный механизм отсутствует', fuelSystem: 'Электронный впрыск, турбонаддув на 13B-T', timingDrive: 'Не применимо: роторный двигатель', strengths: ['Роторная конструкция требует специальных процедур диагностики'], weaknesses: ['Не смешивать атмосферный 13B и turbo 13B-T'] }],
-    transmissions: ['5-ступенчатая МКПП — по версии', '4-ступенчатая АКПП — отдельные версии'],
-    drivetrain: 'Задний привод (FR); главная пара и дифференциал зависят от конкретной комплектации.',
-    sourceNotes: 'FC3S выпускался в нескольких сериях с атмосферными и турбированными роторными моторами. Эта запись намеренно не фиксирует универсальные мощность/момент, точную массу, шины/диски, редуктор и длины дворников без заводской карточки конкретной серии. Не использовать поколенческие габариты для подбора кузовных деталей.',
-    sourceReferences: [{ label: 'Mazda Global — история моделей 1980–1989', url: 'https://www.mazda.com/en/about/history/1980-1989/', scope: 'Исторический контекст модели RX-7; для точных параметров требуется руководство/каталог конкретной серии FC3S.' }]
-  })
 
-  makeSupplementalModel({
-    id: 'toyota-corolla-axio-e140-sedan',
-    brandId: 'toyota',
-    name: 'Corolla Axio (E140)',
-    generation: 'X поколение, японская версия',
-    years: '2006–2012',
-    bodyType: 'Седан',
-    overview: 'Компактный седан японского рынка. Линейка включала бензиновые двигатели 1.5 и 1.8 л; мощность и привод различаются по модификации.',
-    lengthMm: 4410, widthMm: 1695, heightMm: 1460, wheelbaseMm: 2600,
-    groundClearanceMm: 155, trunkVolumeLiters: 'Зависит от комплектации', fuelTankLiters: 50,
-    curbWeightKg: 'Ориентировочно 1100–1300 кг',
-    engines: [
-      { code: '1NZ-FE', name: '1.5 л бензин, VVT-i', displacement: '1496 см³', powerHp: 'Зависит от версии и привода', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый двигатель семейства Toyota'], weaknesses: ['Состояние зависит от обслуживания и пробега'] },
-      { code: '2ZR-FE', name: '1.8 л бензин, Dual VVT-i', displacement: '1797 см³', powerHp: 'Зависит от рынка и года', torqueNm: 'Зависит от версии', valves: '16V DOHC Dual VVT-i', fuelSystem: 'Электронный впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Более высокий запас мощности'], weaknesses: ['Требует проверки конкретной модификации'] }
-    ],
-    transmissions: ['МКПП или автоматическая трансмиссия — по комплектации', 'Вариатор на отдельных версиях'],
-    drivetrain: 'Передний привод; встречаются версии 4WD для японского рынка.',
-    sourceNotes: 'Проверенная реперная версия: японская Corolla Axio X, DBA-NZE141, октябрь 2008–октябрь 2009: 4410×1695×1460 мм, база 2600 мм, масса 1130 кг, 1NZ-FE 1496 см³, 110 PS/140 Н·м, бак 50 л, FF. У 4WD (NZE144) высота, масса и выходные параметры отличаются; эти данные не универсальны для E140.', sourceReferences: [{ label: 'Toyota Japan — Corolla Axio X NZE141 (2008.10)', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA_AXIO/200810/10051731/', scope: 'Официальные данные японской версии NZE141 1.5 FF; не распространять на 4WD и 1.8.' }, { label: 'Toyota Japan — каталог Corolla Axio', url: 'https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA_AXIO/', scope: 'Двигатели, приводы и коробки семейства; параметры зависят от года и комплектации.' }]
-  }),
+
+
+
+
+
+
   makeSupplementalModel({
     id: 'toyota-corolla-fielder-e140-wagon',
     brandId: 'toyota',
