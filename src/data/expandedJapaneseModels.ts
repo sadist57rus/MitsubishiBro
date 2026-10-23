@@ -45,7 +45,15 @@ const makeSupplementalModel = (data: {
       groundClearanceMm: data.groundClearanceMm,
       trunkVolumeLiters: data.trunkVolumeLiters,
       fuelTankLiters: data.fuelTankLiters,
-      curbWeightKg: data.curbWeightKg
+      curbWeightKg: data.curbWeightKg,
+      length: data.lengthMm,
+      width: data.widthMm,
+      height: data.heightMm,
+      wheelbase: data.wheelbaseMm,
+      groundClearance: data.groundClearanceMm,
+      ...( /^\\s*\\d+(?:[.,]\\d+)?\\s*(?:кг)?\\s*$/i.test(data.curbWeightKg)
+        ? { weight: Number(data.curbWeightKg.match(/\\d+(?:[.,]\\d+)?/)?.[0].replace(',', '.')) }
+        : {})
     },
     engines: data.engines,
     transmissions: data.transmissions,
