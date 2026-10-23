@@ -490,10 +490,10 @@ test('нижняя навигация сохраняет контраст во �
     await page.getByRole('button', { name: 'Применить', exact: true }).click();
     await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
     await page.setViewportSize({ width: 390, height: 844 });
-    const active = page.getByTestId('phone-nav-item-settings');
+    const active = page.getByTestId('phone-nav-item-overview');
     await active.click();
     await expect.poll(() => page.evaluate(() => {
-      const element = document.querySelector('[data-testid="phone-nav-item-settings"]');
+      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
       if (!element) return '';
       const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
       const probe = document.createElement('span');
@@ -503,7 +503,7 @@ test('нижняя навигация сохраняет контраст во �
       probe.remove();
       return JSON.stringify({ actual: getComputedStyle(element).color, expected });
     })).toBe(await page.evaluate(() => {
-      const element = document.querySelector('[data-testid="phone-nav-item-settings"]');
+      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
       if (!element) return '';
       const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
       const probe = document.createElement('span');
@@ -519,11 +519,11 @@ test('нижняя навигация сохраняет контраст во �
 
   await page.getByLabel('Тема интерфейса').selectOption('dark');
   await page.setViewportSize({ width: 390, height: 844 });
-  const active = page.getByTestId('phone-nav-item-settings');
+  const active = page.getByTestId('phone-nav-item-overview');
   await expect.poll(() => active.evaluate(element => getComputedStyle(element).color)).toBe(
     await page.evaluate(() => {
       const probe = document.createElement('span');
-      const element = document.querySelector('[data-testid="phone-nav-item-settings"]');
+      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
       if (!element) return '';
       probe.style.color = getComputedStyle(element).getPropertyValue('--palette-accent-content').trim();
       document.body.append(probe);
