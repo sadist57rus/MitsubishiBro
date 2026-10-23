@@ -448,6 +448,99 @@ test('активный пункт нижней навигации использ
   await page.setViewportSize({ width: 390, height: 844 });
   const homeNav = page.getByTestId('phone-nav-item-overview');
   await homeNav.click();
-  await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).color)).toBe('rgb(250, 204, 21)');
+  await expect.poll(() => page.evaluate(() => {
+    const active = document.querySelector('[data-testid="phone-nav-item-overview"]');
+    if (!active) return '';
+    const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+    const probe = document.createElement('span');
+    probe.style.color = getComputedStyle(active).getPropertyValue(variable).trim();
+    document.body.append(probe);
+    const expected = getComputedStyle(probe).color;
+    probe.remove();
+    return JSON.stringify({ actual: getComputedStyle(active).color, expected });
+  })).toBe(await page.evaluate(() => {
+    const active = document.querySelector('[data-testid="phone-nav-item-overview"]');
+    if (!active) return '';
+    const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+    const probe = document.createElement('span');
+    probe.style.color = getComputedStyle(active).getPropertyValue(variable).trim();
+    document.body.append(probe);
+    const expected = getComputedStyle(probe).color;
+    probe.remove();
+    return JSON.stringify({ actual: getComputedStyle(active).color, expected });
+  }));
   await expect.poll(() => homeNav.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe('rgba(0, 0, 0, 0)');
+});
+
+
+test('нижняя навигация сохраняет контраст во всех палитрах и скрывается в широком режиме', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await chooseToyota(page);
+  await openNavItem(page, 'settings');
+  const palettes = [
+    { name: 'Чёрный / жёлтый', id: 'black-yellow' },
+    { name: 'Белый / красный', id: 'white-red' },
+    { name: 'Чёрный / оранжевый', id: 'black-orange' },
+    { name: 'Ночной синий', id: 'midnight-blue' },
+    { name: 'Графит / зелёный', id: 'forest-green' },
+  ];
+
+  for (const palette of palettes) {
+    await page.getByRole('button', { name: new RegExp(palette.name) }).click();
+    await page.getByRole('button', { name: 'Применить', exact: true }).click();
+    await expect.poll(() => page.locator('html').getAttribute('data-palette')).toBe(palette.id);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const active = page.getByTestId('phone-nav-item-overview');
+    await expect(active).toBeVisible();
+    await expect.poll(() => page.evaluate(() => {
+      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
+      if (!element) return '';
+      const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+      const probe = document.createElement('span');
+      probe.style.color = getComputedStyle(element).getPropertyValue(variable).trim();
+      document.body.append(probe);
+      const expected = getComputedStyle(probe).color;
+      probe.remove();
+      return JSON.stringify({ actual: getComputedStyle(element).color, expected });
+    })).toBe(await page.evaluate(() => {
+      const element = document.querySelector('[data-testid="phone-nav-item-overview"]');
+      if (!element) return '';
+      const variable = document.documentElement.classList.contains('dark') ? '--palette-accent-content' : '--palette-accent-ink';
+      const probe = document.createElement('span');
+      probe.style.color = getComputedStyle(element).getPropertyValue(variable).trim();
+      document.body.append(probe);
+      const expected = getComputedStyle(probe).color;
+      probe.remove();
+      return JSON.stringify({ actual: getComputedStyle(element).color, expected });
+    }));
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.getByRole('button', { name: /Планшет \/ магнитола/ }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'wide');
+    await expect(page.getByTestId('phone-bottom-navigation')).toBeHidden();
+    await page.getByRole('button', { name: /Телефон · вертикально/ }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'phone');
+  }
+
+  await page.getByLabel('Тема интерфейса').selectOption('dark');
+  await page.setViewportSize({ width: 390, height: 844 });
+  const active = page.getByTestId('phone-nav-item-overview');
+  await active.click();
+  await expect.poll(() => page.evaluate(() => {
+    const element = document.querySelector<HTMLElement>('[data-testid="phone-nav-item-overview"]');
+    if (!element) return false;
+    const actual = getComputedStyle(element).color;
+    const expected = getComputedStyle(element).getPropertyValue('--palette-accent-content').trim();
+    const canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    const context = canvas.getContext('2d');
+    if (!context) return false;
+    const toSrgb = (color: string) => {
+      context.clearRect(0, 0, 1, 1);
+      context.fillStyle = color;
+      context.fillRect(0, 0, 1, 1);
+      return [...context.getImageData(0, 0, 1, 1).data];
+    };
+    return JSON.stringify(toSrgb(actual)) === JSON.stringify(toSrgb(expected));
+  })).toBe(true);
 });
