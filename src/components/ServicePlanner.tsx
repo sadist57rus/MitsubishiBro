@@ -146,7 +146,7 @@ export default function ServicePlanner() {
       {sortedTasks.length === 0 ? <div className="rounded-xl border border-dashed border-slate-300 px-4 py-8 text-center dark:border-slate-700">
         <Wrench className="mx-auto h-8 w-8 text-slate-400" aria-hidden="true" />
         <h3 className="mt-3 text-base font-bold text-slate-900 dark:text-white">Пока нет запланированных работ</h3>
-        <p className="mx-auto mt-1 max-w-md text-sm text-slate-500 dark:text-slate-400">Добавьте обслуживание, укажите пробег или дату — Car Brother напомнит о нём в этом плане.</p>
+        <p className="mx-auto mt-1 max-w-md text-sm text-slate-500 dark:text-slate-400">Добавьте обслуживание, укажите пробег или дату — Nippon-Drive напомнит о нём в этом плане.</p>
       </div> : <ol className="space-y-2">
         {sortedTasks.map(task => {
           const isOverdue = !task.completed && ((task.dueMileage !== undefined && currentMileage > 0 && task.dueMileage < currentMileage) || (task.dueDate !== undefined && task.dueDate < localDateString()));
