@@ -1508,15 +1508,15 @@ const supplementalModels: JapaneseCarModel[] = [
     generation: 'II поколение (LW)',
     years: '1999–2006',
     bodyType: 'Минивэн',
-    drivetrain: 'Передний или полный привод в зависимости от комплектации.',
-    awdSystemName: 'Нет подтверждённых данных для единой спецификации поколения',
     overview: 'Второе поколение Mazda MPV (LW), представленное в Японии в 1999 году. Двигатель, трансмиссию, размеры и жидкости необходимо уточнять по конкретному коду кузова и году выпуска.',
-    dimensions: {
-      lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
-      trunkVolumeLiters: 'Нет подтверждённых данных',
-      fuelTankLiters: 0,
-      curbWeightKg: 'Нет подтверждённых данных'
-    },
+    lengthMm: 0,
+    widthMm: 0,
+    heightMm: 0,
+    wheelbaseMm: 0,
+    groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных',
+    fuelTankLiters: 0,
+    curbWeightKg: 'Нет подтверждённых данных',
     engines: [{
       code: 'Нет подтверждённых данных',
       name: 'Двигатель не установлен по точной комплектации',
@@ -1530,19 +1530,13 @@ const supplementalModels: JapaneseCarModel[] = [
       weaknesses: ['Требуется точный код кузова и двигатель']
     }],
     transmissions: ['Нет подтверждённых данных для единой спецификации LW'],
-    fuelEconomy: { city: 'Нет подтверждённых данных', highway: 'Нет подтверждённых данных', combined: 'Нет подтверждённых данных', fuelGrade: 'Сверить по руководству конкретной версии' },
-    fluidsAndCapacities: { engineOil: 'Нет подтверждённых данных', engineOilVolume: 'Нет подтверждённых данных', transmissionFluid: 'Нет подтверждённых данных', transferCaseAndDiff: 'Нет подтверждённых данных', coolant: 'Нет подтверждённых данных', brakeFluid: 'Нет подтверждённых данных' },
-    bulbsSummary: { lowBeam: 'Нет подтверждённых данных', highBeam: 'Нет подтверждённых данных', fogLights: 'Нет подтверждённых данных', frontTurn: 'Нет подтверждённых данных', tailStop: 'Нет подтверждённых данных', interior: 'Нет подтверждённых данных' },
-    obdDiagnostics: { portLocation: 'Нет подтверждённых данных', commonCodes: [], protocol: 'Нет подтверждённых данных' },
-    knownIssues: [],
-    verificationStatus: 'unverified',
-    dataQualityNote: 'Навигационная карточка поколения, не подтверждает параметры конкретного автомобиля. Заводские материалы Mazda для соответствующего года и кода кузова нужно проверить до заполнения технических значений.',
+    drivetrain: 'Передний или полный привод в зависимости от комплектации.',
+    sourceNotes: 'Навигационная карточка поколения, не подтверждает параметры конкретного автомобиля. Технические значения оставлены незаполненными до проверки заводского руководства для соответствующего года и кузовного кода.',
     sourceReferences: [{
       label: 'Mazda Japan — официальный архив руководств MPV',
       url: 'https://www.mazda.co.jp/owner_support/manual/mpv/',
       scope: 'Официальная точка входа к руководствам MPV; выбрать год и номер кузова для точных характеристик.'
-    }],
-    lastReviewed: '2026-10-23'
+    }]
   }),
   makeSupplementalModel({
     id: 'mazda3-bp-fastback', brandId: 'mazda', name: 'Mazda3 (BP, Fastback)',
