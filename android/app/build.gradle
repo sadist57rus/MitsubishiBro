@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.sadist57rus.mitsubishibro"
+    namespace = "com.sadist57rus.nippondrive"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.sadist57rus.mitsubishibro"
+        applicationId "com.sadist57rus.nippondrive"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode (System.getenv("ANDROID_VERSION_CODE")?.toInteger() ?: 1)

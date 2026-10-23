@@ -1,4 +1,4 @@
-package com.sadist57rus.mitsubishibro;
+package com.sadist57rus.nippondrive;
 
 import com.getcapacitor.BridgeActivity;
 

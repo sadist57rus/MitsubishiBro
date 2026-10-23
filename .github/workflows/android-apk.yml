@@ -1,4 +1,4 @@
-name: Car Brother Android APK
+name: Nippon Drive Android APK
 
 on:
   push:
@@ -169,7 +169,7 @@ jobs:
       - name: Upload debug APK artifact
         uses: actions/upload-artifact@v5
         with:
-          name: Car-Brother-APK-debug
+          name: Nippon-Drive-APK-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
@@ -263,7 +263,7 @@ jobs:
       - name: Upload signed release APK artifact
         uses: actions/upload-artifact@v5
         with:
-          name: Car-Brother-APK-release-${{ github.ref_name }}
+          name: Nippon-Drive-APK-release-${{ github.ref_name }}
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 30
