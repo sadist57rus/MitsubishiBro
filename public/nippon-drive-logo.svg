@@ -1,32 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 512" role="img" aria-labelledby="title">
-<title id="title">Nippon Drive</title>
-<svg x="0" y="0" width="512" height="512" viewBox="0 0 512 512">
+<title id="title">Nippon Drive — японский автомобильный справочник</title>
 <defs>
- <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15120d"/><stop offset=".55" stop-color="#030609"/><stop offset="1" stop-color="#201306"/></linearGradient>
- <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff2a6"/><stop offset=".28" stop-color="#ffd45b"/><stop offset=".55" stop-color="#b87513"/><stop offset=".78" stop-color="#ffe58a"/><stop offset="1" stop-color="#8c4b05"/></linearGradient>
- <linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#353b40"/><stop offset=".4" stop-color="#11171c"/><stop offset="1" stop-color="#020304"/></linearGradient>
- <radialGradient id="glow"><stop stop-color="#b87513" stop-opacity=".75"/><stop offset="1" stop-color="#b87513" stop-opacity="0"/></radialGradient>
- <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151a20"/><stop offset="1" stop-color="#030609"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b0"/><stop offset=".35" stop-color="#e8b64d"/><stop offset=".72" stop-color="#b87513"/><stop offset="1" stop-color="#ffe18a"/></linearGradient>
+ <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff5d4f"/><stop offset="1" stop-color="#9e171b"/></linearGradient>
+ <linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#59636b"/><stop offset=".5" stop-color="#171e24"/><stop offset="1" stop-color="#050709"/></linearGradient>
 </defs>
-<rect width="512" height="512" rx="92" fill="url(#bg)"/>
-<ellipse cx="256" cy="260" rx="220" ry="150" fill="url(#glow)" opacity=".75"/>
-<rect x="12" y="12" width="488" height="488" rx="82" fill="none" stroke="url(#gold)" stroke-width="7"/>
-<path d="M64 246 Q256 86 448 246" fill="none" stroke="url(#gold)" stroke-width="5" opacity=".9"/>
-<path d="M74 270 Q105 238 150 225 L198 177 Q212 164 235 164 L302 164 Q326 166 344 190 L382 225 Q414 231 438 264 L429 294 L82 294Z" fill="#000" opacity=".8" filter="url(#shadow)"/>
-<path d="M73 267 Q106 238 151 226 L197 181 Q211 168 235 168 L302 168 Q326 170 344 194 L381 226 Q415 232 438 264 L430 292 L82 292Z" fill="url(#car)" stroke="url(#gold)" stroke-width="2.5"/>
-<path d="M173 222 L207 184 Q216 177 236 177 L299 177 Q317 179 331 198 L352 223Z" fill="#0a141b" stroke="#a9b3bb" stroke-width="2"/>
-<path d="M253 179 L253 222 M172 222 L352 222" stroke="#5b6267" stroke-width="2"/>
-<path d="M87 261 L137 247 L163 253 L151 264 L89 274Z" fill="#ffc94d"/>
-<path d="M355 253 L382 247 L424 262 L423 274 L361 264Z" fill="#ffc94d"/>
-<path d="M100 281 Q256 296 411 281 L394 301 L119 301Z" fill="#050607" stroke="#8d5a18" stroke-width="2"/>
-<circle cx="147" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/><circle cx="365" cy="294" r="23" fill="#020304" stroke="url(#gold)" stroke-width="5"/>
-<path d="M55 335 H148 L135 343 H68Z M364 335 H457 L444 343 H377Z" fill="url(#gold)"/>
-<text x="256" y="388" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="65" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1.5" paint-order="stroke">CAR</text>
-<text x="256" y="435" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="900" font-style="italic" letter-spacing="1" fill="url(#gold)" stroke="#6f4009" stroke-width="1" paint-order="stroke">BROTHER</text>
-<path d="M108 454 Q256 484 404 454" fill="none" stroke="url(#gold)" stroke-width="4"/>
-
-</svg>
-<text x="570" y="300" fill="#ffd45b" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="800" letter-spacing="-4">Nippon Drive</text>
-<path d="M575 342H1430" stroke="#b87513" stroke-width="7" stroke-linecap="round"/>
-<text x="580" y="410" fill="#d7d0c2" font-family="Arial,Helvetica,sans-serif" font-size="34" letter-spacing="3">JAPANESE CAR REFERENCE</text>
+<rect width="512" height="512" rx="96" fill="url(#bg)"/>
+<circle cx="256" cy="190" r="112" fill="url(#red)"/>
+<path d="M155 190H357" stroke="#ffdf8b" stroke-width="4" opacity=".8"/>
+<path d="M72 292L106 260L166 243L207 196Q218 184 238 184H296Q316 186 334 210L365 243L405 258L437 289L428 323H84Z" fill="url(#car)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M181 239L216 202Q223 197 240 197H293Q308 199 321 218L338 239Z" fill="#0a141b" stroke="#a9b3bb" stroke-width="2.5"/>
+<path d="M257 199V238M174 239H344" stroke="#66727a" stroke-width="2"/>
+<path d="M91 279L145 264L172 270L154 286L94 293Z M340 270L368 264L421 279L418 293L358 286Z" fill="#fff0b0"/>
+<path d="M114 304Q256 320 398 304L384 326H128Z" fill="#050607" stroke="#b87513" stroke-width="2"/>
+<circle cx="153" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/><circle cx="359" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/>
+<text x="570" y="260" fill="#f3c866" font-family="Arial,Helvetica,sans-serif" font-size="126" font-weight="800" letter-spacing="-3">Nippon Drive</text>
+<path d="M575 304H1430" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+<text x="580" y="372" fill="#d7d0c2" font-family="Arial,Helvetica,sans-serif" font-size="32" letter-spacing="3">JAPANESE CAR REFERENCE</text>
+<text x="580" y="424" fill="#9ea7ae" font-family="Arial,Helvetica,sans-serif" font-size="22" letter-spacing="2">OFFLINE • MAINTENANCE • DIAGNOSTICS</text>
 </svg>

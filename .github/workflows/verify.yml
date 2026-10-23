@@ -8,7 +8,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -24,7 +24,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: Car-Brother-web-build
+          name: Nippon-Drive-web-build
           path: dist/
           if-no-files-found: error
           retention-days: 14

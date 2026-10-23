@@ -22,7 +22,7 @@ export default function VehicleDataGate({ children, onOpenJapaneseCars, required
           <p className="mt-1 text-sm font-semibold text-slate-700 dark:text-slate-200">{brand?.russianName || brand?.name} {model?.name} {model?.generation ? `· ${model.generation}` : ''}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button type="button" onClick={onOpenJapaneseCars} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-red-600 px-3 py-2 text-sm font-bold text-white transition hover:bg-red-700"><BookOpen className="h-4 w-4" /> Карточка модели в «Авто Японии»</button>
-            <a href={`https://github.com/sadist57rus/MitsubishiBro/issues/new?title=${issueTitle}&body=${issueBody}`} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 dark:border-slate-600 dark:text-slate-200"><MessageSquareWarning className="h-4 w-4" /> Запросить данные / сообщить об ошибке</a>
+            <a href={`https://github.com/sadist57rus/Nippon-Drive/issues/new?title=${issueTitle}&body=${issueBody}`} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 dark:border-slate-600 dark:text-slate-200"><MessageSquareWarning className="h-4 w-4" /> Запросить данные / сообщить об ошибке</a>
           </div>
         </div>
       </div>
