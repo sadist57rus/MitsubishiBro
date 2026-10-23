@@ -174,15 +174,20 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish unsigned test release
+      - name: Create draft unsigned test release and upload APK
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
           name: Car Brother test build ${{ github.run_number }}
           generate_release_notes: true
-          draft: false
+          draft: true
           prerelease: true
           files: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Publish unsigned test release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "test-build-${{ github.run_number }}" --draft=false --prerelease
 
 
   release-apk:
