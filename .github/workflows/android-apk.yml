@@ -176,16 +176,26 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Publish unsigned test release
+      - name: Create draft unsigned test release with APK
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-build-${{ github.run_number }}
           name: Nippon-Drive test build ${{ github.run_number }}
           generate_release_notes: true
-          draft: false
+          draft: true
           prerelease: true
           files: android/app/build/outputs/apk/debug/app-debug.apk
+
+      # Immutable-release repositories reject asset uploads after publication.
+      # Upload the APK to a draft first, then publish only after the asset exists.
+      - name: Publish test release after APK upload
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "test-build-${{ github.run_number }}" --json assets --jq '.assets[] | select(.name == "app-debug.apk") | .name' | grep -Fx 'app-debug.apk'
+          gh release edit "test-build-${{ github.run_number }}" --draft=false
 
 
   release-apk:
