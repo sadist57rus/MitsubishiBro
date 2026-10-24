@@ -531,14 +531,14 @@ const supplementalModels: JapaneseCarModel[] = [
     bodyType: 'Хэтчбек',
     overview: 'Компактный пятидверный хэтчбек. Ниже приведена спецификация конкретной японской Note 2WD 15S 2005 года с двигателем CR14DE; не переносить её на другие E11.',
     lengthMm: 3730, widthMm: 1670, heightMm: 1640, wheelbaseMm: 2430,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных для конкретной комплектации', fuelTankLiters: 0,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных для конкретной комплектации', fuelTankLiters: 45,
     curbWeightKg: '1070 кг — японская Note 2WD 15S (2005)',
     engines: [
       { code: 'CR14DE', name: '1.4 л бензиновый', displacement: '1386 см³', powerHp: '98 PS при 5600 об/мин (японская 15S)', torqueNm: '137 Н·м при 3200 об/мин (японская 15S)', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'Электронный впрыск', timingDrive: 'Уточнить по сервисному руководству конкретного двигателя', strengths: ['Параметры подтверждены для японской 15S'], weaknesses: ['Не путать с HR15DE и экспортными версиями'] }
     ],
     transmissions: ['Не указана в выбранной архивной спецификации; уточнить по табличке автомобиля'],
-    sourceNotes: 'Заменены ранее смешанные ориентировочные параметры на характеристики одной заводской версии Nissan Note 2WD 15S 2005 года: 3730×1670×1640 мм, база 2430 мм, масса 1070 кг, CR14DE 1386 см³, 98 PS/137 Н·м. Ёмкость бака, клиренс, трансмиссия и сервисные параметры оставлены неподтверждёнными.',
-    sourceReferences: [{ label: 'Nissan Heritage — Note 2WD 15S (2005, E11)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/479_note_2wd_15s.html', scope: 'Официальная спецификация японской Note 2WD 15S 2005 года; не распространять на все E11.' }]
+    sourceNotes: 'Заменены ранее смешанные ориентировочные параметры на характеристики одной заводской версии Nissan Note 2WD 15S 2005 года: 3730×1670×1640 мм, база 2430 мм, масса 1070 кг, CR14DE 1386 см³, 98 PS/137 Н·м. Клиренс, трансмиссия и сервисные параметры оставлены неподтверждёнными.',
+    sourceReferences: [{ label: 'Nissan Heritage — Note 2WD 15S (2005, E11)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/479_note_2wd_15s.html', scope: 'Официальная спецификация японской Note 2WD 15S 2005 года; не распространять на все E11.' }, { label: 'Nissan FAQ — Note E11: топливный бак', url: 'https://faq2.nissan.co.jp/faq/show/10040?category_id=9&site_domain=default', scope: 'Официальный ответ Nissan указывает бак 45 л для всех комплектаций при запуске в январе 2005 года; применено к японской 15S 2005 года.' }]
   }),
 
   makeSupplementalModel({
@@ -851,22 +851,22 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-prius-xw10', brandId: 'toyota', name: 'Prius (XW10)', generation: 'I поколение', years: '1997–2003', bodyType: 'Хэтчбек',
     overview: 'Первое поколение Prius: представительская спецификация японской версии NHW10, выпущенной в декабре 1997 года. Экспортные версии и комплектации могли отличаться.',
-    lengthMm: 4275, widthMm: 1695, heightMm: 1490, wheelbaseMm: 2550, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 0, curbWeightKg: '1240 кг — японская версия NHW10',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1490, wheelbaseMm: 2550, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 50, curbWeightKg: '1240 кг — японская версия NHW10',
     engines: [{ code: '1NZ-FXE', name: '1.5 л гибридный бензиновый двигатель', displacement: '1496 см³', powerHp: '58 PS при 4000 об/мин (ДВС, японская NHW10)', torqueNm: 'Нет подтверждённых данных для этой карточки', valves: 'Рядный 4-цилиндровый DOHC', fuelSystem: 'Заводская гибридная система Toyota', timingDrive: 'Сверить по сервисному руководству конкретного двигателя', strengths: ['Гибридная силовая установка'], weaknesses: ['Мощность ДВС не равна суммарной мощности гибридной системы'] }], transmissions: ['Гибридная трансмиссия с планетарным механизмом распределения мощности; уточнять по версии'],
     drivetrain: 'Передний привод для указанной японской версии.',
-    sourceNotes: 'Размеры, масса и двигатель взяты из Toyota Global Vehicle Lineage для представительной японской NHW10. Мощность указана для ДВС, а не системы в целом. Бак, клиренс, сервисные жидкости и момент не заполнены без подтверждения для точной комплектации.',
-    sourceReferences: [{ label: 'Toyota Global — Prius NHW10 (1997)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012360/', scope: 'Заводские данные японской NHW10: 4275×1695×1490 мм, база 2550 мм, масса 1240 кг, двигатель 1NZ-FXE 1496 см³ и 58 PS.' }]
+    sourceNotes: 'Размеры, масса и двигатель взяты из Toyota Global Vehicle Lineage для представительной японской NHW10. Мощность указана для ДВС, а не системы в целом. Объём бака 50 л подтверждён карточкой Toyota GAZOO для NHW10 1998 года; клиренс, сервисные жидкости и момент не заполнены без подтверждения для точной комплектации.',
+    sourceReferences: [{ label: 'Toyota Global — Prius NHW10 (1997)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012360/', scope: 'Заводские данные японской NHW10: 4275×1695×1490 мм, база 2550 мм, масса 1240 кг, двигатель 1NZ-FXE 1496 см³ и 58 PS.' }, { label: 'Toyota GAZOO — Prius NHW10, 1998', url: 'https://gazoo.com/catalog/maker/TOYOTA/PRIUS/199712/1008829/', scope: 'Карточка японской NHW10 подтверждает топливный бак 50 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw20', brandId: 'toyota', name: 'Prius (XW20)', generation: 'II поколение', years: '2003–2009', bodyType: 'Хэтчбек',
     overview: 'Второе поколение Prius (NHW20), запущенное в Японии в сентябре 2003 года. Данные относятся к представительным японским комплектациям S/G, не ко всем рынкам.',
-    lengthMm: 4445, widthMm: 1725, heightMm: 1490, wheelbaseMm: 2700, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 0, curbWeightKg: '1250–1270 кг — японские версии S/G',
+    lengthMm: 4445, widthMm: 1725, heightMm: 1490, wheelbaseMm: 2700, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных для выбранной комплектации', fuelTankLiters: 45, curbWeightKg: '1250–1270 кг — японские версии S/G',
     engines: [{ code: '1NZ-FXE', name: '1.5 л гибридный бензиновый двигатель', displacement: '1496 см³', powerHp: '77 PS при 5000 об/мин (ДВС, японская NHW20)', torqueNm: 'Нет подтверждённых данных для этой карточки', valves: 'Рядный 4-цилиндровый DOHC', fuelSystem: 'Toyota Hybrid System II (THS II)', timingDrive: 'Сверить по сервисному руководству конкретного двигателя', strengths: ['THS II; тяговый электромотор участвует в приводе'], weaknesses: ['77 PS — мощность ДВС, не суммарная мощность гибридной системы'] }], transmissions: ['Гибридная трансмиссия THS II с планетарным механизмом распределения мощности'],
     drivetrain: 'Передний привод для указанных японских версий.',
-    sourceNotes: 'Toyota Global подтверждает для японских NHW20 S/G размеры 4445×1725×1490 мм, базу 2700 мм, массу 1250/1270 кг и двигатель 1NZ-FXE 1496 см³, 77 PS. Бак, клиренс, момент и сервисные объёмы не заявлены без подтверждения конкретной версии.',
-    sourceReferences: [{ label: 'Toyota Global — Prius NHW20 (2003)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012399/index.html', scope: 'Заводские данные японских NHW20 S/G; характеристики относятся к представительским комплектациям.' }]
+    sourceNotes: 'Toyota Global подтверждает для японских NHW20 S/G размеры 4445×1725×1490 мм, базу 2700 мм, массу 1250/1270 кг и двигатель 1NZ-FXE 1496 см³, 77 PS. Объём бака 45 л подтверждён карточкой Toyota GAZOO для японской NHW20 G 2007 года; клиренс, момент и сервисные объёмы не заявлены без подтверждения конкретной версии.',
+    sourceReferences: [{ label: 'Toyota Global — Prius NHW20 (2003)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60012399/index.html', scope: 'Заводские данные японских NHW20 S/G; характеристики относятся к представительским комплектациям.' }, { label: 'Toyota GAZOO — Prius NHW20 G, 2007', url: 'https://gazoo.com/catalog/maker/TOYOTA/PRIUS/200309/10038225/', scope: 'Карточка японской NHW20 G подтверждает топливный бак 45 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw50', brandId: 'toyota', name: 'Prius (XW50)', generation: 'IV поколение', years: '2015–2022', bodyType: 'Хэтчбек',
@@ -1196,8 +1196,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'isuzu-elf-n-series', brandId: 'isuzu', name: 'Elf / N-Series', generation: 'Семейство коммерческих шасси', years: '1959–н.в.', bodyType: 'Пикап',
     overview: 'Семейство коммерческого транспорта; точные параметры определяются рынком, кодом кузова, датой выпуска и комплектацией.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: 0, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null,
+    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: null, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
     engines: [{ code: 'УТОЧНИТЬ ПО ТАБЛИЧКЕ', name: 'Состав двигателей зависит от рынка и года', displacement: 'Не задано без кода двигателя', powerHp: 'Не задано без точной модификации', torqueNm: 'Не задано без точной модификации', valves: 'Уточнить по коду двигателя', fuelSystem: 'Уточнить по коду двигателя', timingDrive: 'Уточнить по коду двигателя', strengths: [], weaknesses: [] }],
     transmissions: ['Уточнить по коду коробки и рынку'],
     drivetrain: 'Зависит от версии; сверять по VIN/табличке.',
@@ -1206,8 +1206,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'hino-ranger', brandId: 'hino', name: 'Ranger / 500 Series', generation: 'Семейство среднетоннажных грузовиков', years: '1964–н.в.', bodyType: 'Пикап',
     overview: 'Семейство коммерческого транспорта; точные параметры определяются рынком, кодом кузова, датой выпуска и комплектацией.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: 0, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null,
+    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: null, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
     engines: [{ code: 'УТОЧНИТЬ ПО ТАБЛИЧКЕ', name: 'Состав двигателей зависит от рынка и года', displacement: 'Не задано без кода двигателя', powerHp: 'Не задано без точной модификации', torqueNm: 'Не задано без точной модификации', valves: 'Уточнить по коду двигателя', fuelSystem: 'Уточнить по коду двигателя', timingDrive: 'Уточнить по коду двигателя', strengths: [], weaknesses: [] }],
     transmissions: ['Уточнить по коду коробки и рынку'],
     drivetrain: 'Зависит от версии; сверять по VIN/табличке.',
@@ -1216,8 +1216,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'fuso-canter', brandId: 'mitsubishi-fuso', name: 'Fuso Canter', generation: 'Семейство лёгких коммерческих грузовиков', years: '1963–н.в.', bodyType: 'Пикап',
     overview: 'Семейство коммерческого транспорта; точные параметры определяются рынком, кодом кузова, датой выпуска и комплектацией.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: 0, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null,
+    trunkVolumeLiters: 'Не применимо: шасси/надстройка зависит от исполнения', fuelTankLiters: null, curbWeightKg: 'Зависит от колёсной базы, GVW и надстройки',
     engines: [{ code: 'УТОЧНИТЬ ПО ТАБЛИЧКЕ', name: 'Состав двигателей зависит от рынка и года', displacement: 'Не задано без кода двигателя', powerHp: 'Не задано без точной модификации', torqueNm: 'Не задано без точной модификации', valves: 'Уточнить по коду двигателя', fuelSystem: 'Уточнить по коду двигателя', timingDrive: 'Уточнить по коду двигателя', strengths: [], weaknesses: [] }],
     transmissions: ['Уточнить по коду коробки и рынку'],
     drivetrain: 'Зависит от версии; сверять по VIN/табличке.',
@@ -1307,8 +1307,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-pathfinder-r50-suv', brandId: 'nissan',
     name: 'Pathfinder R50', generation: 'II поколение (R50)', years: '1995–2004', bodyType: 'Внедорожник',
     overview: 'Pathfinder R50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{ code: 'VG33E / QD32', name: 'Бензиновый V6 или дизель; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
     transmissions: ['АКПП или МКПП — только если предусмотрена конкретным рынком; код коробки проверить по VIN. Не указывать CVT без заводского подтверждения.'],
@@ -1320,8 +1320,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-pathfinder-r51-suv', brandId: 'nissan',
     name: 'Pathfinder R51', generation: 'III поколение (R51)', years: '2004–2012', bodyType: 'Внедорожник',
     overview: 'Pathfinder R51: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"VQ40DE","name":"4.0L бензин V6 (Северная Америка и отдельные рынки)","displacement":"3954 см³","powerHp":"266 hp (US specification)","torqueNm":"385 Н·м (US specification)","valves":"24V DOHC V6","fuelSystem":"MPI","timingDrive":"Цепь","strengths":["Подтверждённое семейство VQ40DE для R51"],"weaknesses":["Не переносить мощность и КПП на другие рынки без проверки"]},{"code":"YD25DDTi","name":"2.5L турбодизель (Европа/Азия, отдельные годы)","displacement":"2488 см³","powerHp":"174–190 PS по году и рынку","torqueNm":"403–450 Н·м по году и рынку","valves":"16V DOHC turbo diesel","fuelSystem":"Common Rail","timingDrive":"По заводскому руководству конкретной версии","strengths":["Доступен в нескольких региональных версиях"],"weaknesses":["Калибровка и коробка зависят от рынка"]},{"code":"V9X","name":"3.0L V6 турбодизель (поздние европейские версии)","displacement":"2993 см³","powerHp":"231 PS для указанной версии","torqueNm":"550 Н·м для указанной версии","valves":"24V DOHC turbo diesel","fuelSystem":"Common Rail","timingDrive":"Цепь","strengths":["Высокий крутящий момент"],"weaknesses":["Применимость ограничена поздними региональными комплектациями"]}],
     transmissions: ["5AT (автоматическая; распространённые бензиновые/дизельные версии по рынку)","6MT (отдельные дизельные версии)","7AT (отдельные поздние V9X версии)"],
@@ -1333,8 +1333,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-pathfinder-r52-suv', brandId: 'nissan',
     name: 'Pathfinder R52', generation: 'IV поколение (R52)', years: '2012–2021', bodyType: 'Внедорожник',
     overview: 'Pathfinder R52: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"VQ35DE","name":"3.5L бензин V6 (США/Канада)","displacement":"3498 см³","powerHp":"260 hp при 6400 об/мин","torqueNm":"325 Н·м при 4400 об/мин","valves":"24V DOHC V6","fuelSystem":"Sequential multi-point EFI","timingDrive":"Цепь","strengths":["Официально указан для Pathfinder 2013–2015"],"weaknesses":["Мощность относится к североамериканским спецификациям"]},{"code":"QR25DER","name":"2.5L бензиновый supercharged hybrid","displacement":"2488 см³","powerHp":"230 hp двигатель; 250 hp суммарно для гибридной системы","torqueNm":"329 Н·м для двигателя; системный показатель зависит от методики","valves":"16V DOHC","fuelSystem":"EFI, компрессор, гибридный привод","timingDrive":"Цепь","strengths":["Подтверждённая гибридная версия 2014–2015"],"weaknesses":["Не считать мощность ДВС и суммарную мощность гибрида одним параметром"]}],
     transmissions: ["Xtronic CVT (VQ35DE, Pathfinder R52 североамериканского рынка)","CVT в составе гибридной трансмиссии (QR25DER; гибридная версия)"],
@@ -1346,8 +1346,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-pathfinder-r53-suv', brandId: 'nissan',
     name: 'Pathfinder R53', generation: 'V поколение (R53)', years: '2021–наст. время', bodyType: 'Внедорожник',
     overview: 'Pathfinder R53: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"VQ35DD","name":"3.5L бензин V6 с непосредственным впрыском","displacement":"3498 см³","powerHp":"284 hp при 6400 об/мин (US specification)","torqueNm":"351 Н·м при 4800 об/мин (US specification)","valves":"24V DOHC V6","fuelSystem":"Direct Injection Gasoline","timingDrive":"Цепь","strengths":["Заводская спецификация Nissan 2022"],"weaknesses":["Параметры относятся к североамериканской версии"]}],
     transmissions: ["9AT (9-ступенчатая автоматическая трансмиссия; US-spec 2022+)"],
@@ -1360,20 +1360,20 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'Murano Z50', generation: 'I поколение (Z50)', years: '2002–2007', bodyType: 'Кроссовер',
     overview: 'Murano Z50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4770, widthMm: 1880, heightMm: 1685, wheelbaseMm: 2825,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 82,
     curbWeightKg: '1720 кг — заводская спецификация японской версии 2WD 350XV 2004 года',
     engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 DOHC', displacement: '3498 см³', powerHp: '231 PS при 5600 об/мин для японской версии 2WD 350XV 2004 года', torqueNm: '333 Н·м при 2800 об/мин для указанной версии', valves: '24V DOHC V6', fuelSystem: 'EFI; исполнение зависит от рынка', timingDrive: 'Цепь ГРМ; точный регламент обслуживания сверять с руководством', strengths: ['Высокая плавность и тяга V6'], weaknesses: ['Параметры японской 2WD-версии нельзя автоматически переносить на AWD и экспортные исполнения'] }],
     transmissions: ['Вариатор CVT на ряде версий; точный код и спецификацию жидкости сверить по VIN/табличке агрегата'],
     drivetrain: 'Выпускались переднеприводные и полноприводные версии; привод и трансмиссию не определять только по названию Z50.',
-    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Дорожный просвет, бак, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
-    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }]
+    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Объём бака 82 л подтверждён японской карточкой GAZOO для 2WD 250XL/350XV Z50; дорожный просвет, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
+    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }, { label: 'Toyota GAZOO — Nissan Murano 350XV (PZ50, 2004)', url: 'https://gazoo.com/catalog/maker/NISSAN/MURANO/200409/10023167/', scope: 'Карточка японской 2WD 350XV подтверждает топливный бак 82 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-murano-z51-crossover', brandId: 'nissan',
     name: 'Murano Z51', generation: 'II поколение (Z51)', years: '2008–2014', bodyType: 'Кроссовер',
     overview: 'Murano Z51: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"VQ35DE","name":"3.5L бензин V6 (США/Япония, selected grades)","displacement":"3498 см³","powerHp":"265 hp для ряда североамериканских версий; японские версии отличаются","torqueNm":"336 Н·м для указанной североамериканской версии","valves":"24V DOHC V6","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Основной бензиновый V6 Z51"],"weaknesses":["Мощность зависит от рынка и года"]},{"code":"QR25DE","name":"2.5L бензин (отдельные японские исполнения)","displacement":"2488 см³","powerHp":"170 PS для отдельных японских grade","torqueNm":"245 Н·м для указанного исполнения","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Региональная версия 250XV"],"weaknesses":["Не доступен на всех рынках"]},{"code":"YD25DDTi","name":"2.5L турбодизель (отдельные европейские исполнения)","displacement":"2488 см³","powerHp":"190 PS для отдельных версий","torqueNm":"450 Н·м для указанной версии","valves":"16V DOHC turbo diesel","fuelSystem":"Common Rail","timingDrive":"Цепь","strengths":["Региональная дизельная версия"],"weaknesses":["Проверять по коду кузова и рынку"]}],
     transmissions: ["Xtronic CVT RE0F09A/RE0F09B (VQ35DE; год/рынок dependent)","CVT (QR25DE; selected Japanese grades)","6MT or 6AT (YD25DDTi diesel; selected European grades, confirm by VIN)"],
@@ -1385,8 +1385,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-murano-z52-crossover', brandId: 'nissan',
     name: 'Murano Z52', generation: 'III поколение (Z52)', years: '2014–2024', bodyType: 'Кроссовер',
     overview: 'Murano Z52: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"VQ35DE","name":"3.5L бензин V6 (US-spec)","displacement":"3498 см³","powerHp":"260 hp при 6000 об/мин","torqueNm":"325 Н·м при 4400 об/мин","valves":"24V DOHC V6","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Подтверждено официальной спецификацией Nissan USA"],"weaknesses":["Применимость и мощность сверять по рынку/году"]},{"code":"QR25DER","name":"2.5L supercharged hybrid (selected Japan-market grades)","displacement":"2488 см³","powerHp":"230 hp двигатель; системная мощность зависит от версии","torqueNm":"330 Н·м для ДВС в официальной технической таблице","valves":"16V DOHC","fuelSystem":"EFI, компрессор, гибридный привод","timingDrive":"Цепь","strengths":["Гибридное исполнение отличается от обычного VQ35DE"],"weaknesses":["ДВС и системную мощность нельзя смешивать"]}],
     transmissions: ["Xtronic CVT RE0F10J (VQ35DE, US-spec 2015–2024)","CVT в составе гибридной трансмиссии (QR25DER; selected Japanese grades)"],
@@ -1398,8 +1398,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-murano-z53-crossover', brandId: 'nissan',
     name: 'Murano Z53', generation: 'IV поколение (Z53)', years: '2024–наст. время', bodyType: 'Кроссовер',
     overview: 'Murano Z53: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{"code":"KR20DDET","name":"2.0L VC-Turbo бензин","displacement":"1997 см³","powerHp":"241 hp (US specification)","torqueNm":"352 Н·м (US specification)","valves":"16V DOHC, variable compression","fuelSystem":"Direct injection turbo","timingDrive":"Цепь","strengths":["Указан для поколения Z53 в каталоге модификаций"],"weaknesses":["Не переносить характеристики на Z52 VQ35DE"]}],
     transmissions: ["9AT (9-ступенчатая автоматическая; US-spec 2025+)"],
@@ -1412,7 +1412,7 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'X-Trail T30', generation: 'I поколение (T30)', years: '2000–2007', bodyType: 'Кроссовер',
     overview: 'X-Trail T30: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4455, widthMm: 1765, heightMm: 1750, wheelbaseMm: 2625,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: '1400 кг — заводская спецификация NT30 4WD X 2003 года',
     engines: [{"code":"QR20DE","name":"2.0L бензин","displacement":"1998 см³","powerHp":"150 PS для японской версии NT30 4WD X 2003","torqueNm":"200 Н·м для указанной версии","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Подтверждено Nissan Heritage для конкретной NT30"],"weaknesses":["Не переносить параметры на другие рынки/годы"]},{"code":"QR25DE","name":"2.5L бензин","displacement":"2488 см³","powerHp":"180 PS для отдельных японских версий","torqueNm":"245 Н·м для указанной версии","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Доступен на отдельных рынках"],"weaknesses":["Мощность и коробка зависят от года/grade"]},{"code":"SR20VET","name":"2.0L turbo (X-Trail GT, Japan)","displacement":"1998 см³","powerHp":"280 PS (Japan-market X-Trail GT)","torqueNm":"309 Н·м для указанной версии","valves":"16V DOHC Turbo, NEO VVL","fuelSystem":"EFI, turbo","timingDrive":"Цепь","strengths":["Официально упомянут Nissan как GT-версия"],"weaknesses":["Только соответствующие японские GT-комплектации"]}],
     transmissions: ["4AT (автоматическая; распространённые бензиновые grades)","5MT (отдельные рынки/grade; confirm by chassis code)"],
@@ -1425,7 +1425,7 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'X-Trail T31', generation: 'II поколение (T31)', years: '2007–2013', bodyType: 'Кроссовер',
     overview: 'X-Trail T31: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4635, widthMm: 1790, heightMm: 1785, wheelbaseMm: 2630,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от комплектации и положения сидений', fuelTankLiters: 65,
+    groundClearanceMm: null, trunkVolumeLiters: 'Зависит от комплектации и положения сидений', fuelTankLiters: 65,
     curbWeightKg: 'Зависит от двигателя, коробки и привода',
     engines: [{"code":"MR20DE","name":"2.0L бензин","displacement":"1997 см³","powerHp":"137 PS при 5200 об/мин (Japan-spec 2013)","torqueNm":"200 Н·м при 4400 об/мин (Japan-spec 2013)","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Подтверждено заводской спецификацией Nissan Japan"],"weaknesses":["Параметры относятся к указанному рынку/году"]},{"code":"QR25DE","name":"2.5L бензин","displacement":"2488 см³","powerHp":"170 PS при 6000 об/мин (Japan-spec 2013)","torqueNm":"230 Н·м при 4400 об/мин (Japan-spec 2013)","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Подтверждено заводской спецификацией Nissan Japan"],"weaknesses":["Параметры относятся к указанному рынку/году"]},{"code":"M9R","name":"2.0L турбодизель dCi (20GT)","displacement":"1995 см³","powerHp":"173 PS при 3750 об/мин (Japan-spec 20GT)","torqueNm":"360 Н·м при 2000 об/мин","valves":"16V DOHC turbo diesel","fuelSystem":"Common Rail","timingDrive":"Цепь","strengths":["Для 20GT предусмотрены отдельные коробки"],"weaknesses":["Не смешивать с бензиновыми версиями"]}],
     transmissions: ["Xtronic CVT (MR20DE; selected Japan-market grades)","Xtronic CVT-M6 (QR25DE; selected Japan-market grades)","6MT (M9R 20GT; selected grades)","6AT (M9R 20GT; selected grades)"],
@@ -1438,7 +1438,7 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'X-Trail T32', generation: 'III поколение (T32)', years: '2013–2022', bodyType: 'Кроссовер',
     overview: 'X-Trail T32: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4640, widthMm: 1820, heightMm: 1715, wheelbaseMm: 2705,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: 0,
+    groundClearanceMm: null, trunkVolumeLiters: 'Зависит от сидений и комплектации', fuelTankLiters: null,
     curbWeightKg: 'Зависит от двигателя, привода и комплектации',
     engines: [{"code":"MR20DD","name":"2.0L бензин, непосредственный впрыск (Japan-spec)","displacement":"1997 см³","powerHp":"147 PS","torqueNm":"207 Н·м","valves":"16V DOHC","fuelSystem":"Direct injection","timingDrive":"Цепь","strengths":["Заводские параметры для японского T32"],"weaknesses":["Не переносить на другие рынки/годы"]},{"code":"QR25DE","name":"2.5L бензин (selected markets)","displacement":"2488 см³","powerHp":"170 hp для отдельных североамериканских версий","torqueNm":"233 Н·м для указанной версии","valves":"16V DOHC","fuelSystem":"EFI","timingDrive":"Цепь","strengths":["Региональная версия T32"],"weaknesses":["Не все рынки имели этот двигатель"]},{"code":"R9M","name":"1.6L turbo diesel dCi (Europe)","displacement":"1598 см³","powerHp":"130 PS для европейской версии","torqueNm":"320 Н·м для указанной версии","valves":"16V DOHC turbo diesel","fuelSystem":"Common Rail","timingDrive":"Цепь","strengths":["Европейская дизельная версия"],"weaknesses":["Применимость зависит от года/рынка"]},{"code":"QR25DER","name":"2.5L бензиновый hybrid (Japan-market selected grades)","displacement":"2488 см³","powerHp":"182 PS суммарно для указанной гибридной версии","torqueNm":"Суммарный момент не унифицирован в источнике","valves":"16V DOHC","fuelSystem":"EFI, hybrid system","timingDrive":"Цепь","strengths":["Гибридная версия отличается от обычного QR25DE"],"weaknesses":["Системную мощность не приравнивать к мощности ДВС"]}],
     transmissions: ["Xtronic CVT (Japanese gasoline grades MR20DD/QR25DE)","6MT (selected European gasoline/diesel grades)","Xtronic CVT (selected R9M diesel grades; confirm by VIN)","Hybrid CVT/electric drive (selected Japan-market hybrid grades)"],
@@ -1467,8 +1467,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-qashqai-j10-crossover', brandId: 'nissan',
     name: 'Qashqai J10', generation: 'I поколение (J10)', years: '2006–2013', bodyType: 'Кроссовер',
     overview: 'Qashqai J10: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{ code: 'HR16DE / MR20DE / K9K', name: 'Бензиновые и дизельные семейства; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
     transmissions: ['АКПП или МКПП — только если предусмотрена конкретным рынком; код коробки проверить по VIN. Не указывать CVT без заводского подтверждения.'],
@@ -1480,8 +1480,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-qashqai-j11-crossover', brandId: 'nissan',
     name: 'Qashqai J11', generation: 'II поколение (J11)', years: '2013–2021', bodyType: 'Кроссовер',
     overview: 'Qashqai J11: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{ code: 'HRA2DDT / MR20DD / K9K', name: 'Бензиновые и дизельные семейства; рынок-зависимые версии', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
     transmissions: ['АКПП или МКПП — только если предусмотрена конкретным рынком; код коробки проверить по VIN. Не указывать CVT без заводского подтверждения.'],
@@ -1493,8 +1493,8 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'nissan-qashqai-j12-crossover', brandId: 'nissan',
     name: 'Qashqai J12', generation: 'III поколение (J12)', years: '2021–наст. время', bodyType: 'Кроссовер',
     overview: 'Qashqai J12: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0,
-    groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 0,
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных для всех комплектаций',
     engines: [{ code: 'HR13DDT / e-POWER', name: 'Бензиновые и гибридные версии — по рынку', displacement: 'Уточнить по коду двигателя', powerHp: 'Нет подтверждённых универсальных данных', torqueNm: 'Нет подтверждённых универсальных данных', valves: 'Проверить по модификации', fuelSystem: 'Проверить по модификации', timingDrive: 'По заводскому руководству конкретного двигателя', strengths: ['Идентификация по коду двигателя обязательна'], weaknesses: ['Не использовать как спецификацию без VIN и рынка'] }],
     transmissions: ['АКПП или МКПП — только если предусмотрена конкретным рынком; код коробки проверить по VIN. Не указывать CVT без заводского подтверждения.'],
@@ -1505,8 +1505,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'honda-crv-re-suv', brandId: 'honda', name: 'CR-V (RE)', generation: 'III поколение', years: '2006–2011', bodyType: 'Кроссовер',
     overview: 'CR-V третьего поколения; двигатели и оснащение различаются по рынку.',
-    lengthMm: 4520, widthMm: 1820, heightMm: 1690, wheelbaseMm: 2620, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Зависит от рынка и методики измерения', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённого единого значения для всех версий',
+    lengthMm: 4520, widthMm: 1820, heightMm: 1690, wheelbaseMm: 2620, groundClearanceMm: null,
+    trunkVolumeLiters: 'Зависит от рынка и методики измерения', fuelTankLiters: null, curbWeightKg: 'Нет подтверждённого единого значения для всех версий',
     engines: [
       { code: 'R20A', name: '2.0 л i-VTEC — отдельные рынки', displacement: '1997 см³', powerHp: 'Уточнить по рынку и коду исполнения', torqueNm: 'Уточнить по рынку и коду исполнения', valves: '16V SOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство Honda'], weaknesses: ['Калибровки зависят от рынка'] },
       { code: 'K24Z', name: '2.4 л i-VTEC — отдельные рынки', displacement: '2354 см³', powerHp: 'Уточнить по коду двигателя и рынку', torqueNm: 'Уточнить по коду двигателя и рынку', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство двигателей'], weaknesses: ['Не является мотором всех версий поколения'] }
@@ -1519,8 +1519,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'honda-stepwgn-rg-minivan', brandId: 'honda', name: 'Stepwgn (RG)', generation: 'III поколение', years: '2005–2009', bodyType: 'Минивэн',
     overview: 'Японский минивэн Stepwgn третьего поколения; агрегаты зависят от версии и года.',
-    lengthMm: 4630, widthMm: 1695, heightMm: 1770, wheelbaseMm: 2855, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Зависит от положения сидений', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённого единого значения для всех комплектаций',
+    lengthMm: 4630, widthMm: 1695, heightMm: 1770, wheelbaseMm: 2855, groundClearanceMm: null,
+    trunkVolumeLiters: 'Зависит от положения сидений', fuelTankLiters: null, curbWeightKg: 'Нет подтверждённого единого значения для всех комплектаций',
     engines: [
       { code: 'K20A', name: '2.0 л i-VTEC', displacement: '1998 см³', powerHp: 'Зависит от года и исполнения', torqueNm: 'Зависит от года и исполнения', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый двигатель Honda'], weaknesses: ['Код K20A включает разные калибровки'] },
       { code: 'K24A', name: '2.4 л i-VTEC — отдельные исполнения', displacement: '2354 см³', powerHp: 'Уточнить по исполнению', torqueNm: 'Уточнить по исполнению', valves: '16V DOHC i-VTEC', fuelSystem: 'PGM-FI', timingDrive: 'Цепь ГРМ', strengths: ['Более высокий крутящий момент'], weaknesses: ['Не устанавливался на все комплектации'] }
@@ -1534,7 +1534,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae86', brandId: 'toyota', name: 'Corolla Levin (AE85/AE86)', generation: 'V поколение', years: '1983–1987', bodyType: 'Купе/Спорт',
     overview: 'Заднеприводное купе японского рынка. AE85 и AE86 различаются двигателями и комплектациями; не переносить характеристики одной версии на другую.',
-    lengthMm: 4200, widthMm: 1625, heightMm: 1335, wheelbaseMm: 2400, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '880–960 кг для отдельных заводских комплектаций',
+    lengthMm: 4200, widthMm: 1625, heightMm: 1335, wheelbaseMm: 2400, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '880–960 кг для отдельных заводских комплектаций',
     engines: [
       { code: '4A-GEU', name: '1.6 л DOHC — отдельные AE86', displacement: '1587 см³', powerHp: '130 л.с. gross для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисной документации', strengths: ['Заводской высокооборотный двигатель'], weaknesses: ['Возраст и свапы требуют проверки'] },
       { code: '3A-U', name: '1.5 л — отдельные AE85', displacement: '1452 см³', powerHp: '85 л.с. gross для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'OHC', fuelSystem: 'Зависит от исполнения', timingDrive: 'Уточнить по сервисной документации', strengths: ['Простая заводская версия'], weaknesses: ['Не относится к спортивной спецификации AE86'] }
@@ -1547,7 +1547,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae92', brandId: 'toyota', name: 'Corolla Levin (AE91/AE92)', generation: 'VI поколение', years: '1987–1991', bodyType: 'Купе/Спорт',
     overview: 'Переднеприводное купе шестого поколения; атмосферные и компрессорные двигатели относятся к разным комплектациям.',
-    lengthMm: 4245, widthMm: 1680, heightMm: 1300, wheelbaseMm: 2430, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '980–1070 кг для отдельных комплектаций',
+    lengthMm: 4245, widthMm: 1680, heightMm: 1300, wheelbaseMm: 2430, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '980–1070 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC — отдельные AE92', displacement: '1587 см³', powerHp: '120 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Атмосферная версия'], weaknesses: ['Характеристики зависят от года и рынка'] },
       { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '145 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить данные GT-Z на атмосферные версии'] }
@@ -1555,12 +1555,12 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['МКПП/АКПП по комплектации; точный код проверить по табличке'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Размеры и характеристики относятся к отдельным японским версиям; кузовная ширина зависит от комплектации.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE91/AE92', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003784/', scope: 'Заводские данные отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE91/AE92', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003784/', scope: 'Заводские данные отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin GT-Z E-AE92 (1989.05)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/198905/1002393/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae101', brandId: 'toyota', name: 'Corolla Levin (AE100/AE101)', generation: 'VII поколение', years: '1991–1995', bodyType: 'Купе/Спорт',
     overview: 'Переднеприводное купе японского рынка с несколькими версиями двигателей 1.5 и 1.6 л.',
-    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1020–1150 кг для отдельных комплектаций',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '1020–1150 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC 20V — GT APEX', displacement: '1587 см³', powerHp: '160 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Высокооборотная 20-клапанная версия'], weaknesses: ['Не является характеристикой всех AE101'] },
       { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '170 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить характеристики GT-Z на атмосферные исполнения'] }
@@ -1568,12 +1568,12 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['МКПП/АКПП по комплектации; код требует проверки'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Заводская карточка Toyota описывает представительные японские версии AE101; мощность не универсальна для поколения.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE100/AE101', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003913/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE100/AE101', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003913/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin GT-Z E-AE101 (1991.06)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/199106/1002406/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae111', brandId: 'toyota', name: 'Corolla Levin (AE110/AE111)', generation: 'VIII поколение', years: '1995–2000', bodyType: 'Купе/Спорт',
     overview: 'Последнее поколение Corolla Levin для японского рынка; производство завершилось в 2000 году.',
-    lengthMm: 4285, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '950–1020 кг для отдельных комплектаций',
+    lengthMm: 4285, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '950–1020 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC 20V — BZ-G', displacement: '1587 см³', powerHp: '165 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская спортивная версия'], weaknesses: ['Не относится ко всем AE111'] },
       { code: '4A-FE', name: '1.6 л DOHC — отдельные версии', displacement: '1587 см³', powerHp: '115 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Менее форсированная заводская версия'], weaknesses: ['Требуется проверка кода кузова'] }
@@ -1581,12 +1581,12 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['5-ступенчатая МКПП или 4-ступенчатая АКПП для отдельных версий; проверить код'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Заводская карточка Toyota для отдельных японских AE110/AE111. Мощность зависит от конкретного двигателя и комплектации.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE110/AE111', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60004085B/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE110/AE111', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60004085B/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin BZ-R GF-AE111 (1998.04)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/199505/1002410/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-bb-ncp30', brandId: 'toyota', name: 'bB (NCP30/NCP31/NCP35)', generation: 'I поколение', years: '2000–2005', bodyType: 'Хэтчбек',
     overview: 'Компактный высокий универсал на платформе Vitz. Двигатели 1.3 и 1.5 л, привод зависят от кода кузова и комплектации.',
-    lengthMm: 3845, widthMm: 1690, heightMm: 1640, wheelbaseMm: 2500, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1030–1040 кг для отдельных японских версий 2WD',
+    lengthMm: 3845, widthMm: 1690, heightMm: 1640, wheelbaseMm: 2500, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '1030–1040 кг для отдельных японских версий 2WD',
     engines: [
       { code: '2NZ-FE', name: '1.3 л бензин', displacement: '1298 см³', powerHp: '88 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Проверить кузовной код'] },
       { code: '1NZ-FE', name: '1.5 л бензин', displacement: '1496 см³', powerHp: '110 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Цепь ГРМ', strengths: ['Распространённое семейство Toyota'], weaknesses: ['Мощность и привод зависят от версии'] }
@@ -1599,7 +1599,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-bb-qnc20', brandId: 'toyota', name: 'bB (QNC20/QNC21/QNC25)', generation: 'II поколение', years: '2005–2016', bodyType: 'Хэтчбек',
     overview: 'Второе поколение bB японского рынка. Двигатели, привод и трансмиссии зависят от комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: 'Нет подтверждённых данных',
     engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для всего поколения; сверить по коду кузова'],
     drivetrain: 'Зависит от кузовного кода и комплектации.',
     sourceNotes: 'Карточка поколения добавлена для навигации. Технические параметры оставлены незаполненными до проверки по конкретной заводской комплектации.',
@@ -1608,26 +1608,26 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'nissan-cube-z10', brandId: 'nissan', name: 'Cube (Z10)', generation: 'I поколение', years: '1998–2002', bodyType: 'Минивэн',
     overview: 'Первое поколение Nissan Cube, компактный высокий кузов японского рынка. Двигатель и трансмиссию нужно уточнять по табличке.',
-    lengthMm: 3750, widthMm: 1610, heightMm: 1625, wheelbaseMm: 2360, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Зависит от комплектации',
+    lengthMm: 3750, widthMm: 1610, heightMm: 1625, wheelbaseMm: 2360, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 42, curbWeightKg: 'Зависит от комплектации',
     engines: [{ code: 'CG13DE', name: '1.3 л бензин — отдельные версии Z10', displacement: '1274 см³', powerHp: '82 л.с. для представительной версии', torqueNm: '106 Н·м для представительной версии', valves: 'DOHC 16V', fuelSystem: 'Nissan ECCS/EGI', timingDrive: 'Уточнить по сервисной документации', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Не все Z10 имеют одинаковые агрегаты'] }],
     transmissions: ['4-ступенчатая АКПП; вариатор встречается в отдельных версиях — проверить код коробки'],
     drivetrain: 'Передний привод для указанной заводской версии; другие варианты требуют проверки.',
-    sourceNotes: 'Размеры и двигатель относятся к отдельным опубликованным спецификациям Z10, не ко всем комплектациям поколения.',
-    sourceReferences: [{ label: 'Nissan — официальный релиз Cube 1998', url: 'https://global.nissannews.com/en/releases/19980220-02-e', scope: 'Подтверждает запуск модели.' }, { label: 'Nissan — официальный FAQ Cube Z10', url: 'https://faq2.nissan.co.jp/faq/show/1127?category_id=66&site_domain=default', scope: 'Модельная страница Nissan по периоду Z10.' }]
+    sourceNotes: 'Размеры и двигатель относятся к отдельным опубликованным спецификациям Z10, не ко всем комплектациям поколения. Объём бака 42 л подтверждён японскими карточками Z10 в каталоге GAZOO.',
+    sourceReferences: [{ label: 'Nissan — официальный релиз Cube 1998', url: 'https://global.nissannews.com/en/releases/19980220-02-e', scope: 'Подтверждает запуск модели.' }, { label: 'Nissan — официальный FAQ Cube Z10', url: 'https://faq2.nissan.co.jp/faq/show/1127?category_id=66&site_domain=default', scope: 'Модельная страница Nissan по периоду Z10.' }, { label: 'Toyota GAZOO — Nissan Cube Z10 Yellow Version (1998)', url: 'https://gazoo.com/catalog/maker/NISSAN/CUBE/199802/1505935/', scope: 'Карточка японского Z10 с двигателем CG13DE подтверждает бак 42 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cube-z11', brandId: 'nissan', name: 'Cube (Z11)', generation: 'II поколение', years: '2002–2008', bodyType: 'Минивэн',
     overview: 'Второе поколение Nissan Cube. Двигатель, трансмиссия и привод менялись по годам; сверять по кузовному коду и рынку.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: 'Нет подтверждённых данных',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 41, curbWeightKg: 'Нет подтверждённых данных',
     engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для единого описания поколения; проверить код агрегата'],
     drivetrain: 'Зависит от комплектации и кода кузова.',
-    sourceNotes: 'Карточка поколения добавлена для навигации. Размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
-    sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }]
+    sourceNotes: 'Карточка поколения добавлена для навигации. Бак 41 л подтверждён японскими карточками Cube Z11; размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
+    sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }, { label: 'Toyota GAZOO — Nissan Cube Z11 EX (2004)', url: 'https://gazoo.com/catalog/maker/NISSAN/CUBE/200210/10017904/', scope: 'Карточка японского Z11 подтверждает бак 41 л; отдельные характеристики зависят от комплектации.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cube-z12', brandId: 'nissan', name: 'Cube (Z12)', generation: 'III поколение', years: '2008–2020', bodyType: 'Минивэн',
     overview: 'Третье поколение Nissan Cube. Спецификации менялись по году и комплектации.',
-    lengthMm: 0, widthMm: 0, heightMm: 0, wheelbaseMm: 0, groundClearanceMm: 0, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: 'Нет подтверждённых данных',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 45, curbWeightKg: 'Нет подтверждённых данных',
     engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для единого описания поколения; сверить по кузовному коду'],
     drivetrain: 'Зависит от комплектации и рынка.',
     sourceNotes: 'Топливный бак 45 л подтверждён Nissan для японского Z12; остальные технические поля оставлены незаполненными до выбора комплектации.',
@@ -1645,9 +1645,9 @@ const supplementalModels: JapaneseCarModel[] = [
     widthMm: 1695,
     heightMm: 1570,
     wheelbaseMm: 2670,
-    groundClearanceMm: 0,
+    groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных',
-    fuelTankLiters: 0,
+    fuelTankLiters: null,
     curbWeightKg: 'Нет подтверждённых данных',
     engines: [{
       code: 'FP-DE',
@@ -1960,7 +1960,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-mark-ii-x100-tourer-v', brandId: 'toyota', name: 'Mark II (X100, Tourer V)', generation: 'VIII поколение, X100', years: '1996–2000', bodyType: 'Седан',
     overview: 'Легендарный заднеприводный четырёхдверный Tourer V. Приведены характеристики японской версии E-JZX100 из каталога Toyota; параметры не следует автоматически переносить на другие комплектации Mark II X100.',
-    lengthMm: 4760, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: 0,
+    lengthMm: 4760, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1480 кг для японской версии Tourer V',
     engines: [{ code: '1JZ-GTE', name: '2.5 л турбо, рядный 6-цилиндровый DOHC 24V', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI, электронный впрыск', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и продольный рядный шестицилиндровый двигатель'], weaknesses: ['Состояние турбосистемы и следы модификаций требуют отдельной диагностики'] }],
     transmissions: ['5-ступенчатая МКПП или 4-ступенчатая АКПП — сверять по конкретной комплектации'],
@@ -1976,7 +1976,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-mark-ii-x90-tourer-v', brandId: 'toyota', name: 'Mark II (X90, Tourer V)', generation: 'VII поколение, X90', years: '1992–1996', bodyType: 'Купе/Спорт',
     overview: 'Японский заднеприводный Mark II Tourer V с 1JZ-GTE. Спецификация относится к E-JZX90 1993 года, а не ко всем X90.',
-    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: 0,
+    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1460 кг для японской Tourer V 1993 года',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC, twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '362.8 Н·м при 4800 об/мин', valves: '24V DOHC twin-turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Продольный двигатель и задний привод'], weaknesses: ['Проверять состояние двух турбин и следы тюнинга'] }],
     transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
@@ -1987,7 +1987,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-chaser-x90-tourer-v', brandId: 'toyota', name: 'Chaser (X90, Tourer V)', generation: 'V поколение, X90', years: '1992–1996', bodyType: 'Купе/Спорт',
     overview: 'Спортивный четырёхдверный хардтоп Chaser X90. Здесь указана японская Tourer V 1993 года с 1JZ-GTE.',
-    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: 0,
+    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1450 кг для японской Tourer V 1993 года',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC, twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '362.8 Н·м при 4800 об/мин', valves: '24V DOHC twin-turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и независимая подвеска'], weaknesses: ['Проверять турбины, охлаждение и изменения после тюнинга'] }],
     transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
@@ -1998,7 +1998,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-chaser-x100-tourer-v', brandId: 'toyota', name: 'Chaser (X100, Tourer V)', generation: 'VI поколение, X100', years: '1996–2001', bodyType: 'Купе/Спорт',
     overview: 'Заднеприводный Chaser Tourer V поколения X100 с 1JZ-GTE. Приведена японская спецификация 1998 года.',
-    lengthMm: 4715, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: 0,
+    lengthMm: 4715, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1480 кг для японской Tourer V 1998 года',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и турбированный рядный шестицилиндровый двигатель'], weaknesses: ['Состояние зависит от обслуживания и тюнинга'] }],
     transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
@@ -2009,7 +2009,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-cresta-x100-rulant-g', brandId: 'toyota', name: 'Cresta (X100, Roulant G)', generation: 'V поколение, X100', years: '1996–2001', bodyType: 'Седан',
     overview: 'Четырёхдверный седан Cresta X100 в спортивной версии Roulant G. Данные относятся к японской GF-JZX100 1998 года.',
-    lengthMm: 4760, widthMm: 1755, heightMm: 1420, wheelbaseMm: 2730, groundClearanceMm: 0,
+    lengthMm: 4760, widthMm: 1755, heightMm: 1420, wheelbaseMm: 2730, groundClearanceMm: null,
     trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1490 кг для японской Roulant G 1998 года',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Продольный двигатель и задний привод'], weaknesses: ['Не путать характеристики Roulant G с атмосферными версиями'] }],
     transmissions: ['4-ступенчатая АКПП для указанной версии'],
@@ -2020,52 +2020,52 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-mark-ii-x110-grande-gtb', brandId: 'toyota', name: 'Mark II (X110, Grande G-tb)', generation: 'IX поколение, X110', years: '2000–2004', bodyType: 'Седан',
     overview: 'Последнее поколение Mark II с кузовом седан. Запись относится к японской заднеприводной GH-JZX110 Grande G-tb с турбомотором 1JZ-GTE.',
-    lengthMm: 4735, widthMm: 1760, heightMm: 1460, wheelbaseMm: 2780, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1530 кг для японской GH-JZX110',
+    lengthMm: 4735, widthMm: 1760, heightMm: 1460, wheelbaseMm: 2780, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1530 кг для японской GH-JZX110',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo VVT-i', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC VVT-i Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод и турбированный 1JZ-GTE'], weaknesses: ['Не переносить характеристики на атмосферные версии JZX110/GX110'] }],
     transmissions: ['Автоматическая трансмиссия; другие варианты сверять по точной модификации'],
     drivetrain: 'Задний привод (FR) для GH-JZX110 Grande G-tb.',
     sourceNotes: 'Габариты, масса, код двигателя, объём, мощность и привод подтверждены Toyota Global. Неуказанные параметры оставлены без догадок.',
-    sourceReferences: [{ label: 'Toyota Global — Mark II X110 (2000)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013047/index.html', scope: 'Заводские характеристики репрезентативных японских комплектаций X110.' }]
+    sourceReferences: [{ label: 'Toyota Global — Mark II X110 (2000)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013047/index.html', scope: 'Заводские характеристики репрезентативных японских комплектаций X110.' }, { label: 'Toyota GAZOO — Mark II Grande G-tb GH-JZX110 (2000)', url: 'https://gazoo.com/catalog/maker/TOYOTA/MARK_II/200010/1008659/', scope: 'Японская версия Grande G-tb: объём бака 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-supra-a80-rz', brandId: 'toyota', name: 'Supra (A80, RZ)', generation: 'IV поколение, A80', years: '1993–2002', bodyType: 'Купе/Спорт',
     overview: 'Легендарное заднеприводное спортивное купе Supra A80. Приведена японская версия RZ с 2JZ-GTE.',
-    lengthMm: 4520, widthMm: 1810, heightMm: 1275, wheelbaseMm: 2550, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1490 кг для японской RZ',
+    lengthMm: 4520, widthMm: 1810, heightMm: 1275, wheelbaseMm: 2550, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1490 кг для японской RZ',
     engines: [{ code: '2JZ-GTE', name: '3.0 л рядный 6-цилиндровый DOHC twin-turbo', displacement: '2997 см³', powerHp: '280 PS при 5600 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC twin-turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и задний привод'], weaknesses: ['Проверять систему охлаждения, турбины и историю модификаций'] }],
     transmissions: ['6-ступенчатая МКПП для японской RZ; варианты зависят от grade'],
     drivetrain: 'Задний привод (FR) для японской Supra RZ.',
     sourceNotes: 'Заводские данные Toyota Global для японской JZA80 RZ: размеры, масса и 2JZ-GTE.',
-    sourceReferences: [{ label: 'Toyota Global — Supra A80 (1993)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006850/index.html', scope: 'Заводские параметры японской Supra A80.' }]
+    sourceReferences: [{ label: 'Toyota Global — Supra A80 (1993)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006850/index.html', scope: 'Заводские параметры японской Supra A80.' }, { label: 'Toyota GAZOO — Supra RZ E-JZA80 (1997)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SUPRA/199305/1000971/', scope: 'Японская версия RZ: объём бака 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-soarer-jzz30-gt-twin-turbo', brandId: 'toyota', name: 'Soarer (JZZ30, 2.5 GT Twin Turbo L)', generation: 'III поколение, Z30', years: '1991–2000', bodyType: 'Купе/Спорт',
     overview: 'Большое заднеприводное купе Soarer Z30 с рядным 2.5-литровым 1JZ-GTE twin-turbo. Данные соответствуют японской версии 1991 года.',
-    lengthMm: 4860, widthMm: 1790, heightMm: 1350, wheelbaseMm: 2690, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1590 кг для JZZ30',
+    lengthMm: 4860, widthMm: 1790, heightMm: 1350, wheelbaseMm: 2690, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 78, curbWeightKg: '1590 кг для JZZ30',
     engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: '24V DOHC twin-turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод, независимая двухрычажная подвеска'], weaknesses: ['Возрастные электрические системы и турбонаддув требуют проверки'] }],
     transmissions: ['Автоматическая трансмиссия для указанной спецификации; другие варианты зависят от комплектации'],
     drivetrain: 'Задний привод (FR) для JZZ30.',
     sourceNotes: 'Габариты, масса, двигатель и мощность подтверждены Toyota Global для третьего поколения Soarer.',
-    sourceReferences: [{ label: 'Toyota Global — Soarer Z30 (1991)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60010598/index.html', scope: 'Заводские параметры японской 2.5 GT Twin Turbo L.' }]
+    sourceReferences: [{ label: 'Toyota Global — Soarer Z30 (1991)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60010598/index.html', scope: 'Заводские параметры японской 2.5 GT Twin Turbo L.' }, { label: 'Toyota GAZOO — Soarer 2.5 GT Twin Turbo L E-JZZ30 (1991)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SOARER/199105/1000866/', scope: 'Японская версия 2.5 GT Twin Turbo L: объём бака 78 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-supra-a70-gt-turbo', brandId: 'toyota', name: 'Supra (A70, 3.0 GT Turbo)', generation: 'III поколение, A70', years: '1986–1993', bodyType: 'Купе/Спорт',
     overview: 'Спортивное купе Supra A70 с продольным рядным шестицилиндровым турбомотором. Данные относятся к японской 3.0 GT Turbo 1986 года.',
-    lengthMm: 4620, widthMm: 1690, heightMm: 1310, wheelbaseMm: 2595, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1520 кг для японской 3.0 GT Turbo',
+    lengthMm: 4620, widthMm: 1690, heightMm: 1310, wheelbaseMm: 2595, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1520 кг для японской 3.0 GT Turbo',
     engines: [{ code: '7M-GTEU', name: '3.0 л рядный 6-цилиндровый DOHC turbo', displacement: '2954 см³', powerHp: 'Нет подтверждённых данных в использованной спецификации', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и задний привод'], weaknesses: ['Для старого турбомотора важна проверка охлаждения и истории обслуживания'] }],
     transmissions: ['Варианты трансмиссии зависят от комплектации'],
     drivetrain: 'Задний привод (FR) для японской 3.0 GT Turbo.',
-    sourceNotes: 'Размеры, база, масса, код и объём двигателя подтверждены Toyota Global; неизвестные мощность и момент намеренно не заполнены.',
-    sourceReferences: [{ label: 'Toyota Global — Supra A70 (1986)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006816/', scope: 'Заводские данные японской Supra A70.' }]
+    sourceNotes: 'Размеры, база, масса, код и объём двигателя подтверждены Toyota Global; бак 70 л дополнительно подтверждён карточкой японской 3.0 GT Turbo E-MA70 1989 года. Неизвестные мощность и момент намеренно не заполнены.',
+    sourceReferences: [{ label: 'Toyota Global — Supra A70 (1986)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006816/', scope: 'Заводские данные японской Supra A70.' }, { label: 'Toyota GAZOO — Supra 3.0 GT Turbo E-MA70 (1989)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SUPRA/198908/1000938/', scope: 'Заводская карточка японской 3.0 GT Turbo подтверждает бак 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cefiro-a31-rb20det', brandId: 'nissan', name: 'Cefiro (A31, RB20DET)', generation: 'I поколение, A31', years: '1988–1994', bodyType: 'Седан',
     overview: 'Культовый заднеприводный седан Cefiro A31, часто используемый как платформа для дрифта. Запись описывает японскую версию 1988 года с RB20DET.',
-    lengthMm: 4690, widthMm: 1695, heightMm: 1375, wheelbaseMm: 2670, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1330 кг для японской версии 1988 года',
+    lengthMm: 4690, widthMm: 1695, heightMm: 1375, wheelbaseMm: 2670, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '1330 кг для японской версии 1988 года',
     engines: [{ code: 'RB20DET', name: '2.0 л рядный 6-цилиндровый DOHC turbo', displacement: '1998 см³', powerHp: '205 PS при 6400 об/мин', torqueNm: '265 Н·м при 3200 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод и независимая многорычажная задняя подвеска'], weaknesses: ['Проверять систему охлаждения, турбину и переделки после дрифта'] }],
     transmissions: ['Варианты МКПП/АКПП зависят от комплектации'],
     drivetrain: 'Задний привод для указанной заводской версии; другие варианты сверять по конкретному автомобилю.',
@@ -2075,8 +2075,8 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'nissan-laurel-c33-rb20-medalist', brandId: 'nissan', name: 'Laurel (C33, RB20 Medalist)', generation: 'VI поколение, C33', years: '1988–1993', bodyType: 'Седан',
     overview: 'Заднеприводный седан Laurel C33 с независимой многорычажной задней подвеской. Запись соответствует японскому RB20 Medalist 1990 года; это атмосферная версия, не RB20DET.',
-    lengthMm: 4690, widthMm: 1695, heightMm: 1365, wheelbaseMm: 2670, groundClearanceMm: 0,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1300 кг для японского RB20 Medalist 1990 года',
+    lengthMm: 4690, widthMm: 1695, heightMm: 1365, wheelbaseMm: 2670, groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '1300 кг для японского RB20 Medalist 1990 года',
     engines: [{ code: 'RB20E', name: '2.0 л рядный 6-цилиндровый OHC', displacement: '1998 см³', powerHp: '125 PS при 5600 об/мин', torqueNm: '172 Н·м при 4400 об/мин', valves: 'OHC', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и многорычажная задняя подвеска'], weaknesses: ['Не путать с турбированными Club S/Club L и другими версиями'] }],
     transmissions: ['Варианты трансмиссии зависят от комплектации'],
     drivetrain: 'Задний привод для указанной японской версии.',
