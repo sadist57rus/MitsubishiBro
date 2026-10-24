@@ -4,7 +4,7 @@ import { readStored, writeStored } from '../lib/storage';
 import type { EngineType, DrivetrainType } from '../types';
 
 export interface GarageVehicle {
-  id: string; brandId: string; modelId: string; year: number; vin?: string;
+  id: string; brandId: string; modelId: string; year: number; color?: string; vin?: string;
   mileage: number; engine: string; transmission?: string; drivetrain: DrivetrainType; currency: string;
 }
 interface GarageState { vehicles: GarageVehicle[]; activeVehicleId: string; }
