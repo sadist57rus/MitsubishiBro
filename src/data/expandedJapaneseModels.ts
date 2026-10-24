@@ -531,14 +531,14 @@ const supplementalModels: JapaneseCarModel[] = [
     bodyType: 'Хэтчбек',
     overview: 'Компактный пятидверный хэтчбек. Ниже приведена спецификация конкретной японской Note 2WD 15S 2005 года с двигателем CR14DE; не переносить её на другие E11.',
     lengthMm: 3730, widthMm: 1670, heightMm: 1640, wheelbaseMm: 2430,
-    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных для конкретной комплектации', fuelTankLiters: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных для конкретной комплектации', fuelTankLiters: 45,
     curbWeightKg: '1070 кг — японская Note 2WD 15S (2005)',
     engines: [
       { code: 'CR14DE', name: '1.4 л бензиновый', displacement: '1386 см³', powerHp: '98 PS при 5600 об/мин (японская 15S)', torqueNm: '137 Н·м при 3200 об/мин (японская 15S)', valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов', fuelSystem: 'Электронный впрыск', timingDrive: 'Уточнить по сервисному руководству конкретного двигателя', strengths: ['Параметры подтверждены для японской 15S'], weaknesses: ['Не путать с HR15DE и экспортными версиями'] }
     ],
     transmissions: ['Не указана в выбранной архивной спецификации; уточнить по табличке автомобиля'],
     sourceNotes: 'Заменены ранее смешанные ориентировочные параметры на характеристики одной заводской версии Nissan Note 2WD 15S 2005 года: 3730×1670×1640 мм, база 2430 мм, масса 1070 кг, CR14DE 1386 см³, 98 PS/137 Н·м. Ёмкость бака, клиренс, трансмиссия и сервисные параметры оставлены неподтверждёнными.',
-    sourceReferences: [{ label: 'Nissan Heritage — Note 2WD 15S (2005, E11)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/479_note_2wd_15s.html', scope: 'Официальная спецификация японской Note 2WD 15S 2005 года; не распространять на все E11.' }]
+    sourceReferences: [{ label: 'Nissan Heritage — Note 2WD 15S (2005, E11)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/479_note_2wd_15s.html', scope: 'Официальная спецификация японской Note 2WD 15S 2005 года; не распространять на все E11.' }, { label: 'Nissan FAQ — Note E11: топливный бак', url: 'https://faq2.nissan.co.jp/faq/show/10040?category_id=9&site_domain=default', scope: 'Официальный ответ Nissan указывает бак 45 л для всех комплектаций при запуске в январе 2005 года; применено к японской 15S 2005 года.' }]
   }),
 
   makeSupplementalModel({
