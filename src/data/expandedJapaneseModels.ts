@@ -2016,6 +2016,18 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
       { size: '205/50R17', diameter: 636.8, width: 205, aspectRatio: 50, rimDiameter: 431.8, loadIndex: '89', speedRating: 'V', notes: 'Вариант для отдельных комплектаций; требуется сверка с заводской табличкой.' }
     ]
   },
+  'mazda3-bp-fastback': {
+    tires: [
+      { size: '205/60R16', diameter: 652.4, width: 205, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '92', speedRating: 'V', notes: 'Официальное руководство Mazda3 BP: штатный размер для соответствующих комплектаций. Проверить табличку на стойке двери и точный рынок. https://www2.mazda.co.jp/carlife/owner/manual/mazda3/bp/ebmo_202404/contents/70071000.html' },
+      { size: '215/45R18', diameter: 650.7, width: 215, aspectRatio: 45, rimDiameter: 457.2, loadIndex: '89', speedRating: 'W', notes: 'Официальное руководство Mazda3 BP: размер для соответствующих комплектаций. Проверить табличку на стойке двери и точный рынок. https://www2.mazda.co.jp/carlife/owner/manual/mazda3/bp/ebmo_202404/contents/70071000.html' }
+    ]
+  },
+  'mazda3-bp-sedan': {
+    tires: [
+      { size: '205/60R16', diameter: 652.4, width: 205, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '92', speedRating: 'V', notes: 'Официальное руководство Mazda3 BP: штатный размер для соответствующих комплектаций. Проверить табличку на стойке двери и точный рынок. https://www2.mazda.co.jp/carlife/owner/manual/mazda3/bp/ebmo_202404/contents/70071000.html' },
+      { size: '215/45R18', diameter: 650.7, width: 215, aspectRatio: 45, rimDiameter: 457.2, loadIndex: '89', speedRating: 'W', notes: 'Официальное руководство Mazda3 BP: размер для соответствующих комплектаций. Проверить табличку на стойке двери и точный рынок. https://www2.mazda.co.jp/carlife/owner/manual/mazda3/bp/ebmo_202404/contents/70071000.html' }
+    ]
+  },
   'mazda3-bk-sedan': {
     wiperBladeSize: [{ driverSide: '530 mm (21")', passengerSide: '475 mm (19")', notes: 'Каталоги fitment для Mazda3 BK 2003–2009 указывают 530/475 мм; крепление и региональная версия могут отличаться.' }],
     tires: [
