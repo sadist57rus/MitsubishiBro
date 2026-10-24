@@ -158,7 +158,7 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
     verificationStatus: 'unverified',
     sourceReferences: [
       { label: entry.sourceLabel, url: entry.sourceUrl, scope: entry.dimensionsVerified || entry.tireOptions ? 'Официальный источник производителя; подтверждает только перечисленные параметры для соответствующей версии. Не переносить на другие комплектации или рынки.' : 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.' },
-      ...(entry.wiper ? [{ label: 'NWB — таблица подбора стеклоочистителей', url: entry.brandId === 'suzuki' ? 'https://nwb.wiper-kensaku.com/docs/DCM_2_9_SUZUKI.pdf' : 'https://nwb.wiper-kensaku.com/docs/DCM_2_4_HONDA.pdf', scope: 'Каталог подбора NWB по коду кузова; номера серий указаны вместе с длиной. Перед заказом сверить год, вариант кузова, крепление и задний дворник отдельно.' }] : []),
+      ...(entry.wiper ? [{ label: 'NWB — таблица подбора стеклоочистителей', url: entry.brandId === 'suzuki' ? 'https://nwb.wiper-kensaku.com/docs/DCM_5_9_SUZUKI.pdf' : 'https://nwb.wiper-kensaku.com/docs/DCM_2_4_HONDA.pdf', scope: 'Каталог подбора NWB по коду кузова; номера серий указаны вместе с длиной. Перед заказом сверить год, вариант кузова, крепление и задний дворник отдельно.' }] : []),
     ],
     lastReviewed: '2026-10-24',
   };
