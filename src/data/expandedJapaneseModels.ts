@@ -2113,7 +2113,11 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
     ]
   },
   'nissan-serena-c25': {
-    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '300 mm', notes: 'Официальный FAQ Nissan для Serena C25 (2005/05–2010/11): передние 650/300 мм, задняя 400 мм. Источник: https://faq2.nissan.co.jp/faq/show/7947' }]
+    wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '300 mm', notes: 'Официальный FAQ Nissan для Serena C25 (2005/05–2010/11): передние 650/300 мм, задняя 400 мм. Источник: https://faq2.nissan.co.jp/faq/show/7947' }],
+    tires: [
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'S', notes: 'Официальный FAQ Nissan: штатный размер для ряда Serena C25 2005/05–2010/11; давление и применимость зависят от привода, года и комплектации. Источник: https://faq2.nissan.co.jp/faq/show/10156' },
+      { size: '195/60R16', diameter: 640.4, width: 195, aspectRatio: 60, rimDiameter: 406.4, loadIndex: '89', speedRating: 'H', notes: 'Официальный FAQ Nissan: размер для отдельных комплектаций Serena C25, включая некоторые версии Highway Star/20RS/20RX; не универсален для всех машин. Источник: https://faq2.nissan.co.jp/faq/show/10156' }
+    ]
   },
   'lexus-is-xe20-sedan': {
     wiperBladeSize: [{ driverSide: '550 mm', passengerSide: '500 mm', notes: 'WIPERS.EE указывает 550/500 мм для Lexus IS XE20 sedan 2005–2013; проверять год и кузов.' }],
