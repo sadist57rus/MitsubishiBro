@@ -12,7 +12,9 @@ const seenBodyYears = new Set<string>();
 let modelCount = 0;
 let unverifiedCount = 0;
 let sourceBackedCount = 0;
-let placeholderCount = 0;
+let engineIdentityIncompleteCount = 0;
+let enginePerformanceIncompleteCount = 0;
+let vagueTransmissionCount = 0;
 const duplicateNames = new Map<string, string[]>();
 const vague = /(уточнить|зависит от|не задано|не применимо|проверить по|по vin|по рынку|не подтвержд|unknown|tbd)/i;
 
@@ -41,11 +43,18 @@ for (const brand of JAPANESE_BRANDS) {
     if (model.transmissions.some((transmission) => !transmission.trim())) {
       errors.push(`Empty transmission selection option: ${model.id}`);
     }
-    if (model.engines.some((engine) => vague.test(`${engine.code} ${engine.name} ${engine.displacement} ${engine.powerHp} ${engine.torqueNm}`))) {
-      placeholderCount++;
-      warnings.push(`Engine data is placeholder/vague: ${model.id}`);
+    if (model.engines.some((engine) => vague.test(`${engine.code} ${engine.name} ${engine.displacement}`))) {
+      engineIdentityIncompleteCount++;
+      warnings.push(`Engine identity or displacement is vague: ${model.id}`);
     }
-    if (model.transmissions.some((transmission) => vague.test(transmission))) warnings.push(`Transmission data is placeholder/vague: ${model.id}`);
+    if (model.engines.some((engine) => vague.test(`${engine.powerHp} ${engine.torqueNm}`))) {
+      enginePerformanceIncompleteCount++;
+      warnings.push(`Engine power/torque is unverified: ${model.id}`);
+    }
+    if (model.transmissions.some((transmission) => vague.test(transmission))) {
+      vagueTransmissionCount++;
+      warnings.push(`Transmission selection options are vague: ${model.id}`);
+    }
     if (model.dimensions && [model.dimensions.lengthMm, model.dimensions.widthMm, model.dimensions.heightMm, model.dimensions.wheelbaseMm].some((n) => n === null || !Number.isFinite(n) || n <= 0)) warnings.push(`Missing/non-positive dimensions: ${model.id}`);
     const normalizedDimensions = model.dimensions;
     const normalizedDimensionFields = ['length', 'width', 'height', 'wheelbase', 'groundClearance', 'weight'] as const;
@@ -118,7 +127,7 @@ for (const brand of JAPANESE_BRANDS) {
 
 console.log(`Catalog audit: ${JAPANESE_BRANDS.length} brands, ${modelCount} models`);
 for (const [name, ids] of duplicateNames) if (ids.length > 1) warnings.push(`Possible duplicate model names within brand: ${name}: ${ids.join(', ')}`);
-console.log(`Evidence: ${sourceBackedCount} models have source references; ${unverifiedCount} are not marked verified; ${placeholderCount} have placeholder engine data.`);
+console.log(`Evidence: ${sourceBackedCount} models have source references; ${unverifiedCount} are not marked verified; ${engineIdentityIncompleteCount} have incomplete engine identity; ${enginePerformanceIncompleteCount} have unverified power/torque; ${vagueTransmissionCount} have vague transmission options.`);
 console.log(`Warnings: ${warnings.length}; errors: ${errors.length}`);
 for (const warning of warnings.slice(0, 100)) console.warn(`WARN: ${warning}`);
 if (warnings.length > 100) console.warn(`... plus ${warnings.length - 100} additional warnings`);
