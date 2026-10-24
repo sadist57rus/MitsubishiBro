@@ -13,6 +13,8 @@ type KeiIndexEntry = {
   bodyType: JapaneseCarModel['bodyType'];
   sourceUrl: string;
   sourceLabel: string;
+  dimensionsVerified?: { length: number; width: number; height: number; wheelbase: number; groundClearance: number };
+  tireOptions?: { size: string; notes: string }[];
 };
 
 const NO_DATA = 'Нет подтверждённых данных для точной модификации';
@@ -29,7 +31,7 @@ const entries: KeiIndexEntry[] = [
   // Honda — N-series and earlier kei models
   { id: 'honda-nbox-jf1', brandId: 'honda', name: 'N-BOX (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nbox-jf3', brandId: 'honda', name: 'N-BOX (JF3/JF4)', chassis: 'JF3/JF4', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/Nbox/', sourceLabel: 'Honda Japan — N-BOX' },
-  { id: 'honda-nbox-jf5', brandId: 'honda', name: 'N-BOX (JF5/JF6)', chassis: 'JF5/JF6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/Nbox/', sourceLabel: 'Honda Japan — N-BOX' },
+  { id: 'honda-nbox-jf5', brandId: 'honda', name: 'N-BOX (JF5/JF6)', chassis: 'JF5/JF6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2026/details/136238090-15246.html', sourceLabel: 'Honda Japan — руководство владельца N-BOX 2026', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для соответствующих комплектаций; давление по руководству: перед 240 кПа, зад 230 кПа.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных комплектаций; давление по руководству 220 кПа спереди и сзади. Проверить табличку конкретного автомобиля.' }] },
   { id: 'honda-nbox-plus-jf1', brandId: 'honda', name: 'N-BOX+ (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nbox-slash-jf1', brandId: 'honda', name: 'N-BOX Slash (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nwgn-jh1', brandId: 'honda', name: 'N-WGN (JH1/JH2)', chassis: 'JH1/JH2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN' },
@@ -62,7 +64,7 @@ const entries: KeiIndexEntry[] = [
   // Suzuki — passenger and commercial kei models
   { id: 'suzuki-alto-ha24', brandId: 'suzuki', name: 'Alto (HA24S)', chassis: 'HA24S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-alto-ha36', brandId: 'suzuki', name: 'Alto (HA36S/HA36V)', chassis: 'HA36S/HA36V', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/', sourceLabel: 'Suzuki Japan — Alto' },
-  { id: 'suzuki-alto-ha37', brandId: 'suzuki', name: 'Alto (HA37S/HA97S)', chassis: 'HA37S/HA97S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/', sourceLabel: 'Suzuki Japan — Alto' },
+  { id: 'suzuki-alto-ha37', brandId: 'suzuki', name: 'Alto (HA37S/HA97S)', chassis: 'HA37S/HA97S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/assets/pdf/detail.pdf', sourceLabel: 'Suzuki Japan — официальная таблица характеристик Alto', dimensionsVerified: { length: 3395, width: 1475, height: 1525, wheelbase: 2460, groundClearance: 130 }, tireOptions: [{ size: '155/65R14 75S', notes: 'Размер указан в официальной таблице характеристик Alto; сверить комплектацию и маркировку на стойке двери.' }] },
   { id: 'suzuki-wagon-r-mh21', brandId: 'suzuki', name: 'Wagon R (MH21S/MH22S)', chassis: 'MH21S/MH22S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-wagon-r-mh34', brandId: 'suzuki', name: 'Wagon R (MH34S/MH44S)', chassis: 'MH34S/MH44S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-wagon-r-mh55', brandId: 'suzuki', name: 'Wagon R (MH55S/MH95S)', chassis: 'MH55S/MH95S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/wagonr/', sourceLabel: 'Suzuki Japan — Wagon R' },
@@ -88,15 +90,38 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
     awdSystemName: 'Нет подтверждённых данных для точной модификации',
     overview: `Индекс японского кей-кара для внутреннего рынка. Код кузова указан для идентификации семейства; не переносить характеристики между поколениями, приводами и комплектациями.`,
     dimensions: {
-      lengthMm: null,
-      widthMm: null,
-      heightMm: null,
-      wheelbaseMm: null,
-      groundClearanceMm: null,
+      lengthMm: entry.dimensionsVerified?.length ?? null,
+      widthMm: entry.dimensionsVerified?.width ?? null,
+      heightMm: entry.dimensionsVerified?.height ?? null,
+      wheelbaseMm: entry.dimensionsVerified?.wheelbase ?? null,
+      groundClearanceMm: entry.dimensionsVerified?.groundClearance ?? null,
       trunkVolumeLiters: NO_DATA,
       fuelTankLiters: null,
       curbWeightKg: NO_DATA,
+      ...(entry.dimensionsVerified ? {
+        length: entry.dimensionsVerified.length,
+        width: entry.dimensionsVerified.width,
+        height: entry.dimensionsVerified.height,
+        wheelbase: entry.dimensionsVerified.wheelbase,
+        groundClearance: entry.dimensionsVerified.groundClearance,
+      } : {}),
     },
+    ...(entry.tireOptions ? {
+      tires: entry.tireOptions.map((tire) => {
+        const match = tire.size.match(/^(\d{3})\/(\d{2})R(\d{2})/);
+        if (!match) throw new Error('Invalid tire size: ' + tire.size);
+        const width = Number(match[1]);
+        const aspectRatio = Number(match[2]);
+        const rimDiameter = Number(match[3]) * 25.4;
+        return {
+          size: tire.size, width, aspectRatio, rimDiameter,
+          diameter: rimDiameter + 2 * width * aspectRatio / 100,
+          loadIndex: tire.size.includes('75V') ? '75' : '75',
+          speedRating: tire.size.includes('75V') ? 'V' : 'S',
+          notes: tire.notes,
+        };
+      }),
+    } : {}),
     engines: [],
     transmissions: [],
     fuelEconomy: {
@@ -127,12 +152,12 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
       protocol: NO_DATA,
     },
     knownIssues: [],
-    dataQualityNote: 'Добавлена только индексная запись. Официальная ссылка подтверждает семейство/название модели, но не подтверждает здесь код кузова, годы выпуска или технические характеристики. До проверки руководства владельца/сервисного мануала точной версии эти поля намеренно оставлены неподтверждёнными.',
+    dataQualityNote: entry.dimensionsVerified || entry.tireOptions ? 'Частичные параметры добавлены только по указанному официальному источнику. Остальные поля не подтверждены для точной модификации и не должны выводиться как известные. Размеры шин и давление необходимо сверять с табличкой конкретного автомобиля.' : 'Добавлена только индексная запись. Официальная ссылка подтверждает семейство/название модели, но не подтверждает здесь код кузова, годы выпуска или технические характеристики. До проверки руководства владельца/сервисного мануала точной версии эти поля намеренно оставлены неподтверждёнными.',
     verificationStatus: 'unverified',
     sourceReferences: [{
       label: entry.sourceLabel,
       url: entry.sourceUrl,
-      scope: 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.',
+      scope: entry.dimensionsVerified || entry.tireOptions ? 'Официальный источник производителя; подтверждает только перечисленные параметры для соответствующей версии. Не переносить на другие комплектации или рынки.' : 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.',
     }],
     lastReviewed: '2026-10-24',
   };
