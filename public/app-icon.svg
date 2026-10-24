@@ -1,22 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
-<title id="title">Nippon-Drive — иконка приложения</title>
-<defs>
- <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151a20"/><stop offset="1" stop-color="#030609"/></linearGradient>
- <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b0"/><stop offset=".35" stop-color="#e8b64d"/><stop offset=".72" stop-color="#b87513"/><stop offset="1" stop-color="#ffe18a"/></linearGradient>
- <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff5d4f"/><stop offset="1" stop-color="#9e171b"/></linearGradient>
- <linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#59636b"/><stop offset=".5" stop-color="#171e24"/><stop offset="1" stop-color="#050709"/></linearGradient>
- <radialGradient id="sun"><stop stop-color="#e8b64d" stop-opacity=".5"/><stop offset="1" stop-color="#e8b64d" stop-opacity="0"/></radialGradient>
-</defs>
-<rect width="512" height="512" rx="96" fill="url(#bg)"/>
-<circle cx="256" cy="210" r="160" fill="url(#sun)"/>
-<circle cx="256" cy="184" r="104" fill="url(#red)" opacity=".95"/>
-<path d="M155 187H357" stroke="#ffdf8b" stroke-width="4" opacity=".8"/>
-<path d="M72 292L106 260L166 243L207 196Q218 184 238 184H296Q316 186 334 210L365 243L405 258L437 289L428 323H84Z" fill="url(#car)" stroke="url(#gold)" stroke-width="4" stroke-linejoin="round"/>
-<path d="M181 239L216 202Q223 197 240 197H293Q308 199 321 218L338 239Z" fill="#0a141b" stroke="#a9b3bb" stroke-width="2.5"/>
-<path d="M257 199V238M174 239H344" stroke="#66727a" stroke-width="2"/>
-<path d="M91 279L145 264L172 270L154 286L94 293Z M340 270L368 264L421 279L418 293L358 286Z" fill="#fff0b0"/>
-<path d="M114 304Q256 320 398 304L384 326H128Z" fill="#050607" stroke="#b87513" stroke-width="2"/>
-<circle cx="153" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/><circle cx="359" cy="316" r="24" fill="#050709" stroke="url(#gold)" stroke-width="6"/>
-<path d="M110 374H402" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
-<text x="256" y="422" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="39" font-weight="800" letter-spacing="2" fill="url(#gold)">NIPPON-DRIVE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Nippon-drive — иконка приложения</title>
+  <rect width="512" height="512" rx="44" fill="#080808"/>
+  <circle cx="256" cy="231" r="113" fill="#a90f25"/>
+  <path d="M84 311
+    C94 302 112 294 137 287
+    L196 282
+    L245 254
+    C258 247 279 246 302 248
+    C325 249 341 258 358 268
+    L389 282
+    L411 285
+    L418 302
+    L426 316
+    L424 326
+    L398 333
+    L377 333
+    C374 310 359 297 339 297
+    C318 297 304 312 303 333
+    L183 333
+    C181 310 166 297 146 297
+    C125 297 111 312 110 333
+    L86 333
+    L84 311Z" fill="#fff"/>
+  <path d="M195 282L242 258
+    C253 252 274 252 300 254
+    L331 273
+    L350 286
+    L315 284
+    L304 258
+    C286 255 265 255 248 258
+    L213 282Z" fill="#080808"/>
+  <path d="M249 258L242 282M304 258L315 284" fill="none" stroke="#fff" stroke-width="1.5"/>
+  <path d="M84 310L109 307L109 313L84 314Z" fill="#080808"/>
+  <path d="M120 298C131 291 151 288 169 291L183 302L183 333L110 333C111 318 114 306 120 298Z" fill="#fff"/>
+  <path d="M183 333C181 310 166 297 146 297C125 297 111 312 110 333" fill="#080808"/>
+  <path d="M303 333C304 312 318 297 339 297C359 297 374 310 377 333" fill="#080808"/>
+  <path d="M126 319C130 307 138 303 147 303C157 303 165 309 169 319" fill="none" stroke="#fff" stroke-width="1.4"/>
+  <path d="M319 319C323 307 331 303 340 303C350 303 358 309 362 319" fill="none" stroke="#fff" stroke-width="1.4"/>
+  <path d="M185 283L186 313Q186 326 193 333L303 333
+    C308 317 313 301 322 291L350 289L378 297L401 296
+    L405 314L377 333" fill="#fff"/>
+  <path d="M185 283L242 258C255 251 278 251 300 254L330 273L350 286" fill="none" stroke="#080808" stroke-width="1.2"/>
+  <path d="M196 283L245 259C259 253 281 253 299 256L306 281" fill="none" stroke="#080808" stroke-width="1.2"/>
+  <path d="M306 281L300 296L293 315L303 333" fill="none" stroke="#080808" stroke-width="1.2"/>
+  <rect x="293" y="290" width="9" height="3" rx="1.2" fill="#080808"/>
+  <path d="M378 297L408 295L410 310L378 313Z" fill="#fff"/>
+  <path d="M408 294L422 290L418 301L409 306Z" fill="#fff"/>
+  <path d="M405 315L424 315L421 326L398 331" fill="#fff"/>
+  <path d="M401 300L413 300L413 309L401 309Z" fill="#080808"/>
+  <path d="M85 323L97 324L97 332L87 332Z" fill="#080808"/>
 </svg>
