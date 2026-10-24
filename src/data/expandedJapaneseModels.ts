@@ -1608,21 +1608,21 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'nissan-cube-z10', brandId: 'nissan', name: 'Cube (Z10)', generation: 'I поколение', years: '1998–2002', bodyType: 'Минивэн',
     overview: 'Первое поколение Nissan Cube, компактный высокий кузов японского рынка. Двигатель и трансмиссию нужно уточнять по табличке.',
-    lengthMm: 3750, widthMm: 1610, heightMm: 1625, wheelbaseMm: 2360, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: 'Зависит от комплектации',
+    lengthMm: 3750, widthMm: 1610, heightMm: 1625, wheelbaseMm: 2360, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 42, curbWeightKg: 'Зависит от комплектации',
     engines: [{ code: 'CG13DE', name: '1.3 л бензин — отдельные версии Z10', displacement: '1274 см³', powerHp: '82 л.с. для представительной версии', torqueNm: '106 Н·м для представительной версии', valves: 'DOHC 16V', fuelSystem: 'Nissan ECCS/EGI', timingDrive: 'Уточнить по сервисной документации', strengths: ['Компактный атмосферный двигатель'], weaknesses: ['Не все Z10 имеют одинаковые агрегаты'] }],
     transmissions: ['4-ступенчатая АКПП; вариатор встречается в отдельных версиях — проверить код коробки'],
     drivetrain: 'Передний привод для указанной заводской версии; другие варианты требуют проверки.',
-    sourceNotes: 'Размеры и двигатель относятся к отдельным опубликованным спецификациям Z10, не ко всем комплектациям поколения.',
-    sourceReferences: [{ label: 'Nissan — официальный релиз Cube 1998', url: 'https://global.nissannews.com/en/releases/19980220-02-e', scope: 'Подтверждает запуск модели.' }, { label: 'Nissan — официальный FAQ Cube Z10', url: 'https://faq2.nissan.co.jp/faq/show/1127?category_id=66&site_domain=default', scope: 'Модельная страница Nissan по периоду Z10.' }]
+    sourceNotes: 'Размеры и двигатель относятся к отдельным опубликованным спецификациям Z10, не ко всем комплектациям поколения. Объём бака 42 л подтверждён японскими карточками Z10 в каталоге GAZOO.',
+    sourceReferences: [{ label: 'Nissan — официальный релиз Cube 1998', url: 'https://global.nissannews.com/en/releases/19980220-02-e', scope: 'Подтверждает запуск модели.' }, { label: 'Nissan — официальный FAQ Cube Z10', url: 'https://faq2.nissan.co.jp/faq/show/1127?category_id=66&site_domain=default', scope: 'Модельная страница Nissan по периоду Z10.' }, { label: 'Toyota GAZOO — Nissan Cube Z10 Yellow Version (1998)', url: 'https://gazoo.com/catalog/maker/NISSAN/CUBE/199802/1505935/', scope: 'Карточка японского Z10 с двигателем CG13DE подтверждает бак 42 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cube-z11', brandId: 'nissan', name: 'Cube (Z11)', generation: 'II поколение', years: '2002–2008', bodyType: 'Минивэн',
     overview: 'Второе поколение Nissan Cube. Двигатель, трансмиссия и привод менялись по годам; сверять по кузовному коду и рынку.',
-    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: 'Нет подтверждённых данных',
+    lengthMm: null, widthMm: null, heightMm: null, wheelbaseMm: null, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 41, curbWeightKg: 'Нет подтверждённых данных',
     engines: [{ code: 'Нет подтверждённых данных', name: 'Двигатель не установлен по точной комплектации', displacement: 'Нет подтверждённых данных', powerHp: 'Нет подтверждённых данных', torqueNm: 'Нет подтверждённых данных', valves: 'Нет подтверждённых данных', fuelSystem: 'Нет подтверждённых данных', timingDrive: 'Нет подтверждённых данных', strengths: ['Не указывать без идентификации версии'], weaknesses: ['Требуется код кузова и заводская комплектация'] }], transmissions: ['Нет подтверждённых данных для единого описания поколения; проверить код агрегата'],
     drivetrain: 'Зависит от комплектации и кода кузова.',
-    sourceNotes: 'Карточка поколения добавлена для навигации. Размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
-    sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }]
+    sourceNotes: 'Карточка поколения добавлена для навигации. Бак 41 л подтверждён японскими карточками Cube Z11; размеры, двигатель, коробка, жидкости и OBD-особенности не заполнены без первичного источника для конкретной версии.',
+    sourceReferences: [{ label: 'Nissan service materials — перечень поколений Cube', url: 'https://faines.jaspa.or.jp/enduser/system/files/static/menu/touroku/ma_list1/nissan_list.html', scope: 'Перечень заводских сервисных материалов по Z10/Z11.' }, { label: 'Toyota GAZOO — Nissan Cube Z11 EX (2004)', url: 'https://gazoo.com/catalog/maker/NISSAN/CUBE/200210/10017904/', scope: 'Карточка японского Z11 подтверждает бак 41 л; отдельные характеристики зависят от комплектации.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cube-z12', brandId: 'nissan', name: 'Cube (Z12)', generation: 'III поколение', years: '2008–2020', bodyType: 'Минивэн',
@@ -2054,12 +2054,12 @@ const supplementalModels: JapaneseCarModel[] = [
     id: 'toyota-supra-a70-gt-turbo', brandId: 'toyota', name: 'Supra (A70, 3.0 GT Turbo)', generation: 'III поколение, A70', years: '1986–1993', bodyType: 'Купе/Спорт',
     overview: 'Спортивное купе Supra A70 с продольным рядным шестицилиндровым турбомотором. Данные относятся к японской 3.0 GT Turbo 1986 года.',
     lengthMm: 4620, widthMm: 1690, heightMm: 1310, wheelbaseMm: 2595, groundClearanceMm: null,
-    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '1520 кг для японской 3.0 GT Turbo',
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1520 кг для японской 3.0 GT Turbo',
     engines: [{ code: '7M-GTEU', name: '3.0 л рядный 6-цилиндровый DOHC turbo', displacement: '2954 см³', powerHp: 'Нет подтверждённых данных в использованной спецификации', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и задний привод'], weaknesses: ['Для старого турбомотора важна проверка охлаждения и истории обслуживания'] }],
     transmissions: ['Варианты трансмиссии зависят от комплектации'],
     drivetrain: 'Задний привод (FR) для японской 3.0 GT Turbo.',
-    sourceNotes: 'Размеры, база, масса, код и объём двигателя подтверждены Toyota Global; неизвестные мощность и момент намеренно не заполнены.',
-    sourceReferences: [{ label: 'Toyota Global — Supra A70 (1986)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006816/', scope: 'Заводские данные японской Supra A70.' }]
+    sourceNotes: 'Размеры, база, масса, код и объём двигателя подтверждены Toyota Global; бак 70 л дополнительно подтверждён карточкой японской 3.0 GT Turbo E-MA70 1989 года. Неизвестные мощность и момент намеренно не заполнены.',
+    sourceReferences: [{ label: 'Toyota Global — Supra A70 (1986)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006816/', scope: 'Заводские данные японской Supra A70.' }, { label: 'Toyota GAZOO — Supra 3.0 GT Turbo E-MA70 (1989)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SUPRA/198908/1000938/', scope: 'Заводская карточка японской 3.0 GT Turbo подтверждает бак 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-cefiro-a31-rb20det', brandId: 'nissan', name: 'Cefiro (A31, RB20DET)', generation: 'I поколение, A31', years: '1988–1994', bodyType: 'Седан',
