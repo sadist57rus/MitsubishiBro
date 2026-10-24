@@ -1935,7 +1935,6 @@ const supplementalModels: JapaneseCarModel[] = [
       }
     ]
   }),
-];
 
   makeSupplementalModel({
     id: 'suzuki-swift-zc72s-ru-12-at-2wd-2013',
@@ -1974,6 +1973,7 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Digital Library — Swift 2010, кузов ZC72S', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html', scope: 'Заводские данные для японской ZC72S: двигатель K12B, 1242 см³, 67 кВт/91 PS, габариты и колёсная база. Не подтверждает мощность и комплектацию российского автомобиля.' }
     ]
   }),
+];
 
 const historicalBrandSeeds = [
   { id: 'prince', name: 'Prince Motor Company', russianName: 'Принс', founded: 1952, headquarters: 'Токио, Япония', tagline: 'Историческая японская автомобильная марка', description: 'Исторический производитель, объединённый с Nissan в 1966 году; Skyline и Gloria имеют важную преемственность Prince/Nissan.', brandColor: '#475569', awdPhilosophy: 'Зависит от конкретной модели и эпохи.' },
