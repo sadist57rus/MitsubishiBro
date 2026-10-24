@@ -64,6 +64,8 @@ export interface JapaneseCarModel {
     rootCause: string;
     solution: string;
   }[];
+  /** Model-specific maintenance reminders backed by the linked owner/service documentation. */
+  maintenanceTips?: string[];
   /** Notes about market coverage and the verification level of supplemental data. */
   dataQualityNote?: string;
   /** Conservative status: only set to verified when the exact variant is backed by an OEM document. */
