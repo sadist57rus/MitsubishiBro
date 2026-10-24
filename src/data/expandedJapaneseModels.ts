@@ -2014,9 +2014,10 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
   },
   'toyota-prius-xw30-liftback': {
     tires: [
-      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Listed for selected 2010–2011 Prius ZVW30 L grades; not universal across grades. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
-      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'S', notes: 'Toyota ZVW30 owner-manual fitment for selected 15-inch grades; verify production period and grade. https://www.carfactbook.com/cars/toyota/prius/zvw30/service/tyres-wheels' },
-      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Listed as an option for selected ZVW30 grades; not universal. https://cars-japan.net/tire/mdl0010041.html' }
+      { size: '185/65R15', diameter: 621.5, width: 185, aspectRatio: 65, rimDiameter: 381, loadIndex: '88', speedRating: 'S', notes: 'Руководство Toyota Prius для японской версии 2009–2015 перечисляет размер для отдельных комплектаций. Проверить год, grade и табличку автомобиля. Источник: https://manual.toyota.jp/pdf/prius/prius_201405.pdf' },
+      { size: '195/65R15', diameter: 634.5, width: 195, aspectRatio: 65, rimDiameter: 381, loadIndex: '91', speedRating: 'S', notes: 'Руководство Toyota Prius для японской версии 2009–2015 перечисляет размер для отдельных комплектаций; индекс S/H и применимость сверить по конкретному автомобилю. Источник: https://manual.toyota.jp/pdf/prius/prius_201405.pdf' },
+      { size: '215/45R17', diameter: 625.3, width: 215, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '87', speedRating: 'W', notes: 'Руководство Toyota Prius для японской версии 2009–2015 перечисляет размер для отдельных комплектаций с низкопрофильными шинами; не универсален для всех XW30. Источник: https://manual.toyota.jp/pdf/prius/prius_201405.pdf' },
+      { size: '215/40R18', diameter: 629.2, width: 215, aspectRatio: 40, rimDiameter: 457.2, loadIndex: '85', speedRating: 'W', notes: 'Руководство Toyota Prius для японской версии 2009–2015 перечисляет размер для отдельных комплектаций; перед установкой обязательно сверить grade, допуски колёс и табличку автомобиля. Источник: https://manual.toyota.jp/pdf/prius/prius_201405.pdf' }
     ]
   },
   'mazda-cx5-ke-crossover': {
