@@ -3,6 +3,7 @@ import type { TabId } from './Header';
 import { BrandLogo } from './BrandLogos';
 import { JAPANESE_BRANDS } from '../data/japaneseBrandsData';
 import { useVehicle } from '../context/VehicleContext';
+import VehicleIllustration from './VehicleIllustration';
 
 interface Props {
   onNavigate: (tab: TabId) => void;
