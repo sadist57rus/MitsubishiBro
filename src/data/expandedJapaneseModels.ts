@@ -1973,6 +1973,118 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Digital Library — Swift 2010, кузов ZC72S', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html', scope: 'Заводские данные для японской ZC72S: двигатель K12B, 1242 см³, 67 кВт/91 PS, габариты и колёсная база. Не подтверждает мощность и комплектацию российского автомобиля.' }
     ]
   }),
+
+  // Drift legends batch: Toyota FR sports sedans/coupes and Nissan A31/C33.
+  makeSupplementalModel({
+    id: 'toyota-mark-ii-x90-tourer-v', brandId: 'toyota', name: 'Mark II (X90, Tourer V)', generation: 'VII поколение, X90', years: '1992–1996', bodyType: 'Купе/Спорт',
+    overview: 'Японский заднеприводный Mark II Tourer V с 1JZ-GTE. Спецификация относится к E-JZX90 1993 года, а не ко всем X90.',
+    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1460 кг для японской Tourer V 1993 года',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC, twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '362.8 Н·м при 4800 об/мин', valves: '24V DOHC twin-turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Продольный двигатель и задний привод'], weaknesses: ['Проверять состояние двух турбин и следы тюнинга'] }],
+    transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
+    drivetrain: 'Задний привод (FR) для E-JZX90 Tourer V.',
+    sourceNotes: 'Размеры, база, масса, двигатель и бак взяты из Toyota GAZOO для Mark II Tourer V 1993 года.',
+    sourceReferences: [{ label: 'Toyota GAZOO — Mark II Tourer V E-JZX90 (1993)', url: 'https://gazoo.com/catalog/maker/TOYOTA/MARK_II/199210/1001078/', scope: 'Заводские параметры японской комплектации.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-chaser-x90-tourer-v', brandId: 'toyota', name: 'Chaser (X90, Tourer V)', generation: 'V поколение, X90', years: '1992–1996', bodyType: 'Купе/Спорт',
+    overview: 'Спортивный четырёхдверный хардтоп Chaser X90. Здесь указана японская Tourer V 1993 года с 1JZ-GTE.',
+    lengthMm: 4750, widthMm: 1750, heightMm: 1390, wheelbaseMm: 2730, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1450 кг для японской Tourer V 1993 года',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC, twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '362.8 Н·м при 4800 об/мин', valves: '24V DOHC twin-turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и независимая подвеска'], weaknesses: ['Проверять турбины, охлаждение и изменения после тюнинга'] }],
+    transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
+    drivetrain: 'Задний привод (FR) для E-JZX90 Tourer V.',
+    sourceNotes: 'Заводские параметры японской Tourer V 1993 года по Toyota GAZOO.',
+    sourceReferences: [{ label: 'Toyota GAZOO — Chaser Tourer V E-JZX90 (1993)', url: 'https://gazoo.com/catalog/maker/TOYOTA/CHASER/199210/1011857/', scope: 'Заводские параметры японской комплектации.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-chaser-x100-tourer-v', brandId: 'toyota', name: 'Chaser (X100, Tourer V)', generation: 'VI поколение, X100', years: '1996–2001', bodyType: 'Купе/Спорт',
+    overview: 'Заднеприводный Chaser Tourer V поколения X100 с 1JZ-GTE. Приведена японская спецификация 1998 года.',
+    lengthMm: 4715, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1480 кг для японской Tourer V 1998 года',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и турбированный рядный шестицилиндровый двигатель'], weaknesses: ['Состояние зависит от обслуживания и тюнинга'] }],
+    transmissions: ['4-ступенчатая АКПП или 5-ступенчатая МКПП — по комплектации'],
+    drivetrain: 'Задний привод (FR) для GF-JZX100 Tourer V.',
+    sourceNotes: 'Заводские параметры японской Tourer V 1998 года по Toyota GAZOO.',
+    sourceReferences: [{ label: 'Toyota GAZOO — Chaser Tourer V GF-JZX100 (1998)', url: 'https://gazoo.com/catalog/maker/TOYOTA/CHASER/199609/1001331/', scope: 'Заводские параметры японской комплектации.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-cresta-x100-rulant-g', brandId: 'toyota', name: 'Cresta (X100, Roulant G)', generation: 'V поколение, X100', years: '1996–2001', bodyType: 'Седан',
+    overview: 'Четырёхдверный седан Cresta X100 в спортивной версии Roulant G. Данные относятся к японской GF-JZX100 1998 года.',
+    lengthMm: 4760, widthMm: 1755, heightMm: 1420, wheelbaseMm: 2730, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1490 кг для японской Roulant G 1998 года',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Продольный двигатель и задний привод'], weaknesses: ['Не путать характеристики Roulant G с атмосферными версиями'] }],
+    transmissions: ['4-ступенчатая АКПП для указанной версии'],
+    drivetrain: 'Задний привод (FR) для GF-JZX100 Roulant G.',
+    sourceNotes: 'Заводские параметры японской Roulant G 1998 года по Toyota GAZOO.',
+    sourceReferences: [{ label: 'Toyota GAZOO — Cresta Roulant G GF-JZX100 (1998)', url: 'https://gazoo.com/catalog/maker/TOYOTA/CRESTA/199609/1001210/', scope: 'Заводские параметры японской комплектации.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-mark-ii-x110-grande-gtb', brandId: 'toyota', name: 'Mark II (X110, Grande G-tb)', generation: 'IX поколение, X110', years: '2000–2004', bodyType: 'Седан',
+    overview: 'Последнее поколение Mark II с кузовом седан. Запись относится к японской заднеприводной GH-JZX110 Grande G-tb с турбомотором 1JZ-GTE.',
+    lengthMm: 4735, widthMm: 1760, heightMm: 1460, wheelbaseMm: 2780, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1530 кг для японской GH-JZX110',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC turbo VVT-i', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC VVT-i Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод и турбированный 1JZ-GTE'], weaknesses: ['Не переносить характеристики на атмосферные версии JZX110/GX110'] }],
+    transmissions: ['Автоматическая трансмиссия; другие варианты сверять по точной модификации'],
+    drivetrain: 'Задний привод (FR) для GH-JZX110 Grande G-tb.',
+    sourceNotes: 'Габариты, масса, код двигателя, объём, мощность и привод подтверждены Toyota Global. Неуказанные параметры оставлены без догадок.',
+    sourceReferences: [{ label: 'Toyota Global — Mark II X110 (2000)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013047/index.html', scope: 'Заводские характеристики репрезентативных японских комплектаций X110.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-supra-a80-rz', brandId: 'toyota', name: 'Supra (A80, RZ)', generation: 'IV поколение, A80', years: '1993–2002', bodyType: 'Купе/Спорт',
+    overview: 'Легендарное заднеприводное спортивное купе Supra A80. Приведена японская версия RZ с 2JZ-GTE.',
+    lengthMm: 4520, widthMm: 1810, heightMm: 1275, wheelbaseMm: 2550, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1490 кг для японской RZ',
+    engines: [{ code: '2JZ-GTE', name: '3.0 л рядный 6-цилиндровый DOHC twin-turbo', displacement: '2997 см³', powerHp: '280 PS при 5600 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC twin-turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и задний привод'], weaknesses: ['Проверять систему охлаждения, турбины и историю модификаций'] }],
+    transmissions: ['6-ступенчатая МКПП для японской RZ; варианты зависят от grade'],
+    drivetrain: 'Задний привод (FR) для японской Supra RZ.',
+    sourceNotes: 'Заводские данные Toyota Global для японской JZA80 RZ: размеры, масса и 2JZ-GTE.',
+    sourceReferences: [{ label: 'Toyota Global — Supra A80 (1993)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006850/index.html', scope: 'Заводские параметры японской Supra A80.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-soarer-jzz30-gt-twin-turbo', brandId: 'toyota', name: 'Soarer (JZZ30, 2.5 GT Twin Turbo L)', generation: 'III поколение, Z30', years: '1991–2000', bodyType: 'Купе/Спорт',
+    overview: 'Большое заднеприводное купе Soarer Z30 с рядным 2.5-литровым 1JZ-GTE twin-turbo. Данные соответствуют японской версии 1991 года.',
+    lengthMm: 4860, widthMm: 1790, heightMm: 1350, wheelbaseMm: 2690, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1590 кг для JZZ30',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л рядный 6-цилиндровый DOHC twin-turbo', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: '24V DOHC twin-turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод, независимая двухрычажная подвеска'], weaknesses: ['Возрастные электрические системы и турбонаддув требуют проверки'] }],
+    transmissions: ['Автоматическая трансмиссия для указанной спецификации; другие варианты зависят от комплектации'],
+    drivetrain: 'Задний привод (FR) для JZZ30.',
+    sourceNotes: 'Габариты, масса, двигатель и мощность подтверждены Toyota Global для третьего поколения Soarer.',
+    sourceReferences: [{ label: 'Toyota Global — Soarer Z30 (1991)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60010598/index.html', scope: 'Заводские параметры японской 2.5 GT Twin Turbo L.' }]
+  }),
+  makeSupplementalModel({
+    id: 'toyota-supra-a70-gt-turbo', brandId: 'toyota', name: 'Supra (A70, 3.0 GT Turbo)', generation: 'III поколение, A70', years: '1986–1993', bodyType: 'Купе/Спорт',
+    overview: 'Спортивное купе Supra A70 с продольным рядным шестицилиндровым турбомотором. Данные относятся к японской 3.0 GT Turbo 1986 года.',
+    lengthMm: 4620, widthMm: 1690, heightMm: 1310, wheelbaseMm: 2595, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1520 кг для японской 3.0 GT Turbo',
+    engines: [{ code: '7M-GTEU', name: '3.0 л рядный 6-цилиндровый DOHC turbo', displacement: '2954 см³', powerHp: 'Нет подтверждённых данных в использованной спецификации', torqueNm: 'Нет подтверждённых данных в использованной спецификации', valves: 'DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и задний привод'], weaknesses: ['Для старого турбомотора важна проверка охлаждения и истории обслуживания'] }],
+    transmissions: ['Варианты трансмиссии зависят от комплектации'],
+    drivetrain: 'Задний привод (FR) для японской 3.0 GT Turbo.',
+    sourceNotes: 'Размеры, база, масса, код и объём двигателя подтверждены Toyota Global; неизвестные мощность и момент намеренно не заполнены.',
+    sourceReferences: [{ label: 'Toyota Global — Supra A70 (1986)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006816/', scope: 'Заводские данные японской Supra A70.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-cefiro-a31-rb20det', brandId: 'nissan', name: 'Cefiro (A31, RB20DET)', generation: 'I поколение, A31', years: '1988–1994', bodyType: 'Седан',
+    overview: 'Культовый заднеприводный седан Cefiro A31, часто используемый как платформа для дрифта. Запись описывает японскую версию 1988 года с RB20DET.',
+    lengthMm: 4690, widthMm: 1695, heightMm: 1375, wheelbaseMm: 2670, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1330 кг для японской версии 1988 года',
+    engines: [{ code: 'RB20DET', name: '2.0 л рядный 6-цилиндровый DOHC turbo', displacement: '1998 см³', powerHp: '205 PS при 6400 об/мин', torqueNm: '265 Н·м при 3200 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Задний привод и независимая многорычажная задняя подвеска'], weaknesses: ['Проверять систему охлаждения, турбину и переделки после дрифта'] }],
+    transmissions: ['Варианты МКПП/АКПП зависят от комплектации'],
+    drivetrain: 'Задний привод для указанной заводской версии; другие варианты сверять по конкретному автомобилю.',
+    sourceNotes: 'Заводские данные Nissan Heritage Collection для Cefiro A31 1988 года.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Cefiro A31 (1988)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/458_nissan_cefiro.html', scope: 'Заводские размеры, масса, RB20DET, мощность и момент.' }]
+  }),
+  makeSupplementalModel({
+    id: 'nissan-laurel-c33-rb20-medalist', brandId: 'nissan', name: 'Laurel (C33, RB20 Medalist)', generation: 'VI поколение, C33', years: '1988–1993', bodyType: 'Седан',
+    overview: 'Заднеприводный седан Laurel C33 с независимой многорычажной задней подвеской. Запись соответствует японскому RB20 Medalist 1990 года; это атмосферная версия, не RB20DET.',
+    lengthMm: 4690, widthMm: 1695, heightMm: 1365, wheelbaseMm: 2670, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 0, curbWeightKg: '1300 кг для японского RB20 Medalist 1990 года',
+    engines: [{ code: 'RB20E', name: '2.0 л рядный 6-цилиндровый OHC', displacement: '1998 см³', powerHp: '125 PS при 5600 об/мин', torqueNm: '172 Н·м при 4400 об/мин', valves: 'OHC', fuelSystem: 'Нет подтверждённых данных в использованной спецификации', timingDrive: 'Нет подтверждённых данных в использованной спецификации', strengths: ['Продольная компоновка и многорычажная задняя подвеска'], weaknesses: ['Не путать с турбированными Club S/Club L и другими версиями'] }],
+    transmissions: ['Варианты трансмиссии зависят от комплектации'],
+    drivetrain: 'Задний привод для указанной японской версии.',
+    sourceNotes: 'Заводские данные Nissan Heritage Collection для Laurel C33 RB20 Medalist 1990 года.',
+    sourceReferences: [{ label: 'Nissan Heritage Collection — Laurel RB20 Medalist (1990, C33)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/laurel_rb20.html', scope: 'Заводские размеры, масса, двигатель RB20E, мощность и момент.' }]
+  }),
 ];
 
 const historicalBrandSeeds = [
