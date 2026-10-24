@@ -1937,6 +1937,44 @@ const supplementalModels: JapaneseCarModel[] = [
   }),
 ];
 
+  makeSupplementalModel({
+    id: 'suzuki-swift-zc72s-ru-12-at-2wd-2013',
+    brandId: 'suzuki',
+    name: 'Swift ZC72S 1.2 AT 2WD (Россия)',
+    generation: 'IV поколение AZG, рестайлинг',
+    years: '2013–2015',
+    bodyType: 'Хэтчбек',
+    overview: 'Пятидверный Swift для российского рынка: бензиновый K12B 1.2, 4-ступенчатая АКПП и передний привод. Не смешивать с японскими ZC72S CVT и полноприводным ZD72S.',
+    lengthMm: 3850,
+    widthMm: 1695,
+    heightMm: 1510,
+    wheelbaseMm: 2430,
+    groundClearanceMm: 140,
+    trunkVolumeLiters: '211 л (до 874 л при сложенных задних сиденьях; по вторичному каталогу)',
+    fuelTankLiters: 42,
+    curbWeightKg: '990 кг (по вторичному каталогу)',
+    engines: [{
+      code: 'K12B',
+      name: '1.2 л бензин, Dual VVT',
+      displacement: '1242 см³',
+      powerHp: '94 л.с. при 6000 об/мин для российской версии',
+      torqueNm: '118 Н·м при 4800 об/мин',
+      valves: 'Рядный 4-цилиндровый DOHC, 16 клапанов',
+      fuelSystem: 'Распределённый электронный впрыск',
+      timingDrive: 'Цепь ГРМ; для сервисных работ сверить по документации двигателя',
+      strengths: ['Параметры ограничены российской версией ZC72S 2WD AT 5dr GL'],
+      weaknesses: ['Не переносить данные на ZD72S 4WD, японские CVT-версии или Swift Sport']
+    }],
+    transmissions: ['4-ступенчатая автоматическая коробка передач'],
+    drivetrain: 'Передний привод (2WD/FF).',
+    sourceNotes: 'Отдельная запись для Suzuki Swift ZC72S 1.2 2WD AT 5dr GL российского рынка, 10.2013–05.2015. Вторичный каталог Drom указывает K12B 1242 см³, 94 л.с./118 Н·м, 4AT, FF, размеры 3850×1695×1510 мм, базу 2430 мм, клиренс 140 мм, массу 990 кг, бак 42 л и шины 175/65R15. Дилерский материал Suzuki Moscow 2014 подтверждает 1.2 л, 94 л.с., 118 Н·м, 4AT, передний привод и основные габариты; заводская Suzuki Digital Library подтверждает семейство K12B и кузов ZC72S для японской версии, но не используется как доказательство российской калибровки. Запись остаётся unverified: перед ремонтным применением сверять VIN, табличку и руководство именно российского автомобиля; сервисные жидкости, лампы, коды и регламент не подтверждены.',
+    sourceReferences: [
+      { label: 'Suzuki Moscow — дилерский материал о Swift (2014)', url: 'https://www.moscow-suzuki.ru/bitrix/templates/suzuki/media/vehicle/2014_2.pdf', scope: 'Дилерский материал указывает 1.2 л, 94 л.с. при 6000 об/мин, 118 Н·м при 4800 об/мин, 4-ступенчатый автомат, передний привод и габариты 3850×1695×1510 мм; не подтверждает все данные комплектации.' },
+      { label: 'Drom — Suzuki Swift 1.2 2WD AT 5dr GL, Россия (2013–2015)', url: 'https://www.drom.ru/catalog/suzuki/swift/73395/', scope: 'Вторичный каталог для точной российской комплектации ZC72S: код двигателя, мощность/момент, 4AT, привод, габариты, масса, клиренс, бак и размер шин. Значения требуют проверки по первичному документу/VIN.' },
+      { label: 'Suzuki Digital Library — Swift 2010, кузов ZC72S', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html', scope: 'Заводские данные для японской ZC72S: двигатель K12B, 1242 см³, 67 кВт/91 PS, габариты и колёсная база. Не подтверждает мощность и комплектацию российского автомобиля.' }
+    ]
+  }),
+
 const historicalBrandSeeds = [
   { id: 'prince', name: 'Prince Motor Company', russianName: 'Принс', founded: 1952, headquarters: 'Токио, Япония', tagline: 'Историческая японская автомобильная марка', description: 'Исторический производитель, объединённый с Nissan в 1966 году; Skyline и Gloria имеют важную преемственность Prince/Nissan.', brandColor: '#475569', awdPhilosophy: 'Зависит от конкретной модели и эпохи.' },
   { id: 'datsun', name: 'Datsun', russianName: 'Датсун', founded: 1931, headquarters: 'Япония', tagline: 'Историческая экспортная марка Nissan', description: 'Марка, использовавшаяся Nissan для автомобилей на разных рынках и в разные периоды; нельзя смешивать поколения и региональные версии.', brandColor: '#1d4ed8', awdPhilosophy: 'Зависит от модели, поколения и рынка.' },
@@ -2003,6 +2041,11 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
     wiperBladeSize: [{ driverSide: '650 mm', passengerSide: '575 mm', notes: 'OXIMO catalogue lists 650/575 mm for Civic VIII FN/FK hatchback (2006–2011); other fitment tables differ by production date and market. Verify exact arm/connector. https://www.oximo.pl/en/wiper/honda-civic-viii-fn-fk-hatchback-2006-01-01-wgp350425-0/' }],
     tires: [
       { size: '225/45R17', diameter: 634.3, width: 225, aspectRatio: 45, rimDiameter: 431.8, loadIndex: '91', speedRating: 'W', notes: 'Listed for selected Civic VIII hatchback grades; confirm market and exact grade before treating as approved fitment.' }
+    ]
+  },
+  'suzuki-swift-zc72s-ru-12-at-2wd-2013': {
+    tires: [
+      { size: '175/65R15', diameter: 608.5, width: 175, aspectRatio: 65, rimDiameter: 381, loadIndex: 'Не указан источником', speedRating: 'Не указан источником', notes: 'Drom указывает 175/65R15 для российской комплектации Swift ZC72S 1.2 2WD AT 5dr GL 2013–2015. Индексы нагрузки/скорости не подтверждены; проверить табличку конкретного автомобиля. https://www.drom.ru/catalog/suzuki/swift/73395/' }
     ]
   },
   'suzuki-swift-zc11-hatchback': {
