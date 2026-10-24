@@ -67,6 +67,16 @@ jobs:
           npm install --no-save --package-lock=false --no-audit --no-fund @capacitor/assets
           npx capacitor-assets generate --android
 
+      - name: Regenerate Android launcher icons from current app icon
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          mkdir -p assets
+          rsvg-convert -w 1024 -h 1024 public/app-icon.svg > assets/icon.png
+          cp assets/icon.png assets/splash.png
+          npm install --no-save --package-lock=false --no-audit --no-fund @capacitor/assets
+          npx capacitor-assets generate --android
+
       - name: Sync native project
         run: npx cap sync android
 
