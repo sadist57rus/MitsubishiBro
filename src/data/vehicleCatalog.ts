@@ -1,6 +1,7 @@
 import { JAPANESE_BRANDS as baseBrands, type JapaneseBrand, type JapaneseCarModel } from './japaneseBrandsData';
 import './expandedJapaneseModels';
 import './expandedMazdaSuzukiModels';
+import './expandedKeiCars';
 
 /** One canonical catalog for onboarding, garage, header filters, and the model hub. */
 function deduplicateModels(brand: JapaneseBrand): JapaneseCarModel[] {
