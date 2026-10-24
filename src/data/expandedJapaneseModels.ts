@@ -2089,6 +2089,13 @@ const supplementalFitments: Record<string, Pick<JapaneseCarModel, 'tires' | 'wip
       { size: '175/60R15', diameter: 591, width: 175, aspectRatio: 60, rimDiameter: 381, loadIndex: '81', speedRating: 'H', notes: 'Официальный FAQ Nissan: опциональный размер для отдельных комплектаций E11; не универсальная установка. Источник: https://faq2.nissan.co.jp/faq/show/10039' }
     ]
   },
+  'nissan-xtrail-t32-crossover': {
+    tires: [
+      { size: '225/65R17', diameter: 724.3, width: 225, aspectRatio: 65, rimDiameter: 431.8, loadIndex: '102', speedRating: 'H', notes: 'Официальный FAQ Nissan: штатный размер для ряда комплектаций X-Trail T32; давление и точная применимость зависят от двигателя, привода, года и комплектации. Источник: https://faq2.nissan.co.jp/faq/show/12541' },
+      { size: '225/60R18', diameter: 727.2, width: 225, aspectRatio: 60, rimDiameter: 457.2, loadIndex: '100', speedRating: 'H', notes: 'Официальный FAQ Nissan: размер для отдельных комплектаций X-Trail T32; не универсален для всех версий. Источник: https://faq2.nissan.co.jp/faq/show/12541' },
+      { size: '225/55R19', diameter: 730.1, width: 225, aspectRatio: 55, rimDiameter: 482.6, loadIndex: '99', speedRating: 'H', notes: 'Официальный FAQ Nissan: размер для отдельных комплектаций Mode Premier T32; подтвердить комплектацию и табличку автомобиля. Источник: https://faq2.nissan.co.jp/faq/show/12541' }
+    ]
+  },
   'nissan-xtrail-t31-suv': {
     wiperBladeSize: [{ driverSide: '600 mm', passengerSide: '400 mm', notes: 'Официальный FAQ Nissan для X-Trail T31 (2007/08–2015/02): передние 600/400 мм, задняя 350 мм. Источник: https://faq2.nissan.co.jp/faq/show/7939' }],
     tires: [
