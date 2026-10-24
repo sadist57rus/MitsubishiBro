@@ -15,6 +15,7 @@ type KeiIndexEntry = {
   sourceLabel: string;
   dimensionsVerified?: { length: number; width: number; height: number; wheelbase: number; groundClearance: number };
   tireOptions?: { size: string; notes: string }[];
+  wiper?: { driverSide: string; passengerSide: string; notes: string };
 };
 
 const NO_DATA = 'Нет подтверждённых данных для точной модификации';
@@ -29,16 +30,16 @@ const entries: KeiIndexEntry[] = [
   { id: 'toyota-pixis-truck-s500', brandId: 'toyota', name: 'Pixis Truck (S500U/S510U)', chassis: 'S500U/S510U', bodyType: 'Пикап', sourceUrl: 'https://toyota.jp/pixistruck/', sourceLabel: 'Toyota Japan — Pixis Truck' },
 
   // Honda — N-series and earlier kei models
-  { id: 'honda-nbox-jf1', brandId: 'honda', name: 'N-BOX (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
-  { id: 'honda-nbox-jf3', brandId: 'honda', name: 'N-BOX (JF3/JF4)', chassis: 'JF3/JF4', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/Nbox/', sourceLabel: 'Honda Japan — N-BOX' },
+  { id: 'honda-nbox-jf1', brandId: 'honda', name: 'N-BOX (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/customer/auto/n-box/faq/qa015/', sourceLabel: 'Honda Japan — FAQ по колёсам N-BOX', tireOptions: [{ size: '145/80R13 75S', notes: 'Штатный размер для отдельных базовых комплектаций JF1/JF2; проверить шильдик автомобиля.' }, { size: '155/65R14 75S', notes: 'Для отдельных комплектаций JF1/JF2; проверить шильдик автомобиля.' }, { size: '165/55R15 75V', notes: 'Для отдельных турбированных комплектаций JF1/JF2; проверить шильдик автомобиля.' }], wiper: { driverSide: '450 мм (NWB M45S)', passengerSide: '430 мм (NWB M43S)', notes: 'NWB fitment chart для JF1/JF2; сверить год, крепление и задний дворник отдельно.' } },
+  { id: 'honda-nbox-jf3', brandId: 'honda', name: 'N-BOX (JF3/JF4)', chassis: 'JF3/JF4', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/customer/auto/n-box/faq/qa015/', sourceLabel: 'Honda Japan — FAQ по колёсам N-BOX', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для обычных версий JF3/JF4; давление и применимость сверять по табличке.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных версий Custom Turbo; давление и применимость сверять по табличке.' }], wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: '430 мм (NWB M43S)', notes: 'NWB fitment chart для JF3/JF4; сверить год, крепление и задний дворник отдельно.' } },
   { id: 'honda-nbox-jf5', brandId: 'honda', name: 'N-BOX (JF5/JF6)', chassis: 'JF5/JF6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2026/details/136238090-15246.html', sourceLabel: 'Honda Japan — руководство владельца N-BOX 2026', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для соответствующих комплектаций; давление по руководству: перед 240 кПа, зад 230 кПа.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных комплектаций; давление по руководству 220 кПа спереди и сзади. Проверить табличку конкретного автомобиля.' }] },
   { id: 'honda-nbox-plus-jf1', brandId: 'honda', name: 'N-BOX+ (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nbox-slash-jf1', brandId: 'honda', name: 'N-BOX Slash (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
-  { id: 'honda-nwgn-jh1', brandId: 'honda', name: 'N-WGN (JH1/JH2)', chassis: 'JH1/JH2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN' },
-  { id: 'honda-nwgn-jh3', brandId: 'honda', name: 'N-WGN (JH3/JH4)', chassis: 'JH3/JH4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN' },
-  { id: 'honda-none-jg1', brandId: 'honda', name: 'N-ONE (JG1/JG2)', chassis: 'JG1/JG2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE' },
-  { id: 'honda-none-jg3', brandId: 'honda', name: 'N-ONE (JG3/JG4)', chassis: 'JG3/JG4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE' },
-  { id: 'honda-nvan-jj1', brandId: 'honda', name: 'N-VAN (JJ1/JJ2)', chassis: 'JJ1/JJ2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N-VAN/', sourceLabel: 'Honda Japan — N-VAN' },
+  { id: 'honda-nwgn-jh1', brandId: 'honda', name: 'N-WGN (JH1/JH2)', chassis: 'JH1/JH2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN', wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH1/JH2; крепление и год выпуска нужно сверить.' } },
+  { id: 'honda-nwgn-jh3', brandId: 'honda', name: 'N-WGN (JH3/JH4)', chassis: 'JH3/JH4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN', wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH3/JH4; крепление и год выпуска нужно сверить.' } },
+  { id: 'honda-none-jg1', brandId: 'honda', name: 'N-ONE (JG1/JG2)', chassis: 'JG1/JG2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE', wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: 'Нет подтверждённых данных', notes: 'NWB chart does not list a separate passenger-side blade for this model; do not infer it from another generation.' } },
+  { id: 'honda-none-jg3', brandId: 'honda', name: 'N-ONE (JG3/JG4)', chassis: 'JG3/JG4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE', wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: '380 мм (NWB M38S)', notes: 'NWB fitment chart для JG3/JG4; сверить год и крепление.' } },
+  { id: 'honda-nvan-jj1', brandId: 'honda', name: 'N-VAN (JJ1/JJ2)', chassis: 'JJ1/JJ2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N-VAN/', sourceLabel: 'Honda Japan — N-VAN', wiper: { driverSide: '500 мм (NWB M50S)', passengerSide: '400 мм (NWB M40S)', notes: 'NWB fitment chart для JJ1/JJ2; у high-roof/low-roof версий возможны отличия, сверить исполнение.' } },
   { id: 'honda-s660-jw5', brandId: 'honda', name: 'S660 (JW5)', chassis: 'JW5', bodyType: 'Купе/Спорт', sourceUrl: 'https://www.honda.co.jp/auto-archive/', sourceLabel: 'Honda — архив моделей' },
   { id: 'honda-life-jb5', brandId: 'honda', name: 'Life (JB5/JB6/JB7/JB8)', chassis: 'JB5/JB6/JB7/JB8', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/auto-archive/', sourceLabel: 'Honda — архив моделей' },
   { id: 'honda-acty-hh5', brandId: 'honda', name: 'Acty Van (HH5/HH6)', chassis: 'HH5/HH6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/auto-archive/', sourceLabel: 'Honda — архив моделей' },
@@ -64,7 +65,7 @@ const entries: KeiIndexEntry[] = [
   // Suzuki — passenger and commercial kei models
   { id: 'suzuki-alto-ha24', brandId: 'suzuki', name: 'Alto (HA24S)', chassis: 'HA24S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-alto-ha36', brandId: 'suzuki', name: 'Alto (HA36S/HA36V)', chassis: 'HA36S/HA36V', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/', sourceLabel: 'Suzuki Japan — Alto' },
-  { id: 'suzuki-alto-ha37', brandId: 'suzuki', name: 'Alto (HA37S/HA97S)', chassis: 'HA37S/HA97S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/assets/pdf/detail.pdf', sourceLabel: 'Suzuki Japan — официальная таблица характеристик Alto', dimensionsVerified: { length: 3395, width: 1475, height: 1525, wheelbase: 2460, groundClearance: 130 }, tireOptions: [{ size: '155/65R14 75S', notes: 'Размер указан в официальной таблице характеристик Alto; сверить комплектацию и маркировку на стойке двери.' }] },
+  { id: 'suzuki-alto-ha37', brandId: 'suzuki', name: 'Alto (HA37S/HA97S)', chassis: 'HA37S/HA97S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/alto/assets/pdf/detail.pdf', sourceLabel: 'Suzuki Japan — официальная таблица характеристик Alto', dimensionsVerified: { length: 3395, width: 1475, height: 1525, wheelbase: 2460, groundClearance: 130 }, tireOptions: [{ size: '155/65R14 75S', notes: 'Размер указан в официальной таблице характеристик Alto; сверить комплектацию и маркировку на стойке двери.' }], wiper: { driverSide: '450 мм (NWB M45S)', passengerSide: '450 мм (NWB M45S)', notes: 'NWB fitment chart для HA37S/HA97S; задний дворник подбирается отдельно по кузову и креплению.' } },
   { id: 'suzuki-wagon-r-mh21', brandId: 'suzuki', name: 'Wagon R (MH21S/MH22S)', chassis: 'MH21S/MH22S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-wagon-r-mh34', brandId: 'suzuki', name: 'Wagon R (MH34S/MH44S)', chassis: 'MH34S/MH44S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-wagon-r-mh55', brandId: 'suzuki', name: 'Wagon R (MH55S/MH95S)', chassis: 'MH55S/MH95S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/wagonr/', sourceLabel: 'Suzuki Japan — Wagon R' },
@@ -106,6 +107,7 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
         groundClearance: entry.dimensionsVerified.groundClearance,
       } : {}),
     },
+    ...(entry.wiper ? { wiperBladeSize: [entry.wiper] } : {}),
     ...(entry.tireOptions ? {
       tires: entry.tireOptions.map((tire) => {
         const match = tire.size.match(/^(\d{3})\/(\d{2})R(\d{2})/);
@@ -154,11 +156,10 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
     knownIssues: [],
     dataQualityNote: entry.dimensionsVerified || entry.tireOptions ? 'Частичные параметры добавлены только по указанному официальному источнику. Остальные поля не подтверждены для точной модификации и не должны выводиться как известные. Размеры шин и давление необходимо сверять с табличкой конкретного автомобиля.' : 'Добавлена только индексная запись. Официальная ссылка подтверждает семейство/название модели, но не подтверждает здесь код кузова, годы выпуска или технические характеристики. До проверки руководства владельца/сервисного мануала точной версии эти поля намеренно оставлены неподтверждёнными.',
     verificationStatus: 'unverified',
-    sourceReferences: [{
-      label: entry.sourceLabel,
-      url: entry.sourceUrl,
-      scope: entry.dimensionsVerified || entry.tireOptions ? 'Официальный источник производителя; подтверждает только перечисленные параметры для соответствующей версии. Не переносить на другие комплектации или рынки.' : 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.',
-    }],
+    sourceReferences: [
+      { label: entry.sourceLabel, url: entry.sourceUrl, scope: entry.dimensionsVerified || entry.tireOptions ? 'Официальный источник производителя; подтверждает только перечисленные параметры для соответствующей версии. Не переносить на другие комплектации или рынки.' : 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.' },
+      ...(entry.wiper ? [{ label: 'NWB — таблица подбора стеклоочистителей', url: 'https://nwb.wiper-kensaku.com/docs/DCM_2_4_HONDA.pdf', scope: 'Подбор по коду кузова для Honda; номера серий NWB приведены в поле размера. Перед заказом сверить конкретный год, вариант кузова и крепление.' }] : []),
+    ],
     lastReviewed: '2026-10-24',
   };
 }
