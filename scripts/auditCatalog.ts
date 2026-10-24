@@ -38,7 +38,7 @@ for (const brand of JAPANESE_BRANDS) {
       warnings.push(`Engine data is placeholder/vague: ${model.id}`);
     }
     if (model.transmissions.some((transmission) => vague.test(transmission))) warnings.push(`Transmission data is placeholder/vague: ${model.id}`);
-    if (model.dimensions && [model.dimensions.lengthMm, model.dimensions.widthMm, model.dimensions.heightMm, model.dimensions.wheelbaseMm].some((n) => !Number.isFinite(n) || n <= 0)) warnings.push(`Missing/non-positive dimensions: ${model.id}`);
+    if (model.dimensions && [model.dimensions.lengthMm, model.dimensions.widthMm, model.dimensions.heightMm, model.dimensions.wheelbaseMm].some((n) => n === null || !Number.isFinite(n) || n <= 0)) warnings.push(`Missing/non-positive dimensions: ${model.id}`);
     const normalizedDimensions = model.dimensions;
     const normalizedDimensionFields = ['length', 'width', 'height', 'wheelbase', 'groundClearance', 'weight'] as const;
     const missingNormalizedDimensions = normalizedDimensionFields.filter((field) => {
