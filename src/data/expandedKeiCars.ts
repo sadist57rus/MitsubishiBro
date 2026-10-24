@@ -13,7 +13,8 @@ type KeiIndexEntry = {
   bodyType: JapaneseCarModel['bodyType'];
   sourceUrl: string;
   sourceLabel: string;
-  dimensionsVerified?: { length: number; width: number; height: number; wheelbase: number; groundClearance: number };
+  dimensionsVerified?: Partial<{ length: number; width: number; height: number; wheelbase: number; groundClearance: number }>;
+  additionalSources?: { label: string; url: string; scope: string }[];
   tireOptions?: { size: string; notes: string }[];
   wiper?: { driverSide: string; passengerSide: string; notes: string };
   fluidsVerified?: Partial<JapaneseCarModel['fluidsAndCapacities']>;
@@ -39,7 +40,7 @@ const entries: KeiIndexEntry[] = [
   { id: 'honda-nbox-plus-jf1', brandId: 'honda', name: 'N-BOX+ (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nbox-slash-jf1', brandId: 'honda', name: 'N-BOX Slash (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nwgn-jh1', brandId: 'honda', name: 'N-WGN (JH1/JH2)', chassis: 'JH1/JH2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN', wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH1/JH2; крепление и год выпуска нужно сверить.' } },
-  { id: 'honda-nwgn-jh3', brandId: 'honda', name: 'N-WGN (JH3/JH4)', chassis: 'JH3/JH4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN', wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH3/JH4; крепление и год выпуска нужно сверить.' } },
+  { id: 'honda-nwgn-jh3', brandId: 'honda', name: 'N-WGN (JH3/JH4)', chassis: 'JH3/JH4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/ownersmanual/webom/jpn/n-wgn/2026/details/136172090-15246.html', sourceLabel: 'Honda Japan — руководство владельца N-WGN 2026', tireOptions: [{ size: '155/65R14 75S', notes: 'Атмосферные версии: давление по руководству 240 кПа спереди и 230 кПа сзади.' }, { size: '165/55R15 75V', notes: 'Турбоверсии: давление по руководству 210 кПа спереди и сзади; сверить точную комплектацию.' }], fluidsVerified: { engineOil: 'Атмосферный: Honda ULTRA NEXT / ULTRA Green / ULTRA LEO, API SN или выше, 0W-16 или 0W-20. Турбо: ULTRA LEO / ULTRA LTD, API SN или выше, 0W-20 или 5W-30.', engineOilVolume: '2,4 л при замене; 2,8 л при замене масла и фильтра', transmissionFluid: 'Honda Ultra HCF-2; 2,5 л (2WD) / 2,55 л (4WD) при замене', transferCaseAndDiff: 'Только 4WD: трансфер Honda Ultra DPSF-II — 0,43 л; задний дифференциал Honda Ultra HGO-μ — 0,33 л при замене', coolant: 'Honda Ultra e-Coolant, 50%; 2,79 л атмосферный / 2,78 л турбо при замене (включая резервуар 0,31 л)', brakeFluid: 'Honda Genuine Brake Fluid DOT 3 или DOT 4' }, wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH3/JH4; крепление и год выпуска нужно сверить.' }, maintenanceTips: ['Давление различается у атмосферных и турбоверсий: не использовать значение от другой комплектации.', 'Для 4WD в руководстве указаны отдельные жидкости трансфера и заднего дифференциала.', 'Подтверждённый размер шин и допустимое давление сверять с табличкой на автомобиле.'] },
   { id: 'honda-none-jg1', brandId: 'honda', name: 'N-ONE (JG1/JG2)', chassis: 'JG1/JG2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE', wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: 'Нет подтверждённых данных', notes: 'NWB chart does not list a separate passenger-side blade for this model; do not infer it from another generation.' } },
   { id: 'honda-none-jg3', brandId: 'honda', name: 'N-ONE (JG3/JG4)', chassis: 'JG3/JG4', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-ONE/', sourceLabel: 'Honda Japan — N-ONE', wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: '380 мм (NWB M38S)', notes: 'NWB fitment chart для JG3/JG4; сверить год и крепление.' } },
   { id: 'honda-nvan-jj1', brandId: 'honda', name: 'N-VAN (JJ1/JJ2)', chassis: 'JJ1/JJ2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N-VAN/', sourceLabel: 'Honda Japan — N-VAN', wiper: { driverSide: '500 мм (NWB M50S)', passengerSide: '400 мм (NWB M40S)', notes: 'NWB fitment chart для JJ1/JJ2; у high-roof/low-roof версий возможны отличия, сверить исполнение.' } },
@@ -50,7 +51,7 @@ const entries: KeiIndexEntry[] = [
 
   // Daihatsu — passenger and commercial kei models
   { id: 'daihatsu-mira-es-la300', brandId: 'daihatsu', name: 'Mira e:S (LA300S/LA310S)', chassis: 'LA300S/LA310S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.daihatsu.co.jp/lineup/', sourceLabel: 'Daihatsu Japan — каталог моделей' },
-  { id: 'daihatsu-mira-es-la350', brandId: 'daihatsu', name: 'Mira e:S (LA350S/LA360S)', chassis: 'LA350S/LA360S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.daihatsu.co.jp/lineup/mira_e-s/', sourceLabel: 'Daihatsu Japan — Mira e:S' },
+  { id: 'daihatsu-mira-es-la350', brandId: 'daihatsu', name: 'Mira e:S (LA350S/LA360S)', chassis: 'LA350S/LA360S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.daihatsu.co.jp/lineup/mira_e-s/pdf/specifications.pdf', sourceLabel: 'Daihatsu Japan — официальная таблица характеристик Mira e:S', dimensionsVerified: { length: 3395, width: 1475, wheelbase: 2455 }, tireOptions: [{ size: '155/65R14 75S', notes: 'Официальная таблица характеристик для соответствующих комплектаций.' }, { size: '155/70R13 75S', notes: 'Официальная таблица характеристик для соответствующих комплектаций.' }], maintenanceTips: ['Для указанных в руководстве размеров шин давление составляет 260 кПа (2,6 бар) спереди и сзади; перед накачиванием сверить размер с табличкой автомобиля.', 'Руководство рекомендует перестановку шин через каждые 5 000 км; учитывать направление вращения и рекомендации изготовителя шин.'], additionalSources: [{ label: 'Daihatsu Mira e:S — руководство владельца (2025)', url: 'https://www.daihatsu.co.jp/service/torisetu/mira_e-s/pdf/mira_es_full_2506.pdf', scope: 'Руководство подтверждает давление 260 кПа для размеров 155/70R13 75S и 155/65R14 75S, а также рекомендацию по перестановке шин каждые 5 000 км.' }] },
   { id: 'daihatsu-tanto-l375', brandId: 'daihatsu', name: 'Tanto (L375S/L385S)', chassis: 'L375S/L385S', bodyType: 'Минивэн', sourceUrl: 'https://www.daihatsu.co.jp/lineup/tanto/index.htm', sourceLabel: 'Daihatsu Japan — Tanto' },
   { id: 'daihatsu-tanto-la600', brandId: 'daihatsu', name: 'Tanto (LA600S/LA610S)', chassis: 'LA600S/LA610S', bodyType: 'Минивэн', sourceUrl: 'https://www.daihatsu.co.jp/lineup/tanto/index.htm', sourceLabel: 'Daihatsu Japan — Tanto' },
   { id: 'daihatsu-tanto-la650', brandId: 'daihatsu', name: 'Tanto (LA650S/LA660S)', chassis: 'LA650S/LA660S', bodyType: 'Минивэн', sourceUrl: 'https://www.daihatsu.co.jp/lineup/tanto/pdf/specifications.pdf', sourceLabel: 'Daihatsu Japan — официальная таблица характеристик Tanto', tireOptions: [{ size: '155/65R14 75S', notes: 'Штатный размер для соответствующих комплектаций; в руководстве указано 240 кПа спереди и сзади.' }, { size: '165/55R15 75V', notes: 'Штатный размер для отдельных комплектаций; в руководстве указано 240 кПа спереди и сзади. Сверить размер по табличке автомобиля.' }] },
@@ -74,7 +75,7 @@ const entries: KeiIndexEntry[] = [
   { id: 'suzuki-wagon-r-mh55', brandId: 'suzuki', name: 'Wagon R (MH55S/MH95S)', chassis: 'MH55S/MH95S', bodyType: 'Хэтчбек', sourceUrl: 'https://www.suzuki.co.jp/car/wagonr/', sourceLabel: 'Suzuki Japan — Wagon R' },
   { id: 'suzuki-jimny-jb64', brandId: 'suzuki', name: 'Jimny (JB64W)', chassis: 'JB64W', bodyType: 'Внедорожник', sourceUrl: 'https://www.suzuki.co.jp/car/jimny/', sourceLabel: 'Suzuki Japan — Jimny' },
   { id: 'suzuki-hustler-mr31', brandId: 'suzuki', name: 'Hustler (MR31S/MR41S)', chassis: 'MR31S/MR41S', bodyType: 'Кроссовер', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
-  { id: 'suzuki-hustler-mr52', brandId: 'suzuki', name: 'Hustler (MR52S/MR92S)', chassis: 'MR52S/MR92S', bodyType: 'Кроссовер', sourceUrl: 'https://www.suzuki.co.jp/car/hustler/', sourceLabel: 'Suzuki Japan — Hustler' },
+  { id: 'suzuki-hustler-mr52', brandId: 'suzuki', name: 'Hustler (MR52S/MR92S)', chassis: 'MR52S/MR92S', bodyType: 'Кроссовер', sourceUrl: 'https://www.suzuki.co.jp/car/hustler/detail/pdf/detail.pdf', sourceLabel: 'Suzuki Japan — официальные характеристики Hustler', dimensionsVerified: { length: 3395, width: 1475, wheelbase: 2460 }, tireOptions: [{ size: '165/60R15 77H', notes: 'Размер для семейства MR52S/MR92S по официальным материалам Suzuki; проверить комплектацию и маркировку шин на автомобиле.' }], maintenanceTips: ['У Hustler размер шин 165/60R15; не переносить размер на Wagon R или другие Suzuki kei-модели.', 'Минимальный дорожный просвет отличается между 2WD и 4WD, поэтому для выбора маршрута и защиты днища учитывайте конкретный привод.'], additionalSources: [{ label: 'Suzuki Digital Library — Hustler второго поколения', url: 'https://www.suzuki.co.jp/suzuki_digital_library/pdf/1_auto/hustler/206.pdf', scope: 'Архивная официальная таблица подтверждает размер шин 165/60R15 77H для семейства второго поколения.' }] },
   { id: 'suzuki-spacia-mk32', brandId: 'suzuki', name: 'Spacia (MK32S/MK42S)', chassis: 'MK32S/MK42S', bodyType: 'Минивэн', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-spacia-mk53', brandId: 'suzuki', name: 'Spacia (MK53S)', chassis: 'MK53S', bodyType: 'Минивэн', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
   { id: 'suzuki-every-da64', brandId: 'suzuki', name: 'Every (DA64V/DA64W)', chassis: 'DA64V/DA64W', bodyType: 'Минивэн', sourceUrl: 'https://www.suzuki.co.jp/accessory_car/', sourceLabel: 'Suzuki Japan — каталоги аксессуаров, включая прошлые модели' },
@@ -102,13 +103,11 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
       trunkVolumeLiters: NO_DATA,
       fuelTankLiters: null,
       curbWeightKg: NO_DATA,
-      ...(entry.dimensionsVerified ? {
-        length: entry.dimensionsVerified.length,
-        width: entry.dimensionsVerified.width,
-        height: entry.dimensionsVerified.height,
-        wheelbase: entry.dimensionsVerified.wheelbase,
-        groundClearance: entry.dimensionsVerified.groundClearance,
-      } : {}),
+      ...(entry.dimensionsVerified?.length !== undefined ? { length: entry.dimensionsVerified.length } : {}),
+      ...(entry.dimensionsVerified?.width !== undefined ? { width: entry.dimensionsVerified.width } : {}),
+      ...(entry.dimensionsVerified?.height !== undefined ? { height: entry.dimensionsVerified.height } : {}),
+      ...(entry.dimensionsVerified?.wheelbase !== undefined ? { wheelbase: entry.dimensionsVerified.wheelbase } : {}),
+      ...(entry.dimensionsVerified?.groundClearance !== undefined ? { groundClearance: entry.dimensionsVerified.groundClearance } : {}),
     },
     ...(entry.wiper ? { wiperBladeSize: [entry.wiper] } : {}),
     ...(entry.tireOptions ? {
@@ -163,6 +162,7 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
     sourceReferences: [
       { label: entry.sourceLabel, url: entry.sourceUrl, scope: entry.dimensionsVerified || entry.tireOptions ? 'Официальный источник производителя; подтверждает только перечисленные параметры для соответствующей версии. Не переносить на другие комплектации или рынки.' : 'Официальный ресурс производителя для семейства/каталога. Не считать доказательством годов выпуска, точного кода кузова или технических параметров этой записи.' },
       ...(entry.wiper ? [{ label: 'NWB — таблица подбора стеклоочистителей', url: entry.brandId === 'suzuki' ? 'https://nwb.wiper-kensaku.com/docs/DCM_5_9_SUZUKI.pdf' : 'https://nwb.wiper-kensaku.com/docs/DCM_2_4_HONDA.pdf', scope: 'Каталог подбора NWB по коду кузова; номера серий указаны вместе с длиной. Перед заказом сверить год, вариант кузова, крепление и задний дворник отдельно.' }] : []),
+      ...(entry.additionalSources ?? []),
     ],
     lastReviewed: '2026-10-24',
   };
