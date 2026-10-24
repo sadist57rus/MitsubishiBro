@@ -443,32 +443,6 @@ function AppContent() {
 
       {backHint && <div role="status" className="fixed bottom-5 left-1/2 z-[100] -translate-x-1/2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl">{backHint}</div>}
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-xs text-slate-500 dark:text-slate-400 mt-12 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <div className="space-y-0.5">
-              <div className="font-bold text-slate-900 dark:text-slate-200">
-                Nippon-Drive — справочник японских автомобилей
-              </div>
-              <p className="text-slate-500 dark:text-slate-400 text-xs">
-                Технические данные, диагностика OBD-II и обслуживание. Сверяйте характеристики с руководством для конкретной модификации.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
-              <button
-                onClick={() => setIsApkGuideOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition font-sans font-bold"
-              >
-                <Smartphone className="w-3.5 h-3.5" />
-                <span>Сборка APK на GitHub</span>
-              </button>
-              <span>Nippon-Drive</span>
-            </div>
-          </div>
-        </div>
-      </footer>
 
       {/* APK Guide Modal */}
       <ApkGuideModal
