@@ -16,6 +16,9 @@ type KeiIndexEntry = {
   dimensionsVerified?: { length: number; width: number; height: number; wheelbase: number; groundClearance: number };
   tireOptions?: { size: string; notes: string }[];
   wiper?: { driverSide: string; passengerSide: string; notes: string };
+  fluidsVerified?: Partial<JapaneseCarModel['fluidsAndCapacities']>;
+  bulbsVerified?: Partial<JapaneseCarModel['bulbsSummary']>;
+  maintenanceTips?: string[];
 };
 
 const NO_DATA = 'Нет подтверждённых данных для точной модификации';
@@ -32,7 +35,7 @@ const entries: KeiIndexEntry[] = [
   // Honda — N-series and earlier kei models
   { id: 'honda-nbox-jf1', brandId: 'honda', name: 'N-BOX (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/customer/auto/n-box/faq/qa015/', sourceLabel: 'Honda Japan — FAQ по колёсам N-BOX', tireOptions: [{ size: '145/80R13 75S', notes: 'Штатный размер для отдельных базовых комплектаций JF1/JF2; проверить шильдик автомобиля.' }, { size: '155/65R14 75S', notes: 'Для отдельных комплектаций JF1/JF2; проверить шильдик автомобиля.' }, { size: '165/55R15 75V', notes: 'Для отдельных турбированных комплектаций JF1/JF2; проверить шильдик автомобиля.' }], wiper: { driverSide: '450 мм (NWB M45S)', passengerSide: '430 мм (NWB M43S)', notes: 'NWB fitment chart для JF1/JF2; сверить год, крепление и задний дворник отдельно.' } },
   { id: 'honda-nbox-jf3', brandId: 'honda', name: 'N-BOX (JF3/JF4)', chassis: 'JF3/JF4', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/customer/auto/n-box/faq/qa015/', sourceLabel: 'Honda Japan — FAQ по колёсам N-BOX', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для обычных версий JF3/JF4; давление и применимость сверять по табличке.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных версий Custom Turbo; давление и применимость сверять по табличке.' }], wiper: { driverSide: '480 мм (NWB M48S)', passengerSide: '430 мм (NWB M43S)', notes: 'NWB fitment chart для JF3/JF4; сверить год, крепление и задний дворник отдельно.' } },
-  { id: 'honda-nbox-jf5', brandId: 'honda', name: 'N-BOX (JF5/JF6)', chassis: 'JF5/JF6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2026/details/136238090-15246.html', sourceLabel: 'Honda Japan — руководство владельца N-BOX 2026', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для соответствующих комплектаций; давление по руководству: перед 240 кПа, зад 230 кПа.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных комплектаций; давление по руководству 220 кПа спереди и сзади. Проверить табличку конкретного автомобиля.' }] },
+  { id: 'honda-nbox-jf5', brandId: 'honda', name: 'N-BOX (JF5/JF6)', chassis: 'JF5/JF6', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2026/details/136238090-15246.html', sourceLabel: 'Honda Japan — руководство владельца N-BOX 2026', tireOptions: [{ size: '155/65R14 75S', notes: 'Официальный размер для соответствующих комплектаций; давление по руководству: перед 240 кПа, зад 230 кПа.' }, { size: '165/55R15 75V', notes: 'Официальный размер для отдельных комплектаций; давление по руководству 220 кПа спереди и сзади. Проверить табличку конкретного автомобиля.' }], fluidsVerified: { engineOil: 'Honda ULTRA NEXT / ULTRA Green / ULTRA LEO; API SN или выше, 0W-16 или 0W-20 (атмосферный двигатель). Для турбо: ULTRA LEO / ULTRA LTD, API SN или выше, 0W-20 или 5W-30.', engineOilVolume: '2,4 л при замене; 2,8 л с заменой фильтра', transmissionFluid: 'Honda Ultra HCF-2; 2,5 л (2WD) / 2,55 л (4WD) при замене', transferCaseAndDiff: 'Только 4WD: трансфер Honda Ultra DPSF-II — 0,43 л; задний дифференциал Honda Ultra HGO-μ — 0,33 л при замене', coolant: 'Honda Ultra e-Coolant, концентрация 50%; 2,81 л при замене (включая резервуар 0,31 л)', brakeFluid: 'Honda Genuine Brake Fluid DOT 3 или DOT 4' }, bulbsVerified: { lowBeam: 'LED', highBeam: 'LED', fogLights: 'Нет единой спецификации: зависит от комплектации', frontTurn: 'LED', tailStop: 'LED', interior: 'Салонные/карго лампы LED или 12V-8W/12V-5W в зависимости от места и комплектации' }, maintenanceTips: ['Давление и точный размер шин сверять с наклейкой на стойке двери: в руководстве есть разные значения для 14- и 15-дюймовых шин.', 'Не смешивать жидкости разных типов без проверки руководства; для вариатора указана Honda Ultra HCF-2.', 'На 4WD отдельно учитывать жидкость трансфера и заднего дифференциала; это разные узлы и разные жидкости.', 'Для турбоверсии руководство допускает другой набор моторных масел, чем для атмосферной версии.'] },
   { id: 'honda-nbox-plus-jf1', brandId: 'honda', name: 'N-BOX+ (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Минивэн', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nbox-slash-jf1', brandId: 'honda', name: 'N-BOX Slash (JF1/JF2)', chassis: 'JF1/JF2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N/papercraft/jp/index.html', sourceLabel: 'Honda — история и линейка N-серии' },
   { id: 'honda-nwgn-jh1', brandId: 'honda', name: 'N-WGN (JH1/JH2)', chassis: 'JH1/JH2', bodyType: 'Хэтчбек', sourceUrl: 'https://www.honda.co.jp/N-WGN/', sourceLabel: 'Honda Japan — N-WGN', wiper: { driverSide: '530 мм (NWB M53S)', passengerSide: '350 мм (NWB M35S)', notes: 'NWB fitment chart для JH1/JH2; крепление и год выпуска нужно сверить.' } },
@@ -133,21 +136,22 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
       fuelGrade: NO_DATA,
     },
     fluidsAndCapacities: {
-      engineOil: NO_DATA,
-      engineOilVolume: NO_DATA,
-      transmissionFluid: NO_DATA,
-      transferCaseAndDiff: NO_DATA,
-      coolant: NO_DATA,
-      brakeFluid: NO_DATA,
+      engineOil: entry.fluidsVerified?.engineOil ?? NO_DATA,
+      engineOilVolume: entry.fluidsVerified?.engineOilVolume ?? NO_DATA,
+      transmissionFluid: entry.fluidsVerified?.transmissionFluid ?? NO_DATA,
+      transferCaseAndDiff: entry.fluidsVerified?.transferCaseAndDiff ?? NO_DATA,
+      coolant: entry.fluidsVerified?.coolant ?? NO_DATA,
+      brakeFluid: entry.fluidsVerified?.brakeFluid ?? NO_DATA,
     },
     bulbsSummary: {
-      lowBeam: NO_DATA,
-      highBeam: NO_DATA,
-      fogLights: NO_DATA,
-      frontTurn: NO_DATA,
-      tailStop: NO_DATA,
-      interior: NO_DATA,
+      lowBeam: entry.bulbsVerified?.lowBeam ?? NO_DATA,
+      highBeam: entry.bulbsVerified?.highBeam ?? NO_DATA,
+      fogLights: entry.bulbsVerified?.fogLights ?? NO_DATA,
+      frontTurn: entry.bulbsVerified?.frontTurn ?? NO_DATA,
+      tailStop: entry.bulbsVerified?.tailStop ?? NO_DATA,
+      interior: entry.bulbsVerified?.interior ?? NO_DATA,
     },
+    ...(entry.maintenanceTips ? { maintenanceTips: entry.maintenanceTips } : {}),
     obdDiagnostics: {
       portLocation: NO_DATA,
       commonCodes: [],
