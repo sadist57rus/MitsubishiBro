@@ -82,7 +82,7 @@ export default function BrandSelectorModal({
         aria-modal="true"
         aria-labelledby="brand-selector-title"
         tabIndex={-1}
-        className="relative h-[100dvh] w-full max-w-none rounded-none border-0 bg-white dark:bg-slate-900 shadow-none overflow-hidden flex flex-col"
+        className="relative h-[100dvh] min-h-0 w-full max-w-none rounded-none border-0 bg-white dark:bg-slate-900 shadow-none overflow-hidden flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -126,7 +126,7 @@ export default function BrandSelectorModal({
         </div>
 
         {/* Brands Grid */}
-        <div className="p-4 overflow-y-auto space-y-2 flex-1 scrollbar-thin">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y space-y-2 p-4 scrollbar-thin" style={{ WebkitOverflowScrolling: 'touch' }}>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5">
             {visibleBrands.map(brand => {
               const isSelected = brand.id === selectedBrandId;
