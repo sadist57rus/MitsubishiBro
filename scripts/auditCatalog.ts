@@ -1,6 +1,7 @@
 import { JAPANESE_BRANDS } from '../src/data/japaneseBrandsData';
 import '../src/data/expandedJapaneseModels';
 import '../src/data/expandedMazdaSuzukiModels';
+import '../src/data/expandedKeiCars';
 
 type Model = (typeof JAPANESE_BRANDS)[number]['models'][number];
 
@@ -34,6 +35,12 @@ for (const brand of JAPANESE_BRANDS) {
     duplicateNames.set(normalizedName, [...(duplicateNames.get(normalizedName) ?? []), model.id]);
     check(Array.isArray(model.engines) && model.engines.length > 0, `No engine entries: ${model.id}`);
     check(Array.isArray(model.transmissions) && model.transmissions.length > 0, `No transmission entries: ${model.id}`);
+    if (model.engines.some((engine) => !engine.code.trim() || !engine.name.trim() || !engine.displacement.trim())) {
+      errors.push(`Incomplete engine selection option: ${model.id}`);
+    }
+    if (model.transmissions.some((transmission) => !transmission.trim())) {
+      errors.push(`Empty transmission selection option: ${model.id}`);
+    }
     if (model.engines.some((engine) => vague.test(`${engine.code} ${engine.name} ${engine.displacement} ${engine.powerHp} ${engine.torqueNm}`))) {
       placeholderCount++;
       warnings.push(`Engine data is placeholder/vague: ${model.id}`);
