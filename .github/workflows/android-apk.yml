@@ -7,6 +7,12 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      build_signed_test:
+        description: 'Собрать подписанный тестовый APK без публикации релиза'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -199,9 +205,9 @@ jobs:
 
 
   release-apk:
-    name: Build and publish signed release APK
+    name: Build signed APK
     needs: prepare
-    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.build_signed_test) }}
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
@@ -261,7 +267,7 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_VERSION_CODE: ${{ github.run_number }}
-          ANDROID_VERSION_NAME: ${{ github.ref_name }}
+          ANDROID_VERSION_NAME: ${{ (github.event_name == 'workflow_dispatch' && inputs.build_signed_test) && format('signed-test-{0}', github.run_number) || github.ref_name }}
         run: |
           test -n "$ANDROID_KEYSTORE_PASSWORD" || { echo "::error::Missing ANDROID_KEYSTORE_PASSWORD secret"; exit 1; }
           test -n "$ANDROID_KEY_ALIAS" || { echo "::error::Missing ANDROID_KEY_ALIAS secret"; exit 1; }
@@ -282,6 +288,7 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub Release
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
