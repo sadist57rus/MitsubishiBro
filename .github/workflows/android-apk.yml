@@ -64,12 +64,13 @@ jobs:
             echo "::error::android/ is missing. Run the workflow on main first to bootstrap and commit the native project."
             exit 1
           fi
-          sudo apt-get update
-          sudo apt-get install -y librsvg2-bin
-          mkdir -p assets
-          rsvg-convert -w 1024 -h 1024 public/app-icon.svg > assets/icon.png
-          cp assets/icon.png assets/splash.png
           npx cap add android
+
+      - name: Generate Android launcher icons from the original image
+        run: |
+          mkdir -p assets
+          cp public/nippon-drive-icon.png assets/icon.png
+          cp public/nippon-drive-icon.png assets/splash.png
           npm install --no-save --package-lock=false --no-audit --no-fund @capacitor/assets
           npx capacitor-assets generate --android
 
