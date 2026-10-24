@@ -1973,6 +1973,20 @@ const supplementalModels: JapaneseCarModel[] = [
       { label: 'Suzuki Digital Library — Swift 2010, кузов ZC72S', url: 'https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html', scope: 'Заводские данные для японской ZC72S: двигатель K12B, 1242 см³, 67 кВт/91 PS, габариты и колёсная база. Не подтверждает мощность и комплектацию российского автомобиля.' }
     ]
   }),
+  makeSupplementalModel({
+    id: 'toyota-mark-ii-x100-tourer-v', brandId: 'toyota', name: 'Mark II (X100, Tourer V)', generation: 'VIII поколение, X100', years: '1996–2000', bodyType: 'Седан',
+    overview: 'Легендарный заднеприводный четырёхдверный Tourer V. Приведены характеристики японской версии E-JZX100 из каталога Toyota; параметры не следует автоматически переносить на другие комплектации Mark II X100.',
+    lengthMm: 4760, widthMm: 1755, heightMm: 1400, wheelbaseMm: 2730, groundClearanceMm: 0,
+    trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 70, curbWeightKg: '1480 кг для японской версии Tourer V',
+    engines: [{ code: '1JZ-GTE', name: '2.5 л турбо, рядный 6-цилиндровый DOHC 24V', displacement: '2491 см³', powerHp: '280 PS при 6200 об/мин', torqueNm: '377.6 Н·м при 2400 об/мин', valves: '24V DOHC Turbo', fuelSystem: 'EFI, электронный впрыск', timingDrive: 'Нет подтверждённых данных в использованной карточке', strengths: ['Задний привод и продольный рядный шестицилиндровый двигатель'], weaknesses: ['Состояние турбосистемы и следы модификаций требуют отдельной диагностики'] }],
+    transmissions: ['5-ступенчатая МКПП или 4-ступенчатая АКПП — сверять по конкретной комплектации'],
+    drivetrain: 'Задний привод (FR) для японского JZX100 Tourer V.',
+    sourceNotes: 'Размеры, масса, двигатель 1JZ-GTE, мощность, момент и бак взяты из каталога Toyota GAZOO для Mark II Tourer V 1996 года. Неизвестные параметры не заполнены.',
+    sourceReferences: [
+      { label: 'Toyota GAZOO — Mark II Tourer V (1996, E-JZX100)', url: 'https://gazoo.com/catalog/maker/TOYOTA/MARK_II/199609/1001105/', scope: 'Заводская спецификация японской комплектации: габариты, база, масса, 1JZ-GTE, мощность, момент и бак.' },
+      { label: 'Toyota Global — история и спецификации Mark II X100', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013052/index.html', scope: 'Официальная история поколения и заводские характеристики семейства X100.' }
+    ]
+  }),
 ];
 
 const historicalBrandSeeds = [
