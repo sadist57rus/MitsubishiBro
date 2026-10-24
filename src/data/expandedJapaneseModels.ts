@@ -415,20 +415,22 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'mitsubishi-lancer-x-cy-sedan',
     brandId: 'mitsubishi',
-    name: 'Lancer X (CY)',
-    generation: 'X поколение',
+    name: 'Lancer X (CY sedan)',
+    generation: 'X поколение / CY',
     years: '2007–2017',
     bodyType: 'Седан',
-    overview: 'Седан Lancer десятого поколения. Встречаются разные бензиновые двигатели, механические и автоматизированные трансмиссии; характеристики Evolution нельзя переносить на обычный Lancer.',
-    lengthMm: 4570, widthMm: 1760, heightMm: 1505, wheelbaseMm: 2635,
-    groundClearanceMm: 165, trunkVolumeLiters: 'Около 400 л, зависит от рынка', fuelTankLiters: 59,
-    curbWeightKg: 'Ориентировочно 1300–1500 кг',
+    overview: 'Обычный седан десятого поколения (не Sportback, Ralliart или Evolution). Наиболее распространены бензиновые 1.5, 1.8 и 2.0; состав двигателей и коробок зависит от страны и года.',
+    lengthMm: 4570, widthMm: 1760, heightMm: 1490, wheelbaseMm: 2635,
+    groundClearanceMm: 150, trunkVolumeLiters: 'около 400 л; методика и рынок влияют на значение', fuelTankLiters: 59,
+    curbWeightKg: 'примерно 1300–1500 кг в зависимости от двигателя и трансмиссии',
     engines: [
-      { code: '4A91', name: '1.5 л бензин MIVEC', displacement: '1499 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC MIVEC', fuelSystem: 'Распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Экономичность атмосферной версии'], weaknesses: ['Проверять расход масла и состояние цепного привода'] },
-      { code: '4B10', name: '1.8 л бензин MIVEC', displacement: '1798 см³', powerHp: 'Зависит от рынка', torqueNm: 'Зависит от версии', valves: '16V DOHC MIVEC', fuelSystem: 'Распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Распространённый двигатель семейства 4B'], weaknesses: ['Нужна проверка точной версии и регламента'] }
+      { code: '4A91', name: '1.5 л бензин MIVEC', displacement: '1499 см³', powerHp: '109 л.с. для ряда экспортных версий', torqueNm: 'около 143 Н·м для ряда версий', valves: '16V DOHC MIVEC', fuelSystem: 'Распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Умеренный расход топлива'], weaknesses: ['Проверять расход масла и состояние цепного привода'] },
+      { code: '4B10', name: '1.8 л бензин MIVEC', displacement: '1798 см³', powerHp: '143 л.с. для ряда версий', torqueNm: 'около 178 Н·м для ряда версий', valves: '16V DOHC MIVEC', fuelSystem: 'Распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Хороший баланс мощности и расхода'], weaknesses: ['Проверять уровень масла и историю обслуживания'] },
+      { code: '4B11', name: '2.0 л бензин MIVEC', displacement: '1998 см³', powerHp: '150 л.с. для ряда экспортных версий', torqueNm: '197 Н·м для ряда версий', valves: '16V DOHC MIVEC', fuelSystem: 'Распределённый впрыск', timingDrive: 'Цепь ГРМ', strengths: ['Более высокая тяга'], weaknesses: ['Требует подбора масла и деталей по коду двигателя'] }
     ],
-    transmissions: ['5-ступенчатая МКПП', 'Вариатор CVT — отдельные версии', 'АКПП — по рынку и двигателю'],
-    sourceNotes: 'Ориентир для обычного седана CY. Lancer Sportback и Evolution являются отдельными вариантами; регламенты сверять по коду агрегата.'
+    transmissions: ['5-ступенчатая МКПП — по версии', 'INVECS-III CVT с режимом имитации ступеней — по версии', '4-ступенчатая АКПП — отдельные двигатели/рынки'],
+    drivetrain: 'Передний привод у большинства обычных седанов; отдельные региональные версии отличаются.',
+    sourceNotes: 'Для одной из заводских спецификаций экспортного седана подтверждены 4570×1760×1490 мм, база 2635 мм, бак 59 л, 2.0 4B11 150 PS/197 Н·м и шины 205/60R16; 215/45R18 встречаются в отдельных комплектациях. Источники: https://mmc-manuals.ru/manuals/lancer_x/catalogs/2017_lancer_gcc_en.pdf ; https://catalog.aw.by/ ; https://car.motor-fan.jp/catalog/model/lancer/grade/10043442 . Lancer Sportback, Ralliart и Evolution требуют отдельных спецификаций; размеры колёс и регламент не универсальны.'
   }),
   makeSupplementalModel({
     id: 'toyota-prius-xw30-liftback',
@@ -542,16 +544,17 @@ const supplementalModels: JapaneseCarModel[] = [
   }),
 
   makeSupplementalModel({
-    id: 'mitsubishi-lancer-cs-sedan', brandId: 'mitsubishi', name: 'Lancer IX (CS)', generation: 'IX поколение', years: '2000–2010', bodyType: 'Седан',
-    overview: 'Компактный седан; моторы 4G18/4G63/4G69 и трансмиссии зависят от рынка и комплектации.',
-    lengthMm: 4535, widthMm: 1715, heightMm: 1445, wheelbaseMm: 2600, groundClearanceMm: 165, trunkVolumeLiters: '430 л (зависит от рынка)', fuelTankLiters: 50, curbWeightKg: '1100–1350 кг',
+    id: 'mitsubishi-lancer-cs-sedan', brandId: 'mitsubishi', name: 'Lancer IX (CS sedan)', generation: 'IX поколение / CS', years: '2000–2010', bodyType: 'Седан',
+    overview: 'Седан девятого поколения. Для российского и европейского рынков характерны 1.3 4G13, 1.6 4G18 и отдельные 2.0; японский Lancer Cedia и Evolution имеют отличающиеся кузова и агрегаты.',
+    lengthMm: 4480, widthMm: 1695, heightMm: 1445, wheelbaseMm: 2600, groundClearanceMm: 150, trunkVolumeLiters: '430 л (седан; зависит от методики рынка)', fuelTankLiters: 50, curbWeightKg: 'около 1100–1250 кг для обычных седанов; зависит от двигателя и КПП',
     engines: [
-      { code: '4G18', name: '1.6 л SOHC', displacement: '1584 см³', powerHp: 'около 98 л.с. (по версии)', torqueNm: 'Зависит от версии', valves: '16V SOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Простая атмосферная конструкция'], weaknesses: ['Проверять ремень ГРМ и течи масла'] },
-      { code: '4G63', name: '2.0 л DOHC', displacement: '1997 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Широкая распространённость'], weaknesses: ['Регламент ГРМ зависит от двигателя и года'] },
-      { code: '4G69', name: '2.4 л MIVEC — отдельные версии', displacement: '2378 см³', powerHp: 'Зависит от версии', torqueNm: 'Зависит от версии', valves: '16V SOHC MIVEC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Хорошая тяга'], weaknesses: ['Не устанавливался на все рынки'] }
+      { code: '4G13', name: '1.3 л бензин SOHC', displacement: '1299 см³', powerHp: '82 л.с. для отдельных европейских версий', torqueNm: '120 Н·м для отдельных версий', valves: '16V SOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Простой атмосферный двигатель'], weaknesses: ['Проверять историю замены ремня и роликов'] },
+      { code: '4G18', name: '1.6 л бензин SOHC', displacement: '1584 см³', powerHp: '98 л.с. для распространённой версии', torqueNm: '150 Н·м для распространённой версии', valves: '16V SOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ', strengths: ['Широкая доступность деталей'], weaknesses: ['На возрастных моторах проверять расход масла, дроссель и охлаждение'] },
+      { code: '4G63', name: '2.0 л бензин DOHC — отдельные рынки/версии', displacement: '1997 см³', powerHp: 'около 135 л.с. для отдельных атмосферных версий', torqueNm: 'около 176 Н·м для отдельных версий', valves: '16V DOHC', fuelSystem: 'MPI', timingDrive: 'Ремень ГРМ и отдельный ремень балансирных валов', strengths: ['Более высокая отдача'], weaknesses: ['Особенно важна история обслуживания обоих ременных приводов'] }
     ],
-    transmissions: ['МКПП', 'АКПП — по двигателю и рынку'], drivetrain: 'Преимущественно передний привод; отдельные спортивные/региональные версии отличаются.',
-    sourceNotes: 'Поколение CS включает много рынков и комплектаций. Код двигателя/коробки обязателен для точных жидкостей, ламп и регламента.'
+    transmissions: ['5-ступенчатая МКПП; код коробки зависит от двигателя', '4-ступенчатая АКПП INVECS-II на отдельных версиях'],
+    drivetrain: 'Обычно передний привод; японские Cedia и специальные версии могут отличаться.',
+    sourceNotes: 'Размеры 4480×1695×1445 мм, база 2600 мм, бак 50 л и шины 175/70 R14 либо 195/55 R15 подтверждаются каталогами обычного седана для отдельных рынков. Источники: https://catalog.aw.by/55821/ ; https://auto.ru/catalog/cars/mitsubishi/lancer/2334567/7772063/specifications/7772063__8297226/ . Для точного подбора расходников нужны VIN/код кузова и двигатель; не переносить данные Evolution или универсала на седан.'
   }),
   makeSupplementalModel({
     id: 'mitsubishi-lancer-cs-wagon', brandId: 'mitsubishi', name: 'Lancer IX Wagon (CS)', generation: 'IX поколение, универсал', years: '2003–2008', bodyType: 'Универсал',
