@@ -247,7 +247,7 @@ function AppContent() {
   if (orientationChosen && (!profileSelected || vehicles.length === 0)) {
     const model = setupBrand.models.find(item => item.id === setupModelId) || setupBrand.models[0];
     return (
-      <main className={"car-vehicle-setup min-h-[100dvh] w-full overflow-y-auto overscroll-y-contain [webkit-overflow-scrolling:touch] bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-white flex items-start justify-start p-0 " + (uiMode === 'wide' ? 'car-vehicle-setup-wide' : '')}>
+      <main style={{ WebkitOverflowScrolling: 'touch', scrollBehavior: 'smooth' }} className={"car-vehicle-setup min-h-[100dvh] w-full overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch] bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-white flex items-start justify-start p-0 " + (uiMode === 'wide' ? 'car-vehicle-setup-wide' : '')}>
         <section className="min-h-[100dvh] w-full max-w-none rounded-none border-0 bg-white dark:bg-slate-900 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:p-8 shadow-none">
           <div className="flex items-center gap-4 mb-6"><img src="/nippon-drive-icon.png" alt="Nippon-Drive" className="h-16 w-16 shrink-0 rounded-2xl shadow-lg" /><div><p className="text-sm font-bold uppercase tracking-widest text-red-600">NIPPON-DRIVE</p><h1 className="text-3xl md:text-4xl font-black">Add your vehicle</h1></div></div>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8">Choose a vehicle to personalize your home screen, specifications, and service log. No default brand is selected.</p>
