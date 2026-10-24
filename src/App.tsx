@@ -230,7 +230,7 @@ function AppContent() {
       <main className="min-h-screen bg-[#070b12] text-white flex items-center justify-center p-5">
         <section className="w-full max-w-xl rounded-3xl border border-amber-400/30 bg-gradient-to-br from-slate-950 to-slate-900 p-6 sm:p-8 shadow-2xl">
           <div className="mx-auto mb-5 flex justify-center">
-            <img src="/nippon-drive-logo.png" alt="Nippon-Drive" className="h-32 w-auto max-w-full object-contain rounded-[1.6rem] border border-amber-300/50 shadow-[0_12px_45px_rgba(245,158,11,0.2)]" />
+            <img src="/app-icon.svg" alt="Nippon-Drive" className="h-32 w-auto max-w-full object-contain rounded-[1.6rem] border border-amber-300/50 shadow-[0_12px_45px_rgba(245,158,11,0.2)]" />
           </div>
           <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-amber-300">GARAGE COMPANION</p>
           <h1 className="mt-2 text-center text-2xl sm:text-3xl font-black">Выберите ориентацию экрана</h1>
@@ -249,7 +249,7 @@ function AppContent() {
     return (
       <main className={"car-vehicle-setup min-h-screen bg-slate-100 dark:bg-[#070b12] text-slate-900 dark:text-white flex items-center justify-center p-4 " + (uiMode === 'wide' ? 'car-vehicle-setup-wide' : '')}>
         <section className="w-full max-w-4xl rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 md:p-10 shadow-2xl">
-          <div className="flex items-center gap-4 mb-6"><img src="/nippon-drive-icon.png" alt="Nippon-Drive" className="h-16 w-16 shrink-0 rounded-2xl shadow-lg" /><div><p className="text-sm font-bold uppercase tracking-widest text-red-600">NIPPON-DRIVE</p><h1 className="text-3xl md:text-4xl font-black">Добавим вашу машину</h1></div></div>
+          <div className="flex items-center gap-4 mb-6"><img src="/app-icon.svg" alt="Nippon-Drive" className="h-16 w-16 shrink-0 rounded-2xl shadow-lg" /><div><p className="text-sm font-bold uppercase tracking-widest text-red-600">NIPPON-DRIVE</p><h1 className="text-3xl md:text-4xl font-black">Добавим вашу машину</h1></div></div>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8">Выберите автомобиль — стартовый экран, характеристики и журнал будут привязаны к нему. Никакой марки по умолчанию.</p>
           <div className="grid gap-5 md:grid-cols-2">
             <label className="block text-base md:text-lg font-bold">Марка<select className="mt-2 min-h-16 w-full rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-lg md:text-xl" value={setupBrandId} onChange={event => { const id=event.target.value; const brand=JAPANESE_BRANDS.find(item=>item.id===id)!; setSetupBrandId(id); setSetupModelId(brand.models[0]?.id||''); setSetupEngine(brand.models[0]?.engines[0]?.code||''); setSetupTransmission(brand.models[0]?.transmissions[0]||''); }}>{JAPANESE_BRANDS.map(brand=><option key={brand.id} value={brand.id}>{brand.russianName || brand.name}</option>)}</select></label>
@@ -358,6 +358,16 @@ function AppContent() {
                 </button>;
               })}
             </div>
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => setIsApkGuideOpen(true)}
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-red-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+              >
+                <Smartphone aria-hidden="true" size={18} />
+                <span>Сборка APK на GitHub</span>
+              </button>
+            </div>
           </section>
         )}
 
@@ -443,32 +453,6 @@ function AppContent() {
 
       {backHint && <div role="status" className="fixed bottom-5 left-1/2 z-[100] -translate-x-1/2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-xl">{backHint}</div>}
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-xs text-slate-500 dark:text-slate-400 mt-12 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <div className="space-y-0.5">
-              <div className="font-bold text-slate-900 dark:text-slate-200">
-                Nippon-Drive — справочник японских автомобилей
-              </div>
-              <p className="text-slate-500 dark:text-slate-400 text-xs">
-                Технические данные, диагностика OBD-II и обслуживание. Сверяйте характеристики с руководством для конкретной модификации.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
-              <button
-                onClick={() => setIsApkGuideOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600/10 text-red-600 hover:bg-red-600 hover:text-white transition font-sans font-bold"
-              >
-                <Smartphone className="w-3.5 h-3.5" />
-                <span>Сборка APK на GitHub</span>
-              </button>
-              <span>Nippon-Drive</span>
-            </div>
-          </div>
-        </div>
-      </footer>
 
       {/* APK Guide Modal */}
       <ApkGuideModal

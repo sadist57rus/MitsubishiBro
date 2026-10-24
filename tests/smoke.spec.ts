@@ -182,13 +182,18 @@ for (const viewport of viewports) {
       await expect(page.getByTestId('header-section-title')).toHaveText('Главная');
       await expect(page.getByRole('button', { name: /Изменить автомобиль|Выбрать автомобиль/i })).toBeVisible();
 
+      await moreTrigger.focus();
+      await moreTrigger.press('Enter');
       const apkTrigger = page.getByRole('button', { name: /Сборка APK на GitHub/i });
+      await expect(apkTrigger).toBeVisible();
       await apkTrigger.click();
       const apkDialog = page.getByRole('dialog');
       await expect(apkDialog).toBeVisible();
       await page.keyboard.press('Escape');
       await expect(apkDialog).toBeHidden();
       await expect(apkTrigger).toBeFocused();
+      await page.getByTestId('header-back').click();
+      await expect(page.getByTestId('header-section-title')).toHaveText('Главная');
 
       for (const brand of [{ id: 'nissan', value: 'nissan' }, { id: 'honda', value: 'honda' }]) {
         await page.getByRole('button', { name: /Изменить автомобиль/i }).click();
