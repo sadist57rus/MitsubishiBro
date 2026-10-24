@@ -1360,13 +1360,13 @@ const supplementalModels: JapaneseCarModel[] = [
     name: 'Murano Z50', generation: 'I поколение (Z50)', years: '2002–2007', bodyType: 'Кроссовер',
     overview: 'Murano Z50: агрегаты, оснащение и привод зависят от рынка, года и комплектации.',
     lengthMm: 4770, widthMm: 1880, heightMm: 1685, wheelbaseMm: 2825,
-    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: null,
+    groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых универсальных данных', fuelTankLiters: 82,
     curbWeightKg: '1720 кг — заводская спецификация японской версии 2WD 350XV 2004 года',
     engines: [{ code: 'VQ35DE', name: '3.5 л бензин V6 DOHC', displacement: '3498 см³', powerHp: '231 PS при 5600 об/мин для японской версии 2WD 350XV 2004 года', torqueNm: '333 Н·м при 2800 об/мин для указанной версии', valves: '24V DOHC V6', fuelSystem: 'EFI; исполнение зависит от рынка', timingDrive: 'Цепь ГРМ; точный регламент обслуживания сверять с руководством', strengths: ['Высокая плавность и тяга V6'], weaknesses: ['Параметры японской 2WD-версии нельзя автоматически переносить на AWD и экспортные исполнения'] }],
     transmissions: ['Вариатор CVT на ряде версий; точный код и спецификацию жидкости сверить по VIN/табличке агрегата'],
     drivetrain: 'Выпускались переднеприводные и полноприводные версии; привод и трансмиссию не определять только по названию Z50.',
-    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Дорожный просвет, бак, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
-    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }]
+    sourceNotes: 'Заводская карточка Nissan описывает японский Murano 2WD 350XV 2004 года: 4770×1880×1685 мм, база 2825 мм, масса 1720 кг, VQ35DE 3498 см³, 231 PS и 333 Н·м. Это одна конкретная версия, не универсальная спецификация всех Z50. Объём бака 82 л подтверждён японской карточкой GAZOO для 2WD 250XL/350XV Z50; дорожный просвет, сервисные жидкости и объёмы требуют руководства соответствующего рынка и трансмиссии.',
+    sourceReferences: [{ label: 'Nissan Heritage — Murano 2WD 350XV (2004, PZ50)', url: 'https://www.nissan-global.com/EN/HERITAGE_COLLECTION/467_murano_2wd_350xv.html', scope: 'Официальные размеры, масса и двигатель для японской 2WD-версии 2004 года; не распространять на все рынки.' }, { label: 'Toyota GAZOO — Nissan Murano 350XV (PZ50, 2004)', url: 'https://gazoo.com/catalog/maker/NISSAN/MURANO/200409/10023167/', scope: 'Карточка японской 2WD 350XV подтверждает топливный бак 82 л.' }]
   }),
   makeSupplementalModel({
     id: 'nissan-murano-z51-crossover', brandId: 'nissan',
