@@ -118,8 +118,8 @@ function makeKeiIndexModel(entry: KeiIndexEntry): JapaneseCarModel {
         return {
           size: tire.size, width, aspectRatio, rimDiameter,
           diameter: rimDiameter + 2 * width * aspectRatio / 100,
-          loadIndex: tire.size.match(/R\\d{2}\\s+(\\d{2,3})[A-Z]$/)?.[1] ?? 'Нет данных',
-          speedRating: tire.size.match(/R\\d{2}\\s+\\d{2,3}([A-Z])$/)?.[1] ?? 'Нет данных',
+          loadIndex: tire.size.match(/R\d{2}\s+(\d{2,3})[A-Z]$/)?.[1] ?? 'Нет данных',
+          speedRating: tire.size.match(/R\d{2}\s+\d{2,3}([A-Z])$/)?.[1] ?? 'Нет данных',
           notes: tire.notes,
         };
       }),
