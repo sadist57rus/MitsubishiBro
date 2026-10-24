@@ -2026,7 +2026,7 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['Автоматическая трансмиссия; другие варианты сверять по точной модификации'],
     drivetrain: 'Задний привод (FR) для GH-JZX110 Grande G-tb.',
     sourceNotes: 'Габариты, масса, код двигателя, объём, мощность и привод подтверждены Toyota Global. Неуказанные параметры оставлены без догадок.',
-    sourceReferences: [{ label: 'Toyota Global — Mark II X110 (2000)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013047/index.html', scope: 'Заводские характеристики репрезентативных японских комплектаций X110.' }]
+    sourceReferences: [{ label: 'Toyota Global — Mark II X110 (2000)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60013047/index.html', scope: 'Заводские характеристики репрезентативных японских комплектаций X110.' }, { label: 'Toyota GAZOO — Mark II Grande G-tb GH-JZX110 (2000)', url: 'https://gazoo.com/catalog/maker/TOYOTA/MARK_II/200010/1008659/', scope: 'Японская версия Grande G-tb: объём бака 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-supra-a80-rz', brandId: 'toyota', name: 'Supra (A80, RZ)', generation: 'IV поколение, A80', years: '1993–2002', bodyType: 'Купе/Спорт',
@@ -2037,7 +2037,7 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['6-ступенчатая МКПП для японской RZ; варианты зависят от grade'],
     drivetrain: 'Задний привод (FR) для японской Supra RZ.',
     sourceNotes: 'Заводские данные Toyota Global для японской JZA80 RZ: размеры, масса и 2JZ-GTE.',
-    sourceReferences: [{ label: 'Toyota Global — Supra A80 (1993)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006850/index.html', scope: 'Заводские параметры японской Supra A80.' }]
+    sourceReferences: [{ label: 'Toyota Global — Supra A80 (1993)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60006850/index.html', scope: 'Заводские параметры японской Supra A80.' }, { label: 'Toyota GAZOO — Supra RZ E-JZA80 (1997)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SUPRA/199305/1000971/', scope: 'Японская версия RZ: объём бака 70 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-soarer-jzz30-gt-twin-turbo', brandId: 'toyota', name: 'Soarer (JZZ30, 2.5 GT Twin Turbo L)', generation: 'III поколение, Z30', years: '1991–2000', bodyType: 'Купе/Спорт',
@@ -2048,7 +2048,7 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['Автоматическая трансмиссия для указанной спецификации; другие варианты зависят от комплектации'],
     drivetrain: 'Задний привод (FR) для JZZ30.',
     sourceNotes: 'Габариты, масса, двигатель и мощность подтверждены Toyota Global для третьего поколения Soarer.',
-    sourceReferences: [{ label: 'Toyota Global — Soarer Z30 (1991)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60010598/index.html', scope: 'Заводские параметры японской 2.5 GT Twin Turbo L.' }]
+    sourceReferences: [{ label: 'Toyota Global — Soarer Z30 (1991)', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60010598/index.html', scope: 'Заводские параметры японской 2.5 GT Twin Turbo L.' }, { label: 'Toyota GAZOO — Soarer 2.5 GT Twin Turbo L E-JZZ30 (1991)', url: 'https://gazoo.com/catalog/maker/TOYOTA/SOARER/199105/1000866/', scope: 'Японская версия 2.5 GT Twin Turbo L: объём бака 78 л.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-supra-a70-gt-turbo', brandId: 'toyota', name: 'Supra (A70, 3.0 GT Turbo)', generation: 'III поколение, A70', years: '1986–1993', bodyType: 'Купе/Спорт',
