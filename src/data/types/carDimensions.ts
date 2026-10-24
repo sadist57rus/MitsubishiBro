@@ -42,12 +42,12 @@ export interface WiperBladeSize {
  * Не путать с CarDimensions: это существовавшая до миграции схема.
  */
 export interface LegacyCarDimensions {
-  lengthMm: number;
-  widthMm: number;
-  heightMm: number;
-  wheelbaseMm: number;
-  groundClearanceMm: number;
+  lengthMm: number | null;
+  widthMm: number | null;
+  heightMm: number | null;
+  wheelbaseMm: number | null;
+  groundClearanceMm: number | null;
   trunkVolumeLiters: string;
-  fuelTankLiters: number;
+  fuelTankLiters: number | null;
   curbWeightKg: string;
 }

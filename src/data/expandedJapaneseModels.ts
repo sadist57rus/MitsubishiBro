@@ -13,13 +13,13 @@ const makeSupplementalModel = (data: {
   years: string;
   bodyType: JapaneseCarModel['bodyType'];
   overview: string;
-  lengthMm: number;
-  widthMm: number;
-  heightMm: number;
-  wheelbaseMm: number;
-  groundClearanceMm: number;
+  lengthMm: number | null;
+  widthMm: number | null;
+  heightMm: number | null;
+  wheelbaseMm: number | null;
+  groundClearanceMm: number | null;
   trunkVolumeLiters: string;
-  fuelTankLiters: number;
+  fuelTankLiters: number | null;
   curbWeightKg: string;
   engines: JapaneseCarModel['engines'];
   transmissions: string[];
@@ -46,11 +46,11 @@ const makeSupplementalModel = (data: {
       trunkVolumeLiters: data.trunkVolumeLiters,
       fuelTankLiters: data.fuelTankLiters,
       curbWeightKg: data.curbWeightKg,
-      length: data.lengthMm,
-      width: data.widthMm,
-      height: data.heightMm,
-      wheelbase: data.wheelbaseMm,
-      groundClearance: data.groundClearanceMm,
+      ...(data.lengthMm !== null ? { length: data.lengthMm } : {}),
+      ...(data.widthMm !== null ? { width: data.widthMm } : {}),
+      ...(data.heightMm !== null ? { height: data.heightMm } : {}),
+      ...(data.wheelbaseMm !== null ? { wheelbase: data.wheelbaseMm } : {}),
+      ...(data.groundClearanceMm !== null ? { groundClearance: data.groundClearanceMm } : {}),
       ...( /^\\s*\\d+(?:[.,]\\d+)?\\s*(?:кг)?\\s*$/i.test(data.curbWeightKg)
         ? { weight: Number(data.curbWeightKg.match(/\\d+(?:[.,]\\d+)?/)?.[0].replace(',', '.')) }
         : {})
@@ -1684,6 +1684,43 @@ const supplementalModels: JapaneseCarModel[] = [
       label: 'Mazda Japan — запуск Premacy, 26.04.1999',
       url: 'https://newsroom.mazda.com/en/publicity/release/1999/9904/990426e.html',
       scope: 'Заводской релиз: размеры 2WD/4WD, двигатель FP-DE, мощность, момент, АКПП и варианты привода.'
+    }]
+  }),
+  makeSupplementalModel({
+    id: 'mazda-mpv-lw-japan',
+    brandId: 'mazda',
+    name: 'MPV (LW, японская спецификация)',
+    generation: 'II поколение (LW)',
+    years: '1999–2006',
+    bodyType: 'Минивэн',
+    overview: 'Второе поколение Mazda MPV (LW), представленное в Японии в 1999 году. Двигатель, трансмиссию, размеры и жидкости необходимо уточнять по конкретному коду кузова и году выпуска.',
+    lengthMm: null,
+    widthMm: null,
+    heightMm: null,
+    wheelbaseMm: null,
+    groundClearanceMm: null,
+    trunkVolumeLiters: 'Нет подтверждённых данных',
+    fuelTankLiters: null,
+    curbWeightKg: 'Нет подтверждённых данных',
+    engines: [{
+      code: 'Нет подтверждённых данных',
+      name: 'Двигатель не установлен по точной комплектации',
+      displacement: 'Нет подтверждённых данных',
+      powerHp: 'Нет подтверждённых данных',
+      torqueNm: 'Нет подтверждённых данных',
+      valves: 'Нет подтверждённых данных',
+      fuelSystem: 'Нет подтверждённых данных',
+      timingDrive: 'Нет подтверждённых данных',
+      strengths: ['Не переносить характеристики между рынками и годами'],
+      weaknesses: ['Требуется точный код кузова и двигатель']
+    }],
+    transmissions: ['Нет подтверждённых данных для единой спецификации LW'],
+    drivetrain: 'Передний или полный привод в зависимости от комплектации.',
+    sourceNotes: 'Навигационная карточка поколения, не подтверждает параметры конкретного автомобиля. Технические значения оставлены незаполненными до проверки заводского руководства для соответствующего года и кузовного кода.',
+    sourceReferences: [{
+      label: 'Mazda Japan — официальный архив руководств MPV',
+      url: 'https://www.mazda.co.jp/owner_support/manual/mpv/',
+      scope: 'Официальная точка входа к руководствам MPV; выбрать год и номер кузова для точных характеристик.'
     }]
   }),
   makeSupplementalModel({
