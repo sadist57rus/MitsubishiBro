@@ -1547,7 +1547,7 @@ const supplementalModels: JapaneseCarModel[] = [
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae92', brandId: 'toyota', name: 'Corolla Levin (AE91/AE92)', generation: 'VI поколение', years: '1987–1991', bodyType: 'Купе/Спорт',
     overview: 'Переднеприводное купе шестого поколения; атмосферные и компрессорные двигатели относятся к разным комплектациям.',
-    lengthMm: 4245, widthMm: 1680, heightMm: 1300, wheelbaseMm: 2430, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '980–1070 кг для отдельных комплектаций',
+    lengthMm: 4245, widthMm: 1680, heightMm: 1300, wheelbaseMm: 2430, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '980–1070 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC — отдельные AE92', displacement: '1587 см³', powerHp: '120 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Атмосферная версия'], weaknesses: ['Характеристики зависят от года и рынка'] },
       { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '145 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить данные GT-Z на атмосферные версии'] }
@@ -1555,12 +1555,12 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['МКПП/АКПП по комплектации; точный код проверить по табличке'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Размеры и характеристики относятся к отдельным японским версиям; кузовная ширина зависит от комплектации.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE91/AE92', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003784/', scope: 'Заводские данные отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE91/AE92', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003784/', scope: 'Заводские данные отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin GT-Z E-AE92 (1989.05)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/198905/1002393/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae101', brandId: 'toyota', name: 'Corolla Levin (AE100/AE101)', generation: 'VII поколение', years: '1991–1995', bodyType: 'Купе/Спорт',
     overview: 'Переднеприводное купе японского рынка с несколькими версиями двигателей 1.5 и 1.6 л.',
-    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '1020–1150 кг для отдельных комплектаций',
+    lengthMm: 4275, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '1020–1150 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC 20V — GT APEX', displacement: '1587 см³', powerHp: '160 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Высокооборотная 20-клапанная версия'], weaknesses: ['Не является характеристикой всех AE101'] },
       { code: '4A-GZE', name: '1.6 л с нагнетателем — GT-Z', displacement: '1587 см³', powerHp: '170 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V, supercharger', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская компрессорная версия'], weaknesses: ['Не переносить характеристики GT-Z на атмосферные исполнения'] }
@@ -1568,12 +1568,12 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['МКПП/АКПП по комплектации; код требует проверки'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Заводская карточка Toyota описывает представительные японские версии AE101; мощность не универсальна для поколения.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE100/AE101', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003913/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE100/AE101', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60003913/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin GT-Z E-AE101 (1991.06)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/199106/1002406/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-corolla-levin-ae111', brandId: 'toyota', name: 'Corolla Levin (AE110/AE111)', generation: 'VIII поколение', years: '1995–2000', bodyType: 'Купе/Спорт',
     overview: 'Последнее поколение Corolla Levin для японского рынка; производство завершилось в 2000 году.',
-    lengthMm: 4285, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: null, curbWeightKg: '950–1020 кг для отдельных комплектаций',
+    lengthMm: 4285, widthMm: 1695, heightMm: 1305, wheelbaseMm: 2465, groundClearanceMm: null, trunkVolumeLiters: 'Нет подтверждённых данных', fuelTankLiters: 50, curbWeightKg: '950–1020 кг для отдельных комплектаций',
     engines: [
       { code: '4A-GE', name: '1.6 л DOHC 20V — BZ-G', displacement: '1587 см³', powerHp: '165 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 20V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Заводская спортивная версия'], weaknesses: ['Не относится ко всем AE111'] },
       { code: '4A-FE', name: '1.6 л DOHC — отдельные версии', displacement: '1587 см³', powerHp: '115 л.с. для представительной версии', torqueNm: 'Нет подтверждённых данных', valves: 'DOHC 16V', fuelSystem: 'EFI', timingDrive: 'Уточнить по сервисному руководству', strengths: ['Менее форсированная заводская версия'], weaknesses: ['Требуется проверка кода кузова'] }
@@ -1581,7 +1581,7 @@ const supplementalModels: JapaneseCarModel[] = [
     transmissions: ['5-ступенчатая МКПП или 4-ступенчатая АКПП для отдельных версий; проверить код'],
     drivetrain: 'Передний привод.',
     sourceNotes: 'Заводская карточка Toyota для отдельных японских AE110/AE111. Мощность зависит от конкретного двигателя и комплектации.',
-    sourceReferences: [{ label: 'Toyota — Corolla Levin AE110/AE111', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60004085B/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }]
+    sourceReferences: [{ label: 'Toyota — Corolla Levin AE110/AE111', url: 'https://www.toyota-global.com/company/history_of_toyota/75years/vehicle_lineage/car/id60004085B/index.html', scope: 'Заводские характеристики отдельных японских комплектаций.' }, { label: 'Toyota GAZOO — Corolla Levin BZ-R GF-AE111 (1998.04)', url: 'https://gazoo.com/catalog/maker/TOYOTA/COROLLA_LEVIN/199505/1002410/', scope: 'Заводской каталог подтверждает бак 50 л для указанной японской версии; модельная запись охватывает поколение, комплектацию следует сверять по кузовному коду.' }]
   }),
   makeSupplementalModel({
     id: 'toyota-bb-ncp30', brandId: 'toyota', name: 'bB (NCP30/NCP31/NCP35)', generation: 'I поколение', years: '2000–2005', bodyType: 'Хэтчбек',
